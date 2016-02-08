@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html style="height:100%">
+<head>
+  <meta charset="utf-8">
+  <title>Cycle</title>
+  <script src="/storage.js"></script>
+  <script src="blockly_compressed.js"></script>
+  <script src="blocks_compressed.js"></script>
+  <script src="javascript_compressed.js"></script>
+  <script src="dom_blocks.js"></script>
+  <script src="msg/js/en.js"></script>
+  
+  <script src="codemirror-compressed.js"></script>
+  <link rel="stylesheet" href="codemirror.css">
+  
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+    #sorry {
+      padding: 1ex;
+      background-color: #f9edbe;
+      border: solid 1px #f0c36d;
+    }
+    .CodeMirror {
+        height: 100%;
+    }
+  </style>
+</head>
+<body style="height:90%">
+  
+
+  <script>
+      BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
+      BlocklyStorage.LINK_ALERT = 'Share your blocks with this link:\n\n%1';
+      BlocklyStorage.HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
+      BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
+          'Perhaps it was created with a different version of Blockly?';
+  </script>
+    
+    <div id="navbar" style="height:5%; width:100%; display:flex; justify-content:space-between; ">
+        <span>Cycle</span>
+        <button onclick="BlocklyStorage.link()">Save</button>
+    </div>
+
+    <div id="container" style="height:100%; width:100%; display:flex; flex-direction:row; ">
+        <div id="blocks" style="height:80%; width: 50%;">
+            <div id="blocklyDiv" style="height: 90%; width:100%"></div>
+            
+            <div id="code" style="height:30%; width:100%">
+                <!--Code Mirrors Goes Here-->
+            </div>
+        </div>
+        
+        <div id="output" style="height:100%; width:50%">
+            <iframe id="preview" style="height:100%; width:100%"></iframe>
+        </div>
+    </div>
+
+  <xml id="toolbox" style="display: none">
+        <category name="Logic" colour="210">
+            <block type="controls_if"></block>
+            <block type="logic_compare"></block>
+            <block type="logic_operation"></block>
+            <block type="logic_negate"></block>
+            <block type="logic_boolean"></block>
+            <block type="logic_null"></block>
+            <block type="logic_ternary"></block>
+        </category>
+        <category name="Loops" colour="120">
+            <block type="controls_repeat_ext">
+                <value name="TIMES">
+                    <block type="math_number">
+                        <field name="NUM">10</field>
+                    </block>
+                </value>
+            </block>
+            <block type="controls_whileUntil"></block>
+            <block type="controls_for">
+                <value name="FROM">
+                    <block type="math_number">
+                        <field name="NUM">1</field>
+                    </block>
+                </value>
+                <value name="TO">
+                    <block type="math_number">
+                        <field name="NUM">10</field>
+                    </block>
+                </value>
+                <value name="BY">
+                    <block type="math_number">
+                        <field name="NUM">1</field>
+                    </block>
+                </value>
+            </block>
+            <block type="controls_forEach"></block>
+            <block type="controls_flow_statements"></block>
+        </category>
+        <category name="Math" colour="230">
+            <block type="math_number"></block>
+            <block type="math_arithmetic"></block>
+            <block type="math_single"></block>
+            <block type="math_trig"></block>
+            <block type="math_constant"></block>
+            <block type="math_number_property"></block>
+            <block type="math_change">
+                <value name="DELTA">
+                    <block type="math_number">
+                        <field name="NUM">1</field>
+                    </block>
+                </value>
+            </block>
+            <block type="math_round"></block>
+            <block type="math_on_list"></block>
+            <block type="math_modulo"></block>
+            <block type="math_constrain">
+                <value name="LOW">
+                    <block type="math_number">
+                        <field name="NUM">1</field>
+                    </block>
+                </value>
+                <value name="HIGH">
+                    <block type="math_number">
+                        <field name="NUM">100</field>
+                    </block>
+                </value>
+            </block>
+            <block type="math_random_int">
+                <value name="FROM">
+                    <block type="math_number">
+                        <field name="NUM">1</field>
+                    </block>
+                </value>
+                <value name="TO">
+                    <block type="math_number">
+                        <field name="NUM">100</field>
+                    </block>
+                </value>
+            </block>
+            <block type="math_random_float"></block>
+        </category>
+        <category name="Text" colour="165">
+            <block type="text"></block>
+            <block type="text_join"></block>
+            <block type="text_append">
+                <value name="TEXT">
+                    <block type="text"></block>
+                </value>
+            </block>
+            <block type="text_length"></block>
+            <block type="text_isEmpty"></block>
+            <block type="text_indexOf">
+                <value name="VALUE">
+                    <block type="variables_get">
+                        <field name="VAR">text</field>
+                    </block>
+                </value>
+            </block>
+            <block type="text_charAt">
+                <value name="VALUE">
+                    <block type="variables_get">
+                        <field name="VAR">text</field>
+                    </block>
+                </value>
+            </block>
+            <block type="text_getSubstring">
+                <value name="STRING">
+                    <block type="variables_get">
+                        <field name="VAR">text</field>
+                    </block>
+                </value>
+            </block>
+            <block type="text_changeCase"></block>
+            <block type="text_trim"></block>
+            <block type="text_print"></block>
+            <block type="text_prompt_ext">
+                <value name="TEXT">
+                    <block type="text"></block>
+                </value>
+            </block>
+        </category>
+        <category name="Lists" colour="255">
+            <block type="lists_create_empty"></block>
+            <block type="lists_create_with"></block>
+            <block type="lists_repeat">
+                <value name="NUM">
+                    <block type="math_number">
+                        <field name="NUM">5</field>
+                    </block>
+                </value>
+            </block>
+            <block type="lists_length"></block>
+            <block type="lists_isEmpty"></block>
+            <block type="lists_indexOf">
+                <value name="VALUE">
+                    <block type="variables_get">
+                        <field name="VAR">list</field>
+                    </block>
+                </value>
+            </block>
+            <block type="lists_getIndex">
+                <value name="VALUE">
+                    <block type="variables_get">
+                        <field name="VAR">list</field>
+                    </block>
+                </value>
+            </block>
+            <block type="lists_setIndex">
+                <value name="LIST">
+                    <block type="variables_get">
+                        <field name="VAR">list</field>
+                    </block>
+                </value>
+            </block>
+            <block type="lists_getSublist">
+                <value name="LIST">
+                    <block type="variables_get">
+                        <field name="VAR">list</field>
+                    </block>
+                </value>
+            </block>
+        </category>
+        <category name="Colour" colour="20">
+            <block type="colour_picker"></block>
+            <block type="colour_random"></block>
+            <block type="colour_rgb">
+                <value name="RED">
+                    <block type="math_number">
+                        <field name="NUM">100</field>
+                    </block>
+                </value>
+                <value name="GREEN">
+                    <block type="math_number">
+                        <field name="NUM">50</field>
+                    </block>
+                </value>
+                <value name="BLUE">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+            </block>
+            <block type="colour_blend">
+                <value name="COLOUR1">
+                    <block type="colour_picker">
+                        <field name="COLOUR">#ff0000</field>
+                    </block>
+                </value>
+                <value name="COLOUR2">
+                    <block type="colour_picker">
+                        <field name="COLOUR">#3333ff</field>
+                    </block>
+                </value>
+                <value name="RATIO">
+                    <block type="math_number">
+                        <field name="NUM">0.5</field>
+                    </block>
+                </value>
+            </block>
+        </category>
+        <category name="Variables" colour="330" custom="VARIABLE"></category>
+        <category name="Functions" colour="290" custom="PROCEDURE"></category>
+        <category name="DOM" colour="180">
+          <block type="create_element"></block>
+          <block type="body_element"></block>
+          <block type="get_element_by_id"></block>
+          <block type="append_element"></block>
+          <block type="set_css_colour"></block>
+          <block type="set_content"></block>
+          <block type="input_value"></block>
+          <block type="handle_event"></block>
+        </category>
+    </xml>
+
+  <script>
+    var workspace = Blockly.inject('blocklyDiv',
+        {media: 'media/',
+         toolbox: document.getElementById('toolbox')});
+
+    // An href with #key trigers an AJAX call to retrieve saved blocks.
+    if ('BlocklyStorage' in window && window.location.hash.length > 1) {
+      BlocklyStorage.retrieveXml(window.location.hash.substring(1));
+    }
+    
+    var myCodeMirror = CodeMirror(document.getElementById('code'), {
+        mode:  "javascript",
+        readOnly: true,
+        height: 200
+    });
+    
+    function myUpdateFunction() {
+        var code = Blockly.JavaScript.workspaceToCode(workspace);
+        myCodeMirror.setValue(code);
+        try {
+            document.getElementById('preview').contentWindow.eval(code);
+        } catch (e) {
+            console.debug(e);
+        }
+    }
+    myUpdateFunction();
+    
+    workspace.addChangeListener(myUpdateFunction);
+  </script>
+
+</body>
+</html>
