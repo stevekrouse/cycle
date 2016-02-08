@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <title>Cycle</title>
   <script src="/storage.js"></script>
-  <script src="blockly_compressed.js"></script>
-  <script src="blocks_compressed.js"></script>
-  <script src="javascript_compressed.js"></script>
-  <script src="dom_blocks.js"></script>
-  <script src="msg/js/en.js"></script>
+  <script src="static/blockly_compressed.js"></script>
+  <script src="static/blocks_compressed.js"></script>
+  <script src="static/javascript_compressed.js"></script>
+  <script src="static/dom_blocks.js"></script>
+  <script src="static/msg/js/en.js"></script>
   
-  <script src="codemirror-compressed.js"></script>
-  <link rel="stylesheet" href="codemirror.css">
+  <script src="static/codemirror-compressed.js"></script>
+  <link rel="stylesheet" href="static/codemirror.css">
   
   <style>
     body {
@@ -279,7 +279,7 @@
 
   <script>
     var workspace = Blockly.inject('blocklyDiv',
-        {media: 'media/',
+        {media: 'static/media/',
          toolbox: document.getElementById('toolbox')});
 
     // An href with #key trigers an AJAX call to retrieve saved blocks.
