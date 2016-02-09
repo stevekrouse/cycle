@@ -299,6 +299,7 @@
     function myUpdateFunction() {
         var code = Blockly.JavaScript.workspaceToCode(workspace);
         myCodeMirror.setValue(code);
+        document.getElementById('preview').src = "";
         try {
             document.getElementById('preview').contentWindow.eval(code);
         } catch (e) {
