@@ -351,6 +351,7 @@
                 document.getElementById('preview').contentWindow.eval(code.events.join("\n\n"));
             } catch (e) {
                 console.debug(e);
+                alert("Check your code. It looks like there are inputs that are unfilled.");
             }
         }, 0);
     }
