@@ -48,6 +48,7 @@
     
     <div id="navbar" style="height:5%; width:100%; display:flex; justify-content:space-between; ">
         <span id="title">Cycle</span>
+        <button onclick="runCode()">Run</button>
         <button onclick="BlocklyStorage.link()">Save</button>
     </div>
 
@@ -334,11 +335,15 @@
         events: events
       };
     }
-    
-    function myUpdateFunction() {
+    function updateCodeMirror() {
         var code = getCode(workspace);
         var fullCode = code.definitions.concat(code.when_page_is_loaded).concat(code.events).join("\n\n");
         myCodeMirror.setValue(fullCode);
+    } 
+    
+    function runCode() {
+        var code = getCode(workspace);
+        updateCodeMirror();
         document.getElementById('preview').src = "";
         setTimeout(function(){
             try {
@@ -349,9 +354,9 @@
             }
         }, 0);
     }
-    myUpdateFunction();
+    runCode();
     
-    workspace.addChangeListener(myUpdateFunction);
+    workspace.addChangeListener(updateCodeMirror);
   </script>
   <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
