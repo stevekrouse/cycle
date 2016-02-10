@@ -9,7 +9,23 @@ Blockly.Blocks['create_element'] = {
         ['<div>', 'div'],
         ['<ul>', 'ul'],
         ['<ol>', 'ol'],
-        ['<li>', 'li']
+        ['<li>', 'li'],
+        ['<dl>', 'dl'],
+        ['<dt>', 'dt'],
+        ['<dd>', 'dd'],
+        ['<br>', 'br'],
+        ['<b>', 'b'],
+        ['<i>', 'i'],
+        ['<strike>', 'strike'],
+        ['<h1>', 'h1'],
+        ['<h2>', 'h2'],
+        ['<h3>', 'h3'],
+        ['<h4>', 'h4'],
+        ['<h5>', 'h5'],
+        ['<h6>', 'h6'],
+        ['<input>', 'input'],
+        ['<button>', 'button'],
+        ['<form>', 'form']
       ]), 'TAG').appendField('element with id')
       this.appendValueInput('ID')
         .setCheck("String");
