@@ -270,7 +270,13 @@
         <category name="Variables" colour="330" custom="VARIABLE"></category>
         <category name="Functions" colour="290" custom="PROCEDURE"></category>
         <category name="Elements" colour="180">
-          <block type="create_element"></block>
+          <block type="create_element">
+              <value name="ID">
+                    <block type="text">
+                        <field name="TEXT"></field>
+                    </block>
+                </value>
+          </block>
           <block type="body_element"></block>
           <block type="get_element_by_id"></block>
           <block type="append_element"></block>

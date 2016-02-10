@@ -10,14 +10,19 @@ Blockly.Blocks['create_element'] = {
         ['<ul>', 'ul'],
         ['<ol>', 'ol'],
         ['<li>', 'li']
-      ]), 'TAG').appendField('element');
+      ]), 'TAG').appendField('element with id')
+      this.appendValueInput('ID')
+        .setCheck("String");
+      this.setInputsInline(true);
+;
   }
 };
 
 Blockly.JavaScript['create_element'] = function(block) {
+  var id_name = Blockly.JavaScript.valueToCode(block, 'ID', Blockly.JavaScript.ORDER_ATOMIC);
   return [
     "document.createElement(" +
-    Blockly.JavaScript.quote_(block.getFieldValue('TAG')) + ")",
+    Blockly.JavaScript.quote_(block.getFieldValue('TAG')) + ").id = " + id_name,
     Blockly.JavaScript.ORDER_ATOMIC
   ];
 };
