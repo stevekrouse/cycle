@@ -188,7 +188,7 @@ Blockly.JavaScript['text_node'] = function(block) {
 
 Blockly.Blocks['handle_event'] = {
   init: function() {
-    this.setColour(180);
+    this.setColour(60);
     this.appendValueInput('TARGET').setCheck('Element')
       .appendField('when');
     this.appendStatementInput('STACK').appendField('is clicked');
@@ -236,7 +236,7 @@ Blockly.JavaScript['input_value'] = function(block) {
 
 Blockly.Blocks['when_page_is_loaded'] = {
   init: function() {
-    this.setColour(180);
+    this.setColour(60);
     this.appendDummyInput()
         .appendField("when the page is loaded");
     this.appendStatementInput("blocks")

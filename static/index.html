@@ -150,6 +150,12 @@
         </category>
         <category name="Text" colour="165">
             <block type="text"></block>
+            <block type="text_print"></block>
+            <block type="text_prompt_ext">
+                <value name="TEXT">
+                    <block type="text"></block>
+                </value>
+            </block>
             <block type="text_join"></block>
             <block type="text_append">
                 <value name="TEXT">
@@ -181,12 +187,6 @@
             </block>
             <block type="text_changeCase"></block>
             <block type="text_trim"></block>
-            <block type="text_print"></block>
-            <block type="text_prompt_ext">
-                <value name="TEXT">
-                    <block type="text"></block>
-                </value>
-            </block>
         </category>
         <category name="Lists" colour="255">
             <block type="lists_create_empty"></block>
@@ -269,7 +269,7 @@
         </category>
         <category name="Variables" colour="330" custom="VARIABLE"></category>
         <category name="Functions" colour="290" custom="PROCEDURE"></category>
-        <category name="DOM" colour="180">
+        <category name="Elements" colour="180">
           <block type="create_element"></block>
           <block type="body_element"></block>
           <block type="get_element_by_id"></block>
@@ -277,6 +277,8 @@
           <block type="set_css_colour"></block>
           <block type="set_content"></block>
           <block type="input_value"></block>
+        </category>
+        <category name="Events" colour="60">
           <block type="handle_event"></block>
         </category>
     </xml>
