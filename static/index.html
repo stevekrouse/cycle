@@ -279,11 +279,20 @@
           <block type="handle_event"></block>
         </category>
     </xml>
+    
+    <xml id="startingBlocks">
+        <block type="when_page_is_loaded" deletable="false" movable="false" x="0" y="0"></block>
+    </xml>
 
   <script>
+    Blockly.BlockSvg.START_HAT = true;
+  
     var workspace = Blockly.inject('blocklyDiv',
         {media: 'static/media/',
          toolbox: document.getElementById('toolbox')});
+
+    // load default blocks, which will get overridden if there's a valid hash
+    Blockly.Xml.domToWorkspace(workspace, document.getElementById('startingBlocks'));
 
     // An href with #key trigers an AJAX call to retrieve saved blocks.
     if ('BlocklyStorage' in window && window.location.hash.length > 1) {
@@ -296,15 +305,49 @@
         height: 200
     });
     
-    function myUpdateFunction() {
-        var code = Blockly.JavaScript.workspaceToCode(workspace);
-        myCodeMirror.setValue(code);
-        document.getElementById('preview').src = "";
-        try {
-            document.getElementById('preview').contentWindow.eval(code);
-        } catch (e) {
-            console.debug(e);
+    function getCode(workspace) {
+
+      blocks = workspace.getTopBlocks(true);
+      Blockly.JavaScript.init(workspace);
+      
+      var events = [];
+      var when_page_is_loaded;
+      
+      for (var b = 0; b < blocks.length; b++) {
+        var block = blocks[b];
+        var blockCode = Blockly.JavaScript.blockToCode(block);
+        if ("when_page_is_loaded" == block.type) {
+            when_page_is_loaded = "(" + blockCode[0].slice("document.body.onload = ".length).slice(0,-2) + ")();";
+        } else if (block.startHat_ == true) {
+            events.push(blockCode[0]);
         }
+      }
+      
+      var definitions = []
+      for (var def in Blockly.JavaScript.definitions_) {
+        definitions.push(Blockly.JavaScript.definitions_[def]);
+      }
+
+      return {
+        definitions: definitions,
+        when_page_is_loaded: when_page_is_loaded,
+        events: events
+      };
+    }
+    
+    function myUpdateFunction() {
+        var code = getCode(workspace);
+        var fullCode = code.definitions.concat(code.when_page_is_loaded).concat(code.events).join("\n\n");
+        myCodeMirror.setValue(fullCode);
+        document.getElementById('preview').src = "";
+        setTimeout(function(){
+            try {
+                document.getElementById('preview').contentWindow.eval(code.definitions.concat(code.when_page_is_loaded).join("\n\n"));
+                document.getElementById('preview').contentWindow.eval(code.events.join("\n\n"));
+            } catch (e) {
+                console.debug(e);
+            }
+        }, 0);
     }
     myUpdateFunction();
     

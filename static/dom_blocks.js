@@ -233,3 +233,22 @@ Blockly.JavaScript['input_value'] = function(block) {
     Blockly.JavaScript.ORDER_ATOMIC
   ];
 };
+
+Blockly.Blocks['when_page_is_loaded'] = {
+  init: function() {
+    this.setColour(180);
+    this.appendDummyInput()
+        .appendField("when the page is loaded");
+    this.appendStatementInput("blocks")
+        .setCheck(null);
+    this.setTooltip('');
+  }
+};
+
+Blockly.JavaScript['when_page_is_loaded'] = function(block) {
+  var statements_blocks = Blockly.JavaScript.statementToCode(block, 'blocks');
+  return [
+    'document.body.onload = function() {\n' + statements_blocks + '};\n',
+    Blockly.JavaScript.ORDER_ATOMIC
+  ];
+};
