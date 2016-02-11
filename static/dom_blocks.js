@@ -30,17 +30,20 @@ Blockly.Blocks['create_element'] = {
       this.appendValueInput('ID')
         .setCheck("String");
       this.setInputsInline(true);
-;
   }
 };
-
 Blockly.JavaScript['create_element'] = function(block) {
-  var id_name = Blockly.JavaScript.valueToCode(block, 'ID', Blockly.JavaScript.ORDER_ATOMIC);
-  return [
-    "document.createElement(" +
-    Blockly.JavaScript.quote_(block.getFieldValue('TAG')) + ").id = " + id_name,
-    Blockly.JavaScript.ORDER_ATOMIC
-  ];
+  var functionName = Blockly.JavaScript.provideFunction_(
+      'elementByID',
+      [ 'function ' + Blockly.JavaScript.FUNCTION_NAME_PLACEHOLDER_ + '(idName, tagType) {',
+              '  var anyTag = document.createElement(tagType)',
+              '  anyTag.id = idName;',
+              '  return anyTag;',
+        '}']);
+  var idName = Blockly.JavaScript.valueToCode(block, 'ID', Blockly.JavaScript.ORDER_ATOMIC);
+  var tagType = Blockly.JavaScript.quote_(block.getFieldValue('TAG'));
+  var code = 'elementByID(' + idName + ',' + tagType + ')'
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
 Blockly.Blocks['query_selector'] = {
