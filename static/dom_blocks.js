@@ -315,4 +315,21 @@ Blockly.JavaScript['a_tag'] = function(block) {
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
-        
+Blockly.Blocks['when_key_pressed'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("when")
+        .appendField(new Blockly.FieldDropdown([
+          ["a", "a"], 
+          ["b", "b"], 
+          ["c", "c"], ["d", "d"], 
+          ["e", "e"]
+          ]), "keys");
+    this.appendDummyInput()
+        .appendField("key pressed");
+    this.appendStatementInput("NAME");
+    this.setInputsInline(true);
+    this.setTooltip('');
+    this.setColour(60);
+  }
+};
