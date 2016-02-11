@@ -273,3 +273,43 @@ Blockly.JavaScript['when_page_is_loaded'] = function(block) {
     Blockly.JavaScript.ORDER_ATOMIC
   ];
 };
+
+Blockly.Blocks['a_tag'] = {
+  init: function() {
+    this.setColour(180);
+    this.appendDummyInput()
+        .appendField("a new <a> tag with href");
+    this.appendValueInput('linkText')
+        .setCheck("String");
+    this.appendDummyInput()
+        .appendField("and display text");
+    this.appendValueInput('displayText')
+        .setCheck("String");
+    this.setInputsInline(true);
+    this.setOutput(true);
+    this.setTooltip('');
+  }
+};
+
+
+Blockly.JavaScript['a_tag'] = function(block) {
+  var functionName = Blockly.JavaScript.provideFunction_(
+      'createATag',
+      [ 'function ' + Blockly.JavaScript.FUNCTION_NAME_PLACEHOLDER_ + '(linkText, displayText) {',
+              '  var createA = document.createElement("a");',
+              '  if (linkText.substring(0, 4) != "http") {',
+              '    linkText = "http://" + linkText;',
+              '  }',
+              '  var createAText = document.createTextNode(displayText);',
+              '  createA.setAttribute("href", linkText);',
+              '  createA.setAttribute("target", "blank_")',
+              '  createA.appendChild(createAText);',
+              '  return createA;',
+        '}']);
+  var linkText = Blockly.JavaScript.valueToCode(block, 'linkText', Blockly.JavaScript.ORDER_ATOMIC);   
+  var displayText = Blockly.JavaScript.valueToCode(block, 'displayText', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = 'createATag(' + linkText + ', ' + displayText + ')'
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};
+
+        
