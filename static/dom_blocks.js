@@ -134,14 +134,48 @@ Blockly.Blocks['set_css_colour'] = {
     this
       .appendDummyInput().appendField('set the')
       .appendField(new Blockly.FieldDropdown([
-        ['background', 'backgroundColor'],
-        ['color', 'color']
+        // TODO keep these here and add back in the .setCheck('Colour') below when we mirgrate the others out of here
+        ['background color', 'backgroundColor'],
+        ['text color', 'color'],
+        
+        // TODO make this its own block that sets these 4 at the same time with good defaults
+        ['font size', 'fontSize'],
+        ['font family', 'fontFamily'],
+        ['text decoration', 'textDecoration'],
+        ['text algin', 'textAlign'],
+        
+        // TODO make this its own block that sets these 4 at the same time with good defaults
+        ['height', 'height'],
+        ['width', 'width'],
+        ['position', 'position'],
+        ['display', 'display'],
+        
+        ['visibility', 'visibility'],
+        
+        // TODO make this its own block that sets these 4 at the same time with good defaults
+        ['padding top', 'paddingTop'],
+        ['padding bottom', 'paddingBottom'],
+        ['padding right', 'paddingRight'],
+        ['padding left', 'paddingleft'],
+        
+        // TODO make this its own block that sets these 4 at the same time with good defaults
+        ['margin top', 'marginTop'],
+        ['margin bottom', 'marginBottom'],
+        ['margin right', 'marginRight'],
+        ['margin left', 'marginleft'],
+        
+        // TODO make this its own block that sets these 4 at the same time with good defaults
+        ['border width', 'borderWidth'],
+        ['boder color', 'borderColor'],
+        ['boder radius', 'borderRadius'],
+        ['border style', 'borderStyle']
+        
       ]), 'PROPERTY');
     this
       .appendValueInput('ELEMENT').setCheck('Element')
       .appendField('of');
     this
-      .appendValueInput('COLOUR').setCheck('Colour')
+      .appendValueInput('VALUE')
       .appendField('to');
   }
 };
@@ -152,7 +186,7 @@ Blockly.JavaScript['set_css_colour'] = function(block) {
     Blockly.JavaScript.ORDER_ATOMIC
   );
   var colour = Blockly.JavaScript.valueToCode(
-    block, 'COLOUR',
+    block, 'VALUE',
     Blockly.JavaScript.ORDER_ATOMIC
   );
   return element + '.style.' + block.getFieldValue('PROPERTY') + ' = ' +
