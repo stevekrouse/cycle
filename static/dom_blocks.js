@@ -279,11 +279,11 @@ Blockly.Blocks['a_tag'] = {
     this.setColour(180);
     this.appendDummyInput()
         .appendField("a new <a> tag with href");
-    this.appendValueInput("href")
+    this.appendValueInput('linkText')
         .setCheck("String");
     this.appendDummyInput()
-        .appendField("and link text");
-    this.appendValueInput("linktext")
+        .appendField("and display text");
+    this.appendValueInput('displayText')
         .setCheck("String");
     this.setInputsInline(true);
     this.setOutput(true);
@@ -292,20 +292,23 @@ Blockly.Blocks['a_tag'] = {
 };
 
 
-
 Blockly.JavaScript['a_tag'] = function(block) {
   var functionName = Blockly.JavaScript.provideFunction_(
       'createATag',
-      [ 'function ' + Blockly.JavaScript.FUNCTION_NAME_PLACEHOLDER_ + '() {',
-          'var createA = document.createElement("a");',
-          'var value_linktext = Blockly.JavaScript.valueToCode(block, "linktext", Blockly.JavaScript.ORDER_ATOMIC);',
-          'var createAText = document.createTextNode(value_linktext);',
-          'var value_href = Blockly.JavaScript.valueToCode(block, "href", Blockly.JavaScript.ORDER_ATOMIC);',
-          'createA.setAttribute("href", value_href);',
-          'createA.appendChild(createAText);',
-          'getTheTableTag.appendChild(createA);',
+      [ 'function ' + Blockly.JavaScript.FUNCTION_NAME_PLACEHOLDER_ + '(linkText, displayText) {',
+              '  var createA = document.createElement("a");',
+              '  if (linkText.substring(0, 4) != "http") {',
+              '    linkText = "http://" + linkText;',
+              '  }',
+              '  var createAText = document.createTextNode(displayText);',
+              '  createA.setAttribute("href", linkText);',
+              '  createA.setAttribute("target", "blank_")',
+              '  createA.appendChild(createAText);',
+              '  return createA;',
         '}']);
-  var code = "createATag()"
+  var linkText = Blockly.JavaScript.valueToCode(block, 'linkText', Blockly.JavaScript.ORDER_ATOMIC);   
+  var displayText = Blockly.JavaScript.valueToCode(block, 'displayText', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = 'createATag(' + linkText + ', ' + displayText + ')'
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
