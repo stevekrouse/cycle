@@ -328,7 +328,7 @@
         var block = blocks[b];
         var blockCode = Blockly.JavaScript.blockToCode(block);
         if ("when_page_is_loaded" == block.type) {
-            when_page_is_loaded = "(" + blockCode[0].slice("document.body.onload = ".length).slice(0,-2) + ")();";
+            when_page_is_loaded = blockCode[0]
         } else if (block.startHat_ == true) {
             events.push(blockCode[0]);
         }
@@ -357,7 +357,8 @@
         document.getElementById('preview').src = "";
         setTimeout(function(){
             try {
-                document.getElementById('preview').contentWindow.eval(code.definitions.concat(code.when_page_is_loaded).join("\n\n"));
+                var display_when_page_is_loaded = "(" + code.when_page_is_loaded.slice("document.body.onload = ".length).slice(0,-2) + ")();";
+                document.getElementById('preview').contentWindow.eval(code.definitions.concat(display_when_page_is_loaded).join("\n\n"));
                 document.getElementById('preview').contentWindow.eval(code.events.join("\n\n"));
             } catch (e) {
                 console.debug(e);
