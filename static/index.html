@@ -367,6 +367,18 @@
     runCode();
     
     workspace.addChangeListener(updateCodeMirror);
+    setTimeout(function() {
+        workspace.addChangeListener(function(){window.dirtyChanges = true;});
+    }, 0);
+    
+    // warn users before navigating away from unsaved changes
+    window.dirtyChanges = false;
+    window.onbeforeunload = function (e) {
+        if (window.dirtyChanges) {
+            return "Would you like to trash this unsaved program?";
+        }
+    };
+    
   </script>
   <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

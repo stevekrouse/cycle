@@ -141,6 +141,7 @@ BlocklyStorage.handleRequest_ = function() {
       }
       BlocklyStorage.monitorChanges_(BlocklyStorage.httpRequest_.workspace);
     }
+    window.dirtyChanges = false;
     BlocklyStorage.httpRequest_ = null;
   }
 };
