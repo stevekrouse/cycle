@@ -322,14 +322,52 @@ Blockly.Blocks['when_key_pressed'] = {
         .appendField(new Blockly.FieldDropdown([
           ["a", "a"], 
           ["b", "b"], 
-          ["c", "c"], ["d", "d"], 
-          ["e", "e"]
+          ["c", "c"], 
+          ["d", "d"], 
+          ["e", "e"],
+          ["f", "f"], 
+          ["g", "g"], 
+          ["h", "h"], 
+          ["i", "i"],
+          ["j", "j"],
+          ["k", "k"],
+          ["l", "l"],
+          ["m", "m"],
+          ["n", "n"],
+          ["o", "o"],
+          ["p", "p"],
+          ["q", "q"],
+          ["r", "r"],
+          ["s", "s"],
+          ["t", "t"],
+          ["u", "u"],
+          ["v", "v"],
+          ["w", "w"],
+          ["x", "x"],
+          ["y", "y"],
+          ["z", "z"],
+          ["0", "0"],
+          ["1", "1"],
+          ["2", "2"],
+          ["3", "3"],
+          ["4", "4"],
+          ["5", "5"],
+          ["6", "6"],
+          ["7", "7"],
+          ["8", "8"],
+          ["9", "9"]
           ]), "keys");
     this.appendDummyInput()
         .appendField("key pressed");
-    this.appendStatementInput("NAME");
+    this.appendStatementInput("do");
     this.setInputsInline(true);
     this.setTooltip('');
     this.setColour(60);
   }
+};
+
+Blockly.JavaScript['when_key_pressed'] = function(block) {
+  var dropdown_keys = block.getFieldValue('keys');
+  var statements_do = Blockly.JavaScript.statementToCode(block, 'do');
+  return ['window.addEventListener("keypress", function(e) {\n' + 'if (String.fromCharCode(e.charCode) == "' + dropdown_keys + '"){\n' + statements_do + ' } \n });\n', Blockly.JavaScript.ORDER_ATOMIC];
 };
