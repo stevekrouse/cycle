@@ -349,4 +349,23 @@ Blockly.JavaScript['a_tag'] = function(block) {
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
-        
+Blockly.Blocks['timeout'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("In")
+        .appendField(new Blockly.FieldTextInput("2"), "SECONDS")
+        .appendField("miliseconds, do");
+    this.appendStatementInput("STATEMENTS");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(65);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.JavaScript['timeout'] = function(block) {
+  var text_seconds = block.getFieldValue('SECONDS');
+  var statements = Blockly.JavaScript.statementToCode(block, 'STATEMENTS');
+  return 'setTimeout(function(){\n' + statements + '}, '  + text_seconds +');\n';
+};
