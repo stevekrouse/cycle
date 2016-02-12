@@ -353,7 +353,7 @@ Blockly.Blocks['timeout'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("In")
-        .appendField(new Blockly.FieldTextInput("2"), "SECONDS")
+        .appendField(new Blockly.FieldTextInput("2000"), "SECONDS")
         .appendField("miliseconds, do");
     this.appendStatementInput("STATEMENTS");
     this.setPreviousStatement(true);
