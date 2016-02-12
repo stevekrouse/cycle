@@ -360,7 +360,12 @@
                 document.getElementById('preview').contentWindow.eval(code.events.join("\n\n"));
             } catch (e) {
                 console.debug(e);
-                alert("Check your code. It looks like there are inputs that are unfilled.");
+                if (e.name == "SyntaxError") {
+                    alert("Check your code. It looks like there are inputs that are unfilled.");
+                }
+                else {
+                    alert("Error while running your code: " + e.message);
+                }
             }
         }, 0);
     }
