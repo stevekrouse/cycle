@@ -272,13 +272,19 @@
         <category name="Elements" colour="180">
           <block type="create_element">
               <value name="ID">
-                    <block type="text">
+                    <shadow type="text">
                         <field name="TEXT"></field>
-                    </block>
+                    </shadow>
                 </value>
           </block>
           <block type="body_element"></block>
-          <block type="get_element_by_id"></block>
+          <block type="get_element_by_id">
+              <value name="ID">
+                    <shadow type="text">
+                        <field name="TEXT"></field>
+                    </shadow>
+              </value>
+          </block>
           <block type="append_element"></block>
           <block type="set_css_colour"></block>
           <block type="set_content"></block>

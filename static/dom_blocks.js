@@ -73,7 +73,9 @@ Blockly.Blocks['get_element_by_id'] = {
     this.setColour(180);
     this.setOutput(true, 'Element');
     this.appendDummyInput().appendField('the element with id')
-      .appendField(new Blockly.FieldTextInput('foo'), 'ID');
+    this.appendValueInput('ID')
+      .setCheck("String");
+    this.setInputsInline(true);
   }
 };
 
