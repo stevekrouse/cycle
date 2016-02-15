@@ -376,3 +376,30 @@ Blockly.JavaScript['timeout'] = function(block) {
   var statements = Blockly.JavaScript.statementToCode(block, 'STATEMENTS');
   return 'setTimeout(function(){\n' + statements + '}, '  + text_seconds +');\n';
 };
+
+Blockly.Blocks['set_attribute'] = {
+  init: function() {
+    this.setColour(180);
+    this
+        .appendValueInput("attribute type")
+        .appendField("set attribute");
+    this
+        .appendValueInput("element")
+        .appendField("of ");
+
+    this
+        .appendValueInput("attribute name")
+        .appendField("to");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
+
+Blockly.JavaScript['set_attribute'] = function(block) {
+  var value_attribute_type = Blockly.JavaScript.valueToCode(block, 'attribute type', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_element = Blockly.JavaScript.valueToCode(block, 'element', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_attribute_name = Blockly.JavaScript.valueToCode(block, 'attribute name', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = value_element + ".setAttribute(" + value_attribute_type + ", " + value_attribute_name + ");"
+  return code;
+}
