@@ -82,7 +82,7 @@ Blockly.Blocks['get_element_by_id'] = {
 Blockly.JavaScript['get_element_by_id'] = function(block) {
   return [
     "document.getElementById(" +
-    Blockly.JavaScript.quote_(block.getFieldValue('ID')) + ")",
+    Blockly.JavaScript.valueToCode(block, 'ID', Blockly.JavaScript.ORDER_ATOMIC) + ")",
     Blockly.JavaScript.ORDER_ATOMIC
   ];
 };
