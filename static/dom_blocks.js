@@ -342,7 +342,7 @@ Blockly.JavaScript['a_tag'] = function(block) {
               '  if (linkText.substring(0, 4) != "http") {',
               '    linkText = "http://" + linkText;',
               '  }',
-              //'  createA.id = aTagID;',
+              '  createA.id = aTagID;',
               '  var createAText = document.createTextNode(displayText);',
               '  createA.setAttribute("href", linkText);',
               '  createA.setAttribute("target", "blank_")',
