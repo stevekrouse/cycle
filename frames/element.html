@@ -12,36 +12,36 @@
   <div id="elementBlocks" style="height: 100%" ></div>
   
   <xml id="toolbox" style="display: none;">
-    <block type="colour_picker">
-      <field name="COLOUR">#ff0000</field>
-    </block>
-    <block type="text">
-      <field name="TEXT"></field>
-    </block>
-    <block type="text_join">
-      <mutation items="2"></mutation>
-    </block>
-    <block type="colour_random"></block>
-    <block type="colour_rgb">
-      <value name="RED">
-        <shadow type="math_number">
-          <field name="NUM">100</field>
-        </shadow>
-      </value>
-      <value name="GREEN">
-        <shadow type="math_number">
-          <field name="NUM">50</field>
-        </shadow>
-      </value>
-      <value name="BLUE">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-    </block>
+    <!--<block type="colour_picker">-->
+    <!--  <field name="COLOUR">#ff0000</field>-->
+    <!--</block>-->
+    <!--<block type="text_join">-->
+    <!--  <mutation items="2"></mutation>-->
+    <!--</block>-->
+    <!--<block type="colour_random"></block>-->
+    <!--<block type="colour_rgb">-->
+    <!--  <value name="RED">-->
+    <!--    <shadow type="math_number">-->
+    <!--      <field name="NUM">100</field>-->
+    <!--    </shadow>-->
+    <!--  </value>-->
+    <!--  <value name="GREEN">-->
+    <!--    <shadow type="math_number">-->
+    <!--      <field name="NUM">50</field>-->
+    <!--    </shadow>-->
+    <!--  </value>-->
+    <!--  <value name="BLUE">-->
+    <!--    <shadow type="math_number">-->
+    <!--      <field name="NUM">0</field>-->
+    <!--    </shadow>-->
+    <!--  </value>-->
+    <!--</block>-->
     <block type="cycle_container"></block>
     <block type="cycle_button"></block>
     <block type="cycle_text"></block>
+    <block type="text">
+      <field name="TEXT"></field>
+    </block>
     <!--image-->
     <!--text input-->
     <!--list-->
@@ -89,38 +89,30 @@
     
     Blockly.Xml.domToWorkspace(elementWorkspace, document.getElementById('elementStartingBlocks'));
     
+    elementWorkspace.getTopBlocks(true)[0].select()
+    
     elementWorkspace.addChangeListener(function() {window.parent.$('body').trigger('elementChange') })
     
-    // selected block
-    // setInterval(function(){
-    //   if (Blockly.selected) {
-        
-    //   } else if (!window.currentlySelectedBlockId || !blockById(elementWorkspace.getTopBlocks(true)[0], window.currentlySelectedBlockId)) {
-    //     window.currentlySelectedBlockId = elementWorkspace.getTopBlocks(true)[0].id
-    //   }
-    //   blockById(elementWorkspace.getTopBlocks(true)[0], window.currentlySelectedBlockId).select()
-    // }, 100)
-
-    
-  
-  
-  window.currentlySelectedBlockId = undefined
-  function getElementCode() {
-    blocks = elementWorkspace.getTopBlocks(true);
-    return elementWorkSpaceData(blocks[0])
-  }
-  
-  
-  function blockById(block, id){
-    if (!block){
-      return null
-    } else if (block.id == id){
-      return block
-    } else {
-      return blockById(block.getNextBlock(), id)
+    function getSelectedBlock() {
+      return Blockly.selected
     }
-  }
   
-  
+    function getElementCode() {
+      blocks = elementWorkspace.getTopBlocks(true);
+      return elementWorkSpaceData(blocks[0])
+    }
+    
+    
+    function blockById(block, id){
+      if (!block){
+        return null
+      } else if (block.id == id){
+        return block
+      } else {
+        return blockById(block.getNextBlock(), id)
+      }
+    }
+    
+    window.getSelectedBlock = getSelectedBlock
   </script>
 </body>

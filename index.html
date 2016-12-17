@@ -34,12 +34,12 @@
 
     <div id="container" style="height:100%; width:100%; display:flex; flex-direction:row; ">
         <div id="output" style="height:100%; width:50%">
-            <iframe src="./frames/output.html" id="preview" style="height:100%; width:100%"></iframe>
+            <iframe src="./frames/output.html" id="preview" style="height:49%; width:100%"></iframe>
+            <iframe src="./frames/element.html" id="elementBlocks" style="height: 49%; width: 100%"></iframe>
         </div>
         
         <div id="editPane" style="height:100%; width: 50%; display:flex; flex-direction:column;"> 
-            <iframe src="./frames/settings.html" id="settingsBlocks" style="height: 49%; width:100%; margin-bottom: 1%"></iframe>
-            <iframe src="./frames/element.html" id="elementBlocks" style="height: 49%; width:100%"></iframe>
+            <iframe src="./frames/settings.html" id="settingsBlocks" style="height: 100%;"></iframe>
         </div>
     </div>
 
@@ -74,11 +74,7 @@
     debouncedRunElement()
     
     $('body').bind('elementChange', debouncedRunElement)
-    
-    $('elementBlocks').ready(function(){
-      
-    })
-    
+  
     // warn users before navigating away from unsaved changes
     // window.dirtyChanges = false;
     // window.onbeforeunload = function (e) {
