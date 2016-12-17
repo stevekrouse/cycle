@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html style="height:100%">
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <title>Cycle</title>
+  
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+    #sorry {
+      padding: 1ex;
+      background-color: #f9edbe;
+      border: solid 1px #f0c36d;
+    }
+    .CodeMirror {
+        height: 100%;
+    }
+    #title {
+        color: blue;
+    }
+  </style>
+</head>
+<body style="height:90%">
+    <div id="navbar" style="height:5%; width:100%; text-align: center; font-size:30px; margin-top: 7px ">
+        <span id="title">Cycle</span>
+    </div>
+
+    <div id="container" style="height:100%; width:100%; display:flex; flex-direction:row; ">
+        <div id="output" style="height:100%; width:50%">
+            <iframe src="./frames/output.html" id="preview" style="height:100%; width:100%"></iframe>
+        </div>
+        
+        <div id="editPane" style="height:100%; width: 50%; display:flex; flex-direction:column;"> 
+            <iframe src="./frames/settings.html" id="settingsBlocks" style="height: 49%; width:100%; margin-bottom: 1%"></iframe>
+            <iframe src="./frames/element.html" id="elementBlocks" style="height: 49%; width:100%"></iframe>
+        </div>
+    </div>
+
+  <script>
+    var preview = document.getElementById('preview')
+    var settingsBlocks = document.getElementById('settingsBlocks')
+    var elementBlocks = document.getElementById('elementBlocks')  
+  
+    function runElement() {
+      preview.src = "./frames/output.html";
+      preview.onload = function () {
+        var elementCode = elementBlocks.contentWindow.getElementCode()
+        preview.contentWindow.code = elementCode
+      }
+    }
+    
+    function debounce(func, wait, immediate) {
+    	var timeout;
+    	return function() {
+    		var context = this, args = arguments;
+    		var later = function() {
+    			timeout = null;
+    			if (!immediate) func.apply(context, args);
+    		};
+    		var callNow = immediate && !timeout;
+    		clearTimeout(timeout);
+    		timeout = setTimeout(later, wait);
+    		if (callNow) func.apply(context, args);
+    	};
+    };
+    var debouncedRunElement = debounce(runElement, 1000, false)
+    debouncedRunElement()
+    
+    $('body').bind('elementChange', debouncedRunElement)
+    
+    $('elementBlocks').ready(function(){
+      
+    })
+    
+    // warn users before navigating away from unsaved changes
+    // window.dirtyChanges = false;
+    // window.onbeforeunload = function (e) {
+    //     if (window.dirtyChanges) {
+    //         return "Would you like to trash this unsaved program?";
+    //     }
+    // };
+  </script>
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-73554466-1', 'auto');
+      ga('send', 'pageview');
+  </script>
+
+</body>
+</html>
