@@ -74,6 +74,16 @@
     debouncedRunElement()
     
     $('body').bind('elementChange', debouncedRunElement)
+    
+    var elementSettings = {}
+    $('body').bind('newElementSelected', function(event, blockId) {
+      var selectedSettings = elementSettings[blockId] 
+      settingsBlocks.contentWindow.setWorkspace(selectedSettings)
+    })
+    
+    $('body').bind('settingsChange', function(event, settingsDoc) {
+      elementSettings[elementBlocks.contentWindow.selectedElement.id] = settingsDoc
+    })
   
     // warn users before navigating away from unsaved changes
     // window.dirtyChanges = false;

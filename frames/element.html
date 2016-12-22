@@ -91,7 +91,7 @@
     
     elementWorkspace.getTopBlocks(true)[0].select()
     
-    elementWorkspace.addChangeListener(function() {window.parent.$('body').trigger('elementChange') })
+    elementWorkspace.addChangeListener(function() { window.parent.$('body').trigger('elementChange') })
     
     function getSelectedBlock() {
       return Blockly.selected
@@ -113,6 +113,15 @@
       }
     }
     
-    window.getSelectedBlock = getSelectedBlock
+    var selectedElement = getSelectedBlock()
+    $('#elementBlocks').click(function(){
+      var newSelectedVal = getSelectedBlock()
+      if (selectedElement != newSelectedVal) {
+        selectedElement = newSelectedVal
+        window.parent.$('body').trigger('newElementSelected', selectedElement.id)
+      }
+    })
+    
+    window.selectedElement = selectedElement
   </script>
 </body>

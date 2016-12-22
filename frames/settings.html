@@ -6,6 +6,8 @@
   
   <script src="../blocks/settings/blocks.js"></script>
   <script src="../blocks/settings/generator.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
   <div id="settingsBlocks" style="height: 100%"></div>
@@ -242,13 +244,13 @@
   </xml>
   
   <xml id="settingsStartingBlocks">
-        <block type="when_page_is_loaded" deletable="false" movable="false" x="0" y="0"></block>
-    </xml>
+    <block type="when_page_is_loaded" deletable="false" movable="false" x="0" y="0"></block>
+  </xml>
   
   <script>
     Blockly.BlockSvg.START_HAT = true;
     
-    window.settingsWorkspace = Blockly.inject('settingsBlocks', { 
+    settingsWorkspace = Blockly.inject('settingsBlocks', { 
     	toolbox : document.getElementById("workspaceBlocks"), 
     	collapse : true, 
     	comments : true, 
@@ -264,36 +266,22 @@
     	sounds : true, 
     	oneBasedIndex : true
     });
-    Blockly.Xml.domToWorkspace(settingsWorkspace, document.getElementById('settingsStartingBlocks'));
     
-    
-    function getCode(workspace) {
-      blocks = workspace.getTopBlocks(true);
-      Blockly.JavaScript.init(workspace);
-      
-      var events = [];
-      var when_page_is_loaded;
-      
-      for (var b = 0; b < blocks.length; b++) {
-        var block = blocks[b];
-        var blockCode = Blockly.JavaScript.blockToCode(block);
-        if ("when_page_is_loaded" == block.type) {
-            when_page_is_loaded = blockCode[0]
-        } else if (block.startHat_ == true) {
-            events.push(blockCode[0]);
-        }
+    function setWorkspace(xmlDocument){
+      settingsWorkspace.clear()
+      if (xmlDocument) {
+        Blockly.Xml.domToWorkspace(settingsWorkspace, xmlDocument);
       }
-      
-      var definitions = []
-      for (var def in Blockly.JavaScript.definitions_) {
-        definitions.push(Blockly.JavaScript.definitions_[def]);
-      }
-  
-      return {
-        definitions: definitions,
-        when_page_is_loaded: when_page_is_loaded,
-        events: events
-      };
+      else {
+        // do nothing, no data yet
+      }  
     }
+    
+    settingsWorkspace.addChangeListener(function() { 
+      var settingsDoc = Blockly.Xml.workspaceToDom(settingsWorkspace);
+      window.parent.$('body').trigger('settingsChange', settingsDoc) 
+    })
+    
+    window.setWorkspace = setWorkspace
   </script>
 </body>
