@@ -13,6 +13,16 @@
   <div id="settingsBlocks" style="height: 100%"></div>
   
   <xml id="workspaceBlocks" style="display:none">
+    <category name="Events" colour="60">
+      <block type="load"></block>
+      <block type="mousedown"></block>
+      
+      <!--maybe, custom events-->
+    </category>
+    <category name="Settings" colour="180">
+      <block type="style"></block>
+      <block type="set_css"></block> <!-- make first person-->
+    </category>
     <category name="Logic" colour="210">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>
@@ -22,7 +32,8 @@
       <block type="logic_null"></block>
       <block type="logic_ternary"></block>
     </category>
-    <category name="Loops" colour="120">
+    <category name="Control" colour="120">
+      <block type="timeout"></block>  <!-- eventually turn into wait -->
       <block type="controls_repeat_ext">
         <value name="TIMES">
           <block type="math_number">
@@ -49,7 +60,7 @@
         </value>
       </block>
       <block type="controls_forEach"></block>
-      <block type="controls_flow_statements"></block>
+      <!--<block type="controls_flow_statements"></block>-->
     </category>
     <category name="Math" colour="230">
       <block type="math_number"></block>
@@ -215,36 +226,6 @@
     </category>
     <category name="Variables" colour="330" custom="VARIABLE"></category>
     <category name="Functions" colour="290" custom="PROCEDURE"></category>
-    <category name="Elements" colour="180">
-      <block type="create_element">
-        <value name="ID">
-          <shadow type="text">
-            <field name="TEXT"></field> 
-          </shadow>
-        </value>
-      </block>
-      <block type="body_element"></block>
-      <block type="get_element_by_id">
-        <value name="ID">
-          <shadow type="text">
-            <field name="TEXT"></field> 
-          </shadow>
-        </value>
-      </block>
-      <block type="append_element"></block>
-      <block type="set_css_colour"></block>
-      <block type="set_content"></block>
-      <block type="input_value"></block>
-      <block type="a_tag"></block>
-    </category>
-    <category name="Events" colour="60">
-      <block type="handle_event"></block> 
-      <block type="timeout"></block> 
-    </category>
-  </xml>
-  
-  <xml id="settingsStartingBlocks">
-    <block type="when_page_is_loaded" deletable="false" movable="false" x="0" y="0"></block>
   </xml>
   
   <script>
@@ -277,9 +258,39 @@
       }  
     }
     
+    function getCode() {
+
+      blocks = settingsWorkspace.getTopBlocks(true);
+      Blockly.JavaScript.init(settingsWorkspace);
+      
+      var events = {}
+      var style = {}
+      for (var b = 0; b < blocks.length; b++) {
+        var block = blocks[b];
+        if (block.type == "style") {
+          style = eval(block.style)
+        } else if (block.startHat_ == true) {
+            var blockCode = Blockly.JavaScript.blockToCode(block);
+            events[block.type] = new Function(blockCode[0])
+        }
+      }
+      
+      var definitions = []
+      for (var def in Blockly.JavaScript.definitions_) {
+        definitions.push(Blockly.JavaScript.definitions_[def]);
+      }
+
+      return {
+        definitions: definitions,
+        events: events,
+        style: style
+      };
+    }
+    
     settingsWorkspace.addChangeListener(function() { 
-      var settingsDoc = Blockly.Xml.workspaceToDom(settingsWorkspace);
-      window.parent.$('body').trigger('settingsChange', settingsDoc) 
+      var settings = getCode()
+      settings.xmlDoc = Blockly.Xml.workspaceToDom(settingsWorkspace);
+      window.parent.$('body').trigger('settingsChange', settings) 
     })
     
     window.setWorkspace = setWorkspace

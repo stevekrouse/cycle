@@ -66,21 +66,7 @@ Blockly.Blocks['body_element'] = {
   }
 };
 
-Blockly.Blocks['append_element'] = {
-  init: function() {
-    this.setColour(180);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this
-      .appendValueInput('CHILD').setCheck(['Element', 'TextNode'])
-      .appendField('append');
-    this
-      .appendValueInput('PARENT').setCheck('Element')
-      .appendField('to');
-  }
-};
-
-Blockly.Blocks['set_css_colour'] = {
+Blockly.Blocks['set_css'] = {
   init: function() {
     this.setColour(180);
     this.setPreviousStatement(true);
@@ -126,62 +112,13 @@ Blockly.Blocks['set_css_colour'] = {
         
       ]), 'PROPERTY');
     this
-      .appendValueInput('ELEMENT').setCheck('Element')
-      .appendField('of');
-    this
       .appendValueInput('VALUE')
       .appendField('to');
   }
 };
 
-Blockly.Blocks['set_content'] = {
-  init: function() {
-    this.setColour(180);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this
-      .appendDummyInput().appendField('set the')
-      .appendField(new Blockly.FieldDropdown([
-        ['text', 'textContent'],
-        ['html', 'innerHTML']
-      ]), 'TYPE');
-    this
-      .appendValueInput('ELEMENT').setCheck('Element')
-      .appendField('of');
-    this
-      .appendValueInput('VALUE').setCheck('String')
-      .appendField('to');
-  }
-};
 
-Blockly.Blocks['text_node'] = {
-  init: function() {
-    this.setColour(180);
-    this.appendValueInput('TEXT').setCheck('String')
-      .appendField('a new text node with');
-    this.setOutput(true, 'TextNode');
-  }
-};
-
-Blockly.Blocks['handle_event'] = {
-  init: function() {
-    this.setColour(60);
-    this.appendValueInput('TARGET').setCheck('Element')
-      .appendField('when');
-    this.appendStatementInput('STACK').appendField('is clicked');
-  }
-};
-
-Blockly.Blocks['input_value'] = {
-  init: function() {
-    this.setColour(180);
-    this.setOutput(true, 'String');
-    this.appendValueInput('ELEMENT').setCheck('Element')
-      .appendField('the input value of');
-  }
-};
-
-Blockly.Blocks['when_page_is_loaded'] = {
+Blockly.Blocks['load'] = {
   init: function() {
     this.setColour(60);
     this.appendDummyInput()
@@ -192,19 +129,24 @@ Blockly.Blocks['when_page_is_loaded'] = {
   }
 };
 
-Blockly.Blocks['a_tag'] = {
+Blockly.Blocks['mousedown'] = {
   init: function() {
-    this.setColour(180);
+    this.setColour(60);
     this.appendDummyInput()
-        .appendField("a new <a> tag with href");
-    this.appendValueInput('linkText')
-        .setCheck("String");
+        .appendField("when mouse down");
+    this.appendStatementInput("blocks")
+        .setCheck(null);
+    this.setTooltip('');
+  }
+};
+
+Blockly.Blocks['style'] = {
+  init: function() {
+    this.setColour(60);
     this.appendDummyInput()
-        .appendField("and display text");
-    this.appendValueInput('displayText')
-        .setCheck("String");
-    this.setInputsInline(true);
-    this.setOutput(true);
+        .appendField("Style Settings");
+    this.appendStatementInput("blocks")
+        .setCheck(null);
     this.setTooltip('');
   }
 };
@@ -218,7 +160,7 @@ Blockly.Blocks['timeout'] = {
     this.appendStatementInput("STATEMENTS");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(65);
+    this.setColour(120);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }

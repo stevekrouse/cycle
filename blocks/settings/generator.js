@@ -35,29 +35,12 @@ Blockly.JavaScript['body_element'] = function(block) {
   ];
 };
 
-Blockly.JavaScript['append_element'] = function(block) {
-  var parent = Blockly.JavaScript.valueToCode(
-    block, 'PARENT',
-    Blockly.JavaScript.ORDER_ATOMIC
-  );
-  var child = Blockly.JavaScript.valueToCode(
-    block, 'CHILD',
-    Blockly.JavaScript.ORDER_ATOMIC
-  );
-  return parent + '.appendChild(' + child + ');\n';
-};
-
-Blockly.JavaScript['set_css_colour'] = function(block) {
-  var element = Blockly.JavaScript.valueToCode(
-    block, 'ELEMENT',
-    Blockly.JavaScript.ORDER_ATOMIC
-  );
-  var colour = Blockly.JavaScript.valueToCode(
+Blockly.JavaScript['set_css'] = function(block) {
+  var value = Blockly.JavaScript.valueToCode(
     block, 'VALUE',
     Blockly.JavaScript.ORDER_ATOMIC
   );
-  return element + '.style.' + block.getFieldValue('PROPERTY') + ' = ' +
-         colour + ';\n';
+  return block.getFieldValue('PROPERTY') + ' : ' + value + ',\n';
 };
 
 Blockly.JavaScript['set_content'] = function(block) {
@@ -112,14 +95,29 @@ Blockly.JavaScript['input_value'] = function(block) {
   ];
 };
 
-Blockly.JavaScript['when_page_is_loaded'] = function(block) {
+Blockly.JavaScript['load'] = function(block) {
   var statements_blocks = Blockly.JavaScript.statementToCode(block, 'blocks');
   return [
-    'document.body.onload = function() {\n' + statements_blocks + '};\n',
+    statements_blocks,
     Blockly.JavaScript.ORDER_ATOMIC
   ];
 };
 
+Blockly.JavaScript['mousedown'] = function(block) {
+  var statements_blocks = Blockly.JavaScript.statementToCode(block, 'blocks');
+  return [
+    statements_blocks,
+    Blockly.JavaScript.ORDER_ATOMIC
+  ];
+};
+
+Blockly.JavaScript['style'] = function(block) {
+  var statements_blocks = Blockly.JavaScript.statementToCode(block, 'blocks');
+  return [
+    "{\n" + statements_blocks + "\n}",
+    Blockly.JavaScript.ORDER_ATOMIC
+  ];
+};
 
 Blockly.JavaScript['a_tag'] = function(block) {
   var functionName = Blockly.JavaScript.provideFunction_(

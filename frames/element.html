@@ -12,43 +12,19 @@
   <div id="elementBlocks" style="height: 100%" ></div>
   
   <xml id="toolbox" style="display: none;">
-    <!--<block type="colour_picker">-->
-    <!--  <field name="COLOUR">#ff0000</field>-->
-    <!--</block>-->
-    <!--<block type="text_join">-->
-    <!--  <mutation items="2"></mutation>-->
-    <!--</block>-->
-    <!--<block type="colour_random"></block>-->
-    <!--<block type="colour_rgb">-->
-    <!--  <value name="RED">-->
-    <!--    <shadow type="math_number">-->
-    <!--      <field name="NUM">100</field>-->
-    <!--    </shadow>-->
-    <!--  </value>-->
-    <!--  <value name="GREEN">-->
-    <!--    <shadow type="math_number">-->
-    <!--      <field name="NUM">50</field>-->
-    <!--    </shadow>-->
-    <!--  </value>-->
-    <!--  <value name="BLUE">-->
-    <!--    <shadow type="math_number">-->
-    <!--      <field name="NUM">0</field>-->
-    <!--    </shadow>-->
-    <!--  </value>-->
-    <!--</block>-->
     <block type="cycle_container"></block>
     <block type="cycle_button"></block>
     <block type="cycle_text"></block>
     <block type="text">
       <field name="TEXT"></field>
     </block>
-    <!--image-->
     <!--text input-->
     <!--list-->
-    <!--list element (numbered?)-->
+    <!--list element (numbered/bullet/nothing)-->
+    
     <!--link-->
     <!--heading-->
-    
+    <!--image-->
     <!--text area-->
     <!--table-->
     <!--table row-->
@@ -61,6 +37,27 @@
     <!--select dropdown-->
     <!--toggle-->
     <!--navbar-->
+    
+    <!-- math -->
+    <!--add-->
+    <!--subtract-->
+    <!--divide-->
+    <!--multiply-->
+    <!--etc-->
+    
+    <!-- data -->
+    <!--variables from settings-->
+    
+    <!--control-->
+    <!--if-->
+    <!--if else-->
+    <!--for loop-->
+    <!--for each loop-->
+    
+    <!--create element-->
+    <!--new element-->
+    <!--custom elements-->
+    <!--parameters, data -->
   </xml>
   
   <xml id="elementStartingBlocks">
@@ -97,9 +94,9 @@
       return Blockly.selected
     }
   
-    function getElementCode() {
+    function getElementCode(elementSettings) {
       blocks = elementWorkspace.getTopBlocks(true);
-      return elementWorkSpaceData(blocks[0])
+      return elementWorkspaceData(blocks[0], elementSettings)
     }
     
     

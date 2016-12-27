@@ -8,8 +8,26 @@ function blocksMap(block, func){
   }
 }
 
+function mapElementWorkspaceData(block, elementSettings) {
+  function helper(block) {
+    return elementWorkspaceData(block, elementSettings)
+  }
+  return blocksMap(block, helper)
+}
 
-function elementWorkSpaceData(block) {
+
+// TODO get definitions in the block methods
+
+
+function blockAttributes(block, elementSettings) {
+  var blockSettings = elementSettings[block.id] || {}
+  return {
+    on: blockSettings.events,
+    style: blockSettings.style
+  }
+}
+
+function elementWorkspaceData(block, elementSettings) {
   var blocks 
   if (block.getInputTargetBlock) {
     blocks = block.getInputTargetBlock("BLOCKS")
@@ -18,28 +36,15 @@ function elementWorkSpaceData(block) {
     return {
       blockId: block.id,
       tagType: "div",
-      attributes: {
-          style: {
-              
-          },
-          attrs: {
-              
-          },
-          on: {
-              
-          },
-          // eventually, props: {
-          //    
-          // }
-      },
-      children: blocksMap(blocks, elementWorkSpaceData)
+      attributes: blockAttributes(block, elementSettings),
+      children: mapElementWorkspaceData(blocks, elementSettings)
     }
   } else if (block.type == 'cycle_container'){
     return {
       blockId: block.id,
       tagType: "div",
-      attributes: {},
-      children: blocksMap(blocks, elementWorkSpaceData)
+      attributes: blockAttributes(block, elementSettings),
+      children: mapElementWorkspaceData(blocks, elementSettings)
     }
   } else if (block.type == 'cycle_text') {
     if (block.getInputTargetBlock("TEXT")) {
@@ -51,12 +56,8 @@ function elementWorkSpaceData(block) {
     return {
       blockId: block.id,
       tagType: "button",
-      attributes: {
-        class: {
-          'btn': true
-        }
-      },
-      children: blocksMap(blocks, elementWorkSpaceData)
+      attributes: blockAttributes(block, elementSettings),
+      children: mapElementWorkspaceData(blocks, elementSettings)
     }
   }
 } 

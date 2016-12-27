@@ -47,11 +47,16 @@
     var preview = document.getElementById('preview')
     var settingsBlocks = document.getElementById('settingsBlocks')
     var elementBlocks = document.getElementById('elementBlocks')  
+    
+    // the key data structure for the whole app
+    //  elementSettings :: {ElementID: Settings}  (where Settings :: {events, xmlDoc, definitions})
+    var elementSettings = {}
+    
   
     function runElement() {
       preview.src = "./frames/output.html";
       preview.onload = function () {
-        var elementCode = elementBlocks.contentWindow.getElementCode()
+        var elementCode = elementBlocks.contentWindow.getElementCode(elementSettings)
         preview.contentWindow.code = elementCode
       }
     }
@@ -75,15 +80,29 @@
     
     $('body').bind('elementChange', debouncedRunElement)
     
-    var elementSettings = {}
+    
     $('body').bind('newElementSelected', function(event, blockId) {
-      var selectedSettings = elementSettings[blockId] 
+      var selectedSettings = (elementSettings[blockId] || {}).xmlDoc
       settingsBlocks.contentWindow.setWorkspace(selectedSettings)
     })
     
-    $('body').bind('settingsChange', function(event, settingsDoc) {
-      elementSettings[elementBlocks.contentWindow.selectedElement.id] = settingsDoc
+    $('body').bind('settingsChange', function(event, settings) {
+      elementSettings[elementBlocks.contentWindow.selectedElement.id] = settings
+      debouncedRunElement()
     })
+    
+    // next things TODO
+    // * figure out how to get settings into vue on page
+    
+    // * make the generator work for setting CSS settings
+    
+    // * create text input, list, list element blocks & click events to settings
+    // * add loops, text, math, text, logic, variables to elements
+    
+    // * think about what else I need to get todomvc built (maybe how to get variables working globally, maybe messages)
+    
+    
+    
   
     // warn users before navigating away from unsaved changes
     // window.dirtyChanges = false;
