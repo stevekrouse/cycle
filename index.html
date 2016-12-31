@@ -52,11 +52,11 @@
     //  elementSettings :: {ElementID: Settings}  (where Settings :: {events, xmlDoc, definitions})
     var elementSettings = {}
     
-  
+    var elementCode
     function runElement() {
       preview.src = "./frames/output.html";
       preview.onload = function () {
-        var elementCode = elementBlocks.contentWindow.getElementCode(elementSettings)
+        elementCode = elementBlocks.contentWindow.getElementCode(elementSettings)
         preview.contentWindow.code = elementCode
       }
     }
@@ -91,26 +91,29 @@
       debouncedRunElement()
     })
     
-    // next things TODO
-    // * figure out how to get settings into vue on page
+    // next things TODO for target goal: counter project (with number maybe inside of button)
+    // ^ figure out something more scalable than onload as the starter element because it only works for some tags 
+    // ?   or just make it be the default for starting settings or loop into the page onload
     
-    // * make the generator work for setting CSS settings
+    // next things TODO for target goal: todo list
+    // * create text input and figure out how to get value of it
+    // * add loops for lists
+    // * get variables working globally or message broadcasting
     
-    // * create text input, list, list element blocks & click events to settings
-    // * add loops, text, math, text, logic, variables to elements
-    
-    // * think about what else I need to get todomvc built (maybe how to get variables working globally, maybe messages)
-    
-    
-    
-  
-    // warn users before navigating away from unsaved changes
-    // window.dirtyChanges = false;
-    // window.onbeforeunload = function (e) {
-    //     if (window.dirtyChanges) {
-    //         return "Would you like to trash this unsaved program?";
-    //     }
-    // };
+    // after todo list
+    // * figure out how props/components could work for todo list
+    // *   seperate variables via components
+    // * to full todomvc with css and props/components 
+    // * refactor things so as to decouple from blocky / vue --> a cycle runtime/AST thingy, should be easier now that we have element/setting & events seperated
+    // *   should be similar to the vuejs render object (if not exactly that)
+
+    // eventually, neccesary features that we don't need now because I can use my imagination.
+    // * make variables in the component scope automatically show up in the element list (only to read, not edit)
+    // * remove the set variable block from element
+    // * add variable/method definitions to the scope where vue expressions are evaluated
+    // * seperate the set_css block into singles
+    // * when settings (or text) blocks are clicked in elements, make the events show it's parents' (or parent's parent's etcs) events
+    // * type check statement inputs so that elements and settings are kept apart (or play with the idea of putting them all together...)
   </script>
   <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

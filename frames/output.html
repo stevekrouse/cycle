@@ -1,41 +1,89 @@
 <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <body>
-  <div id="page1"></div>
-   <div id="page"></div>
+  <div id="page" @load="load"></div>
 </body>
 <script>
-  // timeout to wait for code to be defined on scope
-  setTimeout(function(){
-    function parseCodeToVueRender(code){
-      return function(h) {
-        return parseChildrenToRender(h, code)
-      }
+  window.loads = []
+  function scopeVaribles(funcString, keyword, variables) {
+    var result = funcString
+    variables.forEach(function(variable) {
+      result = result.split(variable).join(keyword + "." + variable)
+    })
+    return result
+  }
+  
+  function parseCodeToVueRender(code, variables){
+    return function(h) {
+      return parseChildrenToRender(this, h, code, variables)
     }
-    function parseChildrenToRender(h, code){
-      if (typeof code == "string") {
-        return code
-      } else {
-        return h(
-          code.tagType,
-          code.attributes,
-          code.children.map(function(child) {
-            return parseChildrenToRender(h, child)
-          })
-        )
-      }
+  }
+  function parseChildrenToRender(self, h, code, variables){
+    if (code == null) {
+      return null 
+    } else if (typeof code == "string") {
+      return eval(scopeVaribles(code, "self", variables))  // TODO generalize for other variables
+    } else {
+      return h(
+        code.tagType,
+        scopeEvents(code.attributes, self, variables),
+        code.children.map(function(child) {
+          return parseChildrenToRender(self, h, child, variables)
+        })
+      )
     }
+  }
+  function scopeEvents(attributes, self, variables){
+    var on = attributes.on || {}
+    var onKeys = Object.keys(on)
+    onKeys.forEach(function(key) {
+      if (on[key].split){
+        on[key] = new Function(scopeVaribles(on[key], "this", variables)).bind(self)
+      }
+    })
+    window.loads.push(on["load"])
+    delete on["load"]
+    attributes.on = on
+    return attributes
+  }
+  
+  function collectVariables(code) { return collectVariablesHelper(code, {}) }
+  function collectVariablesHelper(code, collection) {
+    if (!code || typeof code == "string") {
+      return [] 
+    } else {
+      code.settings = code.settings || {}
+      code.settings.variables = code.settings.variables || []
+      code.settings.variables.forEach(function(variable) {
+        collection[variable] = 0
+      })
+      code.children = code.children || []
+      code.children.forEach(function(child) {
+        collectVariablesHelper(child, collection)
+      })
+      return collection
+    }
+  }
+  
+  var app
+  function run(){
+    var data = collectVariables(window.code)
     if (window.code){
-       var app = new Vue({
+       app = new Vue({
         el: '#page',
-        render: parseCodeToVueRender(window.code)
-      //   data: {
-      //     message: 'Hello Vue!'
-      //   }, props: {
+        render: parseCodeToVueRender(window.code, Object.keys(data)),
+        data: data,
+        methods: {
+          load: function() {
+            window.loads.forEach(function(func) { func() })
+          }
+        }
+      // props: {
       //    
       //   }
       })
     }
-   
-  }, 100  )
+  }
+
+  setTimeout(run, 100  ) // timeout to wait for code to be defined on scope
 </script>

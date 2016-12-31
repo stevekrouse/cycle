@@ -16,12 +16,6 @@
     <category name="Events" colour="60">
       <block type="load"></block>
       <block type="mousedown"></block>
-      
-      <!--maybe, custom events-->
-    </category>
-    <category name="Settings" colour="180">
-      <block type="style"></block>
-      <block type="set_css"></block> <!-- make first person-->
     </category>
     <category name="Logic" colour="210">
       <block type="controls_if"></block>
@@ -264,14 +258,11 @@
       Blockly.JavaScript.init(settingsWorkspace);
       
       var events = {}
-      var style = {}
       for (var b = 0; b < blocks.length; b++) {
         var block = blocks[b];
-        if (block.type == "style") {
-          style = eval(block.style)
-        } else if (block.startHat_ == true) {
+        if (block.startHat_ == true) {
             var blockCode = Blockly.JavaScript.blockToCode(block);
-            events[block.type] = new Function(blockCode[0])
+            events[block.type] = blockCode[0]
         }
       }
       
@@ -279,11 +270,13 @@
       for (var def in Blockly.JavaScript.definitions_) {
         definitions.push(Blockly.JavaScript.definitions_[def]);
       }
-
+    
+      var variables = Blockly.Variables.allVariables(settingsWorkspace).slice()
+      
       return {
         definitions: definitions,
         events: events,
-        style: style
+        variables: variables
       };
     }
     

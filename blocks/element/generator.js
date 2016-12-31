@@ -15,49 +15,64 @@ function mapElementWorkspaceData(block, elementSettings) {
   return blocksMap(block, helper)
 }
 
-
-// TODO get definitions in the block methods
-
-
 function blockAttributes(block, elementSettings) {
   var blockSettings = elementSettings[block.id] || {}
+  
+  var settings = block.getInputTargetBlock && block.getInputTargetBlock("SETTINGS")
+  var style = {}
+  while (settings) {
+    if (settings.type == "set_css"){
+      var value = Blockly.JavaScript.valueToCode(
+        settings, 'VALUE',
+        Blockly.JavaScript.ORDER_ATOMIC
+      );
+      style[settings.getFieldValue('PROPERTY')] = eval(value) // TODO replace eval with something smarter, 
+                                                              // that can handle expressions and functions that 
+                                                              // have been provided in blockSettings.definitions
+    }
+    settings = settings.getNextBlock()
+  }
+  
   return {
     on: blockSettings.events,
-    style: blockSettings.style
+    style: style,
   }
 }
 
 function elementWorkspaceData(block, elementSettings) {
-  var blocks 
-  if (block.getInputTargetBlock) {
-    blocks = block.getInputTargetBlock("BLOCKS")
-  }
+  var blockSettings = elementSettings[block.id] || {}
+  var children = block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN")
+  var result
   if (block.type == 'cycle_page') {
-    return {
+    result = {
       blockId: block.id,
+      settings: blockSettings,
       tagType: "div",
-      attributes: blockAttributes(block, elementSettings),
-      children: mapElementWorkspaceData(blocks, elementSettings)
+      children: mapElementWorkspaceData(children, elementSettings)
     }
   } else if (block.type == 'cycle_container'){
-    return {
+    result = {
       blockId: block.id,
+      settings: blockSettings,
       tagType: "div",
-      attributes: blockAttributes(block, elementSettings),
-      children: mapElementWorkspaceData(blocks, elementSettings)
+      children: mapElementWorkspaceData(children, elementSettings)
     }
   } else if (block.type == 'cycle_text') {
-    if (block.getInputTargetBlock("TEXT")) {
-      return block.getInputTargetBlock("TEXT").getFieldValue("TEXT")
-    } else {
-      return ""
-    }
+    var value = Blockly.JavaScript.valueToCode(
+      block, 'TEXT',
+      Blockly.JavaScript.ORDER_ATOMIC
+    );
+    return value
   } else if (block.type == 'cycle_button') {
-    return {
+    result = {
       blockId: block.id,
+      settings: blockSettings,
       tagType: "button",
-      attributes: blockAttributes(block, elementSettings),
-      children: mapElementWorkspaceData(blocks, elementSettings)
+      children: mapElementWorkspaceData(children, elementSettings)
     }
+  } else {
+    throw new Error('unexpected block.type: ' + block.type)
   }
+  result.attributes = blockAttributes(block, elementSettings)
+  return result
 } 
