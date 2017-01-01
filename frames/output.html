@@ -5,33 +5,40 @@
 </body>
 <script>
   window.loads = []
-  function scopeVaribles(funcString, keyword, variables) {
+  function scopeVaribles(funcString, keyword, variables, boundVariables) {
     var result = funcString
     variables.forEach(function(variable) {
       result = result.split(variable).join(keyword + "." + variable)
     })
+    var boundKeys = Object.keys(boundVariables)
+    boundKeys.forEach(function(variable) {
+      result = result.split(variable).join("'" + boundVariables[variable] + "'")
+    })
+    console.log(result)
     return result
   }
   
-  function parseCodeToVueRender(code, variables){
+  function parseCodeToVueRender(code, variables, boundVariables){
     return function(h) {
-      return parseChildrenToRender(this, h, code, variables)
+      return parseChildrenToRender(this, h, code, variables, boundVariables)
     }
   }
-  function parseChildrenToRender(self, h, code, variables){
+  function parseChildrenToRender(self, h, code, variables, boundVariables){
     if (code == null) {
       return null 
     } else if (typeof code == "string") {
-      return eval(scopeVaribles(code, "self", variables))  // TODO generalize for other variables
+      return eval(scopeVaribles(code, "self", variables, boundVariables))  
     } else if (code.attributes.repeat) {
       return h(
         "div", // containter for all the repeats
-        eval(scopeVaribles(code.attributes.repeat.list, "self", variables)).map(function (item) {
+        eval(scopeVaribles(code.attributes.repeat.list, "self", variables, boundVariables)).map(function (item) {
+          var boundVariablesCopy = Object.assign({}, boundVariables)
+          boundVariablesCopy[code.attributes.repeat.iterator] = item
           return h(
             "div",
-            scopeEvents(code.attributes, self, variables), // TODO is this the right idea?
+            scopeEvents(code.attributes, self, variables, boundVariablesCopy), // TODO is this the right idea?
             code.children.map(function(child) {
-              return parseChildrenToRender(self, h, child, variables) // TODO figure out how to bind item to repeat.iterator in 
+              return parseChildrenToRender(self, h, child, variables, boundVariablesCopy)
             })
           )
         })
@@ -39,19 +46,19 @@
     } else {
       return h(
         code.tagType,
-        scopeEvents(code.attributes, self, variables),
+        scopeEvents(code.attributes, self, variables, boundVariables),
         code.children.map(function(child) {
-          return parseChildrenToRender(self, h, child, variables)
+          return parseChildrenToRender(self, h, child, variables, boundVariables)
         })
       )
     }
   }
-  function scopeEvents(attributes, self, variables){
+  function scopeEvents(attributes, self, variables, boundVariables){
     var on = attributes.on || {}
     var onKeys = Object.keys(on)
     onKeys.forEach(function(key) {
       if (on[key].split){
-        on[key] = new Function("event", scopeVaribles(on[key], "this", variables)).bind(self)
+        on[key] = new Function("event", scopeVaribles(on[key], "this", variables, boundVariables)).bind(self)
       }
     })
     window.loads.push(on["load"])
@@ -83,7 +90,7 @@
     if (window.code){
        app = new Vue({
         el: '#page',
-        render: parseCodeToVueRender(window.code, Object.keys(data)),
+        render: parseCodeToVueRender(window.code, Object.keys(data), {}),
         data: data,
         mounted: function () {
           this.$nextTick(function () {

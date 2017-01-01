@@ -37,10 +37,10 @@ function blockAttributes(block, blockEvents) {
   }
   
   if (block.type == "cycle_input") {
-    data["value"] = ""
+    data["inputText"] = ""
     
     blockEvents.events = blockEvents.events || {}
-    blockEvents.events["input"] = "item = event.target.value"
+    blockEvents.events["input"] = "inputText = event.target.value"
   }
   
   if (block.type == "controls_forEach") {
