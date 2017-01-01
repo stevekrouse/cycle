@@ -15,9 +15,7 @@ function mapElementWorkspaceData(block, elementSettings) {
   return blocksMap(block, helper)
 }
 
-function blockAttributes(block, elementSettings) {
-  var blockSettings = elementSettings[block.id] || {}
-  
+function blockAttributes(block, blockSettings) {
   var settings = block.getInputTargetBlock && block.getInputTargetBlock("SETTINGS")
   var style = {}
   while (settings) {
@@ -26,11 +24,17 @@ function blockAttributes(block, elementSettings) {
         settings, 'VALUE',
         Blockly.JavaScript.ORDER_ATOMIC
       );
-      style[settings.getFieldValue('PROPERTY')] = eval(value) // TODO replace eval with something smarter, 
-                                                              // that can handle expressions and functions that 
-                                                              // have been provided in blockSettings.definitions
+      style[settings.getFieldValue('PROPERTY')] = eval(value)
     }
     settings = settings.getNextBlock()
+  }
+  
+  if (block.type == "cycle_input") {
+    blockSettings.variables = blockSettings.variables || []
+    blockSettings.variables.push("item")
+    
+    blockSettings.events = blockSettings.events || {}
+    blockSettings.events["input"] = "item = event.target.value"
   }
   
   return {
@@ -70,9 +74,16 @@ function elementWorkspaceData(block, elementSettings) {
       tagType: "button",
       children: mapElementWorkspaceData(children, elementSettings)
     }
+  } else if (block.type == 'cycle_input') {
+    result = {
+      blockId: block.id,
+      settings: blockSettings,
+      tagType: "input",
+      children: mapElementWorkspaceData(children, elementSettings)
+    }
   } else {
     throw new Error('unexpected block.type: ' + block.type)
   }
-  result.attributes = blockAttributes(block, elementSettings)
+  result.attributes = blockAttributes(block, blockSettings)
   return result
 } 

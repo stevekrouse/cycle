@@ -90,26 +90,31 @@
       elementSettings[elementBlocks.contentWindow.selectedElement.id] = settings
       debouncedRunElement()
     })
-  
-    // next things TODO for target goal: todo list
-    // * create text input and figure out how to get value of it
+    
+    // ^ combine element settings and children to one settings block 
+
+    // next things TODO for target goal: simple, add-only todo list
+    // * figure out how initial data/state should be set for variables
+    // ?  set initial val in element?
     // * add loops for lists
-    // * get variables working globally or message broadcasting
     
     // after todo list
     // * figure out how props/components could work for todo list
     // *   seperate variables via components
-    // * to full todomvc with css and props/components 
+    // * message broadcasting
+    // * full todomvc css
     // * refactor things so as to decouple from blocky / vue --> a cycle runtime/AST thingy, should be easier now that we have element/setting & events seperated
     // *   should be similar to the vuejs render object (if not exactly that)
 
-    // eventually, neccesary features that we don't need now because I can use my imagination.
-    // * make variables in the component scope automatically show up in the element list (only to read, not edit)
-    // * remove the set variable block from element
+    // eventually, neccesary features that we don't need now because I can use my imagination
+    // * parse string to number
+    // * allow multiple kinds of each event
+    // * figure out how to add variables for callbacks (similar to how adding a for-loop does)
+    // * Objects, create empty, access key, set key, get all keys   
     // * add variable/method definitions to the scope where vue expressions are evaluated
     // * seperate the set_css block into singles
+    // * make element / setting variables correspond
     // * when settings (or text) blocks are clicked in elements, make the events show it's parents' (or parent's parent's etcs) events
-    // * type check statement inputs so that elements and settings are kept apart (or play with the idea of putting them all together...)
   </script>
   <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

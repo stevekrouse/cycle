@@ -43,6 +43,21 @@ Blockly.Blocks['cycle_button'] = {
   }
 };
 
+Blockly.Blocks['cycle_input'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Input");
+    this.appendStatementInput("SETTINGS")
+    this.appendStatementInput("CHILDREN")
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 Blockly.Blocks['cycle_page'] = {
   init: function() {
     this.appendDummyInput()

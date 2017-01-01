@@ -38,7 +38,7 @@
     var onKeys = Object.keys(on)
     onKeys.forEach(function(key) {
       if (on[key].split){
-        on[key] = new Function(scopeVaribles(on[key], "this", variables)).bind(self)
+        on[key] = new Function("event", scopeVaribles(on[key], "this", variables)).bind(self)
       }
     })
     window.loads.push(on["load"])

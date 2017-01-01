@@ -111,6 +111,14 @@ Blockly.JavaScript['mousedown'] = function(block) {
   ];
 };
 
+Blockly.JavaScript['change'] = function(block) {
+  var statements_blocks = Blockly.JavaScript.statementToCode(block, 'blocks');
+  return [
+    statements_blocks,
+    Blockly.JavaScript.ORDER_ATOMIC
+  ];
+};
+
 Blockly.JavaScript['style'] = function(block) {
   var statements_blocks = Blockly.JavaScript.statementToCode(block, 'blocks');
   return [

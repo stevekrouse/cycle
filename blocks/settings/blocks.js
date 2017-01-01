@@ -20,6 +20,17 @@ Blockly.Blocks['mousedown'] = {
   }
 };
 
+Blockly.Blocks['change'] = {
+  init: function() {
+    this.setColour(60);
+    this.appendDummyInput()
+        .appendField("when changed");
+    this.appendStatementInput("blocks")
+        .setCheck(null);
+    this.setTooltip('');
+  }
+};
+
 Blockly.Blocks['timeout'] = {
   init: function() {
     this.appendDummyInput()
