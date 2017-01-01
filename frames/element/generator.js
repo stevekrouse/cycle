@@ -15,49 +15,53 @@ function mapElementWorkspaceData(block, elementSettings) {
   return blocksMap(block, helper)
 }
 
-function blockAttributes(block, blockSettings) {
-  var settings = block.getInputTargetBlock && block.getInputTargetBlock("SETTINGS")
+function blockAttributes(block, blockEvents) {
   var style = {}
-  while (settings) {
-    if (settings.type == "set_css"){
+  var data = {}
+  
+  var children = block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN")
+  while (children) {
+    if (children.type == "set_css"){
       var value = Blockly.JavaScript.valueToCode(
-        settings, 'VALUE',
+        children, 'VALUE',
         Blockly.JavaScript.ORDER_ATOMIC
       );
-      style[settings.getFieldValue('PROPERTY')] = eval(value)
+      style[children.getFieldValue('PROPERTY')] = eval(value)
+    } else if (children.type == "variables_set") {
+      var value = Blockly.JavaScript.valueToCode(children, 'VALUE',Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
+      var name = Blockly.JavaScript.variableDB_.getName(children.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+      data[name] = eval(value)
     }
-    settings = settings.getNextBlock()
+    children = children.getNextBlock()
   }
   
   if (block.type == "cycle_input") {
-    blockSettings.variables = blockSettings.variables || []
-    blockSettings.variables.push("item")
+    data["value"] = ""
     
-    blockSettings.events = blockSettings.events || {}
-    blockSettings.events["input"] = "item = event.target.value"
+    blockEvents.events = blockEvents.events || {}
+    blockEvents.events["input"] = "item = event.target.value"
   }
   
   return {
-    on: blockSettings.events,
+    on: blockEvents.events,
     style: style,
+    data: data
   }
 }
 
 function elementWorkspaceData(block, elementSettings) {
-  var blockSettings = elementSettings[block.id] || {}
+  var blockEvents = elementSettings[block.id] || {}
   var children = block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN")
   var result
   if (block.type == 'cycle_page') {
     result = {
       blockId: block.id,
-      settings: blockSettings,
       tagType: "div",
       children: mapElementWorkspaceData(children, elementSettings)
     }
   } else if (block.type == 'cycle_container'){
     result = {
       blockId: block.id,
-      settings: blockSettings,
       tagType: "div",
       children: mapElementWorkspaceData(children, elementSettings)
     }
@@ -70,20 +74,18 @@ function elementWorkspaceData(block, elementSettings) {
   } else if (block.type == 'cycle_button') {
     result = {
       blockId: block.id,
-      settings: blockSettings,
       tagType: "button",
       children: mapElementWorkspaceData(children, elementSettings)
     }
   } else if (block.type == 'cycle_input') {
     result = {
       blockId: block.id,
-      settings: blockSettings,
       tagType: "input",
       children: mapElementWorkspaceData(children, elementSettings)
     }
   } else {
-    throw new Error('unexpected block.type: ' + block.type)
+    // do nothing because we will collect this setting in blockAttributes
   }
-  result.attributes = blockAttributes(block, blockSettings)
+  if (result) { result.attributes = blockAttributes(block, blockEvents) } 
   return result
 } 

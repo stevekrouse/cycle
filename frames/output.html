@@ -47,19 +47,18 @@
     return attributes
   }
   
-  function collectVariables(code) { return collectVariablesHelper(code, {}) }
-  function collectVariablesHelper(code, collection) {
+  function collectData(code) { return collectDataHelper(code, {}) }
+  function collectDataHelper(code, collection) {
     if (!code || typeof code == "string") {
-      return [] 
+      return {}
     } else {
-      code.settings = code.settings || {}
-      code.settings.variables = code.settings.variables || []
-      code.settings.variables.forEach(function(variable) {
-        collection[variable] = 0
+      dataKeys = Object.keys(code.attributes.data)
+      dataKeys.forEach(function(key) {
+        collection[key] = code.attributes.data[key]
       })
       code.children = code.children || []
       code.children.forEach(function(child) {
-        collectVariablesHelper(child, collection)
+        collectDataHelper(child, collection)
       })
       return collection
     }
@@ -67,7 +66,7 @@
   
   var app
   function run(){
-    var data = collectVariables(window.code)
+    var data = collectData(window.code)
     if (window.code){
        app = new Vue({
         el: '#page',
