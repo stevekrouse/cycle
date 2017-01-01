@@ -16,9 +16,7 @@ function mapElementWorkspaceData(block, elementSettings) {
 }
 
 function blockAttributes(block, blockEvents) {
-  var style = {}
-  var data = {}
-  var repeat 
+  var attributes = {}
   
   var children = block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN")
   while (children) {
@@ -27,34 +25,33 @@ function blockAttributes(block, blockEvents) {
         children, 'VALUE',
         Blockly.JavaScript.ORDER_ATOMIC
       );
-      style[children.getFieldValue('PROPERTY')] = eval(value)
+      attributes.style[children.getFieldValue('PROPERTY')] = eval(value)
     } else if (children.type == "variables_set") {
       var value = Blockly.JavaScript.valueToCode(children, 'VALUE',Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
       var name = Blockly.JavaScript.variableDB_.getName(children.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
-      data[name] = eval(value)
+      attributes.data[name] = eval(value)
     }
     children = children.getNextBlock()
   }
   
   if (block.type == "cycle_input") {
-    data["inputText"] = ""
+    attributes.data = {}
+    attributes.data["inputText"] = ""
     
     blockEvents.events = blockEvents.events || {}
     blockEvents.events["input"] = "inputText = event.target.value"
+    
+    attributes.domPropsStrings = {value: "self.inputText"}
   }
   
   if (block.type == "controls_forEach") {
-     repeat = {}
-     repeat.iterator = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
-     repeat.list = Blockly.JavaScript.valueToCode(block, 'LIST',Blockly.JavaScript.ORDER_ASSIGNMENT) || '[]';
+     attributes.repeat = {}
+     attributes.repeat.iterator = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+     attributes.repeat.list = Blockly.JavaScript.valueToCode(block, 'LIST',Blockly.JavaScript.ORDER_ASSIGNMENT) || '[]';
   }
   
-  return {
-    on: blockEvents.events,
-    style: style,
-    data: data,
-    repeat: repeat,
-  }
+  attributes.on = blockEvents.events
+  return attributes
 }
 
 function elementWorkspaceData(block, elementSettings) {

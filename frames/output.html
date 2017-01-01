@@ -14,7 +14,6 @@
     boundKeys.forEach(function(variable) {
       result = result.split(variable).join("'" + boundVariables[variable] + "'")
     })
-    console.log(result)
     return result
   }
   
@@ -64,6 +63,16 @@
     window.loads.push(on["load"])
     delete on["load"]
     attributes.on = on
+    
+    // also eval domProps of we have them
+    var domPropsStrings = attributes.domPropsStrings || {}
+    var domPropsKeys = Object.keys(domPropsStrings)
+    var domProps = {}
+    domPropsKeys.forEach(function(key) {
+      domProps[key] = eval(domPropsStrings[key])
+    })
+    attributes.domProps = domProps
+    
     return attributes
   }
   
@@ -72,7 +81,8 @@
     if (!code || typeof code == "string") {
       return {}
     } else {
-      dataKeys = Object.keys(code.attributes.data)
+      code.attributes.data = code.attributes.data || {}
+      var dataKeys = Object.keys(code.attributes.data)
       dataKeys.forEach(function(key) {
         collection[key] = code.attributes.data[key]
       })
