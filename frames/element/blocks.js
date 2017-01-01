@@ -2,7 +2,6 @@ Blockly.Blocks['cycle_container'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Container");
-    this.appendStatementInput("SETTINGS")
     this.appendStatementInput("CHILDREN")
         .setCheck(null);
     this.setPreviousStatement(true, null);
@@ -32,7 +31,6 @@ Blockly.Blocks['cycle_button'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Button");
-    this.appendStatementInput("SETTINGS")
     this.appendStatementInput("CHILDREN")
         .setCheck(null);
     this.setPreviousStatement(true, null);
@@ -47,7 +45,6 @@ Blockly.Blocks['cycle_input'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Input");
-    this.appendStatementInput("SETTINGS")
     this.appendStatementInput("CHILDREN")
         .setCheck(null);
     this.setPreviousStatement(true, null);
@@ -62,7 +59,6 @@ Blockly.Blocks['cycle_page'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Page");
-    this.appendStatementInput("SETTINGS")
     this.appendStatementInput("CHILDREN")
         .setCheck(null);
     this.setColour(160);

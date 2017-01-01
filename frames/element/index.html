@@ -1,11 +1,11 @@
 <head>
-  <script src="../vendor/blockly/blockly-compressed-dirty-modified.js"></script>
-  <script src="../vendor/blockly/blocks_compressed.js"></script>
-  <script src="../vendor/blockly/javascript_compressed.js"></script>
-  <script src="../vendor/blockly/en.js"></script>
+  <script src="../../vendor/blockly/blockly-compressed-dirty-modified.js"></script>
+  <script src="../../vendor/blockly/blocks_compressed.js"></script>
+  <script src="../../vendor/blockly/javascript_compressed.js"></script>
+  <script src="../../vendor/blockly/en.js"></script>
   
-  <script src="../blocks/element/blocks.js"></script>
-  <script src="../blocks/element/generator.js"></script>
+  <script src="./blocks.js"></script>
+  <script src="./generator.js"></script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
@@ -17,7 +17,11 @@
       <block type="cycle_container"></block>
       <block type="cycle_input"></block>
       <block type="cycle_button"></block>
-      <block type="cycle_text"></block>  <!-- TODO make placeholder -->
+      <block type="cycle_text">
+        <shadow type="text">
+          <field name="TEXT"></field>
+        </shadow>
+      </block> 
     </category>
     <category name="Settings" colour="80">
       <block type="set_css"></block>
@@ -271,7 +275,7 @@
     	horizontalLayout : false, 
     	toolboxPosition : 'start', 
     	css : true, 
-    	media : '../vendor/blockly/media/', 
+    	media : '../../vendor/blockly/media/', 
     	rtl : false, 
     	scrollbars : true, 
     	sounds : true, 
@@ -288,10 +292,10 @@
       return Blockly.selected
     }
   
-    function getElementCode(elementSettings) {
+    function getElementCode(elementEvents) {
       Blockly.JavaScript.init(elementWorkspace);
       blocks = elementWorkspace.getTopBlocks(true);
-      return elementWorkspaceData(blocks[0], elementSettings)
+      return elementWorkspaceData(blocks[0], elementEvents)
     }
     
     

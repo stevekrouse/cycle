@@ -1,16 +1,16 @@
 <head>
-  <script src="../vendor/blockly/blockly-compressed.js"></script>
-  <script src="../vendor/blockly/blocks_compressed.js"></script>
-  <script src="../vendor/blockly/javascript_compressed.js"></script>
-  <script src="../vendor/blockly/en.js"></script>
+  <script src="../../vendor/blockly/blockly-compressed.js"></script>
+  <script src="../../vendor/blockly/blocks_compressed.js"></script>
+  <script src="../../vendor/blockly/javascript_compressed.js"></script>
+  <script src="../../vendor/blockly/en.js"></script>
   
-  <script src="../blocks/settings/blocks.js"></script>
-  <script src="../blocks/settings/generator.js"></script>
+  <script src="./blocks.js"></script>
+  <script src="./generator.js"></script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
-  <div id="settingsBlocks" style="height: 100%"></div>
+  <div id="eventBlocks" style="height: 100%"></div>
   
   <xml id="workspaceBlocks" style="display:none">
     <category name="Events" colour="60">
@@ -54,7 +54,7 @@
         </value>
       </block>
       <block type="controls_forEach"></block>
-      <!--<block type="controls_flow_statements"></block>-->
+      <block type="controls_flow_statements"></block>
     </category>
     <category name="Math" colour="230">
       <block type="math_number"></block>
@@ -225,7 +225,7 @@
   <script>
     Blockly.BlockSvg.START_HAT = true;
     
-    settingsWorkspace = Blockly.inject('settingsBlocks', { 
+    eventWorkspace = Blockly.inject('eventBlocks', { 
     	toolbox : document.getElementById("workspaceBlocks"), 
     	collapse : true, 
     	comments : true, 
@@ -235,7 +235,7 @@
     	horizontalLayout : false, 
     	toolboxPosition : 'start', 
     	css : true, 
-    	media : '../vendor/blockly/media/', 
+    	media : '../../vendor/blockly/media/', 
     	rtl : false, 
     	scrollbars : true, 
     	sounds : true, 
@@ -243,9 +243,9 @@
     });
     
     function setWorkspace(xmlDocument){
-      settingsWorkspace.clear()
+      eventWorkspace.clear()
       if (xmlDocument) {
-        Blockly.Xml.domToWorkspace(settingsWorkspace, xmlDocument);
+        Blockly.Xml.domToWorkspace(eventWorkspace, xmlDocument);
       }
       else {
         // do nothing, no data yet
@@ -254,8 +254,8 @@
     
     function getCode() {
 
-      blocks = settingsWorkspace.getTopBlocks(true);
-      Blockly.JavaScript.init(settingsWorkspace);
+      blocks = eventWorkspace.getTopBlocks(true);
+      Blockly.JavaScript.init(eventWorkspace);
       
       var events = {}
       for (var b = 0; b < blocks.length; b++) {
@@ -271,7 +271,7 @@
         definitions.push(Blockly.JavaScript.definitions_[def]);
       }
     
-      var variables = Blockly.Variables.allVariables(settingsWorkspace).slice()
+      var variables = Blockly.Variables.allVariables(eventWorkspace).slice()
       
       return {
         definitions: definitions,
@@ -280,10 +280,10 @@
       };
     }
     
-    settingsWorkspace.addChangeListener(function() { 
-      var settings = getCode()
-      settings.xmlDoc = Blockly.Xml.workspaceToDom(settingsWorkspace);
-      window.parent.$('body').trigger('settingsChange', settings) 
+    eventWorkspace.addChangeListener(function() { 
+      var event = getCode()
+      event.xmlDoc = Blockly.Xml.workspaceToDom(eventWorkspace);
+      window.parent.$('body').trigger('eventChange', event) 
     })
     
     window.setWorkspace = setWorkspace
