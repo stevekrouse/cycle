@@ -18,6 +18,7 @@ function mapElementWorkspaceData(block, elementSettings) {
 function blockAttributes(block, blockEvents) {
   var style = {}
   var data = {}
+  var repeat 
   
   var children = block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN")
   while (children) {
@@ -42,10 +43,17 @@ function blockAttributes(block, blockEvents) {
     blockEvents.events["input"] = "item = event.target.value"
   }
   
+  if (block.type == "controls_forEach") {
+     repeat = {}
+     repeat.iterator = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+     repeat.list = Blockly.JavaScript.valueToCode(block, 'LIST',Blockly.JavaScript.ORDER_ASSIGNMENT) || '[]';
+  }
+  
   return {
     on: blockEvents.events,
     style: style,
-    data: data
+    data: data,
+    repeat: repeat,
   }
 }
 
@@ -82,6 +90,12 @@ function elementWorkspaceData(block, elementSettings) {
       blockId: block.id,
       tagType: "input",
       children: mapElementWorkspaceData(children, elementSettings)
+    }
+  } else if (block.type == 'controls_forEach') {
+    result = {
+      blockId: block.id,
+      tagType: "div",
+      children: mapElementWorkspaceData(block.getInputTargetBlock("DO"), elementSettings)
     }
   } else {
     // do nothing because we will collect this setting in blockAttributes

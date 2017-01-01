@@ -23,6 +23,19 @@
       return null 
     } else if (typeof code == "string") {
       return eval(scopeVaribles(code, "self", variables))  // TODO generalize for other variables
+    } else if (code.attributes.repeat) {
+      return h(
+        "div", // containter for all the repeats
+        eval(scopeVaribles(code.attributes.repeat.list, "self", variables)).map(function (item) {
+          return h(
+            "div",
+            scopeEvents(code.attributes, self, variables), // TODO is this the right idea?
+            code.children.map(function(child) {
+              return parseChildrenToRender(self, h, child, variables) // TODO figure out how to bind item to repeat.iterator in 
+            })
+          )
+        })
+      )
     } else {
       return h(
         code.tagType,
