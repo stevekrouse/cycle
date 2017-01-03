@@ -34,30 +34,24 @@
 
     <div id="container" style="height:100%; width:100%; display:flex; flex-direction:row; ">
         <div id="output" style="height:100%; width:50%">
-            <iframe frameBorder="0" src="./frames/output.html" id="preview" style="height:49%; width:100%"></iframe>
-            <iframe frameBorder="0" src="./frames/element/index.html" id="elementBlocks" style="height: 49%; width: 100%"></iframe>
+            <iframe frameBorder="0" src="" id="preview" style="height:100%; width:100%"></iframe>
         </div>
         
         <div id="editPane" style="height:100%; width: 50%; display:flex; flex-direction:column;"> 
-            <iframe frameBorder="0" src="./frames/event/index.html" id="eventBlocks" style="height: 100%;"></iframe>
+            <iframe frameBorder="0" src="./editor.html" id="blocksEditor" style="height: 100%; width: 100%"></iframe>
         </div>
     </div>
 
   <script>
     var preview = document.getElementById('preview')
-    var eventBlocks = document.getElementById('eventBlocks')
-    var elementBlocks = document.getElementById('elementBlocks')  
+    var blocksEditor = document.getElementById('blocksEditor')  
     
-    // the key data structure for the whole app
-    //  elementEvents :: {ElementID: events}  (where events :: {events, xmlDoc, definitions, variables})
-    var elementEvents = {}
-    
-    var elementCode
+    var code = {}
     function runElement() {
-      preview.src = "./frames/output.html";
+      preview.src = "./output.html";
       preview.onload = function () {
-        elementCode = elementBlocks.contentWindow.getElementCode(elementEvents)
-        preview.contentWindow.code = elementCode
+        code = blocksEditor.contentWindow.getCode()
+        preview.contentWindow.code = code
       }
     }
     
@@ -78,18 +72,18 @@
     var debouncedRunElement = debounce(runElement, 500, false)
     debouncedRunElement()
     
-    $('body').bind('elementChange', debouncedRunElement)
-    
-    
-    $('body').bind('newElementSelected', function(event, blockId) {
-      var selectedEvents = (elementEvents[blockId] || {}).xmlDoc
-      eventBlocks.contentWindow.setWorkspace(selectedEvents)
+    blocksEditor.addEventListener("load", function() {
+      if (sessionStorage.codeText) {
+        blocksEditor.contentWindow.setText(sessionStorage.codeText)
+        debouncedRunElement()
+      }
+      $('body').bind('elementChange', function() {
+        debouncedRunElement()
+        sessionStorage.codeText = blocksEditor.contentWindow.getText()
+      })
     })
     
-    $('body').bind('eventChange', function(event, settings) {
-      elementEvents[elementBlocks.contentWindow.selectedElement.id] = settings
-      debouncedRunElement()
-    })
+    
   </script>
   <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

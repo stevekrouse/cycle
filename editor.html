@@ -1,8 +1,8 @@
 <head>
-  <script src="../../vendor/blockly/blockly-compressed.js"></script>
-  <script src="../../vendor/blockly/blocks_compressed.js"></script>
-  <script src="../../vendor/blockly/javascript_compressed.js"></script>
-  <script src="../../vendor/blockly/en.js"></script>
+  <script src="./vendor/blockly/blockly-compressed.js"></script>
+  <script src="./vendor/blockly/blocks_compressed.js"></script>
+  <script src="./vendor/blockly/javascript_compressed.js"></script>
+  <script src="./vendor/blockly/en.js"></script>
   
   <script src="./blocks.js"></script>
   <script src="./generator.js"></script>
@@ -10,10 +10,23 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
-  <div id="eventBlocks" style="height: 100%"></div>
+  <div id="elementBlocks" style="height: 100%" ></div>
   
-  <xml id="workspaceBlocks" style="display:none">
-    <category name="Events" colour="60">
+  <xml id="toolbox" style="display: none;">
+    <category name="Elements" colour="60">
+      <block type="cycle_container"></block>
+      <block type="cycle_input"></block>
+      <block type="cycle_button"></block>
+      <block type="cycle_text">
+        <shadow type="text">
+          <field name="TEXT"></field>
+        </shadow>
+      </block> 
+    </category>
+    <category name="Settings" colour="80">
+      <block type="set_css"></block>
+    </category>
+     <category name="Events" colour="60">
       <block type="load"></block>
       <block type="mousedown"></block>
     </category>
@@ -27,7 +40,6 @@
       <block type="logic_ternary"></block>
     </category>
     <category name="Control" colour="120">
-      <block type="timeout"></block>  <!-- eventually turn into wait -->
       <block type="controls_repeat_ext">
         <value name="TIMES">
           <block type="math_number">
@@ -54,7 +66,6 @@
         </value>
       </block>
       <block type="controls_forEach"></block>
-      <block type="controls_flow_statements"></block>
     </category>
     <category name="Math" colour="230">
       <block type="math_number"></block>
@@ -220,13 +231,46 @@
     </category>
     <category name="Variables" colour="330" custom="VARIABLE"></category>
     <category name="Functions" colour="290" custom="PROCEDURE"></category>
+    
+    <!--list-->
+    <!--list element (numbered/bullet/nothing)-->
+    
+    <!--link-->
+    <!--heading-->
+    <!--image-->
+    <!--text area-->
+    <!--table-->
+    <!--table row-->
+    <!--table cell-->
+    <!--code (pre)-->
+    <!--embed-->
+    <!--spacer-->
+    <!--radio buttons-->
+    <!--checkboxes-->
+    <!--select dropdown-->
+    <!--toggle-->
+    <!--navbar-->
+    
+  
+    <!--control-->
+    <!--if-->
+    <!--if else-->
+    <!--for loop-->
+    <!--for each loop-->
+    
+    <!--create element-->
+    <!--parameters -->
   </xml>
   
+  <xml id="elementStartingBlocks">
+    <block type="cycle_page" deletable="false" movable="false" x="0" y="10"></block>
+  </xml>
+    
   <script>
     Blockly.BlockSvg.START_HAT = true;
-    
-    eventWorkspace = Blockly.inject('eventBlocks', { 
-    	toolbox : document.getElementById("workspaceBlocks"), 
+  
+    var workspace = Blockly.inject('elementBlocks',  { 
+    	toolbox : document.getElementById("toolbox"), 
     	collapse : true, 
     	comments : true, 
     	disable : true, 
@@ -235,57 +279,41 @@
     	horizontalLayout : false, 
     	toolboxPosition : 'start', 
     	css : true, 
-    	media : '../../vendor/blockly/media/', 
+    	media : './vendor/blockly/media/', 
     	rtl : false, 
     	scrollbars : true, 
     	sounds : true, 
     	oneBasedIndex : true
     });
     
-    function setWorkspace(xmlDocument){
-      eventWorkspace.clear()
-      if (xmlDocument) {
-        Blockly.Xml.domToWorkspace(eventWorkspace, xmlDocument);
-      }
-      else {
-        // do nothing, no data yet
-      }  
-    }
+    Blockly.Xml.domToWorkspace(workspace, document.getElementById('elementStartingBlocks'));
     
+    workspace.addChangeListener(function() { window.parent.$('body').trigger('elementChange') })
+  
     function getCode() {
-
-      blocks = eventWorkspace.getTopBlocks(true);
-      Blockly.JavaScript.init(eventWorkspace);
-      
-      var events = {}
-      for (var b = 0; b < blocks.length; b++) {
-        var block = blocks[b];
-        if (block.startHat_ == true) {
-            var blockCode = Blockly.JavaScript.blockToCode(block);
-            events[block.type] = blockCode[0]
-        }
-      }
-      
-      var definitions = []
-      for (var def in Blockly.JavaScript.definitions_) {
-        definitions.push(Blockly.JavaScript.definitions_[def]);
-      }
-    
-      var variables = Blockly.Variables.allVariables(eventWorkspace).slice()
-      
-      return {
-        definitions: definitions,
-        events: events,
-        variables: variables
-      };
+      Blockly.JavaScript.init(workspace);
+      blocks = workspace.getTopBlocks(true);
+      return workspaceData(blocks[0])
     }
     
-    eventWorkspace.addChangeListener(function() { 
-      var event = getCode()
-      event.xmlDoc = Blockly.Xml.workspaceToDom(eventWorkspace);
-      window.parent.$('body').trigger('eventChange', event) 
-    })
+    function getText() {
+      return Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace));
+    }
     
-    window.setWorkspace = setWorkspace
+    function setText(text) {
+      workspace.clear()
+      Blockly.Xml.domToWorkspace(workspace, Blockly.Xml.textToDom(text));
+    }
+    
+    window.getText = getText
+    window.setText = setText
+    
+      // TODO figure where this goes...
+      // var definitions = []
+      // for (var def in Blockly.JavaScript.definitions_) {
+      //   definitions.push(Blockly.JavaScript.definitions_[def]);
+      // }
+    
+      // var variables = Blockly.Variables.allVariables(workspace).slice()
   </script>
 </body>

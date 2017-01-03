@@ -1,3 +1,37 @@
+// developer's note, when adding an event, make sure to add it here
+var events = ["load", "mousedown", "change"]
+
+Blockly.JavaScript['load'] = function(block) {
+  var statements_blocks = Blockly.JavaScript.statementToCode(block, 'blocks');
+  return [
+    statements_blocks,
+    Blockly.JavaScript.ORDER_ATOMIC
+  ];
+};
+
+Blockly.JavaScript['mousedown'] = function(block) {
+  var statements_blocks = Blockly.JavaScript.statementToCode(block, 'blocks');
+  return [
+    statements_blocks,
+    Blockly.JavaScript.ORDER_ATOMIC
+  ];
+};
+
+Blockly.JavaScript['change'] = function(block) {
+  var statements_blocks = Blockly.JavaScript.statementToCode(block, 'blocks');
+  return [
+    statements_blocks,
+    Blockly.JavaScript.ORDER_ATOMIC
+  ];
+};
+
+Blockly.JavaScript['timeout'] = function(block) {
+  var text_seconds = block.getFieldValue('SECONDS');
+  var statements = Blockly.JavaScript.statementToCode(block, 'STATEMENTS');
+  return 'setTimeout(function(){\n' + statements + '}, '  + text_seconds +');\n';
+};
+
+
 function blocksMap(block, func){
   if (!block){
     return []
@@ -8,28 +42,24 @@ function blocksMap(block, func){
   }
 }
 
-function mapElementWorkspaceData(block, elementSettings) {
-  function helper(block) {
-    return elementWorkspaceData(block, elementSettings)
-  }
-  return blocksMap(block, helper)
+function mapWorkspaceData(block) {
+  return blocksMap(block, workspaceData)
 }
 
-function blockAttributes(block, blockEvents, elementSettings) {
-  var attributes = {}
+function blockAttributes(block) {
+  var attributes = {style: {}, data: {}, on: {}, if: undefined, repeat: undefined}
   
   var children = block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN")
   while (children) {
     if (children.type == "set_css"){
-      var value = Blockly.JavaScript.valueToCode(
-        children, 'VALUE',
-        Blockly.JavaScript.ORDER_ATOMIC
-      );
+      var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
       attributes.style[children.getFieldValue('PROPERTY')] = eval(value)
     } else if (children.type == "variables_set") {
       var value = Blockly.JavaScript.valueToCode(children, 'VALUE',Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
       var name = Blockly.JavaScript.variableDB_.getName(children.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
       attributes.data[name] = eval(value)
+    } else if (events.includes(children.type)) { // all events here
+      attributes.on[children.type] = Blockly.JavaScript.blockToCode(children)[0] // TODO allow multiple eventually
     }
     children = children.getNextBlock()
   }
@@ -38,8 +68,7 @@ function blockAttributes(block, blockEvents, elementSettings) {
     attributes.data = {}
     attributes.data["inputText"] = ""
     
-    blockEvents.events = blockEvents.events || {}
-    blockEvents.events["input"] = "inputText = event.target.value"
+    attributes.on["input"] = "inputText = event.target.value"  // TODO make this show up so as to be simple and not easy magic
     
     attributes.domPropsStrings = {value: "self.inputText"}
   } else if (block.type == "controls_forEach") {
@@ -52,59 +81,54 @@ function blockAttributes(block, blockEvents, elementSettings) {
      do {
        var branch = {}
        branch.conditionString = Blockly.JavaScript.valueToCode(block, 'IF' + n, Blockly.JavaScript.ORDER_NONE) || 'false'
-       branch.doCode = mapElementWorkspaceData(block.getInputTargetBlock("DO" + n), elementSettings)
+       branch.doCode = mapWorkspaceData(block.getInputTargetBlock("DO" + n))
        attributes.if.branches.push(branch)
         ++n;
       } while (block.getInput('IF' + n));
     
       if (block.getInputTargetBlock("ELSE")) {
-        attributes.if.else_ = mapElementWorkspaceData(block.getInputTargetBlock("ELSE"), elementSettings) // todo figure out how to map this without children blah
+        attributes.if.else_ = mapWorkspaceData(block.getInputTargetBlock("ELSE")) // todo figure out how to map this without children blah
       }
   }
   
-  attributes.on = blockEvents.events
   return attributes
 }
 
-function elementWorkspaceData(block, elementSettings) {
-  var blockEvents = elementSettings[block.id] || {}
+function workspaceData(block) {
   var children = block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN")
   var result
   if (block.type == 'cycle_page') {
     result = {
       blockId: block.id,
       tagType: "div",
-      children: mapElementWorkspaceData(children, elementSettings)
+      children: mapWorkspaceData(children)
     }
   } else if (block.type == 'cycle_container'){
     result = {
       blockId: block.id,
       tagType: "div",
-      children: mapElementWorkspaceData(children, elementSettings)
+      children: mapWorkspaceData(children)
     }
   } else if (block.type == 'cycle_text') {
-    var value = Blockly.JavaScript.valueToCode(
-      block, 'TEXT',
-      Blockly.JavaScript.ORDER_ATOMIC
-    );
+    var value = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC)
     return value
   } else if (block.type == 'cycle_button') {
     result = {
       blockId: block.id,
       tagType: "button",
-      children: mapElementWorkspaceData(children, elementSettings)
+      children: mapWorkspaceData(children)
     }
   } else if (block.type == 'cycle_input') {
     result = {
       blockId: block.id,
       tagType: "input",
-      children: mapElementWorkspaceData(children, elementSettings)
+      children: mapWorkspaceData(children)
     }
   } else if (block.type == 'controls_forEach') {
     result = {
       blockId: block.id,
       tagType: "div",
-      children: mapElementWorkspaceData(block.getInputTargetBlock("DO"), elementSettings)
+      children: mapWorkspaceData(block.getInputTargetBlock("DO"))
     }
   } else if (block.type == "controls_if") {
     result = {
@@ -115,6 +139,6 @@ function elementWorkspaceData(block, elementSettings) {
   } else {
     // do nothing because we will collect this setting in blockAttributes
   }
-  if (result) { result.attributes = blockAttributes(block, blockEvents, elementSettings) } 
+  if (result) { result.attributes = blockAttributes(block) } 
   return result
 } 
