@@ -15,7 +15,7 @@ function mapElementWorkspaceData(block, elementSettings) {
   return blocksMap(block, helper)
 }
 
-function blockAttributes(block, blockEvents) {
+function blockAttributes(block, blockEvents, elementSettings) {
   var attributes = {}
   
   var children = block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN")
@@ -42,12 +42,24 @@ function blockAttributes(block, blockEvents) {
     blockEvents.events["input"] = "inputText = event.target.value"
     
     attributes.domPropsStrings = {value: "self.inputText"}
-  }
-  
-  if (block.type == "controls_forEach") {
+  } else if (block.type == "controls_forEach") {
      attributes.repeat = {}
      attributes.repeat.iterator = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
      attributes.repeat.list = Blockly.JavaScript.valueToCode(block, 'LIST',Blockly.JavaScript.ORDER_ASSIGNMENT) || '[]';
+  } else if (block.type == "controls_if") {
+     attributes.if = {branches: [], else_: undefined}
+     var n = 0
+     do {
+       var branch = {}
+       branch.conditionString = Blockly.JavaScript.valueToCode(block, 'IF' + n, Blockly.JavaScript.ORDER_NONE) || 'false'
+       branch.doCode = mapElementWorkspaceData(block.getInputTargetBlock("DO" + n), elementSettings)
+       attributes.if.branches.push(branch)
+        ++n;
+      } while (block.getInput('IF' + n));
+    
+      if (block.getInputTargetBlock("ELSE")) {
+        attributes.if.else_ = mapElementWorkspaceData(block.getInputTargetBlock("ELSE"), elementSettings) // todo figure out how to map this without children blah
+      }
   }
   
   attributes.on = blockEvents.events
@@ -94,9 +106,15 @@ function elementWorkspaceData(block, elementSettings) {
       tagType: "div",
       children: mapElementWorkspaceData(block.getInputTargetBlock("DO"), elementSettings)
     }
+  } else if (block.type == "controls_if") {
+    result = {
+      blockId: block.id,
+      tagType: "div",
+      children: [] // children are in the attributes.if
+    }
   } else {
     // do nothing because we will collect this setting in blockAttributes
   }
-  if (result) { result.attributes = blockAttributes(block, blockEvents) } 
+  if (result) { result.attributes = blockAttributes(block, blockEvents, elementSettings) } 
   return result
 } 

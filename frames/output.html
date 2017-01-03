@@ -42,6 +42,31 @@
           )
         })
       )
+    } else if (code.attributes.if) {
+      for (var i = 0; i < code.attributes.if.branches.length; i++) {
+        var branch = code.attributes.if.branches[i]
+        var condition = eval(scopeVaribles(branch.conditionString, "self", variables, boundVariables))
+        if (condition) {
+          return h(
+            "div",
+            scopeEvents(code.attributes, self, variables, boundVariables), 
+            branch.doCode.map(function(child) {
+              return parseChildrenToRender(self, h, child, variables, boundVariables)
+            })
+          )
+        }
+      }
+      
+      
+      if (code.attributes.if.else_) {
+        return h(
+          "div",
+          scopeEvents(code.attributes, self, variables, boundVariables), 
+          code.attributes.if.else_.map(function(child) {
+            return parseChildrenToRender(self, h, child, variables, boundVariables)
+          })
+        )
+      }
     } else {
       return h(
         code.tagType,

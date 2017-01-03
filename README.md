@@ -6,24 +6,22 @@ Cycle makes coding no worse than it absoultely needs to be to get the job done.
 
 ## Principles
 
-1) Accessible to create, view and update anywhere
-   - good web citizen
+1) Accessible to create, view and update anywhere, on any device
+   - built on the web
+   - mobile friendly
 
-2) Pre-requisites built-in (microworld)
-   "no user manual, just-in-time learning"
+2) Pre-requisites built-in (microworld, no user manual, just-in-time learning)
    - types as shapes
    - first person coding
    - messages, events as metaphors
 
-3) Workflow built-in
-   "asana/trello/github all rolled into one and built in"
+3) Workflow built-in (asana, workflowy, and github all rolled into one and built in)
    - helps you organize your project
    - nested feature to do list for top-down and bottom-up programming
    - includes branches and version control and collaboration
    - notifies you when you've been stuck on a feature for too long and should take a break or get help
 
-4) Only logical bugs
-   "helpful waiter that gives you tips and warns you against things, but ultimately brings what you ask for as long as it's not going to kill you"
+4) Only logical bugs (helpful waiter that gives you tips and warns you against things, but ultimately brings what you ask for as long as it's not going to kill you)
    - blocks
    - strong types
    - amazing error messages that prevent bugs
@@ -34,12 +32,15 @@ Cycle makes coding no worse than it absoultely needs to be to get the job done.
    - bootstrap bindings
    - package manager imports
 
+6) Simple made easy
+   - pass by value (no pass by ref)
+   - scaffolding and autocoding for simple concepts that need boilerplate > behind the scenes magic
+
 
 ## Goals
 
-Current Branch Experiment: add events into elements as their children
+^ Current Branch Experiment: add events into elements as their children
 
-^ next thing: add sub todos for each goal here, and maybe add more goals
 
 1) save Cycle projects 
    * option 1: local storage
@@ -52,12 +53,21 @@ Current Branch Experiment: add events into elements as their children
      * link to proejcts with /userName/projectName (with 404.html redirect)
 
 2) todos that can be completed with strikethrough
+   * ~~if/else~~
+   * strikethrough block
+   * Objects
+     * create empty
+     * create with KEY VALUE x3 and can add more
+     * access OBJ's KEY
+     * SET OBJ's KEY to VAL
 
 3) todos that can delete themselves
+   * do components here?
 
 4) todos that can be edited on double click
 
 5) save todos to localstorage
+   * localstorage set, get
 
 6) full css for todo mvc
    * margin/padding seem to be broken
@@ -65,6 +75,10 @@ Current Branch Experiment: add events into elements as their children
      *  think about adding objects of styles?
 
 7) allow users to cycle their cycle project's data to firebase (firebase bindings)
+   * on value REF change (value)
+   * after getting REF once (value)
+   * set REF to (value)  (how do we get ID out of this?)
+   * push (value) to REF
 
 
 ## Features we'll need eventually
@@ -83,7 +97,7 @@ Current Branch Experiment: add events into elements as their children
   * no nulls -> maybe and easy unpacking
   * no objects -> records with predefined keys and key types
 * only allow variable creation at top of scope so as to make hoisting simplier to understand (it's already easy)
-* Objects, create empty, access key, set key
+
 * errors
   * when you use a data variable before setting it
 * update blockly so things like shadow blocks work
