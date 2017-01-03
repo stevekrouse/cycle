@@ -90,40 +90,6 @@
       elementEvents[elementBlocks.contentWindow.selectedElement.id] = settings
       debouncedRunElement()
     })
-    
-    // after todo list
-    // * figure out how props/components could work for todo list
-    // *   seperate variables via components
-    // *   message broadcasting
-    // * Objects, create empty, access key, set key
-    // * full todomvc css
-    // *   margin/padding seem to be broken
-    // *   think about classes / selectors for CSS or if componenets
-    // ?     think about adding objects of styles?
-    // * consider adding events to element children
-    // * refactor things so as to decouple from blocky / vue --> a cycle runtime/AST thingy, should be easier now that we have element/setting & events seperated
-    // *   should be similar to the vuejs render object (if not exactly that)
-
-    
-    // ideas for new block language / forking blockly
-    // * the toolbox lives in the mouse so as to help you understand what's in context/scope
-    // * somehow have the ability to have events in elements to the left or right side (without putting them in the "children" section of elements)
-    // * the ability to drag iterators and function arguments into argument defintion like in snap!
-    
-    // eventually, neccesary features that we don't need now because I can use my imagination
-    // * errors
-    // *  when you use a data variable before setting it
-    // * update blockly so things like shadow blocks work
-    // * Object.keys
-    // * add the word "initial" to setting variables in element
-    // * parse string to number
-    // * allow multiple kinds of each event
-    // * figure out how to add variables for callbacks (similar to how adding a for-loop does)
-    // * add method definitions to the scope where vue expressions are evaluated
-    // * seperate the set_css block into singles
-    // * make element / setting variables correspond
-    // * when settings (or text) blocks are clicked in elements, make the events show it's parents' (or parent's parent's etcs) events
-    
   </script>
   <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
