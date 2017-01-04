@@ -68,21 +68,20 @@ Some quirks:
 
 ## Goals
 
-next: fix inputText so it scaffolds as opposed to easy, fix set inputText
-then: goal 2
+setText('<xml xmlns="http://www.w3.org/1999/xhtml"><block type="cycle_page" deletable="false" movable="false" x="0" y="10"><statement name="CHILDREN"><block type="variables_set"><field name="VAR">list</field><value name="VALUE"><block type="lists_create_empty"></block></value><next><block type="cycle_container"><statement name="CHILDREN"><block type="set_css"><field name="PROPERTY">fontSize</field><value name="VALUE"><block type="text"><field name="TEXT">30px</field></block></value><next><block type="cycle_text"><value name="TEXT"><block type="text"><field name="TEXT">The Cycle Todo List</field></block></value></block></next></block></statement><next><block type="cycle_container"><statement name="CHILDREN"><block type="cycle_input"><next><block type="cycle_button"><statement name="CHILDREN"><block type="cycle_text"><value name="TEXT"><block type="text"><field name="TEXT">Submit</field></block></value><next><block type="mousedown"><statement name="blocks"><block type="lists_setIndex"><mutation at="false"></mutation><field name="MODE">INSERT</field><field name="WHERE">LAST</field><value name="LIST"><block type="variables_get"><field name="VAR">list</field></block></value><value name="TO"><block type="lists_create_with"><mutation items="2"></mutation><value name="ADD0"><block type="variables_get"><field name="VAR">inputText</field></block></value><value name="ADD1"><block type="logic_boolean"><field name="BOOL">FALSE</field></block></value></block></value><next><block type="variables_set"><field name="VAR">inputText</field><value name="VALUE"><block type="text"><field name="TEXT"></field></block></value></block></next></block></statement></block></next></block></statement></block></next></block></statement><next><block type="controls_forEach"><field name="VAR">todoItem</field><value name="LIST"><block type="variables_get"><field name="VAR">list</field></block></value><statement name="DO"><block type="cycle_container"><statement name="CHILDREN"><block type="set_css"><field name="PROPERTY">textDecoration</field><value name="VALUE"><block type="logic_ternary"><value name="IF"><block type="lists_getIndex"><mutation statement="false" at="false"></mutation><field name="MODE">GET</field><field name="WHERE">LAST</field><value name="VALUE"><block type="variables_get"><field name="VAR">todoItem</field></block></value></block></value><value name="THEN"><block type="text"><field name="TEXT">line-through</field></block></value><value name="ELSE"><block type="text"><field name="TEXT">none</field></block></value></block></value><next><block type="cycle_text"><value name="TEXT"><block type="lists_getIndex"><mutation statement="false" at="false"></mutation><field name="MODE">GET</field><field name="WHERE">FIRST</field><value name="VALUE"><block type="variables_get"><field name="VAR">todoItem</field></block></value></block></value><next><block type="cycle_button"><statement name="CHILDREN"><block type="cycle_text"><value name="TEXT"><block type="logic_ternary"><value name="IF"><block type="lists_getIndex"><mutation statement="false" at="false"></mutation><field name="MODE">GET</field><field name="WHERE">LAST</field><value name="VALUE"><block type="variables_get"><field name="VAR">todoItem</field></block></value></block></value><value name="THEN"><block type="text"><field name="TEXT">Uncheck</field></block></value><value name="ELSE"><block type="text"><field name="TEXT">Check</field></block></value></block></value><next><block type="mousedown"><statement name="blocks"><block type="lists_setIndex"><mutation at="true"></mutation><field name="MODE">SET</field><field name="WHERE">FROM_START</field><value name="LIST"><block type="variables_get"><field name="VAR">list</field></block></value><value name="AT"><block type="lists_indexOf"><field name="END">FIRST</field><value name="VALUE"><block type="variables_get"><field name="VAR">list</field></block></value><value name="FIND"><block type="variables_get"><field name="VAR">todoItem</field></block></value></block></value><value name="TO"><block type="lists_create_with"><mutation items="2"></mutation><value name="ADD0"><block type="lists_getIndex"><mutation statement="false" at="false"></mutation><field name="MODE">GET</field><field name="WHERE">FIRST</field><value name="VALUE"><block type="variables_get"><field name="VAR">todoItem</field></block></value></block></value><value name="ADD1"><block type="logic_negate"><value name="BOOL"><block type="lists_getIndex"><mutation statement="false" at="false"></mutation><field name="MODE">GET</field><field name="WHERE">LAST</field><value name="VALUE"><block type="variables_get"><field name="VAR">todoItem</field></block></value></block></value></block></value></block></value></block></statement></block></next></block></statement><next><block type="cycle_button"><statement name="CHILDREN"><block type="cycle_text"><value name="TEXT"><block type="text"><field name="TEXT">X</field></block></value><next><block type="mousedown"><statement name="blocks"><block type="lists_getIndex"><mutation statement="true" at="true"></mutation><field name="MODE">REMOVE</field><field name="WHERE">FROM_START</field><value name="VALUE"><block type="variables_get"><field name="VAR">list</field></block></value><value name="AT"><block type="lists_indexOf"><field name="END">FIRST</field><value name="VALUE"><block type="variables_get"><field name="VAR">list</field></block></value><value name="FIND"><block type="variables_get"><field name="VAR">todoItem</field></block></value></block></value></block></statement></block></next></block></statement></block></next></block></next></block></next></block></statement></block></statement></block></next></block></next></block></next></block></statement></block></xml>')
+
 
 1) ~todos that can be completed with strikethrough~ *Acheived!*
    * ~~if/else~~
    * ~~strikethrough block~~
- 
 
-2) todos that can delete themselves
-   * delete by value
-   * do components here?
-
+2) ~~todos that can delete themselves~~ *Acheived!*
+   * ~~delete by value~~
+   
 2.5) todo is submitted on enter
      * make event in scope
-     * Objects
+     * Objects 
+       * find this somewhere, someone must've done it 
        * create empty
        * create with KEY VALUE x3 and can add more
        * access OBJ's KEY
@@ -90,12 +89,13 @@ then: goal 2
        * Object.keys
 
 3) todos that can be edited on double click
-   * make inputText simple rather than easy with scaffolding at the block level (not the generator level)
+   * figure out how to make inputText's in a list for todo items be in their own scopes with their own set
 
 4) save todos to localstorage
    * localstorage set, get
 
 5) full css for todo mvc
+   * do components here?
    * margin/padding seem to be broken
      *  think about classes / selectors for CSS or if componenets are enough?
      *  think about adding objects of styles?

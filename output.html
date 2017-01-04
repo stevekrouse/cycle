@@ -82,8 +82,7 @@
     var onKeys = Object.keys(attributes.onStrings)
     attributes.on = {}
     onKeys.forEach(function(key) {
-      debugger
-      attributes.on[key] = new Function("event", "debugger; \n" + scopeVaribles(attributes.onStrings[key], "this", variables, boundVariables)).bind(self)
+      attributes.on[key] = new Function("event", scopeVaribles(attributes.onStrings[key], "this", variables, boundVariables)).bind(self)
     })
     // TODO the following two lines seem problematic...
     window.loads.push(attributes.on["load"])

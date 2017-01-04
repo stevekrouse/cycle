@@ -290,6 +290,12 @@
     
     workspace.addChangeListener(function() { window.parent.$('body').trigger('elementChange') })
   
+    // detect that input block was added from the menu
+    // right above where it was added, add set input1Text to ""
+    // add inputText (inputText1)
+    // inside add event onkeydown (event)
+    // set inputText1 to event.target.value
+  
     function getCode() {
       Blockly.JavaScript.init(workspace);
       blocks = workspace.getTopBlocks(true);

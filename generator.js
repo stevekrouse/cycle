@@ -31,6 +31,12 @@ Blockly.JavaScript['timeout'] = function(block) {
   return 'setTimeout(function(){\n' + statements + '}, '  + text_seconds +');\n';
 };
 
+Blockly.JavaScript.lists_indexOf = function(a) {
+    var b = "FIRST" == a.getFieldValue("END") ? "indexOf" : "lastIndexOf",
+        c = Blockly.JavaScript.valueToCode(a, "FIND", Blockly.JavaScript.ORDER_NONE) || "''";
+    return [(Blockly.JavaScript.valueToCode(a, "VALUE", Blockly.JavaScript.ORDER_MEMBER) || "[]") + ".map(function(elem) { return JSON.stringify(elem) })." + b + "(JSON.stringify(" + c + ")) + 1", Blockly.JavaScript.ORDER_MEMBER]
+};
+
 Blockly.JavaScript.lists_setIndex = function(a) {
     function b() {
         if (c.match(/^\w+$/)) return "";
