@@ -80,13 +80,17 @@
       }
       $('body').bind('elementChange', function() {
         debouncedRunElement()
+        window.noUpdate = true
+        setTimeout(function() { window.noUpdate = false}, 500)
         window.location.hash = encodeURIComponent(blocksEditor.contentWindow.getText())
       })
     })
     
-    window.addEventListener("hashchange",function(event){
-  		blocksEditor.contentWindow.setText(decodeURIComponent(window.location.hash.substring(1)))
-      debouncedRunElement()
+    window.addEventListener("hashchange", function(){
+      if (!window.noUpdate) {
+        blocksEditor.contentWindow.setText(decodeURIComponent(window.location.hash.substring(1)))
+        debouncedRunElement()
+      }
   	});
   	
   	var undo = function(event) {
