@@ -158,6 +158,98 @@ Blockly.Blocks['change'] = {
   }
 };
 
+Blockly.Blocks['mouseover'] = {
+  init: function() {
+    this.setColour(60);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.appendDummyInput()
+        .appendField("when mouse over (event)");
+    this.appendStatementInput("blocks")
+        .setCheck(null);
+    this.setTooltip('');
+  },
+  getVars: function() {
+    return ["event"]
+  }
+};
+Blockly.Blocks['mouseout'] = {
+  init: function() {
+    this.setColour(60);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.appendDummyInput()
+        .appendField("when mouse out (event)");
+    this.appendStatementInput("blocks")
+        .setCheck(null);
+    this.setTooltip('');
+  },
+  getVars: function() {
+    return ["event"]
+  }
+};
+Blockly.Blocks['dblclick'] = {
+  init: function() {
+    this.setColour(60);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.appendDummyInput()
+        .appendField("when double click (event)");
+    this.appendStatementInput("blocks")
+        .setCheck(null);
+    this.setTooltip('');
+  },
+  getVars: function() {
+    return ["event"]
+  }
+};
+Blockly.Blocks['mouseup'] = {
+  init: function() {
+    this.setColour(60);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.appendDummyInput()
+        .appendField("when mouse up (event)");
+    this.appendStatementInput("blocks")
+        .setCheck(null);
+    this.setTooltip('');
+  },
+  getVars: function() {
+    return ["event"]
+  }
+};
+Blockly.Blocks['keydown'] = {
+  init: function() {
+    this.setColour(60);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.appendDummyInput()
+        .appendField("when key down (event)");
+    this.appendStatementInput("blocks")
+        .setCheck(null);
+    this.setTooltip('');
+  },
+  getVars: function() {
+    return ["event"]
+  }
+};
+
+Blockly.Blocks['keyup'] = {
+  init: function() {
+    this.setColour(60);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.appendDummyInput()
+        .appendField("when key up (event)");
+    this.appendStatementInput("blocks")
+        .setCheck(null);
+    this.setTooltip('');
+  },
+  getVars: function() {
+    return ["event"]
+  }
+};
+
 Blockly.Blocks['timeout'] = {
   init: function() {
     this.setPreviousStatement(true, null);

@@ -80,7 +80,7 @@ https://preview.c9users.io/stevekrouse_1/cycle-lang/cycle/index.html?_c9_id=live
    
 2.5) todo is submitted on enter
      * ~~make event in scope~~
-     * add mousedown event
+     * ~~add keydown event~~
      * Objects 
        * find this somewhere, someone must've done it 
        * create empty
