@@ -89,9 +89,9 @@
 
     var domPropsStrings = attributes.domPropsStrings || {}
     var domPropsKeys = Object.keys(domPropsStrings)
-    attributes.domProp = {}
+    attributes.domProps = {}
     domPropsKeys.forEach(function(key) {
-      attributes.domProp[key] = eval(attributes.domPropsStrings[key]) // not scoped because self.inputText is hardcoded for now, TODO change this
+      attributes.domProps[key] = eval(attributes.domPropsStrings[key]) // TODO scope this after we figure out how to get self.inputText un-hardcoded
     })
     
     var styleStrings = attributes.styleStrings || {}
