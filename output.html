@@ -12,7 +12,7 @@
     })
     var boundKeys = Object.keys(boundVariables)
     boundKeys.forEach(function(variable) {
-      result = result.split(variable).join("'" + boundVariables[variable] + "'")
+      result = result.split(variable).join(JSON.stringify(boundVariables[variable]))
     })
     return result
   }
@@ -31,11 +31,11 @@
       return h(
         "div", // containter for all the repeats
         eval(scopeVaribles(code.attributes.repeat.list, "self", variables, boundVariables)).map(function (item) {
-          var boundVariablesCopy = Object.assign({}, boundVariables)
+          var boundVariablesCopy = JSON.parse(JSON.stringify(boundVariables))
           boundVariablesCopy[code.attributes.repeat.iterator] = item
           return h(
             "div",
-            scopeEvents(code.attributes, self, variables, boundVariablesCopy), // TODO is this the right idea?
+            scopeAttributes(code.attributes, self, variables, boundVariablesCopy),
             code.children.map(function(child) {
               return parseChildrenToRender(self, h, child, variables, boundVariablesCopy)
             })
@@ -49,19 +49,17 @@
         if (condition) {
           return h(
             "div",
-            scopeEvents(code.attributes, self, variables, boundVariables), 
+            scopeAttributes(code.attributes, self, variables, boundVariables), 
             branch.doCode.map(function(child) {
               return parseChildrenToRender(self, h, child, variables, boundVariables)
             })
           )
         }
       }
-      
-      
       if (code.attributes.if.else_) {
         return h(
           "div",
-          scopeEvents(code.attributes, self, variables, boundVariables), 
+          scopeAttributes(code.attributes, self, variables, boundVariables), 
           code.attributes.if.else_.map(function(child) {
             return parseChildrenToRender(self, h, child, variables, boundVariables)
           })
@@ -70,33 +68,39 @@
     } else {
       return h(
         code.tagType,
-        scopeEvents(code.attributes, self, variables, boundVariables),
+        scopeAttributes(code.attributes, self, variables, boundVariables),
         code.children.map(function(child) {
           return parseChildrenToRender(self, h, child, variables, boundVariables)
         })
       )
     }
   }
-  function scopeEvents(attributes, self, variables, boundVariables){
-    var on = attributes.on || {}
-    var onKeys = Object.keys(on)
+  function scopeAttributes(attributes, self, variables, boundVariables){
+    var attributes = JSON.parse(JSON.stringify(attributes))
+
+    attributes.onStrings = attributes.onStrings || {} 
+    var onKeys = Object.keys(attributes.onStrings)
+    attributes.on = {}
     onKeys.forEach(function(key) {
-      if (on[key].split){
-        on[key] = new Function("event", scopeVaribles(on[key], "this", variables, boundVariables)).bind(self)
-      }
+      debugger
+      attributes.on[key] = new Function("event", "debugger; \n" + scopeVaribles(attributes.onStrings[key], "this", variables, boundVariables)).bind(self)
     })
-    window.loads.push(on["load"])
-    delete on["load"]
-    attributes.on = on
-    
-    // also eval domProps of we have them
+    // TODO the following two lines seem problematic...
+    window.loads.push(attributes.on["load"])
+
     var domPropsStrings = attributes.domPropsStrings || {}
     var domPropsKeys = Object.keys(domPropsStrings)
-    var domProps = {}
+    attributes.domProp = {}
     domPropsKeys.forEach(function(key) {
-      domProps[key] = eval(domPropsStrings[key])
+      attributes.domProp[key] = eval(attributes.domPropsStrings[key]) // not scoped because self.inputText is hardcoded for now, TODO change this
     })
-    attributes.domProps = domProps
+    
+    var styleStrings = attributes.styleStrings || {}
+    var styleKeys = Object.keys(styleStrings)
+    attributes.style = {}
+    styleKeys.forEach(function(key) {
+      attributes.style[key] = eval(scopeVaribles(attributes.styleStrings[key], "self", variables, boundVariables))
+    })
     
     return attributes
   }

@@ -52,7 +52,7 @@ Some quirks:
      * create users "table"
      * create projects, revisions tables
      * link to proejcts with /userName/projectName (with 404.html redirect)
-* make inputText simple rather than easy with scaffolding at the block level (not the generator level)
+* debugger block in events
 * refactor data structures
   * render to JavaScript Vue String {registers components, registers app, hooks up renders} (compiled instead of interpreted)
   * Blockly -> {componentName: VueJSRenderObject{tagName, attributes, children}} -> JavaScript Vue String
@@ -68,18 +68,29 @@ Some quirks:
 
 ## Goals
 
+next: fix inputText so it scaffolds as opposed to easy, fix set inputText
+then: goal 2
 
-1) todos that can be completed with strikethrough
+1) ~todos that can be completed with strikethrough~ *Acheived!*
    * ~~if/else~~
-   * strikethrough block
-   * maybe do this now: Objects
+   * ~~strikethrough block~~
+ 
 
 2) todos that can delete themselves
-   * delete at key
    * delete by value
    * do components here?
 
+2.5) todo is submitted on enter
+     * make event in scope
+     * Objects
+       * create empty
+       * create with KEY VALUE x3 and can add more
+       * access OBJ's KEY
+       * SET OBJ's KEY to VAL
+       * Object.keys
+
 3) todos that can be edited on double click
+   * make inputText simple rather than easy with scaffolding at the block level (not the generator level)
 
 4) save todos to localstorage
    * localstorage set, get
@@ -98,12 +109,7 @@ Some quirks:
 
 ## Features we'll need eventually
 
-* Objects
-     * create empty
-     * create with KEY VALUE x3 and can add more
-     * access OBJ's KEY
-     * SET OBJ's KEY to VAL
-     * Object.keys
+
 * components
   * props are pass by value
     * need to figure out how to scaffold the changing of parents variables from child with message passing 
