@@ -82,6 +82,7 @@
     var onKeys = Object.keys(attributes.onStrings)
     attributes.on = {}
     onKeys.forEach(function(key) {
+      console.log(scopeVaribles(attributes.onStrings[key], "this", variables, boundVariables))
       attributes.on[key] = new Function("event", scopeVaribles(attributes.onStrings[key], "this", variables, boundVariables)).bind(self)
     })
     // TODO the following two lines seem problematic...

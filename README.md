@@ -79,7 +79,8 @@ https://preview.c9users.io/stevekrouse_1/cycle-lang/cycle/index.html?_c9_id=live
    * ~~delete by value~~
    
 2.5) todo is submitted on enter
-     * make event in scope
+     * ~~make event in scope~~
+     * add mousedown event
      * Objects 
        * find this somewhere, someone must've done it 
        * create empty

@@ -8,8 +8,7 @@ Blockly.Blocks['cycle_container'] = {
     this.setNextStatement(true, null);
     this.setColour(20);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
+  },
 };
 
 Blockly.Blocks['cycle_text'] = {
@@ -23,8 +22,7 @@ Blockly.Blocks['cycle_text'] = {
     this.setNextStatement(true, null);
     this.setColour(65);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
+  },
 };
 
 Blockly.Blocks['cycle_button'] = {
@@ -37,8 +35,7 @@ Blockly.Blocks['cycle_button'] = {
     this.setNextStatement(true, null);
     this.setColour(120);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
+  },
 };
 
 Blockly.Blocks['cycle_input'] = {
@@ -51,8 +48,7 @@ Blockly.Blocks['cycle_input'] = {
     this.setNextStatement(true, null);
     this.setColour(120);
     this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
+  },
 };
 
 Blockly.Blocks['cycle_page'] = {
@@ -120,10 +116,13 @@ Blockly.Blocks['load'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-        .appendField("when the page is loaded");
+        .appendField("when the page is loaded (event)");
     this.appendStatementInput("blocks")
         .setCheck(null);
     this.setTooltip('');
+  },
+  getVars: function() {
+    return ["event"]
   }
 };
 
@@ -133,10 +132,13 @@ Blockly.Blocks['mousedown'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-        .appendField("when mouse down");
+        .appendField("when mouse down (event)");
     this.appendStatementInput("blocks")
         .setCheck(null);
     this.setTooltip('');
+  },
+  getVars: function() {
+    return ["event"]
   }
 };
 
@@ -146,10 +148,13 @@ Blockly.Blocks['change'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-        .appendField("when changed");
+        .appendField("when changed (event)");
     this.appendStatementInput("blocks")
         .setCheck(null);
     this.setTooltip('');
+  },
+  getVars: function() {
+    return ["event"]
   }
 };
 
