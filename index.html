@@ -84,6 +84,23 @@
       })
     })
     
+    window.addEventListener("hashchange",function(event){
+  		blocksEditor.contentWindow.setText(decodeURIComponent(window.location.hash.substring(1)))
+      debouncedRunElement()
+  	});
+  	
+  	var undo = function(event) {
+  	  if ((event.which == 90 || event.keyCode == 90) && event.ctrlKey) {
+        if (event.shiftKey) {
+          window.history.forward();
+        } else {
+          window.history.back();
+        }
+      }
+  	}
+  	window.addEventListener("keydown", undo)
+  	preview.contentWindow.addEventListener("keydown", undo)
+  	blocksEditor.contentWindow.addEventListener("keydown", undo)
     
   </script>
   <script>
