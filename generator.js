@@ -11,6 +11,43 @@ events.forEach(function(event) {
   };
 })
 
+// OBJECTS
+
+Blockly.JavaScript['objects_create_empty'] = function(block) {
+  return ['{}', Blockly.JavaScript.ORDER_ATOMIC];
+};
+
+Blockly.JavaScript['objects_get'] = function(block) {
+  var value_object = Blockly.JavaScript.valueToCode(block, 'OBJECT', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_key = Blockly.JavaScript.valueToCode(block, 'KEY', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = value_object + "[" + value_key + "]";
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
+
+Blockly.JavaScript['objects_set'] = function(block) {
+  var value_object = Blockly.JavaScript.valueToCode(block, 'OBJECT', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_key = Blockly.JavaScript.valueToCode(block, 'KEY', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = value_object + "[" + value_key + "] = " + value_value;
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
+
+
+Blockly.JavaScript['objects_keys'] = function(block) {
+  var value_object = Blockly.JavaScript.valueToCode(block, 'OBJECT', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_key = Blockly.JavaScript.valueToCode(block, 'KEY', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = "Object.keys(" + value_object + ")";
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
+
+Blockly.JavaScript['objects_copy'] = function(block) {
+  var value_object = Blockly.JavaScript.valueToCode(block, 'OBJECT', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = "JSON.parse(JSON.stringify(" + value_object + ")";
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
+
+// LISTS
+
 Blockly.JavaScript.lists_indexOf = function(a) {
     var b = "FIRST" == a.getFieldValue("END") ? "indexOf" : "lastIndexOf",
         c = Blockly.JavaScript.valueToCode(a, "FIND", Blockly.JavaScript.ORDER_NONE) || "''";

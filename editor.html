@@ -18,9 +18,9 @@
       <block type="cycle_input"></block>
       <block type="cycle_button"></block>
       <block type="cycle_text">
-        <shadow type="text">
-          <field name="TEXT"></field>
-        </shadow>
+        <value name="TEXT">
+          <block type="text"></block>
+        </value>
       </block> 
     </category>
     <category name="Settings" colour="80">
@@ -197,6 +197,15 @@
           </block>
         </value>
       </block>
+    </category>
+    <category name="Objects" colour="255">
+      <block type="objects_create_empty"></block>
+      <!--<block type="objects_create_with"></block>-->
+      <block type="objects_keys"></block>
+      <block type="objects_get"></block>
+      <block type="objects_set"></block>
+      <block type="objects_copy"></block>
+      <!--TODO <block type="objects_copy_with"></block>-->
     </category>
     <category name="Colour" colour="20">
       <block type="colour_picker"></block>

@@ -266,3 +266,91 @@ Blockly.Blocks['timeout'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+// OBJECTS
+
+Blockly.Blocks['objects_create_empty'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("create empty object");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(255);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks.objects_create_with = {
+    init: function() {
+        this.setColour(Blockly.Blocks.lists.HUE);
+        this.appendDummyInput().appendField(Blockly.Msg.LISTS_CREATE_WITH_ITEM_TITLE);
+        this.setPreviousStatement(!0);
+        this.setNextStatement(!0);
+        this.setTooltip(Blockly.Msg.LISTS_CREATE_WITH_ITEM_TOOLTIP);
+        this.contextMenu = !1
+    }
+};
+
+Blockly.Blocks['objects_get'] = {
+  init: function() {
+    this.appendValueInput("OBJECT")
+        .setCheck(null)
+        .appendField("get object");
+    this.appendValueInput("KEY")
+        .setCheck(null)
+        .appendField("'s key");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(255);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['objects_set'] = {
+  init: function() {
+    this.appendValueInput("OBJECT")
+        .setCheck(null)
+        .appendField("set object");
+    this.appendValueInput("KEY")
+        .setCheck(null)
+        .appendField("'s key");
+    this.appendValueInput("VALUE")
+        .setCheck(null)
+        .appendField("to");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(255);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['objects_keys'] = {
+  init: function() {
+    this.appendValueInput("OBJECT")
+        .setCheck(null)
+        .appendField("get ");
+    this.appendDummyInput("KEY")
+        .appendField("'s keys");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(255);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['objects_copy'] = {
+  init: function() {
+    this.appendValueInput("OBJECT")
+        .setCheck(null)
+        .appendField("copy object");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(255);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
