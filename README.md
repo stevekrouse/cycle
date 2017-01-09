@@ -72,6 +72,10 @@ consider using babel ast for jsx react, make generalized blocks that can be edit
 * get functions working
 * need a better way to link to the current state of the art in cycle than a super long hash
 * compress the hash for the URL
+* figure out bug with events stacked
+* zoom controls on blockly
+* auto add inputText scaffolding
+* (unless compiling fixes this) need to figure out a way to get blockly code generator to only generate up to a point for stacked events
 
 
 ## Goals
@@ -97,6 +101,7 @@ https://preview.c9users.io/stevekrouse_1/cycle-lang/cycle/index.html?_c9_id=live
 
 * todos that can be edited on double click 
    * figure out how to make inputText's in a list for todo items be in their own scopes with their own set
+   * NOW IS A GOOD TIME TO REFACTOR TO COMPILED INSTEAD OF INTERPRETED
 
 * save todos to localstorage
    * localstorage set, get
@@ -117,6 +122,7 @@ https://preview.c9users.io/stevekrouse_1/cycle-lang/cycle/index.html?_c9_id=live
 
 ## Features we'll need eventually
 
+* much more intuative ways to get the value of key presses / keys down
 * Objects: create with KEY VALUE x3 and can add more / copy with KEY VALUE x1 and can add more
 * components
   * props are pass by value
