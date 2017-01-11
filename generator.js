@@ -1,3 +1,53 @@
+// function indent(text, spaces){
+//   return text.split("\n").join("\n" + " ".repeat(spaces))
+// }
+
+// Blockly.JavaScript['cycle_page'] = function(block) {
+//   var statements_blocks = Blockly.JavaScript.statementToCode(block, 'CHILDREN');
+//   var id = block.id
+//   var code = "window.loads = []"                                              + "\n" +
+//             "window.render = function(h) {"                                  + "\n" +
+//             "  ({attributes = {}, children = [], data = []} = function() {"  + "\n" +
+//             "    " + indent(statements_blocks, 4)                            + "\n" +
+//             "  }())"                                                         + "\n" + 
+//             "  return h("                                                    + "\n" + 
+//             "    'div',"                                                     + "\n" + 
+//             "    attributes,"                                                 + "\n" + 
+//             "    children"                                                   + "\n" + 
+//             "  )"                                                            + "\n" +
+//             "}"                                                              + "\n" + 
+//             "window.app = new Vue({"                                         + "\n" + 
+//             "  el: '#page',"                                                 + "\n" + 
+//             "  render: window.render,"                                       + "\n" + 
+//             "  data: window.data,"                                           + "\n" + 
+//             "  mounted: function () {"                                       + "\n" +    
+//             "    this.$nextTick(function () {"                               + "\n" + 
+//             "      window.loads.forEach(function(func) { func && func() })"  + "\n" + 
+//             "    })"                                                         + "\n" + 
+//             "  }"                                                            + "\n" +
+//             "})"
+//   return code
+// };
+
+// Blockly.JavaScript['cycle_container'] = function(block) {
+//   var statements_blocks = Blockly.JavaScript.statementToCode(block, 'CHILDREN');
+//   var code = "({attributes = {}, children = [], data = []} = function() {"     + "\n" +
+//               indent(statements_blocks, 2)                                    + "\n" +
+//             "}())"                                                       + "\n" + 
+//             "return {
+//             "  attributes: attributes,
+//             "  children: children,
+//             "  children: [
+//             "    h("                                                       + "\n" + 
+//             "      'div',"                                                        + "\n" + 
+//             "      attributes,"                                                    + "\n" + 
+//             "      children"                                                      + "\n" + 
+//             "    )
+//             "  ]"
+//             "}"
+//   return code
+// };
+
 // developer's note, when adding an event, make sure to add it here
 var events = ["load", "mousedown", "mouseup", "dblclick", "mouseover", "mouseout", "keydown", "keyup", "change"]
 
@@ -97,7 +147,7 @@ Blockly.JavaScript.lists_setIndex = function(a) {
     throw "Unhandled combination (lists_setIndex).";
 };
 
-// eventually when I updated block
+// eventually when I updated blockly
 // Blockly.JavaScript['lists_setIndex'] = function(block) {
 //   // Set element at index.
 //   // Note: Until February 2013 this block did not have MODE or WHERE inputs.
@@ -189,30 +239,26 @@ function mapWorkspaceData(block) {
 }
 
 function blockAttributes(block) {
-  var attributes = {styleStrings: {}, data: {}, onStrings: {}, if: undefined, repeat: undefined}
+  var attributes = {styleStrings: {}, dataStrings: {}, domPropsStrings: {}, onStrings: {}, if: undefined, repeat: undefined}
   
   var children = block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN")
   while (children) {
     if (children.type == "set_css"){
       var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
-      attributes.styleStrings[children.getFieldValue('PROPERTY')] = value // TODO eval in output
+      attributes.styleStrings[children.getFieldValue('PROPERTY')] = value 
     } else if (children.type == "variables_set") {
       var value = Blockly.JavaScript.valueToCode(children, 'VALUE',Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
       var name = Blockly.JavaScript.variableDB_.getName(children.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
-      attributes.data[name] = eval(value)  // TODO eval in output
-    } else if (events.includes(children.type)) { // all events here
+      attributes.dataStrings[name] = value
+    } else if (events.includes(children.type)) { 
       attributes.onStrings[children.type] = Blockly.JavaScript.blockToCode(children)[0] // TODO allow multiple eventually
     }
     children = children.getNextBlock()
   }
   
   if (block.type == "cycle_input") {
-    attributes.data = {}
-    attributes.data["inputText"] = ""
-    
-    attributes.onStrings["input"] = "inputText = event.target.value"  // TODO make this show up so as to be simple and not easy magic
-    
-    attributes.domPropsStrings = {value: "self.inputText"}
+    var value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "undefined"
+    attributes.domPropsStrings = {value: value} 
   } else if (block.type == "controls_forEach") {
      attributes.repeat = {}
      attributes.repeat.iterator = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);

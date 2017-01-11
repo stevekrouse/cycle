@@ -4,104 +4,114 @@
   <div id="page"></div>
 </body>
 <script>
-  window.loads = []
-  function scopeVaribles(funcString, keyword, variables, boundVariables) {
+  function scopeVaribles(funcString, variables) {
     var result = funcString
     variables.forEach(function(variable) {
-      result = result.split(variable).join(keyword + "." + variable)
-    })
-    var boundKeys = Object.keys(boundVariables)
-    boundKeys.forEach(function(variable) {
-      result = result.split(variable).join(JSON.stringify(boundVariables[variable]))
+      result = result.split(variable).join("self." + variable)
     })
     return result
   }
   
-  function parseCodeToVueRender(code, variables, boundVariables){
-    return function(h) {
-      return parseChildrenToRender(this, h, code, variables, boundVariables)
-    }
+  function i(spaces, text){
+    return text.split("\n").join("\n" + " ".repeat(spaces))  
   }
-  function parseChildrenToRender(self, h, code, variables, boundVariables){
+  
+  function parseCodeToVueRender(code, variables){
+    return "function(h) {"                                                        + "\n" + 
+           "  var code = window.code\n" + //+ JSON.stringify(window.code, null, 2)                            + "\n" +
+           "  var variables = " + JSON.stringify(variables)                       + "\n" +
+           "  var self = this"                                                    + "\n" +
+           "  return " +  i(2, parseChildrenToRender(window.code, variables, {})) + "\n" + 
+           "}"
+  }
+  
+  function parseChildrenToRender(code, variables){
     if (code == null) {
-      return null 
+      return "null" 
     } else if (typeof code == "string") {
-      return eval(scopeVaribles(code, "self", variables, boundVariables))  
+      return scopeVaribles(code, variables)  
     } else if (code.attributes.repeat) {
-      return h(
-        "div", // containter for all the repeats
-        eval(scopeVaribles(code.attributes.repeat.list, "self", variables, boundVariables)).map(function (item) {
-          var boundVariablesCopy = JSON.parse(JSON.stringify(boundVariables))
-          boundVariablesCopy[code.attributes.repeat.iterator] = item
-          return h(
-            "div",
-            scopeAttributes(code.attributes, self, variables, boundVariablesCopy),
-            code.children.map(function(child) {
-              return parseChildrenToRender(self, h, child, variables, boundVariablesCopy)
-            })
-          )
-        })
-      )
+      return "h(" + "\n" + 
+             "  'div', // containter for all the repeats"                                                                               + "\n" + 
+             "  {},"                                                                                                                    + "\n" + 
+             "  " + scopeVaribles(code.attributes.repeat.list, variables) + ".map(function (" + code.attributes.repeat.iterator + ") {" + "\n" + 
+             "    return h("                                                                                                            + "\n" + 
+             "      'div',"                                                                                                             + "\n" + 
+             "      " + i(6, scopeAttributes(code.attributes, variables)) + ","                                                         + "\n" + 
+             "      ["                                                                                                                  + "\n" + 
+                      code.children.map(function(child) {                                     
+                        return "        " + i(8, parseChildrenToRender(child, variables))
+                      }).join(",")                                                                                                      + "\n" +  
+             "      ]"                                                                                                                  + "\n" +     
+             "    )"                                                                                                                    + "\n" +
+             "  })"                                                                                                                     + "\n" +
+             ")"
     } else if (code.attributes.if) {
-      for (var i = 0; i < code.attributes.if.branches.length; i++) {
-        var branch = code.attributes.if.branches[i]
-        var condition = eval(scopeVaribles(branch.conditionString, "self", variables, boundVariables))
-        if (condition) {
-          return h(
-            "div",
-            scopeAttributes(code.attributes, self, variables, boundVariables), 
-            branch.doCode.map(function(child) {
-              return parseChildrenToRender(self, h, child, variables, boundVariables)
-            })
-          )
-        }
-      }
+      var result = ""
+      result += "(" + scopeVaribles(code.attributes.if.branches[0].conditionString, variables) + " ? ("
+      result += "  h("
+      result += "    'div',",
+      result += "    " + i(4, scopeAttributes(code.attributes, variables)) + ","
+      result += "      ["                                                                                                                 
+      result +=          code.attributes.if.branches[0].doCode.map(function(child) {                                     
+                           return "        " + i(6, parseChildrenToRender(child, variables))
+                         }).join(",")                                                                                                     
+      result += "      ]"
+      result += "  )"
+      result += ")"
+      
       if (code.attributes.if.else_) {
-        return h(
-          "div",
-          scopeAttributes(code.attributes, self, variables, boundVariables), 
-          code.attributes.if.else_.map(function(child) {
-            return parseChildrenToRender(self, h, child, variables, boundVariables)
-          })
-        )
+        result += ": ("
+        result += "    h("
+        result += "       'div',"
+        result += "       " + scopeAttributes(code.attributes, variables) + ","
+        result += "      ["                                                                                                                 
+        result +=          code.attributes.if.else_.map(function(child) {                                     
+                             return "        " + i(6, parseChildrenToRender(child, variables))
+                           }).join(",")                                                                                                     
+        result += "      ]"
+        result += "    )"
+        result += ")"
+      } else {
+        result += ": ( null )"
       }
+       return result + ")"
     } else {
-      return h(
-        code.tagType,
-        scopeAttributes(code.attributes, self, variables, boundVariables),
-        code.children.map(function(child) {
-          return parseChildrenToRender(self, h, child, variables, boundVariables)
-        })
-      )
+      return "h("                                                                                    + "\n" + 
+             "  " + JSON.stringify(code.tagType)  + ","                                              + "\n" + 
+             "  " + i(2, scopeAttributes(code.attributes, variables)) + ","                          + "\n" + 
+             "  [" + code.children.map(function(child) {                                     
+                  return i(2, parseChildrenToRender(child, variables))
+                }).join(",") + "]\n" +                                                                                   
+             ")"
     }
   }
-  function scopeAttributes(attributes, self, variables, boundVariables){
-    var attributes = JSON.parse(JSON.stringify(attributes))
-
-    attributes.onStrings = attributes.onStrings || {} 
-    var onKeys = Object.keys(attributes.onStrings)
-    attributes.on = {}
-    onKeys.forEach(function(key) {
-      attributes.on[key] = new Function("event", scopeVaribles(attributes.onStrings[key], "this", variables, boundVariables)).bind(self)
-    })
-    // TODO the following two lines seem problematic...
-    window.loads.push(attributes.on["load"])
-
-    var domPropsStrings = attributes.domPropsStrings || {}
-    var domPropsKeys = Object.keys(domPropsStrings)
-    attributes.domProps = {}
-    domPropsKeys.forEach(function(key) {
-      attributes.domProps[key] = eval(attributes.domPropsStrings[key]) // TODO scope this after we figure out how to get self.inputText un-hardcoded
-    })
-    
-    var styleStrings = attributes.styleStrings || {}
-    var styleKeys = Object.keys(styleStrings)
-    attributes.style = {}
-    styleKeys.forEach(function(key) {
-      attributes.style[key] = eval(scopeVaribles(attributes.styleStrings[key], "self", variables, boundVariables))
-    })
-    
-    return attributes
+  function scopeAttributes(attributes, variables){
+    //window.loads.push(attributes.on["load"]) TODO 
+    return "{" + "\n" +
+           "  on: {"                                                                                  + "\n" +                                       
+                    Object.keys(attributes.onStrings).map(function(key) {
+                      return  "    " + key + ": " + "function(event) {"                               + "\n" + 
+                              "    " + i(4, scopeVaribles(attributes.onStrings[key], variables))    + "\n" + 
+                              "    }"
+                    }).join(",")                                                                      + "\n" + 
+           "  },"                                                                                     + "\n" + 
+           "  domProps: {" + 
+                    Object.keys(attributes.domPropsStrings).map(function(key) {
+                      return  "    " + key + ": " + i(4, scopeVaribles(attributes.domPropsStrings[key], variables))
+                    }).join(",")                                                                      + "\n" + 
+           "  },"                                                                                     + "\n" + 
+           "  style: {" + 
+                    Object.keys(attributes.styleStrings).map(function(key) {
+                      return  "    " + key + ": " + i(4, scopeVaribles(attributes.styleStrings[key], variables))
+                    }).join(",")                                                                      + "\n" + 
+           "  },"                                                                                     + "\n" + 
+           "  data: {" + 
+                    Object.keys(attributes.dataStrings).map(function(key) {
+                      return  "    " + key + ": " + i(4, scopeVaribles(attributes.dataStrings[key], variables))
+                    }).join(",")                                                                      + "\n" + 
+           "  },"                                                                                     + "\n" + 
+           "}"                                                                                      
   }
   
   function collectData(code) { return collectDataHelper(code, {}) }
@@ -109,10 +119,10 @@
     if (!code || typeof code == "string") {
       return {}
     } else {
-      code.attributes.data = code.attributes.data || {}
-      var dataKeys = Object.keys(code.attributes.data)
+      code.attributes.data = code.attributes.dataStrings || {}
+      var dataKeys = Object.keys(code.attributes.dataStrings)
       dataKeys.forEach(function(key) {
-        collection[key] = code.attributes.data[key]
+        collection[key] = eval(code.attributes.dataStrings[key])
       })
       code.children = code.children || []
       code.children.forEach(function(child) {
@@ -122,25 +132,34 @@
     }
   }
   
-  var app
+  function pageToVueString(code) {
+    return "window.loads = []"                                                                           + "\n" +
+           "window.data = " + JSON.stringify(collectData(window.code), null, 2)                          + "\n" +
+           "window.render = " + parseCodeToVueRender(window.code, Object.keys(collectData(window.code))) + "\n" + 
+           "window.app = new Vue({"                                                                      + "\n" + 
+           "  el: '#page',"                                                                              + "\n" + 
+           "  render: window.render,"                                                                    + "\n" + 
+           "  data: window.data,"                                                                        + "\n" + 
+           "  mounted: function () {"                                                                    + "\n" +    
+           "    this.$nextTick(function () {"                                                            + "\n" + 
+           "      window.loads.forEach(function(func) { func && func() })"                               + "\n" + 
+           "    })"                                                                                      + "\n" + 
+           "  }"                                                                                         + "\n" +
+           "})"
+  }
+  
   function run(){
-    var data = collectData(window.code)
-    if (window.code){
-       app = new Vue({
-        el: '#page',
-        render: parseCodeToVueRender(window.code, Object.keys(data), {}),
-        data: data,
-        mounted: function () {
-          this.$nextTick(function () {
-            window.loads.forEach(function(func) { func && func() })
-          })
-        }
-      // props: {
-      //    
-      //   }
-      })
-    }
+    var c = pageToVueString(window.code)
+    console.log(c)
+    
+    // eval(c)
+    
+    var script = document.createElement( "script" );
+    script.type = "text/javascript";
+    script.text = c
+    document.body.appendChild(script)
   }
 
-  setTimeout(run, 100  ) // timeout to wait for code to be defined on scope
+  setTimeout(run, 100) // timeout to wait for code to be defined on scope
+ 
 </script>
