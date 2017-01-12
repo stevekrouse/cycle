@@ -149,15 +149,23 @@
   }
   
   function run(){
-    var c = pageToVueString(window.code)
-    console.log(c)
-    
-    // eval(c)
-    
-    var script = document.createElement( "script" );
-    script.type = "text/javascript";
-    script.text = c
-    document.body.appendChild(script)
+    if (window.code) {
+      try {
+        var c = pageToVueString(window.code)
+        console.log(c)
+        
+        // eval(c)
+        
+        var script = document.createElement( "script" );
+        script.type = "text/javascript";
+        script.text = c
+        document.body.appendChild(script)
+      } catch (e) {
+        alert(e.message)
+      }
+    } else {
+      setTimeout(run, 100)
+    }
   }
 
   setTimeout(run, 100) // timeout to wait for code to be defined on scope
