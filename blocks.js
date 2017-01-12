@@ -111,6 +111,17 @@ Blockly.Blocks['set_css'] = {
   }
 };
 
+Blockly.Blocks['cycle_debugger'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("debugger");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(65);
+    this.setTooltip('');
+  },
+};
 
 Blockly.Blocks['load'] = {
   init: function() {

@@ -47,6 +47,7 @@
       <block type="logic_ternary"></block>
     </category>
     <category name="Control" colour="120">
+      <block type="cycle_debugger"></block>
       <block type="controls_repeat_ext">
         <value name="TIMES">
           <block type="math_number">
@@ -299,7 +300,15 @@
     	rtl : false, 
     	scrollbars : true, 
     	sounds : true, 
-    	oneBasedIndex : true
+    	oneBasedIndex : true,
+    	zoom: {
+    	  controls: true,
+        wheel: true,
+        startScale: 1.0,
+        maxScale: 3,
+        minScale: 0.3,
+        scaleSpeed: 1.2
+    	},
     });
     
     Blockly.Xml.domToWorkspace(workspace, document.getElementById('elementStartingBlocks'));
@@ -322,6 +331,9 @@
         var block = blocks[b];
         if ("cycle_page" == block.type) {
             page = workspaceData(block)
+        } else if ("procedures_defnoreturn" == block.type) {
+          var blockCode = Blockly.JavaScript.blockToCode(block);
+          console.log(blockCode)
         }
       }
       

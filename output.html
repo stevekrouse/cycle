@@ -4,10 +4,10 @@
   <div id="page"></div>
 </body>
 <script>
-  function scopeVaribles(funcString, variables) {
+  function scopeVaribles(funcString, variables, keyword) {
     var result = funcString
     variables.forEach(function(variable) {
-      result = result.split(variable).join("self." + variable)
+      result = result.split(variable).join((keyword ? keyword : "self") + "." + variable)
     })
     return result
   }
@@ -135,7 +135,7 @@
   function methods(definitions, variables) {
     var defs = Object.keys(definitions)
     return defs.map(function(key) {
-      return  "  " + key + ": " + i(4, scopeVaribles(definitions[key].replace(" " + key, ""), variables))
+      return  "  " + key + ": " + i(4, scopeVaribles(definitions[key].replace(" " + key, ""), variables, "this"))
     }).join(",") 
   }
   

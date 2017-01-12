@@ -172,6 +172,15 @@ Blockly.JavaScript.lists_setIndex = function(a) {
 //   throw 'Unhandled combination (lists_setIndex).';
 // };
 
+// Debugger
+
+Blockly.JavaScript['cycle_debugger'] = function(block) {
+  return "debugger;\n";
+};
+
+
+// Elements
+
 function blocksMap(block, func){
   if (!block){
     return []

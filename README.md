@@ -71,6 +71,7 @@ consider using babel ast for jsx react, make generalized blocks that can be edit
 
 ## Current TODOS
 
+* user-defined functions
 * need a better way to link to the current state of the art in cycle than a super long hash
   * compress the hash for the URL
 * figure out bug with events stacked
