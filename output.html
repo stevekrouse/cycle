@@ -18,10 +18,10 @@
   
   function parseCodeToVueRender(code, variables){
     return "function(h) {"                                                        + "\n" + 
-           "  var code = window.code\n" + //+ JSON.stringify(window.code, null, 2)                            + "\n" +
+           "  var code = window.code.page\n" + //+ JSON.stringify(window.code.page, null, 2)                            + "\n" +
            "  var variables = " + JSON.stringify(variables)                       + "\n" +
            "  var self = this"                                                    + "\n" +
-           "  return " +  i(2, parseChildrenToRender(window.code, variables, {})) + "\n" + 
+           "  return " +  i(2, parseChildrenToRender(code, variables, {})) + "\n" + 
            "}"
   }
   
@@ -132,10 +132,19 @@
     }
   }
   
+  function methods(definitions, variables) {
+    var defs = Object.keys(definitions)
+    return defs.map(function(key) {
+      return  "  " + key + ": " + i(4, scopeVaribles(definitions[key].replace(" " + key, ""), variables))
+    }).join(",") 
+  }
+  
   function pageToVueString(code) {
+    var data = collectData(code.page)
+    var variables = Object.keys(data).concat(Object.keys(code.definitions))
     return "window.loads = []"                                                                           + "\n" +
-           "window.data = " + JSON.stringify(collectData(window.code), null, 2)                          + "\n" +
-           "window.render = " + parseCodeToVueRender(window.code, Object.keys(collectData(window.code))) + "\n" + 
+           "window.data = " + JSON.stringify(data, null, 2)                                              + "\n" +
+           "window.render = " + parseCodeToVueRender(code.page, variables)                               + "\n" + 
            "window.app = new Vue({"                                                                      + "\n" + 
            "  el: '#page',"                                                                              + "\n" + 
            "  render: window.render,"                                                                    + "\n" + 
@@ -144,7 +153,10 @@
            "    this.$nextTick(function () {"                                                            + "\n" + 
            "      window.loads.forEach(function(func) { func && func() })"                               + "\n" + 
            "    })"                                                                                      + "\n" + 
-           "  }"                                                                                         + "\n" +
+           "  },"                                                                                        + "\n" +
+           "  methods: {"                                                                                + "\n" +    
+           "  " + methods(code.definitions, variables)                                                   + "\n" + 
+           "  },"                                                                                        + "\n" + 
            "})"
   }
   
@@ -162,6 +174,7 @@
         document.body.appendChild(script)
       } catch (e) {
         alert(e.message)
+        throw e
       }
     } else {
       setTimeout(run, 100)

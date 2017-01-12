@@ -314,8 +314,25 @@
   
     function getCode() {
       Blockly.JavaScript.init(workspace);
-      blocks = workspace.getTopBlocks(true);
-      return workspaceData(blocks[0])
+      var blocks = workspace.getTopBlocks(true);
+      
+      var page;
+      
+      for (var b = 0; b < blocks.length; b++) {
+        var block = blocks[b];
+        if ("cycle_page" == block.type) {
+            page = workspaceData(block)
+        }
+      }
+      
+      var definitions = JSON.parse(JSON.stringify(Blockly.JavaScript.definitions_))
+      delete definitions["variables"]
+      
+      return {
+        page: page,
+        blocks: blocks,
+        definitions: definitions
+      }
     }
     
     function getText() {

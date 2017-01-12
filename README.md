@@ -4,8 +4,6 @@ Cycle makes coding no worse than it absoultely needs to be to get the job done.
 
 It's pretty brittle these days, but you can play with a live demo at [stevekrouse.github.io/cycle](stevekrouse.github.io/cycle).
 
-Some quirks:
-  - Most blocks don't work yet (like random color) because I haven't found a way to import their funcitons. That's coming.
 
 ## Principles
 
@@ -73,7 +71,6 @@ consider using babel ast for jsx react, make generalized blocks that can be edit
 
 ## Current TODOS
 
-* get functions working
 * need a better way to link to the current state of the art in cycle than a super long hash
   * compress the hash for the URL
 * figure out bug with events stacked
@@ -147,6 +144,5 @@ https://preview.c9users.io/stevekrouse_1/cycle-lang/cycle/index.html?_c9_id=live
 * parse string to number
 * allow multiple kinds of each event
 * figure out how to add variables for callbacks (similar to how adding a for-loop does)
-* add method definitions to the scope where vue expressions are evaluated
 * seperate the set_css block into singles
 * better colors for things
