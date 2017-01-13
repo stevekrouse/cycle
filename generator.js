@@ -282,6 +282,12 @@ function workspaceData(block) {
       tagType: "input",
       children: mapWorkspaceData(children)
     }
+  } else if (block.type == 'cycle_image') {
+    result = {
+      blockId: block.id,
+      tagType: "img",
+      children: mapWorkspaceData(children)
+    }
   } else if (block.type == 'controls_forEach') {
     result = {
       blockId: block.id,
