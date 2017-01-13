@@ -208,7 +208,11 @@ function blockAttributes(block) {
       var name = Blockly.JavaScript.variableDB_.getName(children.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
       attributes.dataStrings[name] = value
     } else if (events.includes(children.type)) { 
+      // prevent blockly from compiling more than one event at a time by removing nextConnecting accessed in javascript_compressed.js:scrub_
+      var nextConnection = children.nextConnection
+      children.nextConnection = undefined
       attributes.onStrings[children.type] = Blockly.JavaScript.blockToCode(children)[0] // TODO allow multiple eventually
+      children.nextConnection = nextConnection
     }
     children = children.getNextBlock()
   }
