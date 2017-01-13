@@ -45,8 +45,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## Current TODOS
 
-* result.split is not a function fix
-  * in output, you have an uncompleted block 
 * auto add inputText scaffolding
 
 

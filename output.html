@@ -173,8 +173,12 @@
         script.text = c
         document.body.appendChild(script)
       } catch (e) {
-        alert(e.message)
-        throw e
+        if (e.message == "result.split is not a function") {
+          document.body.innerHTML = '<div class="alert alert-warning"><strong>Warning!</strong> You have an uncompleted block.</div>'
+        } else {
+          document.body.innerHTML = '<div class="alert alert-warning"><strong>Warning!</strong>' + e.message + '</div>'
+          throw e
+        }
       }
     } else {
       setTimeout(run, 100)
