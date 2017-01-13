@@ -111,6 +111,40 @@ Blockly.Blocks['set_css'] = {
   }
 };
 
+Blockly.Blocks['cycle_css_property'] = {
+  init: function() {
+    this.setColour(180);
+    this.appendValueInput("KEY")
+        .setCheck(null)
+        .appendField("set CSS property");
+    this.appendValueInput("VALUE")
+        .setCheck(null)
+        .appendField("to");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['cycle_html_property'] = {
+  init: function() {
+    this.setColour(180);
+    this.appendValueInput("KEY")
+        .setCheck(null)
+        .appendField("set HTML property");
+    this.appendValueInput("VALUE")
+        .setCheck(null)
+        .appendField("to");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 Blockly.Blocks['cycle_debugger'] = {
   init: function() {
     this.appendDummyInput()

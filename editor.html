@@ -24,7 +24,27 @@
       </block> 
     </category>
     <category name="Settings" colour="80">
-      <block type="set_css"></block>
+      <block type="set_css">
+        <value name="VALUE">
+          <block type="text"></block>
+        </value>
+      </block>
+      <block type="cycle_css_property">
+        <value name="KEY">
+          <block type="text"></block>
+        </value>
+        <value name="VALUE">
+          <block type="text"></block>
+        </value>
+      </block>
+      <block type="cycle_html_property">
+        <value name="KEY">
+          <block type="text"></block>
+        </value>
+        <value name="VALUE">
+          <block type="text"></block>
+        </value>
+      </block>
     </category>
      <category name="Events" colour="60">
       <block type="load"></block>

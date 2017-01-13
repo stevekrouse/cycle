@@ -199,12 +199,21 @@ function blockAttributes(block) {
   var attributes = {styleStrings: {}, dataStrings: {}, domPropsStrings: {}, onStrings: {}, if: undefined, repeat: undefined}
   
   var children = block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN")
+  var value, key
   while (children) {
     if (children.type == "set_css"){
-      var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+      value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
       attributes.styleStrings[children.getFieldValue('PROPERTY')] = value 
+    } else if (children.type == "cycle_css_property"){
+      value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+      key = Blockly.JavaScript.valueToCode(children, 'KEY', Blockly.JavaScript.ORDER_ATOMIC);
+      attributes.styleStrings[key] = value 
+    } else if (children.type == "cycle_html_property"){
+      value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+      key = Blockly.JavaScript.valueToCode(children, 'KEY', Blockly.JavaScript.ORDER_ATOMIC);
+      attributes.domPropsStrings[key] = value 
     } else if (children.type == "variables_set") {
-      var value = Blockly.JavaScript.valueToCode(children, 'VALUE',Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
+      value = Blockly.JavaScript.valueToCode(children, 'VALUE',Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
       var name = Blockly.JavaScript.variableDB_.getName(children.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
       attributes.dataStrings[name] = value
     } else if (events.includes(children.type)) { 
@@ -219,7 +228,7 @@ function blockAttributes(block) {
   
   if (block.type == "cycle_input") {
     var value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "undefined"
-    attributes.domPropsStrings = {value: value} 
+    attributes.domPropsStrings.value = value // TODO make this a regular dom prop?
   } else if (block.type == "controls_forEach") {
      attributes.repeat = {}
      attributes.repeat.iterator = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);

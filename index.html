@@ -2,7 +2,7 @@
 <html style="height:100%">
 <head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+  <script type="text/javascript" src="https://cdn.rawgit.com/pieroxy/lz-string/86c39345/libs/lz-string.min.js"></script>
   <title>Cycle</title>
   
   <style>
@@ -75,20 +75,20 @@
     
     blocksEditor.addEventListener("load", function() {
       if (window.location.hash) {
-        blocksEditor.contentWindow.setText(decodeURIComponent(window.location.hash.substring(1)))
+        blocksEditor.contentWindow.setText(LZString.decompressFromEncodedURIComponent(window.location.hash.substring(1)))
         debouncedRunElement()
       }
       $('body').bind('elementChange', function() {
         debouncedRunElement()
         window.noUpdate = true
         setTimeout(function() { window.noUpdate = false}, 500)
-        window.location.hash = encodeURIComponent(blocksEditor.contentWindow.getText())
+        window.location.hash = LZString.compressToEncodedURIComponent(blocksEditor.contentWindow.getText())
       })
     })
     
     window.addEventListener("hashchange", function(){
       if (!window.noUpdate) {
-        blocksEditor.contentWindow.setText(decodeURIComponent(window.location.hash.substring(1)))
+        blocksEditor.contentWindow.setText(LZString.decompressFromEncodedURIComponent(window.location.hash.substring(1)))
         debouncedRunElement()
       }
   	});
