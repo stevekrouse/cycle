@@ -1,4 +1,4 @@
-var events = ["load", "mousedown", "mouseup", "dblclick", "mouseover", "mouseout", "keydown", "keyup", "change"]
+var events = ["load", "mousedown", "mouseup", "dblclick", "mouseover", "mouseout", "keydown", "keyup", "change", "blur"]
 events.forEach(function(event) {
   Blockly.JavaScript[event] = function(block) {
     var statements_blocks = Blockly.JavaScript.statementToCode(block, 'blocks');
