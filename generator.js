@@ -232,7 +232,7 @@ function blockAttributes(block) {
   } else if (block.type == "controls_forEach") {
      attributes.repeat = {}
      attributes.repeat.iterator = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
-     attributes.repeat.list = Blockly.JavaScript.valueToCode(block, 'LIST',Blockly.JavaScript.ORDER_ASSIGNMENT) || '[]';
+     attributes.repeat.list = ('(' + Blockly.JavaScript.valueToCode(block, 'LIST',Blockly.JavaScript.ORDER_ASSIGNMENT)  + ')') || '[]';
   } else if (block.type == "controls_if") {
      attributes.if = {branches: [], else_: undefined}
      var n = 0
@@ -259,6 +259,12 @@ function workspaceData(block) {
     result = {
       blockId: block.id,
       tagType: "div",
+      children: mapWorkspaceData(children)
+    }
+  } else if (block.type == 'cycle_link'){
+    result = {
+      blockId: block.id,
+      tagType: "a",
       children: mapWorkspaceData(children)
     }
   } else if (block.type == 'cycle_container'){

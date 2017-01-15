@@ -11,6 +11,19 @@ Blockly.Blocks['cycle_container'] = {
   },
 };
 
+Blockly.Blocks['cycle_link'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Link");
+    this.appendStatementInput("CHILDREN")
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(20);
+    this.setTooltip('');
+  },
+};
+
 Blockly.Blocks['cycle_image'] = {
   init: function() {
     this.appendDummyInput()

@@ -17,6 +17,7 @@
       <block type="cycle_container"></block>
       <block type="cycle_input"></block>
       <block type="cycle_image"></block>
+      <block type="cycle_link"></block>
       <block type="cycle_button"></block>
       <block type="cycle_text">
         <value name="TEXT">
@@ -353,9 +354,8 @@
         var block = blocks[b];
         if ("cycle_page" == block.type) {
             page = workspaceData(block)
-        } else if ("procedures_defnoreturn" == block.type) {
+        } else if (block.type.includes("procedures_")) {
           var blockCode = Blockly.JavaScript.blockToCode(block);
-          console.log(blockCode)
         }
       }
       
