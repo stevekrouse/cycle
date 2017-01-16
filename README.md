@@ -95,6 +95,7 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * if/else attributes bug
   * strategy for html props and css --> better abstractions
   * input text scaffolding
+  * list filtering
  
 
 * allow users to cycle their cycle project's data to firebase (firebase bindings)
