@@ -99,11 +99,7 @@ https://github.com/tastejs/todomvc/blob/master/app-spec.md
   * broadcasting
   * strategy for html props and css --> better abstractions
   * input text scaffolding
-<<<<<<< HEAD
-=======
   * list filtering
- 
->>>>>>> 8cfaf0fb03d31d232ece7ad5d207d6f677669260
 
 
 * teacher roster app
