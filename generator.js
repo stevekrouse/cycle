@@ -195,10 +195,10 @@ function mapWorkspaceData(block) {
   return blocksMap(block, workspaceData)
 }
 
-function blockAttributes(block) {
+function getAttributes(firstChild) {
   var attributes = {styleStrings: {}, dataStrings: {}, domPropsStrings: {}, onStrings: {}, if: undefined, repeat: undefined}
   
-  var children = block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN")
+  var children = firstChild 
   var value, key
   while (children) {
     if (children.type == "set_css"){
@@ -226,6 +226,12 @@ function blockAttributes(block) {
     children = children.getNextBlock()
   }
   
+  return attributes
+}
+
+function blockAttributes(block) {
+  var attributes = getAttributes(block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN"))
+
   if (block.type == "cycle_input") {
     var value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "undefined"
     attributes.domPropsStrings.value = value // TODO make this a regular dom prop?
@@ -240,12 +246,14 @@ function blockAttributes(block) {
        var branch = {}
        branch.conditionString = Blockly.JavaScript.valueToCode(block, 'IF' + n, Blockly.JavaScript.ORDER_NONE) || 'false'
        branch.doCode = mapWorkspaceData(block.getInputTargetBlock("DO" + n))
+       branch.attributes = getAttributes(block.getInputTargetBlock("DO" + n))
        attributes.if.branches.push(branch)
         ++n;
       } while (block.getInput('IF' + n));
     
       if (block.getInputTargetBlock("ELSE")) {
-        attributes.if.else_ = mapWorkspaceData(block.getInputTargetBlock("ELSE")) // todo figure out how to map this without children blah
+        attributes.if.else_ = mapWorkspaceData(block.getInputTargetBlock("ELSE"))
+        attributes.if.else_.attributes = getAttributes(block.getInputTargetBlock("ELSE"))
       }
   }
   

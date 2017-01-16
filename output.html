@@ -51,7 +51,7 @@
       result += "(" + scopeVaribles(code.attributes.if.branches[0].conditionString, variables) + " ? ("
       result += "  h("
       result += "    'div',",
-      result += "    " + i(4, scopeAttributes(code.attributes, variables)) + ","
+      result += "    " + i(4, scopeAttributes(code.attributes.if.branches[0].attributes, variables)) + ","
       result += "      ["                                                                                                                 
       result +=          code.attributes.if.branches[0].doCode.map(function(child) {                                     
                            return "        " + i(6, parseChildrenToRender(child, variables))
@@ -64,7 +64,7 @@
         result += ": ("
         result += "    h("
         result += "       'div',"
-        result += "       " + scopeAttributes(code.attributes, variables) + ","
+        result += "       " + scopeAttributes(code.attributes.if.else_.attributes, variables) + ","
         result += "      ["                                                                                                                 
         result +=          code.attributes.if.else_.map(function(child) {                                     
                              return "        " + i(6, parseChildrenToRender(child, variables))
