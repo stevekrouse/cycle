@@ -117,12 +117,12 @@ Blockly.Blocks['set_css'] = {
         ['padding top', 'paddingTop'],
         ['padding bottom', 'paddingBottom'],
         ['padding right', 'paddingRight'],
-        ['padding left', 'paddingleft'],
+        ['padding left', 'paddingLeft'],
         
         ['margin top', 'marginTop'],
         ['margin bottom', 'marginBottom'],
         ['margin right', 'marginRight'],
-        ['margin left', 'marginleft'],
+        ['margin left', 'marginLeft'],
         
         ['border width', 'borderWidth'],
         ['boder color', 'borderColor'],
