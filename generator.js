@@ -232,7 +232,11 @@ function getAttributes(firstChild) {
 function blockAttributes(block) {
   var attributes = getAttributes(block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN"))
 
-  if (block.type == "cycle_input") {
+  if (block.type == "cycle_page") {
+    if (!attributes.styleStrings.height) {
+      attributes.styleStrings.height = "'100%'"
+    }
+  } else if (block.type == "cycle_input") {
     var value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "undefined"
     attributes.domPropsStrings.value = value // TODO make this a regular dom prop?
   } else if (block.type == "controls_forEach") {
