@@ -94,21 +94,15 @@ https://github.com/tastejs/todomvc/blob/master/app-spec.md
 ## Post To-do MVC
 
 * Big technical projects:
-  * bootstrap everything option (or seperate library)
+  * bootstrap 4 library
   * components
   * broadcasting
-  * strategy for html props and css --> better abstractions
   * input text scaffolding
-  * list filtering
-
-
-* teacher roster app
-  * classes { [dates and times], {date: [normal teacher, sub]}, [normal teachers] }
+  * list filtering (and other HOF)
+  * prevention of blocks where they are not in scope (or better errors)
   * firebase
-  * notification to being added to a class and to confirm
-  * notification for class day of
-  * (potentially) notifications for day where there is no class but you thought there might be
-
+  * other fine tuning by user request
+  * chat app
 
 
 ## Eventually
