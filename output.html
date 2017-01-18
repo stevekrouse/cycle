@@ -98,14 +98,14 @@
            "  on: {"                                                                                  + "\n" +                                       
                     Object.keys(attributes.onStrings).map(function(key) {
                       return  "    " + key + ": " + "function(event) {"                               + "\n" + 
-                              "    " + i(4, scopeVaribles(attributes.onStrings[key], variables))    + "\n" + 
+                              "    " + i(4, scopeVaribles(attributes.onStrings[key], variables))      + "\n" + 
                               "    }"
                     }).join(",")                                                                      + "\n" + 
            "  },"                                                                                     + "\n" + 
-           "  nativeOn: {"                                                                                  + "\n" +                                       
+           "  nativeOn: {"                                                                            + "\n" +                                       
                     Object.keys(attributes.nativeOnStrings).map(function(key) {
-                      return  "    " + key + ": " + "function(event) {"                               + "\n" + 
-                              "    " + i(4, scopeVaribles(attributes.nativeOnStrings[key], variables))    + "\n" + 
+                      return  "    " + key + ": " + "function(event) {"                                + "\n" + 
+                              "    " + i(4, scopeVaribles(attributes.nativeOnStrings[key], variables)) + "\n" + 
                               "    }"
                     }).join(",")                                                                      + "\n" + 
            "  },"                                                                                     + "\n" + 
@@ -162,12 +162,14 @@
     return components.map(function(component) {
       var data = collectData(component)
       var variables = Object.keys(data).concat(Object.keys(window.code.definitions))
-      var render = parseCodeToVueRender(component, variables)
+      var render = parseCodeToVueRender(component, variables.concat(component.props))
       
-      return "  " + JSON.stringify(component.nameString) + ": {"                                                                              + "\n" +
-             "    render: " + i(6, scopeVaribles(scopeVaribles(render, variables), component.props)) + "," + "\n" +
-            // "    data: " + i(6, JSON.stringify(data))  + ","                           + "\n" +
-             "    props: " + i(6, JSON.stringify(component.props))  + ","                           + "\n" +
+      return "  " + JSON.stringify(component.nameString) + ": {"                                           + "\n" +
+             "    render: " + i(6, render)         + "," + "\n" +
+             "    data: function() { "                                                                      + "\n" +
+             "      return "  + i(8, JSON.stringify(data))                                                         + "\n" +
+             "    }"                                                                                  + "," + "\n" +
+             "    props: "  + i(6, JSON.stringify(component.props))                                   + "," + "\n" +
              "  }"
       
     })
@@ -223,5 +225,5 @@
   }
 
   setTimeout(run, 100) // timeout to wait for code to be defined on scope
- 
+
 </script>

@@ -74,7 +74,7 @@ Blockly.Blocks['cycle_custom_event'] = {
         .setCheck(null)
         .appendField("When custom event");
     this.appendDummyInput()
-        .appendField("(data)");
+        .appendField("(event)");
     this.appendStatementInput("blocks")
         .setCheck(null);
     this.setInputsInline(true);
