@@ -70,7 +70,7 @@
     		if (callNow) func.apply(context, args);
     	};
     };
-    var debouncedRunElement = debounce(runElement, 500, false)
+    var debouncedRunElement = debounce(runElement, 2000, false)
     debouncedRunElement()
     
     blocksEditor.addEventListener("load", function() {
@@ -78,7 +78,7 @@
         blocksEditor.contentWindow.setText(LZString.decompressFromEncodedURIComponent(window.location.hash.substring(1)))
         debouncedRunElement()
       }
-      $('body').bind('elementChange', function() {
+      $('body').bind('elementChange', function(event, blocklyEvent) {
         debouncedRunElement()
         window.noUpdate = true
         setTimeout(function() { window.noUpdate = false}, 500)

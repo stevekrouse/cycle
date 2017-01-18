@@ -368,7 +368,7 @@
     
     Blockly.Xml.domToWorkspace(workspace, document.getElementById('elementStartingBlocks'));
     
-    workspace.addChangeListener(function() { window.parent.$('body').trigger('elementChange') })
+    workspace.addChangeListener(function(event) { window.parent.$('body').trigger('elementChange', event) })
   
     // detect that input block was added from the menu
     // right above where it was added, add set input1Text to ""

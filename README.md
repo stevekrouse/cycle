@@ -99,7 +99,7 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ### Big technical projects
   * bootstrap 4 library
-  * ~~components~~ *Acheived!*
+  * ~~components~~ 
     * ~~create menu: more elements~~
     * ~~block with hat call create block with name X~~
     * ~~create block add input with name X~~
@@ -113,11 +113,17 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
     * ~~broadcasting~~ (using vueComponent.$emit for now)
     * ~~currently working on: todo item component~~
       * ~~state in components~~ 
-  * input text scaffolding  
+  * ~~change firing when typing in textbox~~ *Acheived!*
+    * ~~there's a chance that we can prevent this by looking at the blockly event~~ 
+      * ~~update blocky to get new events https://github.com/google/blockly~~
+      * ~~never mind, I just made the debounce 2000 miliseconds instead of 500~~
+  * input text scaffolding 
   * list filtering (and other HOF)
+    * design block
+    * figure out how to add "element" to scope (or another thing if that's already in scope)
   * prevention of name collisions
-  * change firing when typing in textbox
   * prevention of blocks where they are not in scope (or better errors)
+    * THIS IS SO KEY  
 
 
 * ideas
