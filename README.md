@@ -107,6 +107,7 @@ https://github.com/tastejs/todomvc/blob/master/app-spec.md
 
 ## Eventually
 
+* bubble.is typing 's thing and speeadsheet like database and schema thing
 * inspecting html highlights code, and clicking on code highlights html
 * allow users to cycle their cycle project's data to firebase (firebase bindings)
    * on value REF change (value)
