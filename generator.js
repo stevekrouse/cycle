@@ -1,4 +1,7 @@
-var events = ["load", "mousedown", "mouseup", "dblclick", "mouseover", "mouseout", "keydown", "keyup", "change", "blur"]
+var nativeEvents = ["load", "mousedown", "mouseup", "dblclick", "mouseover", "mouseout", "keydown", "keyup", "change", "blur"]
+
+var events = nativeEvents.concat(["cycle_custom_event"])
+
 events.forEach(function(event) {
   Blockly.JavaScript[event] = function(block) {
     var statements_blocks = Blockly.JavaScript.statementToCode(block, 'blocks');
@@ -172,6 +175,13 @@ Blockly.JavaScript.lists_setIndex = function(a) {
 //   throw 'Unhandled combination (lists_setIndex).';
 // };
 
+Blockly.JavaScript['cycle_emit'] = function(block) {
+  var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_data = Blockly.JavaScript.valueToCode(block, 'DATA', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = 'self.$emit(' + value_name + ', ' + (value_data  || "undefined") + ');\n';
+  return code;
+};
+
 // Debugger
 
 Blockly.JavaScript['cycle_debugger'] = function(block) {
@@ -195,11 +205,11 @@ function mapWorkspaceData(block) {
   return blocksMap(block, workspaceData)
 }
 
-function getAttributes(firstChild) {
-  var attributes = {styleStrings: {}, dataStrings: {}, domPropsStrings: {}, onStrings: {}, if: undefined, repeat: undefined}
+function getAttributes(firstChild, parent) {
+  var attributes = {styleStrings: {}, dataStrings: {}, propsStrings: {}, domPropsStrings: {}, onStrings: {}, nativeOnStrings: {}, if: undefined, repeat: undefined}
   
   var children = firstChild 
-  var value, key
+  var value, key, name
   while (children) {
     if (children.type == "set_css"){
       value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
@@ -214,15 +224,37 @@ function getAttributes(firstChild) {
       attributes.domPropsStrings[key] = value 
     } else if (children.type == "variables_set") {
       value = Blockly.JavaScript.valueToCode(children, 'VALUE',Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
-      var name = Blockly.JavaScript.variableDB_.getName(children.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+      name = Blockly.JavaScript.variableDB_.getName(children.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
       attributes.dataStrings[name] = value
     } else if (events.includes(children.type)) { 
+      var eventName
+      if (children.type == "cycle_custom_event") {
+        eventName = Blockly.JavaScript.valueToCode(children, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+      } else {
+        eventName = children.type
+      }
+      
+      var onMap
+      if (parent.type == "cycle_custom_element") {
+        if (nativeEvents.includes(children.type)) {
+          onMap = attributes.nativeOnStrings
+        } else {
+          onMap = attributes.onStrings
+        }
+      } else {
+        onMap = attributes.onStrings
+      }
+      
       // prevent blockly from compiling more than one event at a time by removing nextConnecting accessed in javascript_compressed.js:scrub_
       var nextConnection = children.nextConnection
       children.nextConnection = undefined
-      attributes.onStrings[children.type] = Blockly.JavaScript.blockToCode(children)[0] // TODO allow multiple eventually
+      onMap[eventName] = Blockly.JavaScript.blockToCode(children)[0] // TODO allow multiple eventually
       children.nextConnection = nextConnection
-    }
+    } else if (children.type == "cycle_add_input"){
+      name = children.getFieldValue('NAME')
+      value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+      attributes.propsStrings[name] = value
+    } 
     children = children.getNextBlock()
   }
   
@@ -230,7 +262,7 @@ function getAttributes(firstChild) {
 }
 
 function blockAttributes(block) {
-  var attributes = getAttributes(block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN"))
+  var attributes = getAttributes(block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN"), block)
 
   if (block.type == "cycle_page") {
     if (!attributes.styleStrings.height) {
@@ -250,22 +282,41 @@ function blockAttributes(block) {
        var branch = {}
        branch.conditionString = Blockly.JavaScript.valueToCode(block, 'IF' + n, Blockly.JavaScript.ORDER_NONE) || 'false'
        branch.doCode = mapWorkspaceData(block.getInputTargetBlock("DO" + n))
-       branch.attributes = getAttributes(block.getInputTargetBlock("DO" + n))
+       branch.attributes = getAttributes(block.getInputTargetBlock("DO" + n), block)
        attributes.if.branches.push(branch)
         ++n;
       } while (block.getInput('IF' + n));
     
       if (block.getInputTargetBlock("ELSE")) {
         attributes.if.else_ = mapWorkspaceData(block.getInputTargetBlock("ELSE"))
-        attributes.if.else_.attributes = getAttributes(block.getInputTargetBlock("ELSE"))
+        attributes.if.else_.attributes = getAttributes(block.getInputTargetBlock("ELSE"), block)
       }
   }
   
   return attributes
 }
 
-function workspaceData(block) {
-  var children = block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN")
+function getInputNames(block) {
+  // ability to create an input at a level that's not the top-level? (allChildren instead of CHILDREN)
+  var firstChild = block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN")
+  
+  var children = firstChild 
+  var inputNames = []
+  while (children) {
+    if (children.type == "cycle_create_input"){
+      var nameString = children.getFieldValue('NAME');
+      inputNames.push(nameString)
+    } 
+    children = children.getNextBlock()
+  }
+  return inputNames
+}
+
+function workspaceData(block, childrenString) {
+  if (!childrenString) {
+    childrenString = "CHILDREN"
+  }
+  var children = block.getInputTargetBlock && block.getInputTargetBlock(childrenString)
   var result
   if (block.type == 'cycle_page') {
     result = {
@@ -310,7 +361,7 @@ function workspaceData(block) {
     result = {
       blockId: block.id,
       tagType: "div",
-      children: mapWorkspaceData(block.getInputTargetBlock("DO"))
+      children: mapWorkspaceData(block.getInputTargetBlock("DO"))  // TODO this seems funky
     }
   } else if (block.type == "controls_if") {
     result = {
@@ -318,9 +369,32 @@ function workspaceData(block) {
       tagType: "div",
       children: [] // children are in the attributes.if
     }
+  } else if (block.type == "cycle_custom_element") { 
+    var dynamicTagType = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+    result = {
+      blockId: block.id,
+      dynamicTagType: dynamicTagType,
+      children: [] // no children, that would involve slots, which I want to punt on for now
+    }
+  } else if (block.type == "cycle_create_element") {
+    var name = block.getFieldValue('NAME')
+    var tagType = block.getFieldValue('BASE')
+    var inputNames = getInputNames(block)
+    result = {
+      blockId: block.id,
+      nameString: name,
+      tagType: tagType,
+      props: inputNames,
+      children: mapWorkspaceData(children) 
+    }
   } else {
     // do nothing because we will collect this setting in blockAttributes
   }
   if (result) { result.attributes = blockAttributes(block) } 
   return result
 } 
+
+
+
+
+

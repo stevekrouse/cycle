@@ -37,6 +37,23 @@ Blockly.Blocks['cycle_image'] = {
   },
 };
 
+Blockly.Blocks['cycle_emit'] = {
+  init: function() {
+    this.appendValueInput("NAME")
+        .setCheck(null)
+        .appendField("Trigger event");
+    this.appendValueInput("DATA")
+        .setCheck(null)
+        .appendField("with data");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
 Blockly.Blocks['cycle_text'] = {
   init: function() {
     this.appendDummyInput()
@@ -49,6 +66,24 @@ Blockly.Blocks['cycle_text'] = {
     this.setColour(65);
     this.setTooltip('');
   },
+};
+
+Blockly.Blocks['cycle_custom_event'] = {
+  init: function() {
+    this.appendValueInput("NAME")
+        .setCheck(null)
+        .appendField("When custom event");
+    this.appendDummyInput()
+        .appendField("(data)");
+    this.appendStatementInput("blocks")
+        .setCheck(null);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
 };
 
 Blockly.Blocks['cycle_button'] = {
@@ -88,6 +123,72 @@ Blockly.Blocks['cycle_page'] = {
     this.setColour(160);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['cycle_create_element'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Create element ")
+        .appendField(new Blockly.FieldTextInput("Element1"), "NAME");
+    this.appendDummyInput()
+        .appendField("with base")
+        .appendField(new Blockly.FieldDropdown([["container","div"], ["image","img"], ["input","input"], ["link","a"], ["button","button"]]), "BASE");
+    this.appendStatementInput("CHILDREN")
+        .setCheck(null);
+    this.setInputsInline(true);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('');
+    this.setPreviousStatement(false, null);
+    this.setNextStatement(true, null);
+  }
+};
+
+Blockly.Blocks['cycle_custom_element'] = {
+  init: function() {
+    this.appendValueInput("NAME")
+        .setCheck(null)
+        .appendField("Custom Element");
+    this.appendStatementInput("CHILDREN")
+        .setCheck(null);
+    this.setInputsInline(true);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
+
+Blockly.Blocks['cycle_create_input'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Create input with name")
+        .appendField(new Blockly.FieldTextInput("Input1"), "NAME");
+    this.setInputsInline(true);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
+
+Blockly.Blocks['cycle_add_input'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Add input")
+        .appendField(new Blockly.FieldTextInput("Input1"), "NAME");
+    this.appendValueInput("VALUE")
+        .setCheck(null)
+        .appendField("with value");
+    this.setInputsInline(true);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
   }
 };
 

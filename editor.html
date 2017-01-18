@@ -25,6 +25,38 @@
         </value>
       </block> 
     </category>
+    <category name="More Elements" colour="60">
+      <block type="cycle_create_element">
+      </block>
+      <block type="cycle_custom_element">
+        <value name="NAME">
+          <block type="text"></block>
+        </value>
+      </block>
+      <block type="cycle_create_input">
+        <value name="NAME">
+          <block type="text"></block>
+        </value>
+      </block>
+      <block type="cycle_add_input">
+        <value name="NAME">
+          <block type="text"></block>
+        </value>
+        <value name="VALUE">
+          <block type="text"></block>
+        </value>
+      </block>
+      <block type="cycle_emit">
+        <value name="NAME">
+          <block type="text"></block>
+        </value>
+      </block>
+      <block type="cycle_custom_event">
+        <value name="NAME">
+          <block type="text"></block>
+        </value>
+      </block>
+    </category>
     <category name="Settings" colour="80">
       <block type="set_css">
         <value name="VALUE">
@@ -349,13 +381,15 @@
       var blocks = workspace.getTopBlocks(true);
       
       var page;
-      
+      var components = []
       for (var b = 0; b < blocks.length; b++) {
         var block = blocks[b];
         if ("cycle_page" == block.type) {
             page = workspaceData(block)
         } else if (block.type.includes("procedures_")) {
-          var blockCode = Blockly.JavaScript.blockToCode(block);
+            Blockly.JavaScript.blockToCode(block)  // evaluated for the side-effect of having the function definition in Blockly.JavaScript.definitions_
+        } else if (block.type == "cycle_create_element") {
+          components.push(workspaceData(block)) 
         }
       }
       
@@ -365,7 +399,8 @@
       return {
         page: page,
         blocks: blocks,
-        definitions: definitions
+        definitions: definitions,
+        components: components
       }
     }
     

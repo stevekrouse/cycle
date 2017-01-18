@@ -77,8 +77,14 @@
       }
        return result + ")"
     } else {
+      var tag
+      if (code.dynamicTagType) {
+        tag = code.dynamicTagType // for custom elements
+      } else {
+        tag = JSON.stringify(code.tagType)
+      }
       return "h("                                                                                    + "\n" + 
-             "  " + JSON.stringify(code.tagType)  + ","                                              + "\n" + 
+             "  " + tag                                               + ","                          + "\n" + 
              "  " + i(2, scopeAttributes(code.attributes, variables)) + ","                          + "\n" + 
              "  [" + code.children.map(function(child) {                                     
                   return i(2, parseChildrenToRender(child, variables))
@@ -96,9 +102,21 @@
                               "    }"
                     }).join(",")                                                                      + "\n" + 
            "  },"                                                                                     + "\n" + 
+           "  nativeOn: {"                                                                                  + "\n" +                                       
+                    Object.keys(attributes.nativeOnStrings).map(function(key) {
+                      return  "    " + key + ": " + "function(event) {"                               + "\n" + 
+                              "    " + i(4, scopeVaribles(attributes.nativeOnStrings[key], variables))    + "\n" + 
+                              "    }"
+                    }).join(",")                                                                      + "\n" + 
+           "  },"                                                                                     + "\n" + 
            "  domProps: {" + 
                     Object.keys(attributes.domPropsStrings).map(function(key) {
                       return  "    " + key + ": " + i(4, scopeVaribles(attributes.domPropsStrings[key], variables))
+                    }).join(",")                                                                      + "\n" + 
+           "  },"                                                                                     + "\n" + 
+           "  props: {" + 
+                    Object.keys(attributes.propsStrings).map(function(key) {
+                      return  "    " + key + ": " + i(4, scopeVaribles(attributes.propsStrings[key], variables))
                     }).join(",")                                                                      + "\n" + 
            "  },"                                                                                     + "\n" + 
            "  style: {" + 
@@ -132,11 +150,27 @@
     }
   }
   
-  function methods(definitions, variables) {
+  function printMethods(definitions, variables) {
     var defs = Object.keys(definitions)
     return defs.map(function(key) {
-      return  "  " + key + ": " + i(4, scopeVaribles(definitions[key].replace(" " + key, ""), variables, "this"))
+      var functionWithoutName = definitions[key].replace(" " + key, "") // removing functionName() to make anonymous
+      return  "  " + key + ": " + i(4, scopeVaribles(functionWithoutName, variables, "this"))
     }).join(",") 
+  }
+  
+  function printComponents(components) {
+    return components.map(function(component) {
+      var data = collectData(component)
+      var variables = Object.keys(data).concat(Object.keys(window.code.definitions))
+      var render = parseCodeToVueRender(component, variables)
+      
+      return "  " + JSON.stringify(component.nameString) + ": {"                                                                              + "\n" +
+             "    render: " + i(6, scopeVaribles(scopeVaribles(render, variables), component.props)) + "," + "\n" +
+            // "    data: " + i(6, JSON.stringify(data))  + ","                           + "\n" +
+             "    props: " + i(6, JSON.stringify(component.props))  + ","                           + "\n" +
+             "  }"
+      
+    })
   }
   
   function pageToVueString(code) {
@@ -155,7 +189,10 @@
            "    })"                                                                                      + "\n" + 
            "  },"                                                                                        + "\n" +
            "  methods: {"                                                                                + "\n" +    
-           "  " + methods(code.definitions, variables)                                                   + "\n" + 
+           "  " + printMethods(code.definitions, variables)                                              + "\n" + 
+           "  },"                                                                                        + "\n" + 
+           "  components: {"                                                                             + "\n" +    
+           "  " + printComponents(code.components)                                                       + "\n" + 
            "  },"                                                                                        + "\n" + 
            "})"
   }
