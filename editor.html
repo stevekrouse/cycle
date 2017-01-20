@@ -16,6 +16,7 @@
     <category name="Elements" colour="60">
       <block type="cycle_container"></block>
       <block type="cycle_input"></block>
+      <block type="cycle_input"><statement name="CHILDREN">  <block type="variables_set">    <field name="VAR">inputText</field>    <value name="VALUE">      <block type="text">        <field name="TEXT"></field>      </block>    </value>    <next>      <block type="cycle_html_property">        <value name="KEY">          <block type="text">            <field name="TEXT">value</field>          </block>        </value>        <value name="VALUE">          <block type="text">            <field name="TEXT"></field>          </block>        </value>        <next>          <block type="keyup">            <statement name="blocks">              <block type="variables_set">                <field name="VAR">inputText</field>                <value name="VALUE">                  <block type="objects_get">                    <value name="OBJECT">                      <block type="objects_get">                        <value name="OBJECT">                          <block type="variables_get">                            <field name="VAR">event</field>                          </block>                        </value>                        <value name="KEY">                          <block type="text">                            <field name="TEXT">target</field>                          </block>                        </value>                      </block>                    </value>                    <value name="KEY">                      <block type="text">                        <field name="TEXT">value</field>                      </block>                    </value>                  </block>                </value>              </block>            </statement>          </block>        </next>      </block>    </next>  </block></statement></block>
       <block type="cycle_image"></block>
       <block type="cycle_link"></block>
       <block type="cycle_button"></block>
@@ -34,14 +35,8 @@
         </value>
       </block>
       <block type="cycle_create_input">
-        <value name="NAME">
-          <block type="text"></block>
-        </value>
       </block>
       <block type="cycle_add_input">
-        <value name="NAME">
-          <block type="text"></block>
-        </value>
         <value name="VALUE">
           <block type="text"></block>
         </value>
@@ -366,9 +361,15 @@
     	},
     });
     
-    Blockly.Xml.domToWorkspace(workspace, document.getElementById('elementStartingBlocks'));
+    Blockly.Xml.domToWorkspace(document.getElementById('elementStartingBlocks'), workspace);
     
-    workspace.addChangeListener(function(event) { window.parent.$('body').trigger('elementChange', event) })
+    workspace.addChangeListener(function(event) { 
+      if (event instanceof Blockly.Events.Ui) {
+        // TODO use this to highlight the corresponding HTML elements in output by block id
+      } else {
+         window.parent.$('body').trigger('elementChange', event) 
+      }
+    })
   
     // detect that input block was added from the menu
     // right above where it was added, add set input1Text to ""
@@ -393,9 +394,15 @@
         }
       }
       
-      var definitions = JSON.parse(JSON.stringify(Blockly.JavaScript.definitions_))
-      delete definitions["variables"]
-      
+      var definitions = {}
+      Object.keys(Blockly.JavaScript.definitions_).forEach(function(name) {
+        if (name != "variables") {
+          var nameWithoutLeadingPercent = name.slice(1)
+          var definition = Blockly.JavaScript.definitions_[name]
+          definitions[nameWithoutLeadingPercent] = definition
+        }
+      })
+
       return {
         page: page,
         blocks: blocks,
@@ -410,18 +417,11 @@
     
     function setText(text) {
       workspace.clear()
-      Blockly.Xml.domToWorkspace(workspace, Blockly.Xml.textToDom(text));
+      Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(text), workspace);
     }
     
     window.getText = getText
     window.setText = setText
     
-      // TODO figure where this goes...
-      // var definitions = []
-      // for (var def in Blockly.JavaScript.definitions_) {
-      //   definitions.push(Blockly.JavaScript.definitions_[def]);
-      // }
-    
-      // var variables = Blockly.Variables.allVariables(workspace).slice()
   </script>
 </body>

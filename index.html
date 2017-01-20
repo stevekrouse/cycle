@@ -70,7 +70,7 @@
     		if (callNow) func.apply(context, args);
     	};
     };
-    var debouncedRunElement = debounce(runElement, 2000, false)
+    var debouncedRunElement = debounce(runElement, 500, false)
     debouncedRunElement()
     
     blocksEditor.addEventListener("load", function() {
