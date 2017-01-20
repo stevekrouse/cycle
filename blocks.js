@@ -104,7 +104,6 @@ Blockly.Blocks['cycle_input'] = {
     this.appendDummyInput()
         .appendField("Input");
     this.setInputsInline(true);
-    this.appendValueInput("VALUE")
     this.appendStatementInput("CHILDREN")
         .setCheck(null);
     this.setPreviousStatement(true, null);

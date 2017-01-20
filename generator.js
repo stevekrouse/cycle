@@ -206,7 +206,7 @@ function mapWorkspaceData(block) {
 }
 
 function getAttributes(firstChild, parent) {
-  var attributes = {styleStrings: {}, dataStrings: {}, propsStrings: {}, domPropsStrings: {}, onStrings: {}, nativeOnStrings: {}, if: undefined, repeat: undefined}
+  var attributes = {styleStrings: {}, dataStrings: {}, propsStrings: {}, domPropsStrings: {}, classStrings: [], onStrings: {}, nativeOnStrings: {}, if: undefined, repeat: undefined}
   
   var children = firstChild 
   var value, key, name
@@ -268,9 +268,6 @@ function blockAttributes(block) {
     if (!attributes.styleStrings.height) {
       attributes.styleStrings.height = "'100%'"
     }
-  } else if (block.type == "cycle_input") {
-    var value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "undefined"
-    attributes.domPropsStrings.value = value // TODO make this a regular dom prop?
   } else if (block.type == "controls_forEach") {
      attributes.repeat = {}
      attributes.repeat.iterator = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
