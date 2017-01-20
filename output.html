@@ -95,6 +95,11 @@
   function scopeAttributes(attributes, variables){
     //window.loads.push(attributes.on["load"]) TODO 
     return "{" + "\n" +
+           "  class: {"                                                                               + "\n" +                                       
+                    attributes.classStrings.map(function(key) {
+                      return  "    " + key + ": true"
+                    }).join(",")                                                                      + "\n" + 
+           "  },"                                                                                     + "\n" + 
            "  on: {"                                                                                  + "\n" +                                       
                     Object.keys(attributes.onStrings).map(function(key) {
                       return  "    " + key + ": " + "function(event) {"                               + "\n" + 
