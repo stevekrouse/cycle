@@ -251,9 +251,13 @@
     </category>
     <category name="Objects" colour="255">
       <block type="objects_create_empty"></block>
-      <!--<block type="objects_create_with"></block>-->
+      <block type="objects_create_with"></block>
       <block type="objects_keys"></block>
-      <block type="objects_get"></block>
+      <block type="objects_get">
+        <value name="KEY">
+          <block type="text"></block>
+        </value>
+      </block>
       <block type="objects_set"></block>
       <block type="objects_copy"></block>
       <!--TODO <block type="objects_copy_with"></block>-->

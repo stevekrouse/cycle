@@ -1,9 +1,9 @@
 Blockly.Blocks['cycle_container'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Container");
+      .appendField("Container");
     this.appendStatementInput("CHILDREN")
-        .setCheck(null);
+      .setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(20);
@@ -14,9 +14,9 @@ Blockly.Blocks['cycle_container'] = {
 Blockly.Blocks['cycle_link'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Link");
+      .appendField("Link");
     this.appendStatementInput("CHILDREN")
-        .setCheck(null);
+      .setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(20);
@@ -27,9 +27,9 @@ Blockly.Blocks['cycle_link'] = {
 Blockly.Blocks['cycle_image'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Image");
+      .appendField("Image");
     this.appendStatementInput("CHILDREN")
-        .setCheck(null);
+      .setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(20);
@@ -40,11 +40,11 @@ Blockly.Blocks['cycle_image'] = {
 Blockly.Blocks['cycle_emit'] = {
   init: function() {
     this.appendValueInput("NAME")
-        .setCheck(null)
-        .appendField("Trigger event");
+      .setCheck(null)
+      .appendField("Trigger event");
     this.appendValueInput("DATA")
-        .setCheck(null)
-        .appendField("with data");
+      .setCheck(null)
+      .appendField("with data");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -57,9 +57,9 @@ Blockly.Blocks['cycle_emit'] = {
 Blockly.Blocks['cycle_text'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Text");
+      .appendField("Text");
     this.appendValueInput("TEXT")
-        .setCheck("String");
+      .setCheck("String");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -71,12 +71,12 @@ Blockly.Blocks['cycle_text'] = {
 Blockly.Blocks['cycle_custom_event'] = {
   init: function() {
     this.appendValueInput("NAME")
-        .setCheck(null)
-        .appendField("When custom event");
+      .setCheck(null)
+      .appendField("When custom event");
     this.appendDummyInput()
-        .appendField("(event)");
+      .appendField("(event)");
     this.appendStatementInput("blocks")
-        .setCheck(null);
+      .setCheck(null);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -89,9 +89,9 @@ Blockly.Blocks['cycle_custom_event'] = {
 Blockly.Blocks['cycle_button'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Button");
+      .appendField("Button");
     this.appendStatementInput("CHILDREN")
-        .setCheck(null);
+      .setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(120);
@@ -102,10 +102,10 @@ Blockly.Blocks['cycle_button'] = {
 Blockly.Blocks['cycle_input'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Input");
+      .appendField("Input");
     this.setInputsInline(true);
     this.appendStatementInput("CHILDREN")
-        .setCheck(null);
+      .setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(120);
@@ -116,9 +116,9 @@ Blockly.Blocks['cycle_input'] = {
 Blockly.Blocks['cycle_page'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Page");
+      .appendField("Page");
     this.appendStatementInput("CHILDREN")
-        .setCheck(null);
+      .setCheck(null);
     this.setColour(160);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
@@ -128,13 +128,19 @@ Blockly.Blocks['cycle_page'] = {
 Blockly.Blocks['cycle_create_element'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Create element ")
-        .appendField(new Blockly.FieldTextInput("Element1"), "NAME");
+      .appendField("Create element ")
+      .appendField(new Blockly.FieldTextInput("Element1"), "NAME");
     this.appendDummyInput()
-        .appendField("with base")
-        .appendField(new Blockly.FieldDropdown([["container","div"], ["image","img"], ["input","input"], ["link","a"], ["button","button"]]), "BASE");
+      .appendField("with base")
+      .appendField(new Blockly.FieldDropdown([
+        ["container", "div"],
+        ["image", "img"],
+        ["input", "input"],
+        ["link", "a"],
+        ["button", "button"]
+      ]), "BASE");
     this.appendStatementInput("CHILDREN")
-        .setCheck(null);
+      .setCheck(null);
     this.setInputsInline(true);
     this.setColour(230);
     this.setTooltip('');
@@ -147,10 +153,10 @@ Blockly.Blocks['cycle_create_element'] = {
 Blockly.Blocks['cycle_custom_element'] = {
   init: function() {
     this.appendValueInput("NAME")
-        .setCheck(null)
-        .appendField("Custom Element");
+      .setCheck(null)
+      .appendField("Custom Element");
     this.appendStatementInput("CHILDREN")
-        .setCheck(null);
+      .setCheck(null);
     this.setInputsInline(true);
     this.setColour(230);
     this.setTooltip('');
@@ -163,8 +169,8 @@ Blockly.Blocks['cycle_custom_element'] = {
 Blockly.Blocks['cycle_create_input'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Create input with name")
-        .appendField(new Blockly.FieldTextInput("Input1"), "NAME");
+      .appendField("Create input with name")
+      .appendField(new Blockly.FieldTextInput("Input1"), "NAME");
     this.setInputsInline(true);
     this.setColour(230);
     this.setTooltip('');
@@ -177,11 +183,11 @@ Blockly.Blocks['cycle_create_input'] = {
 Blockly.Blocks['cycle_add_input'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Add input")
-        .appendField(new Blockly.FieldTextInput("Input1"), "NAME");
+      .appendField("Add input")
+      .appendField(new Blockly.FieldTextInput("Input1"), "NAME");
     this.appendValueInput("VALUE")
-        .setCheck(null)
-        .appendField("with value");
+      .setCheck(null)
+      .appendField("with value");
     this.setInputsInline(true);
     this.setColour(230);
     this.setTooltip('');
@@ -197,38 +203,38 @@ Blockly.Blocks['set_css'] = {
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.appendValueInput("VALUE")
-        .appendField('set the')
-        .appendField(new Blockly.FieldDropdown([
+      .appendField('set the')
+      .appendField(new Blockly.FieldDropdown([
         ['background color', 'backgroundColor'],
         ['text color', 'color'],
-        
+
         ['font size', 'fontSize'],
         ['font family', 'fontFamily'],
         ['text decoration', 'textDecoration'],
         ['text algin', 'textAlign'],
-        
+
         ['height', 'height'],
         ['width', 'width'],
         ['position', 'position'],
         ['display', 'display'],
-        
+
         ['visibility', 'visibility'],
-        
+
         ['padding top', 'paddingTop'],
         ['padding bottom', 'paddingBottom'],
         ['padding right', 'paddingRight'],
         ['padding left', 'paddingLeft'],
-        
+
         ['margin top', 'marginTop'],
         ['margin bottom', 'marginBottom'],
         ['margin right', 'marginRight'],
         ['margin left', 'marginLeft'],
-        
+
         ['border width', 'borderWidth'],
         ['boder color', 'borderColor'],
         ['boder radius', 'borderRadius'],
         ['border style', 'borderStyle']
-        
+
       ]), 'PROPERTY')
       .appendField('to');
     // TODO seperate all of these into their own blocks and use units below for the relevant ones
@@ -241,11 +247,11 @@ Blockly.Blocks['cycle_css_property'] = {
   init: function() {
     this.setColour(180);
     this.appendValueInput("KEY")
-        .setCheck(null)
-        .appendField("set CSS property");
+      .setCheck(null)
+      .appendField("set CSS property");
     this.appendValueInput("VALUE")
-        .setCheck(null)
-        .appendField("to");
+      .setCheck(null)
+      .appendField("to");
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -258,11 +264,11 @@ Blockly.Blocks['cycle_html_property'] = {
   init: function() {
     this.setColour(180);
     this.appendValueInput("KEY")
-        .setCheck(null)
-        .appendField("set HTML property");
+      .setCheck(null)
+      .appendField("set HTML property");
     this.appendValueInput("VALUE")
-        .setCheck(null)
-        .appendField("to");
+      .setCheck(null)
+      .appendField("to");
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -274,7 +280,7 @@ Blockly.Blocks['cycle_html_property'] = {
 Blockly.Blocks['cycle_debugger'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("debugger");
+      .appendField("debugger");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -289,9 +295,9 @@ Blockly.Blocks['load'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-        .appendField("when the page is loaded (event)");
+      .appendField("when the page is loaded (event)");
     this.appendStatementInput("blocks")
-        .setCheck(null);
+      .setCheck(null);
     this.setTooltip('');
   },
   getVars: function() {
@@ -305,9 +311,9 @@ Blockly.Blocks['mousedown'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-        .appendField("when mouse down (event)");
+      .appendField("when mouse down (event)");
     this.appendStatementInput("blocks")
-        .setCheck(null);
+      .setCheck(null);
     this.setTooltip('');
   },
   getVars: function() {
@@ -321,9 +327,9 @@ Blockly.Blocks['change'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-        .appendField("when changed (event)");
+      .appendField("when changed (event)");
     this.appendStatementInput("blocks")
-        .setCheck(null);
+      .setCheck(null);
     this.setTooltip('');
   },
   getVars: function() {
@@ -337,9 +343,9 @@ Blockly.Blocks['mouseover'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-        .appendField("when mouse over (event)");
+      .appendField("when mouse over (event)");
     this.appendStatementInput("blocks")
-        .setCheck(null);
+      .setCheck(null);
     this.setTooltip('');
   },
   getVars: function() {
@@ -352,9 +358,9 @@ Blockly.Blocks['mouseout'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-        .appendField("when mouse out (event)");
+      .appendField("when mouse out (event)");
     this.appendStatementInput("blocks")
-        .setCheck(null);
+      .setCheck(null);
     this.setTooltip('');
   },
   getVars: function() {
@@ -367,9 +373,9 @@ Blockly.Blocks['dblclick'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-        .appendField("when double click (event)");
+      .appendField("when double click (event)");
     this.appendStatementInput("blocks")
-        .setCheck(null);
+      .setCheck(null);
     this.setTooltip('');
   },
   getVars: function() {
@@ -382,9 +388,9 @@ Blockly.Blocks['mouseup'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-        .appendField("when mouse up (event)");
+      .appendField("when mouse up (event)");
     this.appendStatementInput("blocks")
-        .setCheck(null);
+      .setCheck(null);
     this.setTooltip('');
   },
   getVars: function() {
@@ -397,9 +403,9 @@ Blockly.Blocks['keydown'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-        .appendField("when key down (event)");
+      .appendField("when key down (event)");
     this.appendStatementInput("blocks")
-        .setCheck(null);
+      .setCheck(null);
     this.setTooltip('');
   },
   getVars: function() {
@@ -413,9 +419,9 @@ Blockly.Blocks['keyup'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-        .appendField("when key up (event)");
+      .appendField("when key up (event)");
     this.appendStatementInput("blocks")
-        .setCheck(null);
+      .setCheck(null);
     this.setTooltip('');
   },
   getVars: function() {
@@ -429,9 +435,9 @@ Blockly.Blocks['blur'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-        .appendField("when blur (event)");
+      .appendField("when blur (event)");
     this.appendStatementInput("blocks")
-        .setCheck(null);
+      .setCheck(null);
     this.setTooltip('');
   },
   getVars: function() {
@@ -444,9 +450,9 @@ Blockly.Blocks['timeout'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-        .appendField("In")
-        .appendField(new Blockly.FieldTextInput("2000"), "SECONDS")
-        .appendField("miliseconds, do");
+      .appendField("In")
+      .appendField(new Blockly.FieldTextInput("2000"), "SECONDS")
+      .appendField("miliseconds, do");
     this.appendStatementInput("STATEMENTS");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -461,7 +467,7 @@ Blockly.Blocks['timeout'] = {
 Blockly.Blocks['objects_create_empty'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("create empty object");
+      .appendField("create empty object");
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(255);
@@ -470,25 +476,15 @@ Blockly.Blocks['objects_create_empty'] = {
   }
 };
 
-Blockly.Blocks.objects_create_with = {
-    init: function() {
-        this.setColour(Blockly.Blocks.lists.HUE);
-        this.appendDummyInput().appendField(Blockly.Msg.LISTS_CREATE_WITH_ITEM_TITLE);
-        this.setPreviousStatement(!0);
-        this.setNextStatement(!0);
-        this.setTooltip(Blockly.Msg.LISTS_CREATE_WITH_ITEM_TOOLTIP);
-        this.contextMenu = !1
-    }
-};
 
 Blockly.Blocks['objects_get'] = {
   init: function() {
     this.appendValueInput("OBJECT")
-        .setCheck(null)
-        .appendField("get object");
+      .setCheck(null)
+      .appendField("get");
     this.appendValueInput("KEY")
-        .setCheck(null)
-        .appendField("'s key");
+      .setCheck(null)
+      .appendField("'s");
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(255);
@@ -500,14 +496,14 @@ Blockly.Blocks['objects_get'] = {
 Blockly.Blocks['objects_set'] = {
   init: function() {
     this.appendValueInput("OBJECT")
-        .setCheck(null)
-        .appendField("set object");
+      .setCheck(null)
+      .appendField("set object");
     this.appendValueInput("KEY")
-        .setCheck(null)
-        .appendField("'s key");
+      .setCheck(null)
+      .appendField("'s key");
     this.appendValueInput("VALUE")
-        .setCheck(null)
-        .appendField("to");
+      .setCheck(null)
+      .appendField("to");
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(255);
@@ -519,10 +515,10 @@ Blockly.Blocks['objects_set'] = {
 Blockly.Blocks['objects_keys'] = {
   init: function() {
     this.appendValueInput("OBJECT")
-        .setCheck(null)
-        .appendField("get ");
+      .setCheck(null)
+      .appendField("get ");
     this.appendDummyInput("KEY")
-        .appendField("'s keys");
+      .appendField("'s keys");
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(255);
@@ -534,12 +530,175 @@ Blockly.Blocks['objects_keys'] = {
 Blockly.Blocks['objects_copy'] = {
   init: function() {
     this.appendValueInput("OBJECT")
-        .setCheck(null)
-        .appendField("copy object");
+      .setCheck(null)
+      .appendField("copy object");
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(255);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
+Blockly.Blocks['objects_create_with'] = {
+  init: function() {
+    this.setHelpUrl(Blockly.Msg.LISTS_CREATE_WITH_HELPURL);
+    this.itemCount_ = 3;
+    this.updateShape_();
+    this.setOutput(true);
+    this.setColour(255);
+    this.setInputsInline(false);
+    this.setMutator(new Blockly.Mutator(['objects_create_with_item']));
+    this.setTooltip(Blockly.Msg.LISTS_CREATE_WITH_TOOLTIP);
+  },
+  /**
+   * Create XML to represent list inputs.
+   * @return {!Element} XML storage element.
+   * @this Blockly.Block
+   */
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    container.setAttribute('items', this.itemCount_);
+    return container;
+  },
+  /**
+   * Parse XML to restore the list inputs.
+   * @param {!Element} xmlElement XML storage element.
+   * @this Blockly.Block
+   */
+  domToMutation: function(xmlElement) {
+    this.itemCount_ = parseInt(xmlElement.getAttribute('items'), 10);
+    this.updateShape_();
+  },
+  /**
+   * Populate the mutator's dialog with this block's components.
+   * @param {!Blockly.Workspace} workspace Mutator's workspace.
+   * @return {!Blockly.Block} Root block in mutator.
+   * @this Blockly.Block
+   */
+  decompose: function(workspace) {
+    var containerBlock = workspace.newBlock('objects_create_with_container');
+    containerBlock.initSvg();
+    var connection = containerBlock.getInput('STACK').connection;
+    for (var i = 0; i < this.itemCount_; i++) {
+      var itemBlock = workspace.newBlock('objects_create_with_item');
+      itemBlock.initSvg();
+      connection.connect(itemBlock.previousConnection);
+      connection = itemBlock.nextConnection;
+    }
+    return containerBlock;
+  },
+  /**
+   * Reconfigure this block based on the mutator dialog's components.
+   * @param {!Blockly.Block} containerBlock Root block in mutator.
+   * @this Blockly.Block
+   */
+  compose: function(containerBlock) {
+    var itemBlock = containerBlock.getInputTargetBlock('STACK');
+    // Count number of inputs.
+    var connections = [];
+    var properties = []
+    while (itemBlock) {
+      connections.push(itemBlock.valueConnection_);
+      properties.push(itemBlock.propertyValue_)
+      itemBlock = itemBlock.nextConnection &&
+        itemBlock.nextConnection.targetBlock();
+    }
+    // Disconnect any children that don't belong.
+    for (var i = 0; i < this.itemCount_; i++) {
+      var connection = this.getInput('ADD' + i).connection.targetConnection;
+      if (connection && connections.indexOf(connection) == -1) {
+        connection.disconnect();
+      }
+    }
+    this.itemCount_ = connections.length;
+    this.updateShape_();
+    // Reconnect any child blocks.
+    for (var i = 0; i < this.itemCount_; i++) {
+      debugger
+      Blockly.Mutator.reconnect(connections[i], this, 'ADD' + i);
+      this.setFieldValue(properties[i], "PROPERTY" + i);
+    }
+  },
+  /**
+   * Store pointers to any connected child blocks.
+   * @param {!Blockly.Block} containerBlock Root block in mutator.
+   * @this Blockly.Block
+   */
+  saveConnections: function(containerBlock) {
+    var itemBlock = containerBlock.getInputTargetBlock('STACK');
+    var i = 0;
+    while (itemBlock) {
+      var input = this.getInput('ADD' + i);
+      itemBlock.valueConnection_ = input && input.connection.targetConnection;
+      var field = this.getFieldValue("PROPERTY" + i)
+      itemBlock.propertyValue_ = field
+      i++;
+      itemBlock = itemBlock.nextConnection &&
+        itemBlock.nextConnection.targetBlock();
+    }
+  },
+  /**
+   * Modify this block to have the correct number of inputs.
+   * @private
+   * @this Blockly.Block
+   */
+  updateShape_: function() {
+    if (this.itemCount_ && this.getInput('EMPTY')) {
+      this.removeInput('EMPTY');
+    }
+    else if (!this.itemCount_ && !this.getInput('EMPTY')) {
+      this.appendDummyInput('EMPTY')
+        .appendField('create empty object');
+    }
+    // Add new inputs.
+    for (var i = 0; i < this.itemCount_; i++) {
+      if (!this.getInput('ADD' + i)) {
+        if (i == 0) {
+          var dummy = this.appendDummyInput();
+          dummy.appendField('create object');
+        }
+        var input = this.appendValueInput('ADD' + i);
+        input.appendField(new Blockly.FieldTextInput("property"), "PROPERTY" + i)
+      }
+    }
+    // Remove deleted inputs.
+    while (this.getInput('ADD' + i)) {
+      this.removeInput('ADD' + i);
+      this.removeInput('VALUE' + i);
+      i++;
+    }
+  }
+};
+
+Blockly.Blocks['objects_create_with_container'] = {
+  /**
+   * Mutator block for list container.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setColour(Blockly.Blocks.lists.HUE);
+    this.appendDummyInput()
+      .appendField('object');
+    this.appendStatementInput('STACK');
+    this.setTooltip('TOOLTIP3');
+    this.contextMenu = false;
+  }
+};
+
+Blockly.Blocks['objects_create_with_item'] = {
+  /**
+   * Mutator block for adding items.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setColour(Blockly.Blocks.lists.HUE);
+    this.appendDummyInput()
+      .appendField('property');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('TOOLTIP2');
+    this.contextMenu = false;
   }
 };

@@ -47,6 +47,11 @@ Blockly.JavaScript['objects_copy'] = function(block) {
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
+Blockly.JavaScript['objects_create_with'] = function(a) {
+  for (var b = Array(a.itemCount_), c = 0; c < a.itemCount_; c++) b[c] = a.getFieldValue("PROPERTY" + c) + ": " + Blockly.JavaScript.valueToCode(a, "ADD" + c, Blockly.JavaScript.ORDER_COMMA) || "null";
+  return ["{" + b.join(", ") + "}", Blockly.JavaScript.ORDER_ATOMIC]
+}
+
 // LISTS
 
 Blockly.JavaScript.lists_indexOf = function(a) {
