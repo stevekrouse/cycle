@@ -49,44 +49,8 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 * http://todomvc.com/examples/vue/#/all
 * https://github.com/tastejs/todomvc/blob/master/app-spec.md
-   
 
-### Mini-goals
-
-* ~~todos that can be completed with strikethrough~~ *Acheived!*
-   * ~~if/else~~
-   * ~~strikethrough block~~
-
-* ~~todos that can delete themselves~~ *Acheived!*
-   * ~~delete by value~~
-   
-* ~~todo is submitted on enter~~ *Acheived!*
-     * ~~make event in scope~~
-     * ~~add keydown event~~
-     * ~~Objects~~
-       * ~~create empty~~
-       * ~~access OBJ's KEY~~
-       * ~~SET OBJ's KEY to VAL~~
-       * ~~Object.keys~~
-
-* ~~todos that can be edited in place~~ *Acheived!*
-   * ~~compiled instead of interpreted~~
-     * ~~attributes -> compiled~~
-     * ~~if -> compiled~~
-     * ~~figure out editing todos in place~~
-       * ~~dom strings not hardcoded~~
-
-* ~~Things needed for 95% TODO MVC parity~~ *Acheived!*
-   * ~~input placeholder~~
-   * ~~images (for checkbox)~~
-   * ~~on blur~~
-   * ~~box shadow~~
-   * ~~list filtering~~
-   * ~~input no highlight on hover~~
-   * ~~links~~
-   
-
-* Total TODO MVC parity
+### Total TODO MVC parity
    * focus in events (might need to give elements their ids) 
      * create a directive focus that you can set to an expression and when true, it focuses on that element
    * trim text
@@ -95,7 +59,12 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
    * window.loation.hash (or could look at full routing https://github.com/flatiron/director)
  
 
-## Post To-do MVC
+## Things I'm currently leaving simple (and ugly, and not easy)
+
+* HTML props (including, value, src, href)
+* CSS properties and values
+* including CSS link and JS script tags 
+
 
 ### Big technical projects
   * ~~components~~ *Acheived!*
