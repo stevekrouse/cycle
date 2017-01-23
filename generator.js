@@ -52,6 +52,12 @@ Blockly.JavaScript['objects_create_with'] = function(a) {
   return ["{" + b.join(", ") + "}", Blockly.JavaScript.ORDER_ATOMIC]
 }
 
+Blockly.JavaScript['objects_clone_with'] = function(a) {
+  for (var b = Array(a.itemCount_), c = 0; c < a.itemCount_; c++) b[c] = a.getFieldValue("PROPERTY" + c) + ": " + Blockly.JavaScript.valueToCode(a, "ADD" + c, Blockly.JavaScript.ORDER_COMMA) || "null";
+  var clone = Blockly.JavaScript.valueToCode(a, "CLONE", Blockly.JavaScript.ORDER_ATOMIC)
+  return ["Object.assign(Object.assign({}, " + clone + "), {" + b.join(", ") + "})", Blockly.JavaScript.ORDER_ATOMIC]
+}
+
 // LISTS
 
 Blockly.JavaScript.lists_indexOf = function(a) {

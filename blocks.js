@@ -616,9 +616,8 @@ Blockly.Blocks['objects_create_with'] = {
     this.updateShape_();
     // Reconnect any child blocks.
     for (var i = 0; i < this.itemCount_; i++) {
-      debugger
       Blockly.Mutator.reconnect(connections[i], this, 'ADD' + i);
-      this.setFieldValue(properties[i], "PROPERTY" + i);
+      this.setFieldValue(properties[i] || "property" + (i+1), "PROPERTY" + i);
     }
   },
   /**
@@ -657,7 +656,7 @@ Blockly.Blocks['objects_create_with'] = {
       if (!this.getInput('ADD' + i)) {
         if (i == 0) {
           var dummy = this.appendDummyInput();
-          dummy.appendField('create object');
+          dummy.appendField('new object');
         }
         var input = this.appendValueInput('ADD' + i);
         input.appendField(new Blockly.FieldTextInput("property"), "PROPERTY" + i)
@@ -702,3 +701,42 @@ Blockly.Blocks['objects_create_with_item'] = {
     this.contextMenu = false;
   }
 };
+
+Blockly.Blocks['objects_clone_with'] = Object.assign({}, Blockly.Blocks['objects_create_with'])
+Blockly.Blocks['objects_clone_with'].updateShape_ = function() {
+  // Add new inputs.
+  if (!this.getInput("CLONE")) {
+    var clone = this.appendValueInput("CLONE");
+    clone.appendField('clone');
+    if (this.itemCount_ > 0) {
+      var dummy = this.appendDummyInput("WITH")
+      dummy.appendField("with")
+    }
+  }
+  
+  for (var i = 0; i < this.itemCount_; i++) {
+    if (!this.getInput('ADD' + i)) {
+      var input = this.appendValueInput('ADD' + i);
+      input.appendField(new Blockly.FieldTextInput("property"), "PROPERTY" + i)
+    }
+  }
+  if (this.itemCount_ == 0 && this.getInput('WITH')) {
+    this.removeInput('WITH');
+  }
+  // Remove deleted inputs.
+  while (this.getInput('ADD' + i)) {
+    this.removeInput('ADD' + i);
+    this.removeInput('VALUE' + i);
+    i++;
+  }
+}
+Blockly.Blocks['objects_clone_with'].init = function() {
+  this.setHelpUrl(Blockly.Msg.LISTS_CREATE_WITH_HELPURL);
+  this.itemCount_ = 1;
+  this.updateShape_();
+  this.setOutput(true);
+  this.setColour(255);
+  this.setInputsInline(true);
+  this.setMutator(new Blockly.Mutator(['objects_create_with_item']));
+  this.setTooltip(Blockly.Msg.LISTS_CREATE_WITH_TOOLTIP);
+}
