@@ -644,20 +644,20 @@ Blockly.Blocks['objects_create_with'] = {
    * @this Blockly.Block
    */
   updateShape_: function() {
-    if (this.itemCount_ && this.getInput('EMPTY')) {
+
+    if (this.itemCount_ === 0 && !this.getInput("EMPTY")) {
+      this.appendDummyInput("EMPTY")
+        .appendField('create empty object');
+      this.removeInput('CREATE');
+    } else if (this.itemCount_ !== 0 && !this.getInput('CREATE')) {
+      this.appendDummyInput("CREATE")
+        .appendField('new object');
       this.removeInput('EMPTY');
     }
-    else if (!this.itemCount_ && !this.getInput('EMPTY')) {
-      this.appendDummyInput('EMPTY')
-        .appendField('create empty object');
-    }
-    // Add new inputs.
+  
+  
     for (var i = 0; i < this.itemCount_; i++) {
       if (!this.getInput('ADD' + i)) {
-        if (i == 0) {
-          var dummy = this.appendDummyInput();
-          dummy.appendField('new object');
-        }
         var input = this.appendValueInput('ADD' + i);
         input.appendField(new Blockly.FieldTextInput("property"), "PROPERTY" + i)
       }
@@ -740,3 +740,117 @@ Blockly.Blocks['objects_clone_with'].init = function() {
   this.setMutator(new Blockly.Mutator(['objects_create_with_item']));
   this.setTooltip(Blockly.Msg.LISTS_CREATE_WITH_TOOLTIP);
 }
+
+// Firebase
+
+Blockly.Blocks['firebase_initialize_app'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Configure Firebase");
+    this.appendDummyInput()
+        .appendField("apiKey")
+        .appendField(new Blockly.FieldTextInput("SDF46KSDFL"), "apiKey");
+    this.appendDummyInput()
+        .appendField("authDomain")
+        .appendField(new Blockly.FieldTextInput("projectId.firebaseapp.com"), "authDomain");
+    this.appendDummyInput()
+        .appendField("databaseURL")
+        .appendField(new Blockly.FieldTextInput("https://databaseName.firebaseio.com"), "databaseURL");
+    this.appendDummyInput()
+        .appendField("storageBucket")
+        .appendField(new Blockly.FieldTextInput("bucket.appspot.com"), "storageBucket");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['firebase_set'] = {
+  init: function() {
+    this.appendValueInput("REF")
+        .setCheck(null)
+        .appendField("set REF");
+    this.appendValueInput("VALUE")
+        .setCheck(null)
+        .appendField("to");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['firebase_add_to_list'] = {
+  init: function() {
+    this.appendValueInput("VALUE")
+        .setCheck(null)
+        .appendField("add");
+    this.appendValueInput("REF")
+        .setCheck(null)
+        .appendField("to list at REF");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    // this.setOutput(true);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['firebase_delete'] = {
+  init: function() {
+    this.appendValueInput("REF")
+        .setCheck(null)
+        .appendField("delete REF");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['firebase_get'] = {
+  init: function() {
+    this.appendValueInput("REF")
+        .setCheck(null)
+        .appendField("get REF");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["every change","value"], ["once","once"], ["child added","child_added"], ["child removed","child_removed"], ["child changed","child_changed"]]), "frequency")
+        .appendField("(value)");
+    this.appendStatementInput("CHILDREN")
+        .setCheck(null);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+// Include scripts
+
+Blockly.Blocks['cycle_include_script'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("get JS script at URL")
+        .appendField(new Blockly.FieldTextInput("https://www.gstatic.com/firebasejs/3.6.6/firebase.js"), "URL");
+    this.appendDummyInput()
+        .appendField("and then do");
+    this.appendStatementInput("CHILDREN")
+        .setCheck(null);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};

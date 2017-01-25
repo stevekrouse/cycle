@@ -12,6 +12,64 @@ events.forEach(function(event) {
   };
 })
 
+// Include scripts
+
+Blockly.JavaScript['cycle_include_script'] = function(block) {
+  var text_url = block.getFieldValue('URL');
+  var statements_children = Blockly.JavaScript.statementToCode(block, 'CHILDREN');
+  var code = ""
+  code += 'var script = document.createElement( "script" );\n'
+  code += 'script.type = "text/javascript";\n'
+  code += 'script.onload = function() {\n  ' + statements_children + '\n};\n'
+  code += "script.src = '" + text_url + '\';\n'
+  code += 'document.body.appendChild(script)'
+  return code
+}
+
+// Firebase
+
+Blockly.JavaScript['firebase_initialize_app'] = function(block) {
+  var text_apikey = block.getFieldValue('apiKey');
+  var text_authdomain = block.getFieldValue('authDomain');
+  var text_databaseurl = block.getFieldValue('databaseURL');
+  var text_storagebucket = block.getFieldValue('storageBucket');
+  var code = "firebase.initializeApp({apiKey: '" + text_apikey + "', authDomain: '" + text_authdomain + "', databaseURL: '" + text_databaseurl + "', storageBucket: '" + text_storagebucket + "'});\n"
+  return code;
+};
+
+Blockly.JavaScript['firebase_set'] = function(block) {
+  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_ref = Blockly.JavaScript.valueToCode(block, 'REF', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = "firebase.database().ref(" + value_ref + ").set(" + value_value + ");\n"
+  return code;
+};
+
+Blockly.JavaScript['firebase_add_to_list'] = function(block) {
+  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_ref = Blockly.JavaScript.valueToCode(block, 'REF', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = "firebase.database().ref(" + value_ref + ").push(" + value_value + ");\n"
+  return code;
+};
+
+Blockly.JavaScript['firebase_delete'] = function(block) {
+  var value_ref = Blockly.JavaScript.valueToCode(block, 'REF', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = "firebase.database().ref(" + value_ref + ").remove();\n"
+  return code;
+};
+
+Blockly.JavaScript['firebase_get'] = function(block) {
+  var value_ref = Blockly.JavaScript.valueToCode(block, 'REF', Blockly.JavaScript.ORDER_ATOMIC);
+  var dropdown_frequency = block.getFieldValue('frequency');
+  var statements_children = Blockly.JavaScript.statementToCode(block, 'CHILDREN');
+  var freqency = dropdown_frequency == "once" ? "once" : "on"
+  var code = 'firebase.database().ref(' + value_ref + ')' 
+  code += '.' + freqency + '("value", function(snapshot) {' + '\n';
+  code += 'var value = snapshot.val();\n'
+  code += statements_children
+  code += "})"
+  return code;
+};
+
 // OBJECTS
 
 Blockly.JavaScript['objects_create_empty'] = function(block) {

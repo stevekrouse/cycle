@@ -3,6 +3,16 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+  <style>
+    html {
+      width: 90%;
+      height: 90%;
+    }
+    body {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
 </head>
 <body>
   <div id="page"></div>
@@ -97,7 +107,7 @@
     }
   }
   function scopeAttributes(attributes, variables){
-    //window.loads.push(attributes.on["load"]) TODO 
+    attributes.onStrings["load"] && window.loads.push(scopeVaribles(attributes.onStrings["load"], variables, "window.app")) // TODO something better than this 
     return "{" + "\n" +
            "  class: {"                                                                               + "\n" +                                       
                     attributes.classStrings.map(function(key) {
@@ -146,10 +156,10 @@
     if (!code || typeof code == "string") {
       return {}
     } else {
-      code.attributes.data = code.attributes.dataStrings || {}
+      debugger
       var dataKeys = Object.keys(code.attributes.dataStrings)
       dataKeys.forEach(function(key) {
-        collection[key] = eval(code.attributes.dataStrings[key])
+        collection[key] = new Function("return " + code.attributes.dataStrings[key])()
       })
       code.children = code.children || []
       code.children.forEach(function(child) {
@@ -187,8 +197,7 @@
   function pageToVueString(code) {
     var data = collectData(code.page)
     var variables = Object.keys(data).concat(Object.keys(code.definitions))
-    return "window.loads = []"                                                                           + "\n" +
-           "window.data = " + JSON.stringify(data, null, 2)                                              + "\n" +
+    return "window.data = " + JSON.stringify(data, null, 2)                                              + "\n" +
            "window.render = " + parseCodeToVueRender(code.page, variables)                               + "\n" + 
            "window.app = new Vue({"                                                                      + "\n" + 
            "  el: '#page',"                                                                              + "\n" + 
@@ -196,7 +205,7 @@
            "  data: window.data,"                                                                        + "\n" + 
            "  mounted: function () {"                                                                    + "\n" +    
            "    this.$nextTick(function () {"                                                            + "\n" + 
-           "      window.loads.forEach(function(func) { func && func() })"                               + "\n" + 
+           "      window.loads.forEach(function(funcString) { new Function(funcString)() })"                               + "\n" + 
            "    })"                                                                                      + "\n" + 
            "  },"                                                                                        + "\n" +
            "  methods: {"                                                                                + "\n" +    
@@ -212,6 +221,7 @@
   function run(){
     if (window.code) {
       try {
+        window.loads = [] // TODO something better
         c = pageToVueString(window.code)
         // console.log(c)
         

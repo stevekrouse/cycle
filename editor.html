@@ -15,16 +15,31 @@
   <xml id="toolbox" style="display: none;">
     <category name="Elements" colour="60">
       <block type="cycle_container"></block>
-      <block type="cycle_input"></block>
-      <block type="cycle_input"><statement name="CHILDREN">  <block type="variables_set">    <field name="VAR">inputText</field>    <value name="VALUE">      <block type="text">        <field name="TEXT"></field>      </block>    </value>    <next>      <block type="cycle_html_property">        <value name="KEY">          <block type="text">            <field name="TEXT">value</field>          </block>        </value>        <value name="VALUE">          <block type="text">            <field name="TEXT"></field>          </block>        </value>        <next>          <block type="keyup">            <statement name="blocks">              <block type="variables_set">                <field name="VAR">inputText</field>                <value name="VALUE">                  <block type="objects_get">                    <value name="OBJECT">                      <block type="objects_get">                        <value name="OBJECT">                          <block type="variables_get">                            <field name="VAR">event</field>                          </block>                        </value>                        <value name="KEY">                          <block type="text">                            <field name="TEXT">target</field>                          </block>                        </value>                      </block>                    </value>                    <value name="KEY">                      <block type="text">                        <field name="TEXT">value</field>                      </block>                    </value>                  </block>                </value>              </block>            </statement>          </block>        </next>      </block>    </next>  </block></statement></block>
-      <block type="cycle_image"></block>
-      <block type="cycle_link"></block>
-      <block type="cycle_button"></block>
       <block type="cycle_text">
         <value name="TEXT">
           <block type="text"></block>
         </value>
       </block> 
+      <block type="cycle_link"></block>
+      <block type="cycle_image"></block>
+      <block type="cycle_button"></block>
+      <block type="cycle_input"></block>
+      <block type="cycle_input"><statement name="CHILDREN">  <block type="variables_set">    <field name="VAR">inputText</field>    <value name="VALUE">      <block type="text">        <field name="TEXT"></field>      </block>    </value>    <next>      <block type="cycle_html_property">        <value name="KEY">          <block type="text">            <field name="TEXT">value</field>          </block>        </value>        <value name="VALUE">          <block type="text">            <field name="TEXT"></field>          </block>        </value>        <next>          <block type="keyup">            <statement name="blocks">              <block type="variables_set">                <field name="VAR">inputText</field>                <value name="VALUE">                  <block type="objects_get">                    <value name="OBJECT">                      <block type="objects_get">                        <value name="OBJECT">                          <block type="variables_get">                            <field name="VAR">event</field>                          </block>                        </value>                        <value name="KEY">                          <block type="text">                            <field name="TEXT">target</field>                          </block>                        </value>                      </block>                    </value>                    <value name="KEY">                      <block type="text">                        <field name="TEXT">value</field>                      </block>                    </value>                  </block>                </value>              </block>            </statement>          </block>        </next>      </block>    </next>  </block></statement></block>
+      <!--list-->
+      <!--list element (numbered/bullet/nothing)-->
+      <!--heading-->
+      <!--text area-->
+      <!--table-->
+      <!--table row-->
+      <!--table cell-->
+      <!--code (pre)-->
+      <!--embed-->
+      <!--spacer-->
+      <!--radio buttons-->
+      <!--checkboxes-->
+      <!--select dropdown-->
+      <!--toggle-->
+      <!--navbar-->
     </category>
     <category name="More Elements" colour="60">
       <block type="cycle_create_element">
@@ -86,6 +101,7 @@
       <block type="keyup"></block>
       <block type="blur"></block>
       <block type="change"></block>
+      <block type="cycle_include_script"></block>
     </category>
     <category name="Logic" colour="210">
       <block type="controls_if"></block>
@@ -302,35 +318,35 @@
     </category>
     <category name="Variables" colour="330" custom="VARIABLE"></category>
     <category name="Functions" colour="290" custom="PROCEDURE"></category>
-    
-    <!--list-->
-    <!--list element (numbered/bullet/nothing)-->
-    
-    <!--link-->
-    <!--heading-->
-    <!--image-->
-    <!--text area-->
-    <!--table-->
-    <!--table row-->
-    <!--table cell-->
-    <!--code (pre)-->
-    <!--embed-->
-    <!--spacer-->
-    <!--radio buttons-->
-    <!--checkboxes-->
-    <!--select dropdown-->
-    <!--toggle-->
-    <!--navbar-->
-    
-  
-    <!--control-->
-    <!--if-->
-    <!--if else-->
-    <!--for loop-->
-    <!--for each loop-->
-    
-    <!--create element-->
-    <!--parameters -->
+    <category name="Firebase" colour="290">
+      <block type="firebase_initialize_app"></block>
+      <block type="firebase_set">
+        <value name="REF">
+          <block type="text"></block>
+        </value>
+        <value name="VALUE">
+          <block type="objects_create_with"></block>
+        </value>
+      </block>
+      <block type="firebase_add_to_list">
+        <value name="REF">
+          <block type="text"></block>
+        </value>
+        <value name="VALUE">
+          <block type="objects_create_with"></block>
+        </value>
+      </block>
+      <block type="firebase_get">
+        <value name="REF">
+          <block type="text"></block>
+        </value>
+      </block>
+      <block type="firebase_delete">
+        <value name="REF">
+          <block type="text"></block>
+        </value>
+      </block>
+    </category>
   </xml>
   
   <xml id="elementStartingBlocks">
@@ -344,7 +360,6 @@
     	toolbox : document.getElementById("toolbox"), 
     	collapse : true, 
     	comments : true, 
-    	disable : true, 
     	maxBlocks : Infinity, 
     	trashcan : true, 
     	horizontalLayout : false, 
