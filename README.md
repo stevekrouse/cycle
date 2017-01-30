@@ -53,23 +53,18 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 ### Big technical projects
   * drag bug where you can't select blocks anymore
     * https://github.com/google/blockly/issues/888
-  
-  * figure out width/height of screen issues
 
-  * inspecting html highlights code, and clicking on code highlights html
-    
   * much more intuative ways to get the value of key presses / keys down
   
   * add variables in scope to variable list
     * did I already do this for events? 
     * figure out how to add variables for callbacks (similar to how adding a for-loop does)
+    * every time you add inputText, increase the number of numberText of the XML in the toolbox 
 
   * hints
     * raise errors when variables are used out of scope 
 
   * prevention of name collisions
-  
-  
 
   * else-if compiled
   
@@ -79,8 +74,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
   * hot reloading
     * keep track of data between renders and set it as initial values for the next render (refresh clears this) 
-
-  * every time you add inputText, increase the number of numberText of the XML in the toolbox 
 
   * add the word "initial" to setting variables in element: create variable X with initial value Y
   * think about: only allow variable creation at top of scope so as to make hoisting simplier to understand --> or suggest that you put this in an event

@@ -451,7 +451,7 @@
 
     workspace.addChangeListener(function(event) {
       if (event instanceof Blockly.Events.Ui) {
-        // TODO use this to highlight the corresponding HTML elements in output by block id
+        window.parent.$('body').trigger('UIEvent', event)
       }
       else {
         window.parent.$('body').trigger('elementChange', event)

@@ -111,6 +111,36 @@
         debouncedRun()
       }
     });
+    
+    $.fn.filterByData = function(prop, val) {
+        return this.filter(
+            function() { return this["data-" + prop]==val; }
+        );
+    }
+    
+    $('body').bind('UIEvent', function(event, blocklyEvent) {
+      if (blocklyEvent.element == "selected") {
+        if (blocklyEvent.oldValue) {
+          var element = $(preview.contentWindow.document).find("*").filterByData('block-id', blocklyEvent.oldValue)
+          
+          element.css('border', element.data('old-border'))
+          element.css('opacity', element.data('old-opacity'))
+        }
+        if (blocklyEvent.newValue) {
+          var element = $(preview.contentWindow.document).find("*").filterByData('block-id', blocklyEvent.newValue)
+          
+          // store default styles
+          element.data('old-border', element.css("border") || "none")
+          element.data('old-opacity', element.css("opacity") || "1")
+          
+          // highlight element
+          element.css('border', "2px solid #4d90fe")
+          element.css('opacity', "0.7")
+          
+          
+        }
+      }
+    })
 
     var undo = function(event) {
       if ((event.which == 90 || event.keyCode == 90) && event.ctrlKey) {

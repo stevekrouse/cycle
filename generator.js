@@ -315,6 +315,8 @@ function blockAttributes(block) {
       }
   }
   
+  attributes.domPropsStrings['"data-block-id"'] = "'" + block.id + "'"
+  
   return attributes
 }
 
