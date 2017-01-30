@@ -47,17 +47,21 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
   * HTML props (including, value, src, href)
   * CSS properties and values
-  * including CSS link and JS script tags 
-
+  * including CSS link and JS script tags
+  * JavaScript events
 
 ### Big technical projects
+
   * drag bug where you can't select blocks anymore
     * https://github.com/google/blockly/issues/888
   
   * blockly delete bug where it doesn't work until you drag delete something 
     * https://github.com/google/blockly/issues/891  
-
+  
   * much more intuative ways to get the value of key presses / keys down
+  
+  * hot reloading
+    * keep track of data between renders and set it as initial values for the next render (refresh clears this) 
   
   * add variables in scope to variable list
     * https://github.com/google/blockly/blob/c0053531897ad8f7486a5f197ea3cd1803374c6b/core/variables.js 
@@ -69,20 +73,12 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * prevention of name collisions
 
   * else-if compiled
+
   
-  * better error when using a component that's undefined
-
-  * better colors for things
-
-  * hot reloading
-    * keep track of data between renders and set it as initial values for the next render (refresh clears this) 
 
   * add the word "initial" to setting variables in element: create variable X with initial value Y
   * think about: only allow variable creation at top of scope so as to make hoisting simplier to understand --> or suggest that you put this in an event
   * the dataCollection method in output.html doesn't work for data inside if/else clauses!
-
-  * make the input text setup more clear (both setting the value, and getting the event.target.value)
-
 
 ## App ideas
 
@@ -148,6 +144,7 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## Eventually
 
+  
   * clicking on html scrolls to code
   * ability to add classes (or is add HTML prop class good for now?) 
   * more expressive firebase querying
@@ -182,7 +179,9 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   
 
 ## Considerations
-
+  
+  * error handling (short term -> try/catch, long-term -> strong typing and no runtime errors)
+  * make getting getting the event.target.value for input text setup more clear
   * the toolbox lives in the mouse/selector so as to help you understand what's in context/scope
   * bubble.is typing 's thing and speeadsheet like database and schema thing
   * ability to select block by drag

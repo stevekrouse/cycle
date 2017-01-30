@@ -48,7 +48,7 @@ Blockly.Blocks['cycle_emit'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('');
   }
@@ -63,7 +63,7 @@ Blockly.Blocks['cycle_text'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(65);
+    this.setColour(20);
     this.setTooltip('');
   },
 };
@@ -80,7 +80,7 @@ Blockly.Blocks['cycle_custom_event'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('');
   }
@@ -94,7 +94,7 @@ Blockly.Blocks['cycle_button'] = {
       .setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(120);
+    this.setColour(20);
     this.setTooltip('');
   },
 };
@@ -108,7 +108,7 @@ Blockly.Blocks['cycle_input'] = {
       .setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(120);
+    this.setColour(20);
     this.setTooltip('');
   },
 };
@@ -119,7 +119,7 @@ Blockly.Blocks['cycle_page'] = {
       .appendField("Page");
     this.appendStatementInput("CHILDREN")
       .setCheck(null);
-    this.setColour(160);
+    this.setColour(20);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -142,7 +142,7 @@ Blockly.Blocks['cycle_create_element'] = {
     this.appendStatementInput("CHILDREN")
       .setCheck(null);
     this.setInputsInline(true);
-    this.setColour(230);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('');
     this.setPreviousStatement(false, null);
@@ -158,7 +158,7 @@ Blockly.Blocks['cycle_custom_element'] = {
     this.appendStatementInput("CHILDREN")
       .setCheck(null);
     this.setInputsInline(true);
-    this.setColour(230);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('');
     this.setPreviousStatement(true, null);
@@ -172,7 +172,7 @@ Blockly.Blocks['cycle_create_input'] = {
       .appendField("Create input with name")
       .appendField(new Blockly.FieldTextInput("Input1"), "NAME");
     this.setInputsInline(true);
-    this.setColour(230);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('');
     this.setPreviousStatement(true, null);
@@ -192,7 +192,7 @@ Blockly.Blocks['cycle_add_input'] = {
       .setCheck(null)
       .appendField("with value");
     this.setInputsInline(true);
-    this.setColour(230);
+    this.setColour(0);
     this.setTooltip('');
     this.setHelpUrl('');
     this.setPreviousStatement(true, null);
@@ -202,7 +202,7 @@ Blockly.Blocks['cycle_add_input'] = {
 
 Blockly.Blocks['set_css'] = {
   init: function() {
-    this.setColour(180);
+    this.setColour(310);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.appendValueInput("VALUE")
@@ -248,7 +248,7 @@ Blockly.Blocks['set_css'] = {
 
 Blockly.Blocks['cycle_css_property'] = {
   init: function() {
-    this.setColour(180);
+    this.setColour(310);
     this.appendValueInput("KEY")
       .setCheck(null)
       .appendField("set CSS property");
@@ -265,7 +265,7 @@ Blockly.Blocks['cycle_css_property'] = {
 
 Blockly.Blocks['cycle_html_property'] = {
   init: function() {
-    this.setColour(180);
+    this.setColour(310);
     this.appendValueInput("KEY")
       .setCheck(null)
       .appendField("set HTML property");
@@ -473,7 +473,7 @@ Blockly.Blocks['objects_create_empty'] = {
       .appendField("create empty object");
     this.setInputsInline(true);
     this.setOutput(true, null);
-    this.setColour(255);
+    this.setColour(240);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -490,7 +490,7 @@ Blockly.Blocks['objects_get'] = {
       .appendField("'s");
     this.setInputsInline(true);
     this.setOutput(true, null);
-    this.setColour(255);
+    this.setColour(240);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -509,7 +509,7 @@ Blockly.Blocks['objects_set'] = {
       .appendField("to");
     this.setInputsInline(true);
     this.setOutput(true, null);
-    this.setColour(255);
+    this.setColour(240);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -524,7 +524,7 @@ Blockly.Blocks['objects_keys'] = {
       .appendField("'s keys");
     this.setInputsInline(true);
     this.setOutput(true, null);
-    this.setColour(255);
+    this.setColour(240);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -537,7 +537,7 @@ Blockly.Blocks['objects_copy'] = {
       .appendField("copy object");
     this.setInputsInline(true);
     this.setOutput(true, null);
-    this.setColour(255);
+    this.setColour(240);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -550,7 +550,7 @@ Blockly.Blocks['objects_create_with'] = {
     this.itemCount_ = 3;
     this.updateShape_();
     this.setOutput(true);
-    this.setColour(255);
+    this.setColour(240);
     this.setInputsInline(false);
     this.setMutator(new Blockly.Mutator(['objects_create_with_item']));
     this.setTooltip(Blockly.Msg.LISTS_CREATE_WITH_TOOLTIP);
@@ -738,7 +738,7 @@ Blockly.Blocks['objects_clone_with'].init = function() {
   this.itemCount_ = 1;
   this.updateShape_();
   this.setOutput(true);
-  this.setColour(255);
+  this.setColour(240);
   this.setInputsInline(true);
   this.setMutator(new Blockly.Mutator(['objects_create_with_item']));
   this.setTooltip(Blockly.Msg.LISTS_CREATE_WITH_TOOLTIP);
@@ -764,7 +764,7 @@ Blockly.Blocks['firebase_initialize_app'] = {
         .appendField(new Blockly.FieldTextInput("bucket.appspot.com"), "storageBucket");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('');
   }
@@ -781,7 +781,7 @@ Blockly.Blocks['firebase_set'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('');
   }
@@ -799,7 +799,7 @@ Blockly.Blocks['firebase_add_to_list'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     // this.setOutput(true);
-    this.setColour(230);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('');
   }
@@ -813,7 +813,7 @@ Blockly.Blocks['firebase_delete'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('');
   }
@@ -832,7 +832,7 @@ Blockly.Blocks['firebase_get'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('');
   }
@@ -852,7 +852,7 @@ Blockly.Blocks['cycle_include_script'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('');
   }
