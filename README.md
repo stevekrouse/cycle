@@ -53,12 +53,14 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 ### Big technical projects
   * drag bug where you can't select blocks anymore
     * https://github.com/google/blockly/issues/888
+  
+  * blockly delete bug where it doesn't work until you drag delete something 
+    * https://github.com/google/blockly/issues/891  
 
   * much more intuative ways to get the value of key presses / keys down
   
   * add variables in scope to variable list
-    * did I already do this for events? 
-    * figure out how to add variables for callbacks (similar to how adding a for-loop does)
+    * https://github.com/google/blockly/blob/c0053531897ad8f7486a5f197ea3cd1803374c6b/core/variables.js 
     * every time you add inputText, increase the number of numberText of the XML in the toolbox 
 
   * hints
@@ -146,6 +148,7 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## Eventually
 
+  * clicking on html scrolls to code
   * ability to add classes (or is add HTML prop class good for now?) 
   * more expressive firebase querying
     * limit to VALUE

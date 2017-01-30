@@ -131,22 +131,22 @@
                               "    }"
                     }).join(",")                                                                      + "\n" + 
            "  },"                                                                                     + "\n" + 
-           "  domProps: {" + 
+           "  domProps: {"                                                                            + "\n" + 
                     Object.keys(attributes.domPropsStrings).map(function(key) {
                       return  "    " + key + ": " + i(4, scopeVaribles(attributes.domPropsStrings[key], variables))
                     }).join(",")                                                                      + "\n" + 
            "  },"                                                                                     + "\n" + 
-           "  props: {" + 
+           "  props: {"                                                                               + "\n" + 
                     Object.keys(attributes.propsStrings).map(function(key) {
                       return  "    " + key + ": " + i(4, scopeVaribles(attributes.propsStrings[key], variables))
                     }).join(",")                                                                      + "\n" + 
            "  },"                                                                                     + "\n" + 
-           "  style: {" + 
+           "  style: {"                                                                               + "\n" +   
                     Object.keys(attributes.styleStrings).map(function(key) {
                       return  "    " + key + ": " + i(4, scopeVaribles(attributes.styleStrings[key], variables))
                     }).join(",")                                                                      + "\n" + 
            "  },"                                                                                     + "\n" + 
-           "  data: {" + 
+           "  data: {"                                                                                + "\n" + 
                     Object.keys(attributes.dataStrings).map(function(key) {
                       return  "    " + key + ": " + i(4, scopeVaribles(attributes.dataStrings[key], variables))
                     }).join(",")                                                                      + "\n" + 

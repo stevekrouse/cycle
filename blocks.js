@@ -177,6 +177,9 @@ Blockly.Blocks['cycle_create_input'] = {
     this.setHelpUrl('');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
+  },
+  getVars: function() {
+    return [this.getFieldValue("NAME")]
   }
 };
 

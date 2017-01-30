@@ -108,32 +108,6 @@
       <!--toggle-->
       <!--navbar-->
     </category>
-    <category name="More Elements" colour="60">
-      <block type="cycle_create_element">
-      </block>
-      <block type="cycle_custom_element">
-        <value name="NAME">
-          <block type="text"></block>
-        </value>
-      </block>
-      <block type="cycle_create_input">
-      </block>
-      <block type="cycle_add_input">
-        <value name="VALUE">
-          <block type="text"></block>
-        </value>
-      </block>
-      <block type="cycle_emit">
-        <value name="NAME">
-          <block type="text"></block>
-        </value>
-      </block>
-      <block type="cycle_custom_event">
-        <value name="NAME">
-          <block type="text"></block>
-        </value>
-      </block>
-    </category>
     <category name="Settings" colour="80">
       <block type="set_css">
         <value name="VALUE">
@@ -168,7 +142,6 @@
       <block type="keyup"></block>
       <block type="blur"></block>
       <block type="change"></block>
-      <block type="cycle_include_script"></block>
     </category>
     <category name="Logic" colour="210">
       <block type="controls_if"></block>
@@ -215,13 +188,6 @@
       <block type="math_trig"></block>
       <block type="math_constant"></block>
       <block type="math_number_property"></block>
-      <block type="math_change">
-        <value name="DELTA">
-          <block type="math_number">
-            <field name="NUM">1</field>
-          </block>
-        </value>
-      </block>
       <block type="math_round"></block>
       <block type="math_on_list"></block>
       <block type="math_modulo"></block>
@@ -385,8 +351,39 @@
     </category>
     <category name="Variables" colour="330" custom="VARIABLE"></category>
     <category name="Functions" colour="290" custom="PROCEDURE"></category>
+    <category name="More Elements" colour="60">
+      <block type="cycle_create_element">
+      </block>
+      <block type="cycle_custom_element">
+        <value name="NAME">
+          <block type="text"></block>
+        </value>
+      </block>
+      <block type="cycle_create_input">
+      </block>
+      <block type="cycle_add_input">
+        <value name="VALUE">
+          <block type="text"></block>
+        </value>
+      </block>
+      <block type="cycle_emit">
+        <value name="NAME">
+          <block type="text"></block>
+        </value>
+      </block>
+      <block type="cycle_custom_event">
+        <value name="NAME">
+          <block type="text"></block>
+        </value>
+      </block>
+    </category>
     <category name="Firebase" colour="290">
-      <block type="firebase_initialize_app"></block>
+      <block type="cycle_include_script">
+        <statement name="CHILDREN">
+          <block type="firebase_initialize_app"></block>
+        </statement>
+      </block>
+      
       <block type="firebase_set">
         <value name="REF">
           <block type="text"></block>
