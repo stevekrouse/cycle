@@ -54,14 +54,8 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * drag bug where you can't select blocks anymore
     * https://github.com/google/blockly/issues/888
   
-  * errors
-    * ~~make a clear distinction between compile and runtime errors in cycle source code~~
-    * compile errors
-      * ~~these can show up in the output window~~
-      * ~~prevent adding elements or settings to events (only change data and other side effect things)~~
-    * ~~runtime errors~~
-      * ~~like we have in woof~~ 
-  
+  * figure out width/height of screen issues
+
   * inspecting html highlights code, and clicking on code highlights html
     
   * much more intuative ways to get the value of key presses / keys down
@@ -70,16 +64,10 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
     * did I already do this for events? 
     * figure out how to add variables for callbacks (similar to how adding a for-loop does)
 
-  
-    
   * hints
     * raise errors when variables are used out of scope 
 
-  
-  
   * prevention of name collisions
-  
-  * figure out width/height of screen issues
   
   
 

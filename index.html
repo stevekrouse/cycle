@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="height:100%">
+<html>
 
 <head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -7,45 +7,40 @@
   <title>Cycle</title>
 
   <style>
+    html {
+      height: 100%;
+    }
     body {
+      height: 100%;
+      margin: 0px;
       background-color: #fff;
       font-family: sans-serif;
-    }
-    
-    h1 {
-      font-weight: normal;
-      font-size: 140%;
-    }
-    
-    #sorry {
-      padding: 1ex;
-      background-color: #f9edbe;
-      border: solid 1px #f0c36d;
-    }
-    
-    .CodeMirror {
-      height: 100%;
+      display: flex;
+      align-items: stretch;
+      flex-direction: column;
     }
     
     #title {
+      font-weight: normal;
+      font-size: 25px;
       color: blue;
     }
   </style>
 </head>
 
-<body style="height:90%">
-  <div id="navbar" style="height:5%; width:100%; text-align: center; font-size:30px; margin-top: 7px; display: flex; justify-content: space-between ">
+<body>
+  <div id="navbar" style="height:30px; width:calc(100%-10px); padding: 5px; display: flex; justify-content: space-between ">
     <span id="title">Cycle</span>
     <button id="runtimeError" style="display:none; background-color: salmon; border: none">Error</button>
     <a href="./index.html"><button>New Project</button></a>
   </div>
 
-  <div id="container" style="height:100%; width:100%; display:flex; flex-direction:row; ">
-    <div id="output" style="height:100%; width:50%">
-      <iframe frameBorder="0" src="" id="preview" style="height:100%; width:100%"></iframe>
+  <div id="container" style="width:100%; flex-grow: 1; display:flex; flex-direction:row; align-items: stretch;">
+    <div id="output" style=" width:50%; display:flex; align-items: stretch;">
+      <iframe frameBorder="0" src="" id="preview" style="width:100%"></iframe>
     </div>
 
-    <div id="editPane" style="height:100%; width: 50%; display:flex; flex-direction:column;">
+    <div id="editPane" style="width: 50%; display:flex; align-items: stretch;">
       <iframe frameBorder="0" src="./editor.html" id="blocksEditor" style="height: 100%; width: 100%"></iframe>
     </div>
   </div>
