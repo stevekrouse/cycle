@@ -1,121 +1,153 @@
 <!DOCTYPE html>
 <html style="height:100%">
+
 <head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdn.rawgit.com/pieroxy/lz-string/86c39345/libs/lz-string.min.js"></script>
   <title>Cycle</title>
-  
+
   <style>
     body {
       background-color: #fff;
       font-family: sans-serif;
     }
+    
     h1 {
       font-weight: normal;
       font-size: 140%;
     }
+    
     #sorry {
       padding: 1ex;
       background-color: #f9edbe;
       border: solid 1px #f0c36d;
     }
+    
     .CodeMirror {
-        height: 100%;
+      height: 100%;
     }
+    
     #title {
-        color: blue;
+      color: blue;
     }
   </style>
 </head>
+
 <body style="height:90%">
-    <div id="navbar" style="height:5%; width:100%; text-align: center; font-size:30px; margin-top: 7px; display: flex; justify-content: space-between ">
-        <span id="title">Cycle</span>
-        <a href="./index.html"><button>New Project</button></a>
+  <div id="navbar" style="height:5%; width:100%; text-align: center; font-size:30px; margin-top: 7px; display: flex; justify-content: space-between ">
+    <span id="title">Cycle</span>
+    <button id="runtimeError" style="display:none; background-color: salmon; border: none">Error</button>
+    <a href="./index.html"><button>New Project</button></a>
+  </div>
+
+  <div id="container" style="height:100%; width:100%; display:flex; flex-direction:row; ">
+    <div id="output" style="height:100%; width:50%">
+      <iframe frameBorder="0" src="" id="preview" style="height:100%; width:100%"></iframe>
     </div>
 
-    <div id="container" style="height:100%; width:100%; display:flex; flex-direction:row; ">
-        <div id="output" style="height:100%; width:50%">
-            <iframe frameBorder="0" src="" id="preview" style="height:100%; width:100%"></iframe>
-        </div>
-        
-        <div id="editPane" style="height:100%; width: 50%; display:flex; flex-direction:column;"> 
-            <iframe frameBorder="0" src="./editor.html" id="blocksEditor" style="height: 100%; width: 100%"></iframe>
-        </div>
+    <div id="editPane" style="height:100%; width: 50%; display:flex; flex-direction:column;">
+      <iframe frameBorder="0" src="./editor.html" id="blocksEditor" style="height: 100%; width: 100%"></iframe>
     </div>
+  </div>
 
   <script>
+    var runtimeError = document.getElementById('runtimeError')
     var preview = document.getElementById('preview')
-    var blocksEditor = document.getElementById('blocksEditor')  
-    
+    var blocksEditor = document.getElementById('blocksEditor')
+
+    var clearError = function() {
+      runtimeError.style.display = "none"
+    }
+      
+    $('body').bind('runtimeError', function(event, message) {
+      runtimeError.style.display = "inline-block"
+      runtimeError.onclick = function() {
+        alert(message)
+      }
+    })
+      
     var code = {}
-    function runElement() {
+    function run() {
       preview.src = "./output.html";
-      preview.onload = function () {
+      
+      preview.onload = function() {
+        clearError()
         code = blocksEditor.contentWindow.getCode()
-        preview.contentWindow.code = code
+        preview.contentWindow.code = code 
       }
     }
-    
+
     function debounce(func, wait, immediate) {
-    	var timeout;
-    	return function() {
-    		var context = this, args = arguments;
-    		var later = function() {
-    			timeout = null;
-    			if (!immediate) func.apply(context, args);
-    		};
-    		var callNow = immediate && !timeout;
-    		clearTimeout(timeout);
-    		timeout = setTimeout(later, wait);
-    		if (callNow) func.apply(context, args);
-    	};
+      var timeout;
+      return function() {
+        var context = this,
+          args = arguments;
+        var later = function() {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
     };
-    var debouncedRunElement = debounce(runElement, 500, false)
-    debouncedRunElement()
-    
+    var debouncedRun = debounce(run, 500, false)
+    debouncedRun()
+
     blocksEditor.addEventListener("load", function() {
       if (window.location.hash) {
         blocksEditor.contentWindow.setText(LZString.decompressFromEncodedURIComponent(window.location.hash.substring(1)))
-        debouncedRunElement()
+        debouncedRun()
       }
       $('body').bind('elementChange', function(event, blocklyEvent) {
-        debouncedRunElement()
+        debouncedRun()
         window.noUpdate = true
-        setTimeout(function() { window.noUpdate = false}, 500)
+        setTimeout(function() {
+          window.noUpdate = false
+        }, 500)
         window.location.hash = LZString.compressToEncodedURIComponent(blocksEditor.contentWindow.getText())
       })
     })
-    
-    window.addEventListener("hashchange", function(){
+
+    window.addEventListener("hashchange", function() {
       if (!window.noUpdate) {
         blocksEditor.contentWindow.setText(LZString.decompressFromEncodedURIComponent(window.location.hash.substring(1)))
-        debouncedRunElement()
+        debouncedRun()
       }
-  	});
-  	
-  	var undo = function(event) {
-  	  if ((event.which == 90 || event.keyCode == 90) && event.ctrlKey) {
+    });
+
+    var undo = function(event) {
+      if ((event.which == 90 || event.keyCode == 90) && event.ctrlKey) {
         if (event.shiftKey) {
           window.history.forward();
-        } else {
+        }
+        else {
           window.history.back();
         }
       }
-  	}
-  	window.addEventListener("keydown", undo)
-  	preview.contentWindow.addEventListener("keydown", undo)
-  	blocksEditor.contentWindow.addEventListener("keydown", undo)
-    
+    }
+    window.addEventListener("keydown", undo)
+    preview.contentWindow.addEventListener("keydown", undo)
+    blocksEditor.contentWindow.addEventListener("keydown", undo)
   </script>
   <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    
-      ga('create', 'UA-73554466-1', 'auto');
-      ga('send', 'pageview');
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-73554466-1', 'auto');
+    ga('send', 'pageview');
   </script>
 
 </body>
+
 </html>

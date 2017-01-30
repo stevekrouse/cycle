@@ -6,207 +6,227 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 
 ## Principles
-
-1) Accessible to create, view and update anywhere, on any device
-   - built on the web
-   - mobile friendly
-
-2) Pre-requisites built-in (microworld, no user manual, just-in-time learning)
-   - types as shapes
-   - first person coding, messages, events as metaphors
-
-3) Workflow built-in (asana, workflowy, and github all rolled into one and built in)
-   - helps you organize your project
-   - nested feature to do list for top-down and bottom-up programming
-   - includes branches and version control and collaboration
-   - notifies you when you've been stuck on a feature for too long and should take a break or get help
-
-4) Only logical bugs (helpful waiter that gives you tips and warns you against things, but ultimately brings what you ask for as long as it's not going to kill you)
-   - blocks
-   - strong types
-   - amazing error messages that prevent bugs
-
-5) No Ceiling
-   - play nice with exsiting tech
-   - firebase bindings
-   - bootstrap bindings
-   - package manager imports
-
-6) Simple made easy
-   - pass by value (no pass by ref)
-   - scaffolding and autocoding for simple concepts that need boilerplate > behind the scenes magic
+  
+  1) Accessible to create, view and update anywhere, on any device
+     - built on the web
+     - mobile friendly
+  
+  2) Pre-requisites built-in (microworld, no user manual, just-in-time learning)
+     - types as shapes
+     - first person coding, messages, events as metaphors
+  
+  3) Workflow built-in (asana, workflowy, and github all rolled into one and built in)
+     - helps you organize your project
+     - nested feature to do list for top-down and bottom-up programming
+     - includes branches and version control and collaboration
+     - notifies you when you've been stuck on a feature for too long and should take a break or get help
+  
+  4) Only logical bugs (helpful waiter that gives you tips and warns you against things, but ultimately brings what you ask for as long as it's not going to kill you)
+     - blocks
+     - strong types
+     - amazing error messages that prevent bugs
+  
+  5) No Ceiling
+     - play nice with exsiting tech
+     - firebase bindings
+     - bootstrap bindings
+     - package manager imports
+  
+  6) Simple made easy
+     - pass by value (no pass by ref)
+     - scaffolding and autocoding for simple concepts that need boilerplate > behind the scenes magic
 
 
 ## Customer development ideas
+  
+  * go to hackathons to teach kids to code with cycle and have them win
+  * need to come up with better words than "block-based" or "drag and drop"
 
-* go to hackathons to teach kids to code with cycle and have them win
-* need to come up with better words than "block-based" or "drag and drop"
-
-
-## To-do MVC
-
-### Spec
-
-* http://todomvc.com/examples/vue/#/all
-* https://github.com/tastejs/todomvc/blob/master/app-spec.md
-
-### Total TODO MVC parity
-   * focus in events (might need to give elements their ids) 
-     * create a directive focus that you can set to an expression and when true, it focuses on that element
-   * trim text
-   * localstorage set, get
-   * check/uncheck all box
-   * window.loation.hash (or could look at full routing https://github.com/flatiron/director)
- 
 
 ## Things I'm currently leaving simple (and ugly, and not easy)
 
-* HTML props (including, value, src, href)
-* CSS properties and values
-* including CSS link and JS script tags 
+  * HTML props (including, value, src, href)
+  * CSS properties and values
+  * including CSS link and JS script tags 
 
 
 ### Big technical projects
-  * ~~components~~ *Acheived!*
-    * ~~create menu: more elements~~
-    * ~~block with hat call create block with name X~~
-    * ~~create block add input with name X~~
-    * ~~dropdown to pick a base element type~~
-    * ~~create an element that accepts statements with a text input instead of a name where you can type the name of custom blocks~~
-    * ~~create an element: input with name X with value Y~~
-    * ~~remove double quotes on component names~~
-    * ~~smart nativeOn for component events~~
-    * ~~emit EVENT with DATA~~ 
-    * ~~when CUSTOM EVENT~~ (data)
-    * ~~broadcasting~~ (using vueComponent.$emit for now)
-    * ~~currently working on: todo item component~~
-      * ~~state in components~~ 
-      
-  * ~~change firing when typing in textbox~~ *Acheived!*
-    * ~~there's a chance that we can prevent this by looking at the blockly event~~ 
-      * ~~update blocky to get new events https://github.com/google/blockly~~
-      * ~~never mind, I just made the debounce 2000 miliseconds instead of 500~~
-      
-  * ~~input text scaffolding~~  *Acheived!*
-    * ~~remove value block and make it set HTML prop~~
-    * ~~update blockly for new events~~
-      * ~~everything is in serif font~~
-      * ~~update list blocks in generator~~
-      * ~~new line for todo text~~
-      * ~~text typing bug~~
-      * ~~not being able to select blocks bug~~ (seems ok-ish for now, will keep an eye on it)
-    * ~~simply add scaffolding into toolbox~~ 
-    
-  * ability to add script tag and link tags
-    * ability to add classes (or is add HTML prop class good for now?) 
-    
-  * ~~object support~~  *Acheived!*
-    * ~~make get more concise~~
-    * ~~create with keys and values~~
-      * ~~https://developers.google.com/blockly/guides/create-custom-blocks/mutators~~  
-    * ~~update (and clone and update) with keys and values~~
-
   * drag bug where you can't select blocks anymore
-    * and deleting is funky too 
-
-  * currently working on: firebase
-    * https://blockly-demo.appspot.com/static/demos/blockfactory/index.html 
-    * ~~create block menu~~ 
-    * ~~initializeApp~~
-    * ~~set string value REF to object value~~  
-      * ~~default ref is empty string~~
-      * ~~default value is empty object~~
-    * ~~get REF once or on every change (value) 
-      * limit to VALUE (maybe later)
-      * order by key VALUE (maybe later)
-      * equal to VALUE (maybe later)
-    * ~~add VALUE to list REF (returns ID)~~
-    * ~~delete REF~~
-    * inline string concatenation
-    * the dataCollection method in output.html doesn't work for data inside if/else clauses!
-
+    * https://github.com/google/blockly/issues/888
+  
+  * errors
+    * ~~make a clear distinction between compile and runtime errors in cycle source code~~
+    * compile errors
+      * ~~these can show up in the output window~~
+      * ~~prevent adding elements or settings to events (only change data and other side effect things)~~
+    * ~~runtime errors~~
+      * ~~like we have in woof~~ 
+  
+  * inspecting html highlights code, and clicking on code highlights html
     
+  * much more intuative ways to get the value of key presses / keys down
+  
+  * add variables in scope to variable list
+    * did I already do this for events? 
+    * figure out how to add variables for callbacks (similar to how adding a for-loop does)
+
+  
+    
+  * hints
+    * raise errors when variables are used out of scope 
+
+  
+  
   * prevention of name collisions
   
-  * prevention of blocks where they are not in scope (or better errors)
-    * THIS IS SO KEY  
+  * figure out width/height of screen issues
+  
+  
+
+  * else-if compiled
+  
+  * better error when using a component that's undefined
+
+  * better colors for things
+
+  * hot reloading
+    * keep track of data between renders and set it as initial values for the next render (refresh clears this) 
+
+  * every time you add inputText, increase the number of numberText of the XML in the toolbox 
+
+  * add the word "initial" to setting variables in element: create variable X with initial value Y
+  * think about: only allow variable creation at top of scope so as to make hoisting simplier to understand --> or suggest that you put this in an event
+  * the dataCollection method in output.html doesn't work for data inside if/else clauses!
+
+  * make the input text setup more clear (both setting the value, and getting the event.target.value)
+
+
+## App ideas
+
+   * Total TODO MVC parity
+     * http://todomvc.com/examples/vue/#/all
+     * https://github.com/tastejs/todomvc/blob/master/app-spec.md
+     * focus in events (might need to give elements their ids) 
+       * create a directive focus that you can set to an expression and when true, it focuses on that element
+     * trim text
+     * localstorage set, get
+     * check/uncheck all box
+     * window.loation.hash (or could look at full routing https://github.com/flatiron/director)
+
+
+  * upvoter for x
+    * login
+      * https://firebase.google.com/docs/auth/web/password-auth
+        * think about how to handle errors! 
+      * createUserWithEmailAndPassword
+      * signInWithEmailAndPassword
+      * email and password field
+      * login in / sign up buttons
+    * add 
+      * title
+      * url
+      * button
+      * submit to firebase
+    * for each  url, 
+      * button to upvote
+        * submit to firebase
+      * number of upvotes
+      * sorted
+    
+   * tinder for X
+    * if not logged in
+       * login
+         * email
+         * password
+         * login
+         * click here to create account
+      * create account
+        * name
+        * type X or Y (boy or girl)
+        * contact info (will be shared with matches)
+        * URL of photo
+        * email
+        * password
+        * submit button
+        * click here to log in
+    * logged in
+      * get list of users (not already swiped)
+      * place user in front
+        * name
+        * photo
+      * yes / no buttons
+        * submit to firebase
+        * move to next person
+      * have button to see matches
+        * photo, name, contact info
+        * back button
+      * log out button
 
 
 ## Eventually
 
-* every time you add inputText, increase the number of numberText of the XML in the toolbox 
-* bootstrap 4 library https://v4-alpha.getbootstrap.com/getting-started/introduction/
-   * options
-     * 1. add class X, Y, Z, etc, etc
-     * 2. or have bootstrap button with lots of class options
-     * 3. navbar / bootstrap buttons can be scaffolded with classes 
-   * elements  
-     * heading 1-6 (get for free?) 
-     * containers
-        * fixed-width vs fluid
-      *  button
-        * primary, secondary, success, info, warning, danger, link
-        * outline-primary, etc, etc 
-        * lg, sm, block
-        * disabled
-      * drop down
-      * list group / list group item
-      * nav bar
-        * collapse 
-        * ul / li.nav-item 
-* list filtering (and other HOF)
-    * design block
-    * figure out how to add "element" to scope (or another thing if that's already in scope)
-* better error when using a component that's undefined
-* bubble.is typing 's thing and speeadsheet like database and schema thing
-* hot reloading
-  * keep track of data between renders and set it as initial values for the next render (refresh clears this) 
-* inspecting html highlights code, and clicking on code highlights html
-* filter function
-* get attributes on if's div
-* element functions without components. basically macros that expand (figure out how to isolate scope)
-* clean up the vuejs js output code
-* figure out better way to do CSS / HTML props
-* auto add inputText scaffolding
-* bootstrap everything option
-* user-defined functions in elements for styles and events you want in many places
-* save Cycle projects with firebase
-  * create users
-  * create users "table"
-  * create projects, revisions tables
-  * link to proejcts with /userName/projectName (with 404.html redirect)
-* consider using babel ast for jsx react, make generalized blocks that can be editied and then handcraft as I go (or consider switching to pencilcode's droplet)
-* arrow codes to move selector + type to insert code
-* strong typing
-  * types as shapes
-  * no nulls -> maybe and easy unpacking
-  * no objects -> records with predefined keys and key types
-* only allow variable creation at top of scope so as to make hoisting simplier to understand --> or suggest that you put this in an event
-* the ability to drag iterators and function arguments into argument defintion like in snap!
-* the toolbox lives in the mouse/selector so as to help you understand what's in context/scope
-* make object accessors more compact yet still clear --> maybe just 's, if not, do what we have for lists
-* make the input text setup more clear (both setting the value, and getting the event.target.value)
-* creating variables/attributes in if/else doesn't seem to work
-* else-if compiled
-* much more intuative ways to get the value of key presses / keys down
-* Objects: create with KEY VALUE x3 and can add more / copy with KEY VALUE x1 and can add more
-* components
-  * props are pass by value
-    * need to figure out how to scaffold the changing of parents variables from child with message passing 
-    * (and easy object cloning and key modifying)
-  * need to somehow make data variables out of scope in eval
-  * message broadcasting between components
-* errors
-  * when you use a data variable before setting it
-  * prevent adding elements or settings to events (only change data and other side effect things)
-* update blockly so things like shadow blocks work
-* add the word "initial" to setting variables in element: create variable X with initial value Y
-* parse string to number
-* allow multiple kinds of each event
-* figure out how to add variables for callbacks (similar to how adding a for-loop does)
-* seperate the set_css block into singles
-* better colors for things
-* ability to select block by drag
+  * ability to add classes (or is add HTML prop class good for now?) 
+  * more expressive firebase querying
+    * limit to VALUE
+    * order by key VALUE
+    * equal to VALUE
+  * list sorting
+  * list filtering
+  * ability to add link tags
+  * URL menu for routing, includng hash and other convinience methods
+  * inline string concatenation
+  * figure out better way to do CSS / HTML props
+  * user-defined functions in elements for styles and events you want in many places
+  * save Cycle projects with firebase
+    * create users
+    * create users "table"
+    * create projects, revisions tables
+    * link to proejcts with /userName/projectName (with 404.html redirect)
+  * strong typing
+    * types as shapes
+    * no nulls -> maybe and easy unpacking
+    * no objects -> records with predefined keys and key types
+  * the ability to drag iterators and function arguments into argument defintion like in snap!
+  * components
+    * props are pass by value
+      * need to figure out how to scaffold the changing of parents variables from child with message passing 
+      * (and easy object cloning and key modifying)
+    * need to somehow make data variables out of scope in eval
+    * message broadcasting between components
+  * parse string to number
+  * seperate the set_css block into singles
+  
+
+## Considerations
+
+  * the toolbox lives in the mouse/selector so as to help you understand what's in context/scope
+  * bubble.is typing 's thing and speeadsheet like database and schema thing
+  * ability to select block by drag
+  * allow multiple kinds of each event
+  * arrow codes to move selector + type to insert code
+  * element functions without components. basically macros that expand (figure out how to isolate scope)
+  * consider using babel ast for jsx react, make generalized blocks that can be editied and then handcraft as I go (or consider switching to pencilcode's droplet)
+  * bootstrap 4 library https://v4-alpha.getbootstrap.com/getting-started/introduction/
+     * options
+       * 1. add class X, Y, Z, etc, etc
+       * 2. or have bootstrap button with lots of class options
+       * 3. navbar / bootstrap buttons can be scaffolded with classes 
+     * elements  
+       * heading 1-6 (get for free?) 
+       * containers
+          * fixed-width vs fluid
+        *  button
+          * primary, secondary, success, info, warning, danger, link
+          * outline-primary, etc, etc 
+          * lg, sm, block
+          * disabled
+        * drop down
+        * list group / list group item
+        * nav bar
+          * collapse 
+          * ul / li.nav-item 
+
+## Tinder for X
 
 
 ## No-login Chat App

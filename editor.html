@@ -3,15 +3,16 @@
   <script src="./vendor/blockly/blocks_compressed.js"></script>
   <script src="./vendor/blockly/javascript_compressed.js"></script>
   <script src="./vendor/blockly/en.js"></script>
-  
+
   <script src="./blocks.js"></script>
   <script src="./generator.js"></script>
-  
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
+
 <body>
-  <div id="elementBlocks" style="height: 100%" ></div>
-  
+  <div id="elementBlocks" style="height: 100%"></div>
+
   <xml id="toolbox" style="display: none;">
     <category name="Elements" colour="60">
       <block type="cycle_container"></block>
@@ -19,12 +20,69 @@
         <value name="TEXT">
           <block type="text"></block>
         </value>
-      </block> 
+      </block>
       <block type="cycle_link"></block>
       <block type="cycle_image"></block>
       <block type="cycle_button"></block>
       <block type="cycle_input"></block>
-      <block type="cycle_input"><statement name="CHILDREN">  <block type="variables_set">    <field name="VAR">inputText</field>    <value name="VALUE">      <block type="text">        <field name="TEXT"></field>      </block>    </value>    <next>      <block type="cycle_html_property">        <value name="KEY">          <block type="text">            <field name="TEXT">value</field>          </block>        </value>        <value name="VALUE">          <block type="text">            <field name="TEXT"></field>          </block>        </value>        <next>          <block type="keyup">            <statement name="blocks">              <block type="variables_set">                <field name="VAR">inputText</field>                <value name="VALUE">                  <block type="objects_get">                    <value name="OBJECT">                      <block type="objects_get">                        <value name="OBJECT">                          <block type="variables_get">                            <field name="VAR">event</field>                          </block>                        </value>                        <value name="KEY">                          <block type="text">                            <field name="TEXT">target</field>                          </block>                        </value>                      </block>                    </value>                    <value name="KEY">                      <block type="text">                        <field name="TEXT">value</field>                      </block>                    </value>                  </block>                </value>              </block>            </statement>          </block>        </next>      </block>    </next>  </block></statement></block>
+      <block type="cycle_input">
+        <statement name="CHILDREN">
+          <block type="variables_set">
+            <field name="VAR">inputText</field>
+            <value name="VALUE">
+              <block type="text">
+                <field name="TEXT"></field>
+              </block>
+            </value>
+            <next>
+              <block type="cycle_html_property">
+                <value name="KEY">
+                  <block type="text">
+                    <field name="TEXT">value</field>
+                  </block>
+                </value>
+                <value name="VALUE">
+                  <block type="text">
+                    <field name="TEXT"></field>
+                  </block>
+                </value>
+                <next>
+                  <block type="keyup">
+                    <statement name="blocks">
+                      <block type="variables_set">
+                        <field name="VAR">inputText</field>
+                        <value name="VALUE">
+                          <block type="objects_get">
+                            <value name="OBJECT">
+                              <block type="objects_get">
+                                <value name="OBJECT">
+                                  <block type="variables_get">
+                                    <field name="VAR">event</field>
+                                  </block>
+                                </value>
+                                <value name="KEY">
+                                  <block type="text">
+                                    <field name="TEXT">target</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="KEY">
+                              <block type="text">
+                                <field name="TEXT">value</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
       <!--list-->
       <!--list element (numbered/bullet/nothing)-->
       <!--heading-->
@@ -90,7 +148,7 @@
         </value>
       </block>
     </category>
-     <category name="Events" colour="60">
+    <category name="Events" colour="60">
       <block type="load"></block>
       <block type="mousedown"></block>
       <block type="mouseup"></block>
@@ -348,71 +406,87 @@
       </block>
     </category>
   </xml>
-  
+
   <xml id="elementStartingBlocks">
     <block type="cycle_page" deletable="false" movable="false" x="0" y="10"></block>
   </xml>
-    
+
   <script>
     Blockly.BlockSvg.START_HAT = true;
-  
-    var workspace = Blockly.inject('elementBlocks',  { 
-    	toolbox : document.getElementById("toolbox"), 
-    	collapse : true, 
-    	comments : true, 
-    	maxBlocks : Infinity, 
-    	trashcan : true, 
-    	horizontalLayout : false, 
-    	toolboxPosition : 'start', 
-    	css : true, 
-    	media : './vendor/blockly/media/', 
-    	rtl : false, 
-    	scrollbars : true, 
-    	sounds : true, 
-    	oneBasedIndex : true,
-    	zoom: {
-    	  controls: true,
+
+    var workspace = Blockly.inject('elementBlocks', {
+      toolbox: document.getElementById("toolbox"),
+      collapse: true,
+      comments: true,
+      maxBlocks: Infinity,
+      trashcan: true,
+      horizontalLayout: false,
+      toolboxPosition: 'start',
+      css: true,
+      media: './vendor/blockly/media/',
+      rtl: false,
+      scrollbars: true,
+      sounds: true,
+      oneBasedIndex: true,
+      zoom: {
+        controls: true,
         wheel: false,
         startScale: 1.0,
         maxScale: 3,
         minScale: 0.3,
         scaleSpeed: 1.2
-    	},
+      },
     });
-    
+
     Blockly.Xml.domToWorkspace(document.getElementById('elementStartingBlocks'), workspace);
-    
-    workspace.addChangeListener(function(event) { 
+
+    workspace.addChangeListener(function(event) {
       if (event instanceof Blockly.Events.Ui) {
         // TODO use this to highlight the corresponding HTML elements in output by block id
-      } else {
-         window.parent.$('body').trigger('elementChange', event) 
+      }
+      else {
+        window.parent.$('body').trigger('elementChange', event)
       }
     })
-  
-    // detect that input block was added from the menu
-    // right above where it was added, add set input1Text to ""
-    // add inputText (inputText1)
-    // inside add event onkeydown (event)
-    // set inputText1 to event.target.value
-  
+
     function getCode() {
       Blockly.JavaScript.init(workspace);
       var blocks = workspace.getTopBlocks(true);
-      
+
       var page;
       var components = []
+      var compileErrors = []
       for (var b = 0; b < blocks.length; b++) {
         var block = blocks[b];
         if ("cycle_page" == block.type) {
+          try {
             page = workspaceData(block)
-        } else if (block.type.includes("procedures_")) {
-            Blockly.JavaScript.blockToCode(block)  // evaluated for the side-effect of having the function definition in Blockly.JavaScript.definitions_
-        } else if (block.type == "cycle_create_element") {
-          components.push(workspaceData(block)) 
+          }
+          catch(e) {
+            if (e.message.includes("Cannot read property 'call' of undefined")) {
+              compileErrors.push(new Error("You cannot have elements or settings inside of events."))
+            } else {
+              compileErrors.push(e)
+            }
+          }
+        }
+        else if (block.type.includes("procedures_")) {
+          try {
+            Blockly.JavaScript.blockToCode(block) // evaluated for the side-effect of having the function definition in Blockly.JavaScript.definitions_
+          } catch (e) {
+            compileErrors.push(e)
+          }
+        }
+        else if (block.type == "cycle_create_element") {
+          try {
+            components.push(workspaceData(block))
+          }
+          catch (e) {
+            compileErrors.push(e)
+          }
         }
       }
-      
+
       var definitions = {}
       Object.keys(Blockly.JavaScript.definitions_).forEach(function(name) {
         if (name != "variables") {
@@ -426,21 +500,21 @@
         page: page,
         blocks: blocks,
         definitions: definitions,
-        components: components
+        components: components,
+        compileErrors: compileErrors
       }
     }
-    
+
     function getText() {
       return Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace));
     }
-    
+
     function setText(text) {
       workspace.clear()
       Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(text), workspace);
     }
-    
+
     window.getText = getText
     window.setText = setText
-    
   </script>
 </body>
