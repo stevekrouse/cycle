@@ -12,6 +12,24 @@ events.forEach(function(event) {
   };
 })
 
+var keyEvents = ["keydown", "keyup"]
+
+keyEvents.forEach(function(event){
+  Blockly.JavaScript[event] = function(block) {
+    var statements_blocks = Blockly.JavaScript.statementToCode(block, 'blocks');
+    if (block.getFieldValue("KEYCODE") != "ANY") {
+      statements_blocks = "  if (event.keyCode == " + Number(block.getFieldValue("KEYCODE")) + ") {\n  " + statements_blocks + "\n  }"
+    }
+    return [
+      statements_blocks,
+      Blockly.JavaScript.ORDER_ATOMIC
+    ];
+  };
+})
+
+
+
+
 // Include scripts
 
 Blockly.JavaScript['cycle_include_script'] = function(block) {
