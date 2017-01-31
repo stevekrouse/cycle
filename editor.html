@@ -471,6 +471,8 @@
           catch(e) {
             if (e.message.includes("Cannot read property 'call' of undefined")) {
               compileErrors.push(new Error("You cannot have elements or settings inside of events."))
+            } else if (e.message == "a.replace is not a function") {
+              compileErrors.push(new Error('You cannot put an event inside another event.'))
             } else {
               compileErrors.push(e)
             }

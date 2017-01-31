@@ -52,18 +52,18 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ### Big technical projects
   
-  * make debugger green
-  
   * easy next thing: else-if compiled -> more nested ternary expressions. the hard part is keeping track of the end parenthesis
 
-  * hints
-    * raise errors when variables are used out of scope 
-
   * prevention of name collisions
+    * if one variable name is contianed within another variable 
 
   * add the word "initial" to setting variables in element: create variable X with initial value Y
   * think about: only allow variable creation at top of scope so as to make hoisting simplier to understand --> or suggest that you put this in an event
   * the dataCollection method in output.html doesn't work for data inside if/else clauses!
+
+  * hints
+    * raise errors when variables are used out of scope 
+
 
 ## App ideas
 
