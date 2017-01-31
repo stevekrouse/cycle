@@ -52,8 +52,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ### Big technical projects
   
-  * easy next thing: else-if compiled -> more nested ternary expressions. the hard part is keeping track of the end parenthesis
-
   * prevention of name collisions
     * if one variable name is contianed within another variable 
 
@@ -131,9 +129,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   
   * drag bug where you can't select blocks anymore
     * https://github.com/google/blockly/issues/888
-  
-  * blockly delete bug where it doesn't work until you drag delete something 
-    * https://github.com/google/blockly/issues/891  
   * add variables in scope to variable list
     * https://github.com/google/blockly/blob/c0053531897ad8f7486a5f197ea3cd1803374c6b/core/variables.js 
     * every time you add inputText, increase the number of numberText of the XML in the toolbox 
