@@ -71,17 +71,24 @@
              ")"
     } else if (code.attributes.if) {
       var result = ""
-      result += "(" + scopeVaribles(code.attributes.if.branches[0].conditionString, variables) + " ? ("
-      result += "  h("
-      result += "    'div',",
-      result += "    " + i(4, scopeAttributes(code.attributes.if.branches[0].attributes, variables)) + ","
-      result += "      ["                                                                                                                 
-      result +=          code.attributes.if.branches[0].doCode.map(function(child) {                                     
-                           return "        " + i(6, parseChildrenToRender(child, variables))
-                         }).join(",")                                                                                                     
-      result += "      ]"
-      result += "  )"
-      result += ")"
+      var endParens = ")"
+      code.attributes.if.branches.forEach(function(branch, index) {
+        if (index > 0) { 
+          result += ": "
+          endParens += ")"
+        }
+        result += "(" + scopeVaribles(branch.conditionString, variables) + " ? ("
+        result += "  h("
+        result += "    'div',",
+        result += "    " + i(4, scopeAttributes(branch.attributes, variables)) + ","
+        result += "      ["                                                                                                                 
+        result +=          branch.doCode.map(function(child) {                                     
+                             return "        " + i(6, parseChildrenToRender(child, variables))
+                           }).join(",")                                                                                                     
+        result += "      ]"
+        result += "  )"
+        result += ")"
+      })
       
       if (code.attributes.if.else_) {
         result += ": ("
@@ -98,7 +105,7 @@
       } else {
         result += ": ( null )"
       }
-       return result + ")"
+       return result + endParens
     } else {
       var tag
       if (code.dynamicTagType) {
