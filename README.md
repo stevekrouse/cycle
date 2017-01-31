@@ -52,10 +52,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ### Big technical projects
   
-  * easy next thing: much more intuative ways to get the value of key presses / keys down
-    * on key DROPDOWN down (with ENTER, TAB, etc)
-    * on key KEYCODE down
-  
   * make debugger green
   
   * easy next thing: else-if compiled -> more nested ternary expressions. the hard part is keeping track of the end parenthesis
