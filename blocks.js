@@ -659,11 +659,15 @@ Blockly.Blocks['objects_create_with'] = {
     if (this.itemCount_ === 0 && !this.getInput("EMPTY")) {
       this.appendDummyInput("EMPTY")
         .appendField('create empty object');
-      this.removeInput('CREATE');
+      if (this.getInput('CREATE')) {
+        this.removeInput('CREATE');
+      }
     } else if (this.itemCount_ !== 0 && !this.getInput('CREATE')) {
       this.appendDummyInput("CREATE")
         .appendField('new object');
-      this.removeInput('EMPTY');
+      if (this.getInput('EMPTY')) {
+        this.removeInput('EMPTY');
+      }
     }
   
   
@@ -676,7 +680,9 @@ Blockly.Blocks['objects_create_with'] = {
     // Remove deleted inputs.
     while (this.getInput('ADD' + i)) {
       this.removeInput('ADD' + i);
-      this.removeInput('VALUE' + i);
+      if (this.getInput('VALUE' + i)) {
+        this.removeInput('VALUE' + i);
+      }
       i++;
     }
   }
@@ -737,7 +743,9 @@ Blockly.Blocks['objects_clone_with'].updateShape_ = function() {
   // Remove deleted inputs.
   while (this.getInput('ADD' + i)) {
     this.removeInput('ADD' + i);
-    this.removeInput('VALUE' + i);
+    if (this.getInput('VALUE' + i)) {
+      this.removeInput('VALUE' + i);
+    }
     i++;
   }
 }

@@ -5,10 +5,7 @@ var events = nativeEvents.concat(["cycle_custom_event"])
 events.forEach(function(event) {
   Blockly.JavaScript[event] = function(block) {
     var statements_blocks = Blockly.JavaScript.statementToCode(block, 'blocks');
-    return [
-      statements_blocks,
-      Blockly.JavaScript.ORDER_ATOMIC
-    ];
+    return statements_blocks
   };
 })
 
@@ -20,10 +17,7 @@ keyEvents.forEach(function(event){
     if (block.getFieldValue("KEYCODE") != "ANY") {
       statements_blocks = "  if (event.keyCode == " + Number(block.getFieldValue("KEYCODE")) + ") {\n  " + statements_blocks + "\n  }"
     }
-    return [
-      statements_blocks,
-      Blockly.JavaScript.ORDER_ATOMIC
-    ];
+    return statements_blocks
   };
 })
 
@@ -291,7 +285,7 @@ function getAttributes(firstChild, parent) {
       // prevent blockly from compiling more than one event at a time by removing nextConnecting accessed in javascript_compressed.js:scrub_
       var nextConnection = children.nextConnection
       children.nextConnection = undefined
-      onMap[eventName] = Blockly.JavaScript.blockToCode(children)[0] // TODO allow multiple eventually
+      onMap[eventName] = Blockly.JavaScript.blockToCode(children) // TODO allow multiple eventually
       children.nextConnection = nextConnection
     } else if (children.type == "cycle_add_input"){
       name = children.getFieldValue('NAME')
@@ -310,6 +304,8 @@ function blockAttributes(block) {
   if (block.type == "cycle_page") {
     if (!attributes.styleStrings.height) {
       attributes.styleStrings.height = "'100%'"
+      attributes.styleStrings.textAlign = "'center'"
+      attributes.styleStrings.fontFamily = "'sans-serif'"
     }
   } else if (block.type == "controls_forEach") {
      attributes.repeat = {}
