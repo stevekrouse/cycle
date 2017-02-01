@@ -51,17 +51,7 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * JavaScript events
 
 ### Current technical projects
-  
-  * initial page should have some blocks on it 
-  
-  * button should have text inside by default
-  * same with link
-  * and image
-  * fix scaffolded input and delete empty input
-  * print should have text inside by default 
-  
-  * make the output body not suck with no padding by default (without messing up the 100% height thing)
-  
+
   * prevention of name collisions
     * if one variable name is contianed within another variable 
 
