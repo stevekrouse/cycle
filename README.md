@@ -51,17 +51,13 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * JavaScript events
 
 ### Current technical projects
-
-  * consider adding patch to make text change on commit
-  
-  * block menu open on hover
   
   * initial page should have some blocks on it 
   
   * button should have text inside by default
-   
-  * text should have text inside by default
-  
+  * same with link
+  * and image
+  * fix scaffolded input and delete empty input
   * print should have text inside by default 
   
   * make the output body not suck with no padding by default (without messing up the 100% height thing)
@@ -141,6 +137,7 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## Eventually
   
+  * consider blockly-closure-and-flyout-on-hover   
   * drag bug where you can't select blocks anymore
     * https://github.com/google/blockly/issues/888
   * add variables in scope to variable list
