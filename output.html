@@ -192,8 +192,14 @@
       dataKeys.forEach(function(key) {
         collection[key] = new Function("return " + code.attributes.dataStrings[key])()
       })
-      code.children = code.children || []
-      code.children.forEach(function(child) {
+      var subBlocks = code.children || []
+      if (code.attributes.if){
+        subBlocks = subBlocks.concat(code.attributes.if.branches)
+      }
+      if (code.attributes.if && code.attributes.if.else_) {
+        subBlocks.push(code.attributes.if.else_)
+      }
+      subBlocks.forEach(function(child) {
         collectDataHelper(child, collection)
       })
       return collection

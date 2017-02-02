@@ -44,8 +44,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * race between programmer typing and another programmer on cycle
 
 ### Current technical projects
-
-  * the dataCollection method in output.html doesn't work for data inside if/else clauses!
   
   * CSS menus
     * text
