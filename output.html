@@ -33,8 +33,9 @@
 <script>
   function scopeVaribles(funcString, variables, keyword) {
     var result = funcString
-    variables.forEach(function(variable) {
-      result = result.split(variable).join((keyword ? keyword : "self") + "." + variable)
+    variables.forEach(function(v){
+      var re = new RegExp("([^a-zA-Z0-9]|^)(" + v + ")([^a-zA-Z0-9]|$)", "g")
+      result = result.replace(re, "$1" + (keyword ? keyword : "self") + ".$2$3")
     })
     return result
   }

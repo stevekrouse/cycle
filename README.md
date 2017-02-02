@@ -45,10 +45,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ### Current technical projects
 
-  * double click to edit text in todo mvc broken
-
-  * prevention of name collisions
-
   * the dataCollection method in output.html doesn't work for data inside if/else clauses!
   
   * CSS menus
