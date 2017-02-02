@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
@@ -9,13 +10,15 @@
       height: 100%;
       width: 100%;
     }
+    
     body {
       height: 100%;
       width: 100%;
       margin: 0px;
     }
+    
     .error {
-      padding:20px;
+      padding: 20px;
       font: sans-serif;
       font-size: 20px;
       background-color: lightyellow;
@@ -23,6 +26,7 @@
   </style>
   </style>
 </head>
+
 <body>
   <div id="page"></div>
 </body>
@@ -34,144 +38,155 @@
     })
     return result
   }
-  
-  function i(spaces, text){
-    return text.split("\n").join("\n" + " ".repeat(spaces))  
+
+  function i(spaces, text) {
+    return text.split("\n").join("\n" + " ".repeat(spaces))
   }
-  
-  function parseCodeToVueRender(code, variables){
-    return "function(h) {"                                                        + "\n" + 
-           "  var code = window.code.page\n" + //+ JSON.stringify(window.code.page, null, 2)                            + "\n" +
-           "  var variables = " + JSON.stringify(variables)                       + "\n" +
-           "  var self = this"                                                    + "\n" +
-           "  return " +  i(2, parseChildrenToRender(code, variables, {})) + "\n" + 
-           "}"
+
+  function parseCodeToVueRender(code, variables) {
+    return "function(h) {" + "\n" +
+      "  var code = window.code.page\n" + //+ JSON.stringify(window.code.page, null, 2)                            + "\n" +
+      "  var variables = " + JSON.stringify(variables) + "\n" +
+      "  var self = this" + "\n" +
+      "  return " + i(2, parseChildrenToRender(code, variables, {})) + "\n" +
+      "}"
   }
-  
-  function parseChildrenToRender(code, variables){
+
+  function parseChildrenToRender(code, variables) {
     if (code == null) {
-      return "null" 
-    } else if (typeof code == "string") {
-      return scopeVaribles(code, variables)  
-    } else if (code.attributes.repeat) {
-      return "h(" + "\n" + 
-             "  'div', // containter for all the repeats"                                                                               + "\n" + 
-             "  {},"                                                                                                                    + "\n" + 
-             "  " + scopeVaribles(code.attributes.repeat.list, variables) + ".map(function (" + code.attributes.repeat.iterator + ") {" + "\n" + 
-             "    return h("                                                                                                            + "\n" + 
-             "      'div',"                                                                                                             + "\n" + 
-             "      " + i(6, scopeAttributes(code.attributes, variables)) + ","                                                         + "\n" + 
-             "      ["                                                                                                                  + "\n" + 
-                      code.children.map(function(child) {                                     
-                        return "        " + i(8, parseChildrenToRender(child, variables))
-                      }).join(",")                                                                                                      + "\n" +  
-             "      ]"                                                                                                                  + "\n" +     
-             "    )"                                                                                                                    + "\n" +
-             "  })"                                                                                                                     + "\n" +
-             ")"
-    } else if (code.attributes.if) {
+      return "null"
+    }
+    else if (typeof code == "string") {
+      return scopeVaribles(code, variables)
+    }
+    else if (code.attributes.repeat) {
+      return "h(" + "\n" +
+        "  'div', // containter for all the repeats" + "\n" +
+        "  {}," + "\n" +
+        "  " + scopeVaribles(code.attributes.repeat.list, variables) + ".map(function (" + code.attributes.repeat.iterator + ") {" + "\n" +
+        "    return h(" + "\n" +
+        "      'div'," + "\n" +
+        "      " + i(6, scopeAttributes(code.attributes, variables)) + "," + "\n" +
+        "      [" + "\n" +
+        code.children.map(function(child) {
+          return "        " + i(8, parseChildrenToRender(child, variables))
+        }).join(",") + "\n" +
+        "      ]" + "\n" +
+        "    )" + "\n" +
+        "  })" + "\n" +
+        ")"
+    }
+    else if (code.attributes.if) {
       var result = ""
       var endParens = ")"
       code.attributes.if.branches.forEach(function(branch, index) {
-        if (index > 0) { 
+        if (index > 0) {
           result += ": "
           endParens += ")"
         }
         result += "(" + scopeVaribles(branch.conditionString, variables) + " ? ("
         result += "  h("
         result += "    'div',",
-        result += "    " + i(4, scopeAttributes(branch.attributes, variables)) + ","
-        result += "      ["                                                                                                                 
-        result +=          branch.doCode.map(function(child) {                                     
-                             return "        " + i(6, parseChildrenToRender(child, variables))
-                           }).join(",")                                                                                                     
+          result += "    " + i(4, scopeAttributes(branch.attributes, variables)) + ","
+        result += "      ["
+        result += branch.doCode.map(function(child) {
+          return "        " + i(6, parseChildrenToRender(child, variables))
+        }).join(",")
         result += "      ]"
         result += "  )"
         result += ")"
       })
-      
+
       if (code.attributes.if.else_) {
         result += ": ("
         result += "    h("
         result += "       'div',"
         result += "       " + scopeAttributes(code.attributes.if.else_.attributes, variables) + ","
-        result += "      ["                                                                                                                 
-        result +=          code.attributes.if.else_.map(function(child) {                                     
-                             return "        " + i(6, parseChildrenToRender(child, variables))
-                           }).join(",")                                                                                                     
+        result += "      ["
+        result += code.attributes.if.else_.map(function(child) {
+          return "        " + i(6, parseChildrenToRender(child, variables))
+        }).join(",")
         result += "      ]"
         result += "    )"
         result += ")"
-      } else {
+      }
+      else {
         result += ": ( null )"
       }
-       return result + endParens
-    } else {
+      return result + endParens
+    }
+    else {
       var tag
       if (code.dynamicTagType) {
         tag = code.dynamicTagType // for custom elements
-      } else {
+      }
+      else {
         tag = JSON.stringify(code.tagType)
       }
-      return "h("                                                                                    + "\n" + 
-             "  " + tag                                               + ","                          + "\n" + 
-             "  " + i(2, scopeAttributes(code.attributes, variables)) + ","                          + "\n" + 
-             "  [" + code.children.map(function(child) {                                     
-                  return i(2, parseChildrenToRender(child, variables))
-                }).join(",") + "]\n" +                                                                                   
-             ")"
+      return "h(" + "\n" +
+        "  " + tag + "," + "\n" +
+        "  " + i(2, scopeAttributes(code.attributes, variables)) + "," + "\n" +
+        "  [" + code.children.map(function(child) {
+          return i(2, parseChildrenToRender(child, variables))
+        }).join(",") + "]\n" +
+        ")"
     }
   }
-  function scopeAttributes(attributes, variables){
+
+  function scopeAttributes(attributes, variables) {
     attributes.onStrings["load"] && window.loads.push(scopeVaribles(attributes.onStrings["load"], variables, "window.app")) // TODO something better than this 
     return "{" + "\n" +
-           "  class: {"                                                                               + "\n" +                                       
-                    attributes.classStrings.map(function(key) {
-                      return  "    " + key + ": true"
-                    }).join(",")                                                                      + "\n" + 
-           "  },"                                                                                     + "\n" + 
-           "  on: {"                                                                                  + "\n" +                                       
-                    Object.keys(attributes.onStrings).map(function(key) {
-                      return  "    " + key + ": " + "function(event) {"                               + "\n" + 
-                              "    " + i(4, scopeVaribles(attributes.onStrings[key], variables))      + "\n" + 
-                              "    }"
-                    }).join(",")                                                                      + "\n" + 
-           "  },"                                                                                     + "\n" + 
-           "  nativeOn: {"                                                                            + "\n" +                                       
-                    Object.keys(attributes.nativeOnStrings).map(function(key) {
-                      return  "    " + key + ": " + "function(event) {"                                + "\n" + 
-                              "    " + i(4, scopeVaribles(attributes.nativeOnStrings[key], variables)) + "\n" + 
-                              "    }"
-                    }).join(",")                                                                      + "\n" + 
-           "  },"                                                                                     + "\n" + 
-           "  domProps: {"                                                                            + "\n" + 
-                    Object.keys(attributes.domPropsStrings).map(function(key) {
-                      return  "    " + key + ": " + i(4, scopeVaribles(attributes.domPropsStrings[key], variables))
-                    }).join(",")                                                                      + "\n" + 
-           "  },"                                                                                     + "\n" + 
-           "  props: {"                                                                               + "\n" + 
-                    Object.keys(attributes.propsStrings).map(function(key) {
-                      return  "    " + key + ": " + i(4, scopeVaribles(attributes.propsStrings[key], variables))
-                    }).join(",")                                                                      + "\n" + 
-           "  },"                                                                                     + "\n" + 
-           "  style: {"                                                                               + "\n" +   
-                    Object.keys(attributes.styleStrings).map(function(key) {
-                      return  "    " + key + ": " + i(4, scopeVaribles(attributes.styleStrings[key], variables))
-                    }).join(",")                                                                      + "\n" + 
-           "  },"                                                                                     + "\n" + 
-           "  data: {"                                                                                + "\n" + 
-                    Object.keys(attributes.dataStrings).map(function(key) {
-                      return  "    " + key + ": " + i(4, scopeVaribles(attributes.dataStrings[key], variables))
-                    }).join(",")                                                                      + "\n" + 
-           "  },"                                                                                     + "\n" + 
-           "}"                                                                                      
+      "  class: {" + "\n" +
+      attributes.classStrings.map(function(key) {
+        return "    " + key + ": true"
+      }).join(",") + "\n" +
+      "  }," + "\n" +
+      "  on: {" + "\n" +
+      Object.keys(attributes.onStrings).map(function(key) {
+        return "    " + key + ": " + "function(event) {" + "\n" +
+          "    " + i(4, scopeVaribles(attributes.onStrings[key], variables)) + "\n" +
+          "    }"
+      }).join(",") + "\n" +
+      "  }," + "\n" +
+      "  nativeOn: {" + "\n" +
+      Object.keys(attributes.nativeOnStrings).map(function(key) {
+        return "    " + key + ": " + "function(event) {" + "\n" +
+          "    " + i(4, scopeVaribles(attributes.nativeOnStrings[key], variables)) + "\n" +
+          "    }"
+      }).join(",") + "\n" +
+      "  }," + "\n" +
+      "  domProps: {" + "\n" +
+      Object.keys(attributes.domPropsStrings).map(function(key) {
+        return "    " + key + ": " + i(4, scopeVaribles(attributes.domPropsStrings[key], variables))
+      }).join(",") + "\n" +
+      "  }," + "\n" +
+      "  props: {" + "\n" +
+      Object.keys(attributes.propsStrings).map(function(key) {
+        return "    " + key + ": " + i(4, scopeVaribles(attributes.propsStrings[key], variables))
+      }).join(",") + "\n" +
+      "  }," + "\n" +
+      "  style: {" + "\n" +
+      Object.keys(attributes.styleStrings).map(function(key) {
+        return "    " + key + ": " + i(4, scopeVaribles(attributes.styleStrings[key], variables))
+      }).join(",") + "\n" +
+      "  }," + "\n" +
+      "  data: {" + "\n" +
+      Object.keys(attributes.dataStrings).map(function(key) {
+        return "    " + key + ": " + i(4, scopeVaribles(attributes.dataStrings[key], variables))
+      }).join(",") + "\n" +
+      "  }," + "\n" +
+      "}"
   }
-  
-  function collectData(code) { return collectDataHelper(code, {}) }
+
+  function collectData(code) {
+    return collectDataHelper(code, {})
+  }
+
   function collectDataHelper(code, collection) {
     if (!code || typeof code == "string") {
       return {}
-    } else {
+    }
+    else {
       var dataKeys = Object.keys(code.attributes.dataStrings)
       dataKeys.forEach(function(key) {
         collection[key] = new Function("return " + code.attributes.dataStrings[key])()
@@ -183,55 +198,55 @@
       return collection
     }
   }
-  
+
   function printMethods(definitions, variables) {
     var defs = Object.keys(definitions)
     return defs.map(function(key) {
       var functionWithoutName = definitions[key].replace(" " + key, "") // removing functionName() to make anonymous
-      return  "  " + key + ": " + i(4, scopeVaribles(functionWithoutName, variables, "this"))
-    }).join(",") 
+      return "  " + key + ": " + i(4, scopeVaribles(functionWithoutName, variables, "this"))
+    }).join(",")
   }
-  
+
   function printComponents(components) {
     return components.map(function(component) {
       var data = collectData(component)
       var variables = Object.keys(data).concat(Object.keys(window.code.definitions))
       var render = parseCodeToVueRender(component, variables.concat(component.props))
-      
-      return "  " + JSON.stringify(component.nameString) + ": {"                                           + "\n" +
-             "    render: " + i(6, render)         + "," + "\n" +
-             "    data: function() { "                                                                      + "\n" +
-             "      return "  + i(8, JSON.stringify(data))                                                         + "\n" +
-             "    }"                                                                                  + "," + "\n" +
-             "    props: "  + i(6, JSON.stringify(component.props))                                   + "," + "\n" +
-             "  }"
-      
+
+      return "  " + JSON.stringify(component.nameString) + ": {" + "\n" +
+        "    render: " + i(6, render) + "," + "\n" +
+        "    data: function() { " + "\n" +
+        "      return " + i(8, JSON.stringify(data)) + "\n" +
+        "    }" + "," + "\n" +
+        "    props: " + i(6, JSON.stringify(component.props)) + "," + "\n" +
+        "  }"
+
     })
   }
-  
+
   function pageToVueString(code) {
     var data = collectData(code.page)
     var variables = Object.keys(data).concat(Object.keys(code.definitions))
-    return "window.data = " + JSON.stringify(data, null, 2)                                              + "\n" +
-           "window.render = " + parseCodeToVueRender(code.page, variables)                               + "\n" + 
-           "window.app = new Vue({"                                                                      + "\n" + 
-           "  el: '#page',"                                                                              + "\n" + 
-           "  render: window.render,"                                                                    + "\n" + 
-           "  data: window.data,"                                                                        + "\n" + 
-           "  mounted: function () {"                                                                    + "\n" +    
-           "    this.$nextTick(function () {"                                                            + "\n" + 
-           "      window.loads.forEach(function(funcString) { new Function(funcString)() })"                               + "\n" + 
-           "    })"                                                                                      + "\n" + 
-           "  },"                                                                                        + "\n" +
-           "  methods: {"                                                                                + "\n" +    
-           "  " + printMethods(code.definitions, variables)                                              + "\n" + 
-           "  },"                                                                                        + "\n" + 
-           "  components: {"                                                                             + "\n" +    
-           "  " + printComponents(code.components)                                                       + "\n" + 
-           "  },"                                                                                        + "\n" + 
-           "})"
+    return "window.data = " + JSON.stringify(data, null, 2) + "\n" +
+      "window.render = " + parseCodeToVueRender(code.page, variables) + "\n" +
+      "window.app = new Vue({" + "\n" +
+      "  el: '#page'," + "\n" +
+      "  render: window.render," + "\n" +
+      "  data: window.data," + "\n" +
+      "  mounted: function () {" + "\n" +
+      "    this.$nextTick(function () {" + "\n" +
+      "      window.loads.forEach(function(funcString) { new Function(funcString)() })" + "\n" +
+      "    })" + "\n" +
+      "  }," + "\n" +
+      "  methods: {" + "\n" +
+      "  " + printMethods(code.definitions, variables) + "\n" +
+      "  }," + "\n" +
+      "  components: {" + "\n" +
+      "  " + printComponents(code.components) + "\n" +
+      "  }," + "\n" +
+      "})"
   }
-  
+
   // this is to catch when vuejs calls console.error direclty instead of throwing an error
   var consoleError = console.error
   var consoleLog = console.log
@@ -243,37 +258,46 @@
       throw e
     }
   }
-  
+
   window.onerror = function(message) {
     if (message.includes('Unknown custom element')) {
-      window.parent.$('body').trigger('runtimeError', "You are using a custom element that hasn't been defined. One possible cause is you are misspelling your custom element's name somewhere.") 
-    } else {
-      window.parent.$('body').trigger('runtimeError', message) 
+      window.parent.$('body').trigger('runtimeError', "You are using a custom element that hasn't been defined. One possible cause is you are misspelling your custom element's name somewhere.")
+    }
+    else {
+      window.parent.$('body').trigger('runtimeError', message)
     }
   }
-  
+
   var c
-  function run(){
+
+  function run() {
     if (window.code) {
-      if (window.code.compileErrors.length == 0){
+      if (window.code.compileErrors.length == 0) {
         try {
-          window.loads = [] // TODO something better
+          window.loads = [
+            "$('*').mouseover(function(event){ window.parent.$('body').trigger('mouseoverElement', event.target) })",
+            "$('*').mouseout(function(event){ window.parent.$('body').trigger('mouseoutElement', event.target) })",
+            "$('*').mousedown(function(event){ window.parent.$('body').trigger('mousedownElement', event.target) })"
+          ] 
           c = pageToVueString(window.code)
-        
-          var script = document.createElement( "script" );
+
+          var script = document.createElement("script");
           script.type = "text/javascript";
           script.text = c
           document.body.appendChild(script)
-        } catch (e) {
+        }
+        catch (e) {
           if (e.message == "result.split is not a function") {
             document.body.innerHTML = '<div class="error">You have an uncompleted block.</div>'
-          } else {
+          }
+          else {
             document.body.innerHTML = '<div class="error">' + e.message + '</div>'
             throw e
           }
         }
-      } else {
-        window.code.compileErrors.forEach(function(e){
+      }
+      else {
+        window.code.compileErrors.forEach(function(e) {
           document.body.innerHTML += '<div class="error">' + e.message + '</div>'
         })
       }
@@ -284,6 +308,6 @@
   }
 
   setTimeout(run, 100) // timeout to wait for code to be defined on scope
-
 </script>
+
 </html>

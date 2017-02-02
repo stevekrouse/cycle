@@ -41,27 +41,63 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   
   * go to hackathons to teach kids to code with cycle and have them win
   * need to come up with better words than "block-based" or "drag and drop"
-
-
-## Things I'm currently leaving simple (and ugly, and not easy)
-
-  * HTML props (including, value, src, href)
-  * CSS properties and values
-  * including CSS link and JS script tags
-  * JavaScript events
+  * race between programmer typing and another programmer on cycle
 
 ### Current technical projects
 
-  * prevention of name collisions
-    * if one variable name is contianed within another variable 
+  * focus on blockly after clicking on output so delete button works
 
-  * add the word "initial" to setting variables in element: create variable X with initial value Y
-  * think about: only allow variable creation at top of scope so as to make hoisting simplier to understand --> or suggest that you put this in an event
+  * double click to edit text in todo mvc broken
+
+  * prevention of name collisions
+
   * the dataCollection method in output.html doesn't work for data inside if/else clauses!
+  
+  * CSS menus
+    * text
+      * font
+      * color
+      * size
+    * layout
+      * flexbox
+        * algin children
+        * grow self
+      * inline vs block
+    * background
+      * color
+      * image
+        * repeat etc  
+    * border
+      * element width
+      * element height
+      * DISTANCE to left border
+      * DISTANCE after left border
+      * border color
+      * border width
+      * border radius
+  
+  * better demo
+    * links to demos on the main page?
+    
+  * good css defaults in the homepage
+    * make flexbox a bit more understandable
+      * arrange children: (column|row)
+      * align children: (center|?)
+      * stretch in the cross axis?
+    
+  
+  * including CSS link tags
+    * and JS, not dynamically?
+
+  * see if we can get blocks not to carry children
+    * google this first for sure 
+
+  * beautify chat app
+   
+  * blocks broken on mobile --> and desktop safari
 
   * hints
     * raise errors when variables are used out of scope 
-
 
 ## App ideas
 
@@ -74,7 +110,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
      * localstorage set, get
      * check/uncheck all box
      * window.loation.hash (or could look at full routing https://github.com/flatiron/director)
-
 
   * upvoter for x
     * login
@@ -126,7 +161,10 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 
 ## Eventually
-  
+
+  * more intuative variables
+    * add the word "initial" to setting variables in element: create variable X with initial value Y
+    * think about: only allow variable creation at top of scope so as to make hoisting simplier to understand --> or suggest that you put this in an event
   * consider blockly-closure-and-flyout-on-hover   
   * drag bug where you can't select blocks anymore
     * https://github.com/google/blockly/issues/888
