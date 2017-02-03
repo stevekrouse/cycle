@@ -255,6 +255,22 @@ function getAttributes(firstChild, parent) {
       value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
       key = Blockly.JavaScript.valueToCode(children, 'KEY', Blockly.JavaScript.ORDER_ATOMIC);
       attributes.styleStrings[key] = value 
+    } else if (children.type.includes("size_")) {
+      if (children.type == "size_width") {
+        var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+        attributes.styleStrings["width"] =  value
+      } else if (children.type == "size_height") {
+        var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+        attributes.styleStrings["height"] =  value
+      } else if (children.type == "size_padding") {
+        var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+        var side = children.getFieldValue('BORDER') == "all" ? '' : children.getFieldValue('BORDER')
+        attributes.styleStrings["padding" + side] =  value
+      } else if (children.type == "size_margin") {
+        var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+        var side = children.getFieldValue('BORDER') == "all" ? '' : children.getFieldValue('BORDER')
+        attributes.styleStrings["margin" + side] =  value
+      }
     } else if (children.type.includes("font_")) {
       if (children.type == "font_shadow") {
         var value_x = Blockly.JavaScript.valueToCode(children, 'X', Blockly.JavaScript.ORDER_ATOMIC);

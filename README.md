@@ -1,40 +1,8 @@
 # Cycle
 
-Cycle - the intuative interface designer.
+Cycle - the intuative interface builder, because HTML, CSS and JS need to be abstracted over
 
 Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
-
-
-## Principles
-  
-  1) Accessible to create, view and update anywhere, on any device
-     - built on the web
-     - mobile friendly
-  
-  2) Pre-requisites built-in (microworld, no user manual, just-in-time learning)
-     - types as shapes
-     - first person coding, messages, events as metaphors
-  
-  3) Workflow built-in (asana, workflowy, and github all rolled into one and built in)
-     - helps you organize your project
-     - nested feature to do list for top-down and bottom-up programming
-     - includes branches and version control and collaboration
-     - notifies you when you've been stuck on a feature for too long and should take a break or get help
-  
-  4) Only logical bugs (helpful waiter that gives you tips and warns you against things, but ultimately brings what you ask for as long as it's not going to kill you)
-     - blocks
-     - strong types
-     - amazing error messages that prevent bugs
-  
-  5) No Ceiling
-     - play nice with exsiting tech
-     - firebase bindings
-     - bootstrap bindings
-     - package manager imports
-  
-  6) Simple made easy
-     - pass by value (no pass by ref)
-     - scaffolding and autocoding for simple concepts that need boilerplate > behind the scenes magic
 
 
 ## Customer development ideas
@@ -46,11 +14,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 ### Current technical projects
   
   * CSS
-    * Sizing & spacing
-      * width 
-      * height
-      * distance to border ALL / LEFT RIGHT UP DOWN
-      * distance from border ALL / LEFT RIGHT UP DOWN
     * layout
       * set inline TRUE
       * arrange children in a ROW
@@ -61,6 +24,12 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
       * detect flex axis -> layout children x LEFT|RIGHT|CENTER|SPACE-BEWTEEN|SPACE-AROUND|STRETCH
       * detect flex axis -> layout children y TOP|BOTTOM|CENTER|SPACE-BEWTEEN|SPACE-AROUND|STRETCH      
       * weight self for growth NUMBER 
+    * border
+      * border 5px solid black
+      * border TOP 2px dotted red
+      * border color
+      * border radius
+      * border style    
     * background --> maybe skip background image for now?
       * background color
       * bacgkround: URL repeat scroll top left
@@ -76,12 +45,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
       * background size x 80px y 60px
       * background stretch to cover TRUE
       * background scale to cover TRUE
-    * border
-      * border 5px solid black
-      * border TOP 2px dotted red
-      * border color
-      * border radius
-      * border style
 
   * links images and links should have better shaped blocks
     * maybe inputs... 
@@ -171,10 +134,14 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## Eventually
   
+  * allow code snipets
+    * HTML -> use VueJS compiler
+    * JS -> eval
   * CSS
     * more built in fonts
     * absolute positioning
     * animations
+    * mad and min height and width
   * more intuative variables
     * add the word "initial" to setting variables in element: create variable X with initial value Y
     * think about: only allow variable creation at top of scope so as to make hoisting simplier to understand --> or suggest that you put this in an event
@@ -221,6 +188,11 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## Considerations
   
+  * Workflow built-in (asana, workflowy, and github all rolled into one and built in)
+     - helps you organize your project
+     - nested feature to do list for top-down and bottom-up programming
+     - includes branches and version control and collaboration
+     - notifies you when you've been stuck on a feature for too long and should take a break or get help
   * error handling (short term -> try/catch, long-term -> strong typing and no runtime errors)
   * make getting getting the event.target.value for input text setup more clear
   * the toolbox lives in the mouse/selector so as to help you understand what's in context/scope

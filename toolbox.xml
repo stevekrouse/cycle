@@ -275,6 +275,36 @@
       </value>
     </block>
   </category>
+  <category name="Sizing &amp; Spacing" colour="310">
+    <block type="size_width">
+       <value name="VALUE">
+        <block type="text">
+          <field name="TEXT">100px</field>
+        </block>
+      </value>
+    </block>
+    <block type="size_height">
+       <value name="VALUE">
+        <block type="text">
+          <field name="TEXT">50px</field>
+        </block>
+      </value>
+    </block>
+    <block type="size_padding">
+       <value name="VALUE">
+        <block type="text">
+          <field name="TEXT">3px</field>
+        </block>
+      </value>
+    </block>
+    <block type="size_margin">
+       <value name="VALUE">
+        <block type="text">
+          <field name="TEXT">5px</field>
+        </block>
+      </value>
+    </block>
+  </category>
   <category name="Settings" colour="310">
     <block type="set_css">
       <value name="VALUE">

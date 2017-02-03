@@ -1051,3 +1051,61 @@ Blockly.Blocks['font_overline'] = {
     this.setHelpUrl('');
   }
 };
+
+// Sizing & Spacing
+
+Blockly.Blocks['size_width'] = {
+  init: function() {
+    this.appendValueInput("VALUE")
+        .setCheck(null)
+        .appendField("width");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['size_height'] = {
+  init: function() {
+    this.appendValueInput("VALUE")
+        .setCheck(null)
+        .appendField("height");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['size_padding'] = {
+  init: function() {
+    this.appendValueInput("VALUE")
+        .setCheck(null)
+        .appendField("distance to")
+        .appendField(new Blockly.FieldDropdown([["all","all"], ["top","Top"], ["right","Right"], ["bottom","Bottom"], ["left","Left"]]), "BORDER")
+        .appendField("border(s)");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['size_margin'] = {
+  init: function() {
+    this.appendValueInput("VALUE")
+        .setCheck(null)
+        .appendField("distance after")
+        .appendField(new Blockly.FieldDropdown([["all","all"], ["top","Top"], ["right","Right"], ["bottom","Bottom"], ["left","Left"]]), "BORDER")
+        .appendField("border(s)");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
