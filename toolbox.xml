@@ -275,32 +275,45 @@
       </value>
     </block>
   </category>
-  <category name="Sizing &amp; Spacing" colour="310">
-    <block type="size_width">
+  <category name="Layout" colour="310">
+    <block type="layout_width">
        <value name="VALUE">
         <block type="text">
           <field name="TEXT">100px</field>
         </block>
       </value>
     </block>
-    <block type="size_height">
+    <block type="layout_height">
        <value name="VALUE">
         <block type="text">
           <field name="TEXT">50px</field>
         </block>
       </value>
     </block>
-    <block type="size_padding">
+    <block type="layout_padding">
        <value name="VALUE">
         <block type="text">
           <field name="TEXT">3px</field>
         </block>
       </value>
     </block>
-    <block type="size_margin">
+    <block type="layout_margin">
        <value name="VALUE">
         <block type="text">
           <field name="TEXT">5px</field>
+        </block>
+      </value>
+    </block>
+    <block type="layout_inline">
+      <value name="VALUE">
+        <block type="logic_boolean"></block>
+      </value>
+    </block>
+    <block type="layout_flex_parent"></block>
+    <block type="layout_grow">
+       <value name="VALUE">
+        <block type="math_number">
+          <field name="NUM">1</field>
         </block>
       </value>
     </block>

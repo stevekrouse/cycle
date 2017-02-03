@@ -1052,35 +1052,35 @@ Blockly.Blocks['font_overline'] = {
   }
 };
 
-// Sizing & Spacing
+// Layout
 
-Blockly.Blocks['size_width'] = {
+Blockly.Blocks['layout_width'] = {
   init: function() {
     this.appendValueInput("VALUE")
         .setCheck(null)
         .appendField("width");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour(310);
     this.setTooltip('');
     this.setHelpUrl('');
   }
 };
 
-Blockly.Blocks['size_height'] = {
+Blockly.Blocks['layout_height'] = {
   init: function() {
     this.appendValueInput("VALUE")
         .setCheck(null)
         .appendField("height");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour(310);
     this.setTooltip('');
     this.setHelpUrl('');
   }
 };
 
-Blockly.Blocks['size_padding'] = {
+Blockly.Blocks['layout_padding'] = {
   init: function() {
     this.appendValueInput("VALUE")
         .setCheck(null)
@@ -1089,13 +1089,13 @@ Blockly.Blocks['size_padding'] = {
         .appendField("border(s)");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour(310);
     this.setTooltip('');
     this.setHelpUrl('');
   }
 };
 
-Blockly.Blocks['size_margin'] = {
+Blockly.Blocks['layout_margin'] = {
   init: function() {
     this.appendValueInput("VALUE")
         .setCheck(null)
@@ -1104,7 +1104,54 @@ Blockly.Blocks['size_margin'] = {
         .appendField("border(s)");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(230);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['layout_flex_parent'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("arrange sub-elements")
+        .appendField(new Blockly.FieldDropdown([["left to right","row"], ["right to left","reverse-row"], ["top to bottom","column"], ["bottom to top","reverse-column"]]), "DIRECTION");
+    this.appendDummyInput()
+        .appendField("on the x-axis, align sub-elements")
+        .appendField(new Blockly.FieldDropdown([["center","center"], ["left","left"], ["right","right"], ["space around","space-around"], ["space between","space-between"], ["stretch","stretch"]]), "X");
+    this.appendDummyInput()
+        .appendField("on the y-axis, align sub-elements")
+        .appendField(new Blockly.FieldDropdown([["center","center"], ["top","top"], ["bottom","bottom"], ["space around","space-around"], ["space between","space-between"], ["stretch","stretch"]]), "Y");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["wrap sub-elements","wrap"], ["keep all sub-elements in a line","nowrap"]]), "WRAP");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['layout_grow'] = {
+  init: function() {
+    this.appendValueInput("VALUE")
+        .setCheck(null)
+        .appendField("stretch ratio");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+}
+
+Blockly.Blocks['layout_inline'] = {
+  init: function() {
+    this.appendValueInput("VALUE")
+        .setCheck(null)
+        .appendField("inline");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
     this.setTooltip('');
     this.setHelpUrl('');
   }

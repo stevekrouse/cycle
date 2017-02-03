@@ -255,21 +255,60 @@ function getAttributes(firstChild, parent) {
       value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
       key = Blockly.JavaScript.valueToCode(children, 'KEY', Blockly.JavaScript.ORDER_ATOMIC);
       attributes.styleStrings[key] = value 
-    } else if (children.type.includes("size_")) {
-      if (children.type == "size_width") {
+    } else if (children.type.includes("layout_")) {
+      if (children.type == "layout_width") {
         var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
         attributes.styleStrings["width"] =  value
-      } else if (children.type == "size_height") {
+      } else if (children.type == "layout_height") {
         var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
         attributes.styleStrings["height"] =  value
-      } else if (children.type == "size_padding") {
+      } else if (children.type == "layout_padding") {
         var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
         var side = children.getFieldValue('BORDER') == "all" ? '' : children.getFieldValue('BORDER')
         attributes.styleStrings["padding" + side] =  value
-      } else if (children.type == "size_margin") {
+      } else if (children.type == "layout_margin") {
         var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
         var side = children.getFieldValue('BORDER') == "all" ? '' : children.getFieldValue('BORDER')
         attributes.styleStrings["margin" + side] =  value
+      } else if (children.type == "layout_flex_parent") {
+        var direction = "'" + children.getFieldValue('DIRECTION') + "'";
+        var x = "'" + children.getFieldValue('X') + "'";
+        var y = "'" + children.getFieldValue('Y') + "'";
+        var wrap = "'" + children.getFieldValue('WRAP') + "'"
+        if (attributes.styleStrings.display && attributes.styleStrings.display.includes("inline")) {
+          throw new Error('An inline block cannot arrange its children. Remove the "inline" block or the "arrange children" block.')
+        } else {
+          attributes.styleStrings["display"] = "'flex'"
+        }
+        attributes.styleStrings["flexDirection"] =  direction
+        attributes.styleStrings["flexWrap"] = wrap
+        if (direction.includes('row')){
+          if (direction.includes('reverse')) {
+            attributes.styleStrings["justifyContent"] = (x == "'left'" ? "'flex-end'" : (x == "'right'" ? "'flex-start'" : x))
+          } else {
+            attributes.styleStrings["justifyContent"] = (x == "'left'" ? "'flex-start'" : (x == "'right'" ? "'flex-end'" : x))
+          }
+          attributes.styleStrings["alignContent"] = (y == "'top'" ? "'flex-start'" : (y == "'bottom'" ? "'flex-end'" : y))
+          attributes.styleStrings["alignItems"] = (y == "'top'" ? "'flex-start'" : (y == "'bottom'" ? "'flex-end'" : y))
+        } else {
+          if (direction.includes('reverse')) {
+            attributes.styleStrings["justifyContent"] = (y == "'bottom'" ? "'flex-end'" : (y == "'top'" ? "'flex-start'" : y))
+          } else {
+            attributes.styleStrings["justifyContent"] = (y == "'top'" ? "'flex-start'" : (y == "'bottom'" ? "'flex-end'" : y))
+          }
+          attributes.styleStrings["alignContent"] = (x == "'left'" ? "'flex-start'" : (x == "'right'" ? "'flex-end'" : x))
+          attributes.styleStrings["alignItems"] = (x == "'left'" ? "'flex-start'" : (x == "'right'" ? "'flex-end'" : x))
+        }
+      } else if (children.type == "layout_grow") {
+        var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+        attributes.styleStrings["flexGrow"] = value
+      } else if (children.type == "layout_inline") {
+        var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+        if (attributes.styleStrings.display && attributes.styleStrings.display.includes("flex")) {
+          throw new Error('An inline block cannot arrange its children. Remove the "inline" block or the "arrange children" block.')
+        } else {
+          attributes.styleStrings.display = value + "? 'inline-block' : 'block'"
+        }
       }
     } else if (children.type.includes("font_")) {
       if (children.type == "font_shadow") {

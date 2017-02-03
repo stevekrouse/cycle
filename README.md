@@ -14,16 +14,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 ### Current technical projects
   
   * CSS
-    * layout
-      * set inline TRUE
-      * arrange children in a ROW
-      * arrange children in a COLUMN
-      * arrange children in a reverse-row 
-      * arrange children in a reverse-column 
-      * wrap children TRUE
-      * detect flex axis -> layout children x LEFT|RIGHT|CENTER|SPACE-BEWTEEN|SPACE-AROUND|STRETCH
-      * detect flex axis -> layout children y TOP|BOTTOM|CENTER|SPACE-BEWTEEN|SPACE-AROUND|STRETCH      
-      * weight self for growth NUMBER 
     * border
       * border 5px solid black
       * border TOP 2px dotted red
