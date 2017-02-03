@@ -45,38 +45,55 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ### Current technical projects
   
-  * CSS menus
-    * text
-      * font
-      * color
-      * size
+  * CSS
+    * Sizing & spacing
+      * width 
+      * height
+      * distance to border ALL / LEFT RIGHT UP DOWN
+      * distance from border ALL / LEFT RIGHT UP DOWN
     * layout
-      * flexbox
-        * algin children
-        * grow self
-      * inline vs block
-    * background
-      * color
-      * image
-        * repeat etc  
+      * set inline TRUE
+      * arrange children in a ROW
+      * arrange children in a COLUMN
+      * arrange children in a reverse-row 
+      * arrange children in a reverse-column 
+      * wrap children TRUE
+      * detect flex axis -> layout children x LEFT|RIGHT|CENTER|SPACE-BEWTEEN|SPACE-AROUND|STRETCH
+      * detect flex axis -> layout children y TOP|BOTTOM|CENTER|SPACE-BEWTEEN|SPACE-AROUND|STRETCH      
+      * weight self for growth NUMBER 
+    * background --> maybe skip background image for now?
+      * background color
+      * bacgkround: URL repeat scroll top left
+      * background image URL
+      * background image repeat
+      * background image repeat-x
+      * background image repeat-y
+      * background image no-repeat
+      * background image SCROLL FALSE
+      * background position x center y right
+      * background position x 10%  y 60%
+      * background position x 100px  y 200px
+      * background size x 80px y 60px
+      * background stretch to cover TRUE
+      * background scale to cover TRUE
     * border
-      * element width
-      * element height
-      * DISTANCE to left border
-      * DISTANCE after left border
+      * border 5px solid black
+      * border TOP 2px dotted red
       * border color
-      * border width
       * border radius
-  
+      * border style
+
+  * links images and links should have better shaped blocks
+    * maybe inputs... 
+      
   * better demo
     * links to demos on the main page?
     
   * good css defaults in the homepage
-    * make flexbox a bit more understandable
-      * arrange children: (column|row)
-      * align children: (center|?)
-      * stretch in the cross axis?
-    
+    * make them explicit
+    * center text maybe
+    * add padding maybe
+    * sans serif maybe
   
   * including CSS link tags
     * and JS, not dynamically?
@@ -153,7 +170,11 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 
 ## Eventually
-
+  
+  * CSS
+    * more built in fonts
+    * absolute positioning
+    * animations
   * more intuative variables
     * add the word "initial" to setting variables in element: create variable X with initial value Y
     * think about: only allow variable creation at top of scope so as to make hoisting simplier to understand --> or suggest that you put this in an event

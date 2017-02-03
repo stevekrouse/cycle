@@ -255,6 +255,80 @@ function getAttributes(firstChild, parent) {
       value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
       key = Blockly.JavaScript.valueToCode(children, 'KEY', Blockly.JavaScript.ORDER_ATOMIC);
       attributes.styleStrings[key] = value 
+    } else if (children.type.includes("font_")) {
+      if (children.type == "font_shadow") {
+        var value_x = Blockly.JavaScript.valueToCode(children, 'X', Blockly.JavaScript.ORDER_ATOMIC);
+        var value_y = Blockly.JavaScript.valueToCode(children, 'Y', Blockly.JavaScript.ORDER_ATOMIC);
+        var value_color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC);
+        attributes.styleStrings["textShadow"] =  value_x + "+ ' ' +" + value_y + "+ ' ' +" + value_color
+      }
+      else if (children.type == "font_align") {
+        var v_align = Blockly.JavaScript.valueToCode(children, 'ALIGN', Blockly.JavaScript.ORDER_ATOMIC);
+        attributes.styleStrings["textAlign"] =  v_align
+      }
+      else if (children.type == "font_size") {
+        var value_size = Blockly.JavaScript.valueToCode(children, 'SIZE', Blockly.JavaScript.ORDER_ATOMIC);
+        attributes.styleStrings["fontSize"] =  value_size
+      }
+      else if (children.type == "font_bold") {
+        var value_bold = Blockly.JavaScript.valueToCode(children, 'BOLD', Blockly.JavaScript.ORDER_ATOMIC);
+        attributes.styleStrings["fontWeight"] =  value_bold + ' ? "bold" : "normal"'
+      }
+      else if (children.type == "font_family") {
+        var value_font = Blockly.JavaScript.valueToCode(children, 'FONT', Blockly.JavaScript.ORDER_ATOMIC);
+        attributes.styleStrings["fontFamily"] =  value_font
+      }
+      else if (children.type == "font_italics") {
+        var value_italics = Blockly.JavaScript.valueToCode(children, 'ITALICS', Blockly.JavaScript.ORDER_ATOMIC);
+        attributes.styleStrings["fontStyle"] =  value_italics + ' ? "italic" : "normal"'
+      }
+      else if (children.type == "font_color") {
+        var value_color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC);
+        attributes.styleStrings["color"] =  value_color
+      } 
+      else if (children.type == "font_underline") {
+        var value_decoration = Blockly.JavaScript.valueToCode(children, 'DECORATION', Blockly.JavaScript.ORDER_ATOMIC);
+        if (!(attributes.styleStrings["textDecoration"] && attributes.styleStrings["textDecoration"].includes("underline"))) {
+          if (attributes.styleStrings["textDecoration"]) {
+           attributes.styleStrings["textDecoration"] += " + "
+          } else {
+          attributes.styleStrings["textDecoration"] = ""
+          }
+          attributes.styleStrings["textDecoration"] += "(" + value_decoration + " ? ' underline ' : '')"
+        }
+      } else if (children.type == "font_overline") {
+        var value_decoration = Blockly.JavaScript.valueToCode(children, 'DECORATION', Blockly.JavaScript.ORDER_ATOMIC)
+        if (!(attributes.styleStrings["textDecoration"] && attributes.styleStrings["textDecoration"].includes("overline"))) {
+          if (attributes.styleStrings["textDecoration"]) {
+            attributes.styleStrings["textDecoration"] += " + "
+          } else {
+            attributes.styleStrings["textDecoration"] = ""
+          }
+          attributes.styleStrings["textDecoration"] += "(" + value_decoration + " ? 'overline ' : '')"
+        }
+      } else if (children.type == "font_strikethrough") {
+        var value_decoration = Blockly.JavaScript.valueToCode(children, 'DECORATION', Blockly.JavaScript.ORDER_ATOMIC);
+        if (!(attributes.styleStrings["textDecoration"] && attributes.styleStrings["textDecoration"].includes("line-through"))) {
+          if (attributes.styleStrings["textDecoration"]) {
+            attributes.styleStrings["textDecoration"] += " + "
+          } else {
+            attributes.styleStrings["textDecoration"] = ""
+          }
+          attributes.styleStrings["textDecoration"] += "(" + value_decoration + " ? ' line-through ' : '')"
+        }
+      }
+      else if (children.type == "font_line_spacing") {
+        var value_spacing = Blockly.JavaScript.valueToCode(children, 'SPACING', Blockly.JavaScript.ORDER_ATOMIC);
+        attributes.styleStrings["lineHeight"] =  value_spacing
+      }
+      else if (children.type == "font_letter_spacing") {
+        var value_spacing = Blockly.JavaScript.valueToCode(children, 'SPACING', Blockly.JavaScript.ORDER_ATOMIC);
+        attributes.styleStrings["letterSpacing"] =  value_spacing
+      }
+      else if (children.type == "font_word_spacing") {
+        var value_spacing = Blockly.JavaScript.valueToCode(children, 'SPACING', Blockly.JavaScript.ORDER_ATOMIC);
+        attributes.styleStrings["wordSpacing"] =  value_spacing
+      }
     } else if (children.type == "cycle_html_property"){
       value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
       key = Blockly.JavaScript.valueToCode(children, 'KEY', Blockly.JavaScript.ORDER_ATOMIC);

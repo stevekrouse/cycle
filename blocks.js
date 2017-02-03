@@ -873,3 +873,181 @@ Blockly.Blocks['cycle_include_script'] = {
     this.setHelpUrl('');
   }
 };
+
+// Font
+
+Blockly.Blocks['font_shadow'] = {
+  init: function() {
+    this.appendValueInput("X")
+        .setCheck(null)
+        .appendField("font shadow x");
+    this.appendValueInput("Y")
+        .setCheck(null)
+        .appendField("y");
+    this.appendValueInput("COLOR")
+        .setCheck(null)
+        .appendField("color");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['font_size'] = {
+  init: function() {
+    this.appendValueInput("SIZE")
+        .setCheck(null)
+        .appendField("font size");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['font_bold'] = {
+  init: function() {
+    this.appendValueInput("BOLD")
+        .setCheck(null)
+        .appendField("font bold");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['font_family'] = {
+  init: function() {
+    this.appendValueInput("FONT")
+        .setCheck(null)
+        .appendField("font family");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['font_align'] = {
+  init: function() {
+    this.appendValueInput("ALIGN")
+        .setCheck(null)
+        .appendField("font align");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['font_italics'] = {
+  init: function() {
+    this.appendValueInput("ITALICS")
+        .setCheck(null)
+        .appendField("font italics");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['font_color'] = {
+  init: function() {
+    this.appendValueInput("COLOR")
+        .setCheck(null)
+        .appendField("font color");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['font_underline'] = {
+  init: function() {
+    this.appendValueInput("DECORATION")
+        .setCheck(null)
+        .appendField("font underline");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['font_strikethrough'] = {
+  init: function() {
+    this.appendValueInput("DECORATION")
+        .setCheck(null)
+        .appendField("font strikethrough");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['font_line_spacing'] = {
+  init: function() {
+    this.appendValueInput("SPACING")
+        .setCheck(null)
+        .appendField("font line spacing");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['font_letter_spacing'] = {
+  init: function() {
+    this.appendValueInput("SPACING")
+        .setCheck(null)
+        .appendField("font letter spacing");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['font_word_spacing'] = {
+  init: function() {
+    this.appendValueInput("SPACING")
+        .setCheck(null)
+        .appendField("font word spacing");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['font_overline'] = {
+  init: function() {
+    this.appendValueInput("DECORATION")
+        .setCheck(null)
+        .appendField("font overline");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};

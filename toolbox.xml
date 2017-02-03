@@ -161,6 +161,120 @@
     <!--toggle-->
     <!--navbar-->
   </category>
+  <category name="Font" colour="310">
+    <block type="font_family">
+      <value name="FONT">
+        <block type="text">
+          <field name="TEXT">sans-serif</field>
+        </block>
+      </value>
+    </block>
+    <block type="font_size">
+      <value name="SIZE">
+        <block type="text">
+          <field name="TEXT">15px</field>
+        </block>
+      </value>
+    </block>
+    <block type="font_align">
+      <value name="ALIGN">
+        <block type="text">
+          <field name="TEXT">center</field>
+        </block>
+      </value>
+    </block>
+    <block type="font_align">
+      <value name="ALIGN">
+        <block type="text">
+          <field name="TEXT">left</field>
+        </block>
+      </value>
+    </block>
+    <block type="font_align">
+      <value name="ALIGN">
+        <block type="text">
+          <field name="TEXT">right</field>
+        </block>
+      </value>
+    </block>
+    <block type="font_bold">
+      <value name="BOLD">
+        <block type="logic_boolean"></block>
+      </value>
+    </block> 
+    <block type="font_italics">
+      <value name="ITALICS">
+        <block type="logic_boolean"></block>
+      </value>
+    </block> 
+    <block type="font_color">
+      <value name="COLOR">
+        <block type="text">
+          <field name="TEXT">red</field>
+        </block>
+      </value>
+    </block> 
+    <block type="font_color">
+      <value name="COLOR">
+        <block type="colour_picker">
+          <field name="COLOUR">#3333ff</field>
+        </block>
+      </value>
+    </block> 
+    <block type="font_underline">
+      <value name="DECORATION">
+        <block type="logic_boolean"></block>
+      </value>
+    </block> 
+    <block type="font_strikethrough">
+      <value name="DECORATION">
+        <block type="logic_boolean"></block>
+      </value>
+    </block> 
+    <block type="font_overline">
+      <value name="DECORATION">
+        <block type="logic_boolean"></block>
+      </value>
+    </block>
+    <block type="font_line_spacing">
+      <value name="SPACING">
+        <block type="text">
+          <field name="TEXT">1</field>
+        </block>
+      </value>
+    </block> 
+    <block type="font_letter_spacing">
+      <value name="SPACING">
+        <block type="text">
+          <field name="TEXT">2px</field>
+        </block>
+      </value>
+    </block> 
+    <block type="font_word_spacing">
+      <value name="SPACING">
+        <block type="text">
+          <field name="TEXT">10px</field>
+        </block>
+      </value>
+    </block> 
+    <block type="font_shadow">
+      <value name="X">
+        <block type="text">
+          <field name="TEXT">1px</field>
+        </block>
+      </value>
+      <value name="Y">
+        <block type="text">
+          <field name="TEXT">3px</field>
+        </block>
+      </value>
+      <value name="COLOR">
+        <block type="colour_picker">
+          <field name="COLOUR">#3333ff</field>
+        </block>
+      </value>
+    </block>
+  </category>
   <category name="Settings" colour="310">
     <block type="set_css">
       <value name="VALUE">
