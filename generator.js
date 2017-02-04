@@ -266,6 +266,12 @@ function getAttributes(firstChild, parent) {
         var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
         var side = children.getFieldValue('BORDER') == "all" ? '' : children.getFieldValue('BORDER')
         attributes.styleStrings["padding" + side] =  value
+      } else if (children.type == "layout_border") {
+        var color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC);
+        var width = Blockly.JavaScript.valueToCode(children, 'WIDTH', Blockly.JavaScript.ORDER_ATOMIC);
+        var side = children.getFieldValue('BORDER') == "all" ? '' : children.getFieldValue('BORDER')
+        var style = children.getFieldValue('STYLE') 
+        attributes.styleStrings["border" + side] =  width + " + ' " + style + " ' + " + color  
       } else if (children.type == "layout_margin") {
         var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
         var side = children.getFieldValue('BORDER') == "all" ? '' : children.getFieldValue('BORDER')

@@ -290,6 +290,18 @@
         </block>
       </value>
     </block>
+    <block type="layout_border">
+       <value name="WIDTH">
+        <block type="text">
+          <field name="TEXT">2px</field>
+        </block>
+      </value>
+      <value name="COLOR">
+        <block type="colour_picker">
+          <field name="COLOUR">#3333ff</field>
+        </block>
+      </value>
+    </block>
     <block type="layout_padding">
        <value name="VALUE">
         <block type="text">

@@ -13,43 +13,42 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ### Current technical projects
   
-  * CSS
-    * border
-      * border 5px solid black
-      * border TOP 2px dotted red
-      * border color
-      * border radius
-      * border style    
-    * background --> maybe skip background image for now?
-      * background color
-      * bacgkround: URL repeat scroll top left
-      * background image URL
-      * background image repeat
-      * background image repeat-x
-      * background image repeat-y
-      * background image no-repeat
-      * background image SCROLL FALSE
-      * background position x center y right
-      * background position x 10%  y 60%
-      * background position x 100px  y 200px
-      * background size x 80px y 60px
-      * background stretch to cover TRUE
-      * background scale to cover TRUE
+  * have slightly different colors for CSS menus
+  * put css generalized at bottom of each css menu
+  * put html prop at end of element menu --> delete settings menu
 
   * links images and links should have better shaped blocks
     * maybe inputs... 
+    * should text be a div with a text input space and children'? inline?
       
-  * better demo
+  * better onboarding
+    * needs more structure but still allows for user choice 
+    * need to come up with untutorials?
     * links to demos on the main page?
     
+  * faster iteration cycle   
+    * don't fully reload īframe just delete loads and vue and app and page for speed
+    * try making style and text changes directly without recompile for speed
+    * play with ability to edit box model in magnifying glass
+
   * good css defaults in the homepage
     * make them explicit
     * center text maybe
     * add padding maybe
     * sans serif maybe
   
+  * using a variable before defining it should error better
+
+  * variable should default to setting to 0
+  
+  * get random color and color blend and other such functions all working 
+  
+  * set font family broken
+
   * including CSS link tags
     * and JS, not dynamically?
+  
+  * break up elements into menus textbooks media inputs containers nav bar lists link?
 
   * see if we can get blocks not to carry children
     * google this first for sure 
@@ -124,6 +123,7 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## Eventually
   
+  * turn all px inputs to numbers with dropdown for px, em, %
   * allow code snipets
     * HTML -> use VueJS compiler
     * JS -> eval
@@ -132,6 +132,20 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
     * absolute positioning
     * animations
     * mad and min height and width
+    * background image
+      * bacgkround: URL repeat scroll top left
+      * background image URL
+      * background image repeat
+      * background image repeat-x
+      * background image repeat-y
+      * background image no-repeat
+      * background image SCROLL FALSE
+      * background position x center y right
+      * background position x 10%  y 60%
+      * background position x 100px  y 200px
+      * background size x 80px y 60px
+      * background stretch to cover TRUE
+      * background scale to cover TRUE
   * more intuative variables
     * add the word "initial" to setting variables in element: create variable X with initial value Y
     * think about: only allow variable creation at top of scope so as to make hoisting simplier to understand --> or suggest that you put this in an event
@@ -178,6 +192,11 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## Considerations
   
+  * change cycle name!
+  * compile to snabbdom instead of vuejs for better patching and instant rendering
+    * immutableJS
+  * need to make it much more clear the distinction between elements, events, data, and settings
+    * including turnary expressions and if/else and for each lists etc
   * Workflow built-in (asana, workflowy, and github all rolled into one and built in)
      - helps you organize your project
      - nested feature to do list for top-down and bottom-up programming

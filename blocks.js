@@ -1156,3 +1156,24 @@ Blockly.Blocks['layout_inline'] = {
     this.setHelpUrl('');
   }
 };
+
+Blockly.Blocks['layout_border'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["all","all"], ["top","Top"], ["right","Right"], ["left","Left"], ["bottom","Bottom"]]), "BORDER")
+        .appendField("border(s)");
+    this.appendValueInput("WIDTH")
+        .setCheck(null)
+        .appendField("width");
+    this.appendValueInput("COLOR")
+        .setCheck(null)
+        .appendField("color");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["solid line","solid"], ["dotted line","dotted"], ["dashed line","dashed"], /* causes trouble ["double line","double"],*/ ["no line","none"]]), "STYLE");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
