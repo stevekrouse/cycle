@@ -265,7 +265,7 @@ Blockly.Blocks['cycle_css_property'] = {
 
 Blockly.Blocks['cycle_html_property'] = {
   init: function() {
-    this.setColour(310);
+    this.setColour(20);
     this.appendValueInput("KEY")
       .setCheck(null)
       .appendField("set HTML property");
