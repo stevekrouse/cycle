@@ -269,9 +269,19 @@ function getAttributes(firstChild, parent) {
       } else if (children.type == "layout_border") {
         var color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC);
         var width = Blockly.JavaScript.valueToCode(children, 'WIDTH', Blockly.JavaScript.ORDER_ATOMIC);
+        var radius = Blockly.JavaScript.valueToCode(children, 'RADIUS', Blockly.JavaScript.ORDER_ATOMIC);
         var side = children.getFieldValue('BORDER') == "all" ? '' : children.getFieldValue('BORDER')
         var style = children.getFieldValue('STYLE') 
         attributes.styleStrings["border" + side] =  width + " + ' " + style + " ' + " + color  
+        attributes.styleStrings["borderRadius"] =  radius  
+      } else if (children.type == "layout_outline") {
+        var color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC);
+        var width = Blockly.JavaScript.valueToCode(children, 'WIDTH', Blockly.JavaScript.ORDER_ATOMIC);
+        var style = children.getFieldValue('STYLE') 
+        attributes.styleStrings["outline"] =  width + " + ' " + style + " ' + " + color  
+      } else if (children.type == "layout_background_color") {
+        var color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC);
+        attributes.styleStrings["backgroundColor"] =  color  
       } else if (children.type == "layout_margin") {
         var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
         var side = children.getFieldValue('BORDER') == "all" ? '' : children.getFieldValue('BORDER')
@@ -305,6 +315,13 @@ function getAttributes(firstChild, parent) {
           attributes.styleStrings["alignContent"] = (x == "'left'" ? "'flex-start'" : (x == "'right'" ? "'flex-end'" : x))
           attributes.styleStrings["alignItems"] = (x == "'left'" ? "'flex-start'" : (x == "'right'" ? "'flex-end'" : x))
         }
+      } else if (children.type == "layout_shadow") {
+        var value_x = Blockly.JavaScript.valueToCode(children, 'X', Blockly.JavaScript.ORDER_ATOMIC);
+        var value_y = Blockly.JavaScript.valueToCode(children, 'Y', Blockly.JavaScript.ORDER_ATOMIC);
+        var value_color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC);
+        var blur = Blockly.JavaScript.valueToCode(children, 'BLUR', Blockly.JavaScript.ORDER_ATOMIC);
+        var spread = Blockly.JavaScript.valueToCode(children, 'SPREAD', Blockly.JavaScript.ORDER_ATOMIC);
+        attributes.styleStrings["boxShadow"] =  value_x + "+ ' ' +" + value_y + "+ ' ' +" + blur + "+ ' ' +" + spread + "+ ' ' +" + value_color
       } else if (children.type == "layout_grow") {
         var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
         attributes.styleStrings["flexGrow"] = value
@@ -436,13 +453,7 @@ function getAttributes(firstChild, parent) {
 function blockAttributes(block) {
   var attributes = getAttributes(block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN"), block)
 
-  if (block.type == "cycle_page") {
-    if (!attributes.styleStrings.height) {
-      attributes.styleStrings.height = "'100%'"
-      attributes.styleStrings.textAlign = "'center'"
-      attributes.styleStrings.fontFamily = "'sans-serif'"
-    }
-  } else if (block.type == "controls_forEach") {
+  if (block.type == "controls_forEach") {
      attributes.repeat = {}
      attributes.repeat.iterator = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
      attributes.repeat.list = ('(' + (Blockly.JavaScript.valueToCode(block, 'LIST',Blockly.JavaScript.ORDER_ASSIGNMENT) || '[]') + ')');

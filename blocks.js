@@ -1054,6 +1054,19 @@ Blockly.Blocks['font_overline'] = {
 
 // Layout
 
+Blockly.Blocks['layout_background_color'] = {
+  init: function() {
+    this.appendValueInput("COLOR")
+        .setCheck(null)
+        .appendField("background color");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
 Blockly.Blocks['layout_width'] = {
   init: function() {
     this.appendValueInput("VALUE")
@@ -1168,8 +1181,55 @@ Blockly.Blocks['layout_border'] = {
     this.appendValueInput("COLOR")
         .setCheck(null)
         .appendField("color");
+    this.appendValueInput("RADIUS")
+        .setCheck(null)
+        .appendField("radius");
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([["solid line","solid"], ["dotted line","dotted"], ["dashed line","dashed"], /* causes trouble ["double line","double"],*/ ["no line","none"]]), "STYLE");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['layout_outline'] = {
+  init: function() {
+    this.appendValueInput("WIDTH")
+        .setCheck(null)
+        .appendField("outline width");
+    this.appendValueInput("COLOR")
+        .setCheck(null)
+        .appendField("color");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["solid line","solid"], ["dotted line","dotted"], ["dashed line","dashed"], /* causes trouble ["double line","double"],*/ ["no line","none"]]), "STYLE");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(310);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['layout_shadow'] = {
+  init: function() {
+    this.appendValueInput("X")
+        .setCheck(null)
+        .appendField("shadow x");
+    this.appendValueInput("Y")
+        .setCheck(null)
+        .appendField("y");
+    this.appendValueInput("COLOR")
+        .setCheck(null)
+        .appendField("color");
+    this.appendValueInput("BLUR")
+        .setCheck(null)
+        .appendField("blur");
+    this.appendValueInput("SPREAD")
+        .setCheck(null)
+        .appendField("spread");
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(310);

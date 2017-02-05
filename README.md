@@ -11,12 +11,17 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * need to come up with better words than "block-based" or "drag and drop"
   * race between programmer typing and another programmer on cycle
 
-### Current technical projects
-  
-  * have slightly different colors for CSS menus
-  * put css generalized at bottom of each css menu
-  * put html prop at end of element menu --> delete settings menu
+### Current technical projects7
 
+  * more compile time errors with block id
+  
+  * think about pros/cons of rolling my own variable implementation vs modifying their existing one 
+    * create variable POOP with initial value Y
+      * -> now you can set it, change it and use it
+
+  * colour scheme generator built in 
+    * maybe: https://github.com/Fooidge/PleaseJS 
+  
   * links images and links should have better shaped blocks
     * maybe inputs... 
     * should text be a div with a text input space and children'? inline?
@@ -24,7 +29,7 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * better onboarding
     * needs more structure but still allows for user choice 
     * need to come up with untutorials?
-    * links to demos on the main page?
+    * add other projects chat app and todomvc (with links not to c9) to homepage
     
   * faster iteration cycle   
     * don't fully reload īframe just delete loads and vue and app and page for speed
@@ -128,6 +133,7 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
     * HTML -> use VueJS compiler
     * JS -> eval
   * CSS
+    * ability to set border radius on each or all corners 
     * more built in fonts
     * absolute positioning
     * animations
@@ -230,11 +236,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
         * nav bar
           * collapse 
           * ul / li.nav-item 
-
-## I've been clicked # times
-
-https://preview.c9users.io/stevekrouse_1/cycle-lang/cycle/index.html#DwDwtgNgBOEHYGcC8AiAFgFwwBwFwHp8B3EgOiIGZSB7AJwHN8BGATjfxE0hQD5gAjCNQDGAaygYAntgCmqYZOEQZAfWwBDejJRQAlgBNU+AGYB1AOJJhAFhYA9AD4BpAHIANADRxdABQCKEADEOiCoAAw6kuG8wAgY6hgyYDJwGFBw6smoAMIAEgCSADIAIgBKAKIuMYIi4lKy8orKKsLUqeq6cDK0OgaoACoAjgBaYABSY7oAAuYIxj4AVsWuAN4AuhBVfHEJSSlpGVkoeUVlldVCYhLScigAbuq0uuqCMggqCDIYvYYoa+bWMAAVX6AG5hCtSvQIABCejFfr0dQANicMWMuhkEH06UytwAagBBUq8XSJMDAEyY7F8B4QACuMlxRyJhSB5QutWuDRQYASaBUcHpYH43R+qAA1MjzB4wvowGsiED1NYQKZaAAvYr4QoAfnR1Jxh1uLiBAFleGFKRisfo+PgamJ7XTGXwuiAMHxHXUbqhPhgWggEOKUKCnKIABwS6jmaimDW0DBOCMLDwAMQwpHMBttzNuPlKAHkfOVSv0AJq8YxtDAAZV0Gpk1sNtPUDKZxtQrPZnKu9VuiQ9IfpHicuuRurcABIAH748sgO5pqZjawAbVE+r4NuxeYG5Tc-V4FDC2BAzdt9u9zrbruA7s9AkuPp5CiUqkH3z0vynZvpphhYopzCHxcAAdimXAwgWIEAFYwlwYwYhdDs8X3Q9exfAcZCHb9UHKNMwIAWmRWC02RAAKXApjuNYXAWfo4H4CNgm3Q09xQfoDyPHhTCxVpkgkagoGyJomypS9KWvSkUKvZ97QfOTagUnDHwdeTKR2cl9jdVSvWfblbjfZp+HpLA2hDXINVwQIKGGIFTH0XUIF1WtsCIBZ6XxNd8RiLS9lSDiThKCotifLl+z9L5A2DPCUAWCAAEoHDQfAJXxZA11g-Q0z8FwWA1ekIjY3NOxQAti1LCsqxretGwvGlgBQjjuw5fSIt9FBPxDURkVENx8nxKcWFoDwVkJdQEAUNBFTRErdzKriMJ4JgIzPBq7SkjT8Fk+89PCvtOuMj9VOHcw1glFQ7DQCBTAwAAmGFsFBOBAl0ABSawACFkNvVCjiWniDqw1BPxUBZqE6EM01ERK7CIWgkECM1ynxHwgQAKjcPwQGwfR3piMAzISXQ2j0clkBQCgYnwIn4gwUm4FbdsOMJYpimK4HDNB064qYDA0H0YRa3jRGJX6MCzQAXyliAzXMFQcwWtDOO43h8gAcjAKB1CgUzzLgCQ0ASDWED1mQUigJRdDEGQcQ2pSnRkv7mcZVn2aYTDufuR5nled4tC-PoUDgQt8AoNZhgohYnHUU1AiIkByl1NdSjXJWjRVokSR4MkkgdrblOd9tXf+242eKe6vcirreeDuxaEkcwKJhe6NUKXQHGoJBsGUfFjFrFYM44wHeAkXRkgQAv1KLnaXcLp255LvaPXaw6eTAah6U+fRqCIOAQ1BBx6CIigILWXJUglfRCXoKd1DcXJRD8+mAoOFXvWDNeQd5fkWmNuAWgQzCBnPoRKEBYIYCmB4NAhIpaEicMMZEpA-D9FgsPMq2dSTkgLs1MqxRyiFH6ISPyxtd5EG9nyAWgphSih6HFFwDgEBAXKHADG9IIBfTNPkbIFFJCSCmFLBYGCVamgtCtaeCAyF7xvMvGei9-LJFSI7UQKlV4L1UZSRSGj7SKJ0jorR+15GaPwHo5RBiOCQB4EAA
-
 
 ## No-login Chat App
 
