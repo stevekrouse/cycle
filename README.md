@@ -19,9 +19,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
     * create variable POOP with initial value Y
       * -> now you can set it, change it and use it
 
-  * colour scheme generator built in 
-    * maybe: https://github.com/Fooidge/PleaseJS 
-  
   * links images and links should have better shaped blocks
     * maybe inputs... 
     * should text be a div with a text input space and children'? inline?
@@ -34,7 +31,7 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * faster iteration cycle   
     * don't fully reload īframe just delete loads and vue and app and page for speed
     * try making style and text changes directly without recompile for speed
-    * play with ability to edit box model in magnifying glass
+    
 
   * good css defaults in the homepage
     * make them explicit
@@ -46,10 +43,8 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
   * variable should default to setting to 0
   
-  * get random color and color blend and other such functions all working 
+  * functions don't work in setting inital data! this is complex given how things are currenlty built
   
-  * set font family broken
-
   * including CSS link tags
     * and JS, not dynamically?
   
@@ -127,7 +122,9 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 
 ## Eventually
-  
+
+  * colour scheme generator built in 
+    * maybe: https://github.com/Fooidge/PleaseJS
   * turn all px inputs to numbers with dropdown for px, em, %
   * allow code snipets
     * HTML -> use VueJS compiler
@@ -197,7 +194,8 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   
 
 ## Considerations
-  
+
+  * play with ability to edit box model in magnifying glass
   * change cycle name!
   * compile to snabbdom instead of vuejs for better patching and instant rendering
     * immutableJS

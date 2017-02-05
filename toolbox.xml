@@ -295,7 +295,7 @@
     <block type="layout_background_color">
       <value name="COLOR">
         <block type="colour_picker">
-          <field name="COLOUR">white</field>
+          <field name="COLOUR">rgb(51, 153, 153)</field>
         </block>
       </value>
     </block>

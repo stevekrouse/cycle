@@ -453,7 +453,11 @@ function getAttributes(firstChild, parent) {
 function blockAttributes(block) {
   var attributes = getAttributes(block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN"), block)
 
-  if (block.type == "controls_forEach") {
+  if (block.type == "cycle_page") {
+    if (!attributes.styleStrings.height) {
+      attributes.styleStrings.height = "'100%'"
+    }
+  } else if (block.type == "controls_forEach") {
      attributes.repeat = {}
      attributes.repeat.iterator = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
      attributes.repeat.list = ('(' + (Blockly.JavaScript.valueToCode(block, 'LIST',Blockly.JavaScript.ORDER_ASSIGNMENT) || '[]') + ')');
