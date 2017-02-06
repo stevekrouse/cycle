@@ -13,6 +13,8 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## MVP
 
+  * can't read style strings of undefined
+
   * min, max width, height --> set mix height to 100%  - 20 min
   
   * more compile time errors with block id so can highlight - 1 hour
