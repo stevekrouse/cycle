@@ -324,6 +324,22 @@ Blockly.Blocks['mousedown'] = {
   }
 };
 
+Blockly.Blocks['mousemove'] = {
+  init: function() {
+    this.setColour(60);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.appendDummyInput()
+      .appendField("when mouse move (event)");
+    this.appendStatementInput("blocks")
+      .setCheck(null);
+    this.setTooltip('');
+  },
+  getVars: function() {
+    return ["event"]
+  }
+};
+
 Blockly.Blocks['change'] = {
   init: function() {
     this.setColour(60);

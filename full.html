@@ -22,41 +22,17 @@
     body {
       height: 100%;
       margin: 0px;
-      background-color: #fff;
-      font-family: sans-serif;
       display: flex;
       align-items: stretch;
       flex-direction: column;
-    }
-    
-    #title {
-      font-weight: normal;
-      font-size: 25px;
-      color: blue;
     }
   </style>
 </head>
 
 <body>
-  <div id="navbar" style="height:30px; width:calc(100%-10px); padding: 5px; display: flex; justify-content: space-between ">
-    <span id="title">Cycle</span>
-    <img onclick="selector=true" style="height:30px" src="https://d0.awsstatic.com/Inspector/Inspector_MCV3_Benefit_IdentifyApplication.png"></img>
-    <button id="runtimeError" style="display:none; background-color: salmon; border: none">Error</button>
-    <button onclick="window.open('full.html' + window.location.hash)">Full Screen</button>
-    <a href="./index.html"><button>New Project</button></a>
-  </div>
+  <iframe frameBorder="0" src="" id="preview" style="width:100%; height: 100%"></iframe>
 
-  <div id="container" style="width:100%; flex-grow: 1; display:flex; flex-direction:row; align-items: stretch;">
-    <div id="output" style=" width:50%; display:flex; align-items: stretch;">
-      <iframe frameBorder="0" src="" id="preview" style="width:100%"></iframe>
-    </div>
-
-    <div id="blocksEditor" style="width: 50%; "></div>
-    
-    <xml id="elementStartingBlocks" style="display:none">
-      <block type="cycle_page" id="1" deletable="false" movable="false" x="0" y="10"><statement name="CHILDREN"><block type="layout_height" id="Z_;h`Tu#1D$/uw$_0=yg"><value name="VALUE"><block type="text" id="@tA^B-r5k2-gdJW]|*1H"><field name="TEXT">100%</field></block></value><next><block type="layout_background_color" id="St|`#QCG?B;vNm$a7r9z"><value name="COLOR"><block type="colour_picker" id="uw=itF/nez?qJAs,gLa}"><field name="COLOUR">#ffffff</field></block></value><next><block type="layout_flex_parent" id="g!-{wcJ*EIra^nqS-pTz"><field name="DIRECTION">column</field><field name="X">center</field><field name="Y">top</field><field name="WRAP">wrap</field><next><block type="cycle_container" id="{[prevIU~[?u.[kji,[4"><statement name="CHILDREN"><block type="font_color" id="17.lb%4Wdjf89A!Qmapk"><value name="COLOR"><block type="colour_picker" id="aWs+UwCEuHW#P,9P2)G1"><field name="COLOUR">#ff6666</field></block></value><next><block type="layout_margin" id="Pg7~z!JRqGNCgf]7@:E_"><field name="BORDER">Top</field><value name="VALUE"><block type="text" id="{)=/xZXeJZmmu2-}.^Qk"><field name="TEXT">100px</field></block></value><next><block type="font_size" id="E-naHXF5e=JZ(a()n:06"><value name="SIZE"><block type="text" id="u}CL0i}l4C$QpRv^%^ed"><field name="TEXT">50px</field></block></value><next><block type="font_family" id="*8%FD`Mk]]NlCN5v;1$["><value name="FONT"><block type="text" id="$`wU:`yC[^J?8g4zzwL}"><field name="TEXT">sans-serif</field></block></value><next><block type="cycle_text" id="o929PCc,t3Y]cNDv=/+9"><value name="TEXT"><block type="text" id="OBk7E:r/w`T:hGF:^NdD"><field name="TEXT">Welcome to Cycle</field></block></value></block></next></block></next></block></next></block></next></block></statement><next><block type="cycle_button" id="yi11R!ix186a]Y[Tv2FX"><statement name="CHILDREN"><block type="layout_background_color" id="KZI1M[Yv%z{6ml.U!A3l"><value name="COLOR"><block type="colour_picker" id="6PV4Tk3/P0)=@*1#ntua"><field name="COLOUR">#ffffff</field></block></value><next><block type="font_color" id="8~HKUjs?g{(i+#WhLw*k"><value name="COLOR"><block type="colour_picker" id="s9GlVxfx[-N,ZSom`YQ%"><field name="COLOUR">#666666</field></block></value><next><block type="font_size" id="~2B*iPeYKXO*;k`s.H6z"><value name="SIZE"><block type="text" id="m%CDKH)X`Otm2_P8C5|E"><field name="TEXT">30px</field></block></value><next><block type="layout_margin" id="S~DMzr}c/Yt#jmpmw_l("><field name="BORDER">Top</field><value name="VALUE"><block type="text" id="0mr1c^:}{s2,j_Hll4C."><field name="TEXT">40px</field></block></value><next><block type="layout_border" id="q3E4SM)C0,]qmaK-:aOV"><field name="BORDER">all</field><field name="STYLE">solid</field><value name="WIDTH"><block type="text" id="tX~cYD;hlNB`(y;NX0`/"><field name="TEXT">2px</field></block></value><value name="COLOR"><block type="colour_picker" id="n(7N(n7UaF3e*s/_Edrz"><field name="COLOUR">#c0c0c0</field></block></value><value name="RADIUS"><block type="text" id="d_Z5z#8+0MbR_O:Ia6:Y"><field name="TEXT">5px</field></block></value><next><block type="layout_outline" id="d=%UWnKmrKEFx~Tkik78"><field name="STYLE">none</field><value name="WIDTH"><block type="text" id="]7%{Og2-e`9imn3%4w%D"><field name="TEXT">2px</field></block></value><value name="COLOR"><block type="colour_picker" id="3~lD$=5^;yW|Mva[B{SB"><field name="COLOUR">#3333ff</field></block></value><next><block type="cycle_text" id="M0b]_Bxpj4_+,)c^}gnl"><value name="TEXT"><block type="text_join" id="gj_5z^Z*#[H)@uJjz/N6"><mutation items="3"></mutation><value name="ADD0"><block type="text" id="bL$v_#YX(zmInkf%%b5s"><field name="TEXT">I've been clicked </field></block></value><value name="ADD1"><block type="variables_get" id=",OZqq%y(~}k)dNy#wM;h"><field name="VAR">clicks</field></block></value><value name="ADD2"><block type="text" id="NWxl1WD[4Hfzj,q`Z8!Q"><field name="TEXT"> times</field></block></value></block></value><next><block type="variables_set" id="5w;Fv/p.7GMMs8i|qOKF"><field name="VAR">clicks</field><value name="VALUE"><block type="math_number" id="eHe3QR|{iIA{l}eVYSL3"><field name="NUM">0</field></block></value><next><block type="mousedown" id="/wdNa!YO=2DnO@Jt}VA:"><statement name="blocks"><block type="math_change" id="iMl0f#x%1^3k}PQ0Id(@"><field name="VAR">clicks</field><value name="DELTA"><shadow type="math_number" id="eb!DcZ/;:+zq;|qC#:R,"><field name="NUM">1</field></shadow></value></block></statement></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></statement></block></next></block></next></block></next></block></next></block></statement></block>
-    </xml>
-  </div>
+  <div id="blocksEditor" style="display:none"></div>
 
   <script>
     Blockly.BlockSvg.START_HAT = true;
@@ -132,8 +108,7 @@
           scaleSpeed: 1.2
         },
       });
-      Blockly.Xml.domToWorkspace(document.getElementById('elementStartingBlocks'), workspace);  
-      
+
       workspace.addChangeListener(function(event) {
         if (event instanceof Blockly.Events.Ui) {
           if (event.element == "selected") {
@@ -245,24 +220,12 @@
     var runtimeError = document.getElementById('runtimeError')
     var preview = document.getElementById('preview')
     var blocksEditor = document.getElementById('blocksEditor')
-
-    var clearError = function() {
-      runtimeError.style.display = "none"
-    }
-      
-    $('body').bind('runtimeError', function(event, message) {
-      runtimeError.style.display = "inline-block"
-      runtimeError.onclick = function() {
-        alert(message)
-      }
-    })
       
     var code = {}
     function run() {
       preview.src = "./output.html";
       
       preview.onload = function() {
-        clearError()
         code = getCode()
         preview.contentWindow.code = code 
       }

@@ -1,4 +1,4 @@
-var nativeEvents = ["load", "mousedown", "mouseup", "dblclick", "mouseover", "mouseout", "keydown", "keyup", "change", "blur"]
+var nativeEvents = ["load", "mousedown", "mouseup", "dblclick", "mouseover", "mouseout", "mousemove", "keydown", "keyup", "change", "blur"]
 
 var events = nativeEvents.concat(["cycle_custom_event"])
 
@@ -15,7 +15,7 @@ keyEvents.forEach(function(event){
   Blockly.JavaScript[event] = function(block) {
     var statements_blocks = Blockly.JavaScript.statementToCode(block, 'blocks');
     if (block.getFieldValue("KEYCODE") != "ANY") {
-      statements_blocks = "  if (event.keyCode == " + Number(block.getFieldValue("KEYCODE")) + ") {\n  " + statements_blocks + "\n  }"
+      statements_blocks = "debugger;   if (event.keyCode == " + Number(block.getFieldValue("KEYCODE")) + ") {\n  " + statements_blocks + "\n  }"
     }
     return statements_blocks
   };
@@ -549,7 +549,7 @@ function workspaceData(block, childrenString) {
     result = {
       blockId: block.id,
       tagType: "div",
-      children: mapWorkspaceData(block.getInputTargetBlock("DO"))  // TODO this seems funky
+      children: mapWorkspaceData(block.getInputTargetBlock("DO"))  
     }
   } else if (block.type == "controls_if") {
     result = {

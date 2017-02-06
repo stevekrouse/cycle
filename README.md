@@ -11,118 +11,63 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * need to come up with better words than "block-based" or "drag and drop"
   * race between programmer typing and another programmer on cycle
 
-### Current technical projects7
+## MVP
 
-  * more compile time errors with block id
+  * view full screen
   
-  * think about pros/cons of rolling my own variable implementation vs modifying their existing one 
-    * create variable POOP with initial value Y
-      * -> now you can set it, change it and use it
-
-  * links images and links should have better shaped blocks
-    * maybe inputs... 
-    * should text be a div with a text input space and children'? inline?
-      
+  * user accounts & saving
+  
+  * ajax
+  
+  * repeat 10 times for elements and for loop for elements 
+  
   * better onboarding
     * needs more structure but still allows for user choice 
     * need to come up with untutorials?
     * add other projects chat app and todomvc (with links not to c9) to homepage
-    
-  * faster iteration cycle   
-    * don't fully reload īframe just delete loads and vue and app and page for speed
-    * try making style and text changes directly without recompile for speed
-    
 
-  * good css defaults in the homepage
-    * make them explicit
-    * center text maybe
-    * add padding maybe
-    * sans serif maybe
+  * more compile time errors with block id so can highlight
   
-  * using a variable before defining it should error better
 
-  * variable should default to setting to 0
+### Current technical projects
   
-  * functions don't work in setting inital data! this is complex given how things are currenlty built
-  
-  * including CSS link tags
-    * and JS, not dynamically?
-  
-  * break up elements into menus textbooks media inputs containers nav bar lists link?
-
-  * see if we can get blocks not to carry children
-    * google this first for sure 
-
-  * beautify chat app
-   
-  * blocks broken on mobile --> and desktop safari
-
-  * hints
+  * think about how to make data more intuative
+    * roll custom variables -> data menu
+    * create variable with initial value 
+    * set variable to X
+    * increase variable by 1
+    * using a variable before defining it should error better
+    * variable should default to setting to 0
+    * functions don't work in setting inital data! this is complex given how things are currenlty built
     * raise errors when variables are used out of scope 
-
-## App ideas
-
-   * Total TODO MVC parity
-     * http://todomvc.com/examples/vue/#/all
-     * https://github.com/tastejs/todomvc/blob/master/app-spec.md
-     * focus in events (might need to give elements their ids) 
-       * create a directive focus that you can set to an expression and when true, it focuses on that element
-     * trim text
-     * localstorage set, get
-     * check/uncheck all box
-     * window.loation.hash (or could look at full routing https://github.com/flatiron/director)
-
-  * upvoter for x
-    * login
-      * https://firebase.google.com/docs/auth/web/password-auth
-        * think about how to handle errors! 
-      * createUserWithEmailAndPassword
-      * signInWithEmailAndPassword
-      * email and password field
-      * login in / sign up buttons
-    * add 
-      * title
-      * url
-      * button
-      * submit to firebase
-    * for each  url, 
-      * button to upvote
-        * submit to firebase
-      * number of upvotes
-      * sorted
-    
-   * tinder for X
-    * if not logged in
-       * login
-         * email
-         * password
-         * login
-         * click here to create account
-      * create account
-        * name
-        * type X or Y (boy or girl)
-        * contact info (will be shared with matches)
-        * URL of photo
-        * email
-        * password
-        * submit button
-        * click here to log in
-    * logged in
-      * get list of users (not already swiped)
-      * place user in front
-        * name
-        * photo
-      * yes / no buttons
-        * submit to firebase
-        * move to next person
-      * have button to see matches
-        * photo, name, contact info
-        * back button
-      * log out button
+  * better elements
+    * Link url URL in a new tab|this page|new window
+    * Image url URL
+    * break up elements into menus
+      * text-boxes 
+      * media 
+        * images
+        * links
+        * video
+      * inputs/forms 
+      * containers
+      * navbar
+      * lists 
+      * tables
 
 
 ## Eventually
 
+  * export project 
+  * faster iteration cycle   
+    * don't fully reload īframe just delete loads and vue and app and page for speed
+    * try making style and text changes directly without recompile for speed
+  * including CSS link tags
+  * beautify chat app
+  * blocks broken on chrome and safari mobile --> and desktop safari
+  * import JS librarys statically
+  * copy and paste or "backpack"
+  * should text be a div with a text input space and children'? inline?
   * colour scheme generator built in 
     * maybe: https://github.com/Fooidge/PleaseJS
   * turn all px inputs to numbers with dropdown for px, em, %
@@ -195,6 +140,9 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## Considerations
 
+  * connector to webscript or blockspring or 
+  * see if we can get blocks not to carry children
+  * cannot get keydown on divs because no tab index set
   * play with ability to edit box model in magnifying glass
   * change cycle name!
   * compile to snabbdom instead of vuejs for better patching and instant rendering
@@ -234,6 +182,72 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
         * nav bar
           * collapse 
           * ul / li.nav-item 
+
+
+## App ideas
+
+   * Total TODO MVC parity
+     * http://todomvc.com/examples/vue/#/all
+     * https://github.com/tastejs/todomvc/blob/master/app-spec.md
+     * focus in events (might need to give elements their ids) 
+       * create a directive focus that you can set to an expression and when true, it focuses on that element
+     * trim text
+     * localstorage set, get
+     * check/uncheck all box
+     * window.loation.hash (or could look at full routing https://github.com/flatiron/director)
+
+  * upvoter for x
+    * login
+      * https://firebase.google.com/docs/auth/web/password-auth
+        * think about how to handle errors! 
+      * createUserWithEmailAndPassword
+      * signInWithEmailAndPassword
+      * email and password field
+      * login in / sign up buttons
+    * add 
+      * title
+      * url
+      * button
+      * submit to firebase
+    * for each  url, 
+      * button to upvote
+        * submit to firebase
+      * number of upvotes
+      * sorted
+    
+   * tinder for X
+    * if not logged in
+       * login
+         * email
+         * password
+         * login
+         * click here to create account
+      * create account
+        * name
+        * type X or Y (boy or girl)
+        * contact info (will be shared with matches)
+        * URL of photo
+        * email
+        * password
+        * submit button
+        * click here to log in
+    * logged in
+      * get list of users (not already swiped)
+      * place user in front
+        * name
+        * photo
+      * yes / no buttons
+        * submit to firebase
+        * move to next person
+      * have button to see matches
+        * photo, name, contact info
+        * back button
+      * log out button
+
+
+## Click to change color
+
+https://preview.c9users.io/stevekrouse_1/cycle-lang/cycle/index.html#DwDwtgNgBOEHYGcC8AiAFgFwwBwFwHp8B3EgOiIGZSB7AJwHN8BGATjfxE0hQD5gAjCNQDGAaygYAntgCmqYZOEQZAfWwBDejJRQAlgBNUTHfpnKM6wXJQAzdRATaoYagDdLy1HYdOQqAAw6kkaBfAgWGDJgMnAYUHDq0agAwgASAJIAMgAiAEoAogByvAJCYhLS1u60uh4yCCqOGDoGqBhoALoA6gB+ANoAVgACAGoAjvkA1AB6TNNgmQAkAOzLJTa6ZvrxidYjAIK5vMLUQrTA+BtbfO4QAK4yO0koB5kAqvklgiLiUrLyp2od1oal0YhktBahhQuloAEVcEwAL6ZABCAFZph11OoALQAQjgaAAlABZABi602EG2CWeyQA8pkGW8jjwAMQ2Gz+Hn+C5XGl8fDfMRC24PPhwGQgDB8EW-SqoCDqSRAjAqfjqMT0WhAuD6FQnM5Q1Aqdno-h3SQAaXxCAA-CwGalCgADfCTPoADmyJXFjzp1kZzLZpR+FX+KGqtSsDS0zT00NwAG4AFI9Ma6UkIhkdECFN66a34e34+hUrZPPaHY6A86Xan6IXysX2CXAKUyuVlBWRlx3Rz6ahEOAmlDCO7YAAKI0yokK5JAxIAVOk4bovSpyQgpyVwupItFYlXUPKEF8exGquoanUGk0xzYEP5ktMAEx9dTpgDiMiRcCnGRkjAdEkQrGkTxeGseCNOh+UbG42wDXZUFeD4L3DP5rFg4EVFodR9WoMAxwAFlwCAumSdQ4XoN9dFSIhcFxe1iX2bJrQADRKYUe1be4ZGbXiLn3Q8YllC4WwuTtxJ4n4hWkwS5OEiIojExTRQuWAeCAA
 
 ## No-login Chat App
 

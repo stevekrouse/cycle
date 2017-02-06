@@ -412,6 +412,7 @@
     <block type="dblclick"></block>
     <block type="mouseover"></block>
     <block type="mouseout"></block>
+    <block type="mousemove"></block>
     <block type="keydown"></block>
     <block type="keyup"></block>
     <block type="blur"></block>
