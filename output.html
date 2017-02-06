@@ -63,7 +63,7 @@
     else if (code.attributes.repeat) {
       return "h(" + "\n" +
         "  'div', // containter for all the repeats" + "\n" +
-        "  {}," + "\n" +
+        "  {style: {width: '100%', height: '100%'}}," + "\n" +
         "  " + scopeVaribles(code.attributes.repeat.list, variables) + ".map(function (" + code.attributes.repeat.iterator + ") {" + "\n" +
         "    return h(" + "\n" +
         "      'div'," + "\n" +

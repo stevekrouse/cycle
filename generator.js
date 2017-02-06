@@ -451,7 +451,16 @@ function getAttributes(firstChild, parent) {
 }
 
 function blockAttributes(block) {
-  var attributes = getAttributes(block.getInputTargetBlock && block.getInputTargetBlock("CHILDREN"), block)
+  var attributes
+  if (block.getInputTargetBlock) {
+    if (block.getInputTargetBlock("CHILDREN")) {
+      attributes = getAttributes(block.getInputTargetBlock("CHILDREN"), block)
+    } else if (block.getInputTargetBlock("DO")) {
+      attributes = getAttributes(block.getInputTargetBlock("DO"), block)
+    }
+  } else {
+    return {}
+  }
 
   if (block.type == "cycle_page") {
     if (!attributes.styleStrings.height) {

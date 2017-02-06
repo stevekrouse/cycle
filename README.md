@@ -13,6 +13,8 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## MVP
   
+  * get methods working in setting data initially
+  
   * ajax
     * consider webscript and blockspring 
   
