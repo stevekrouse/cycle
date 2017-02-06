@@ -457,6 +457,18 @@ function blockAttributes(block) {
     if (!attributes.styleStrings.height) {
       attributes.styleStrings.height = "'100%'"
     }
+  } else if (block.type == "controls_repeat_ext") {
+     attributes.repeat = {}
+     attributes.repeat.iterator = Blockly.JavaScript.variableDB_.getName("NONE");
+     var times = Blockly.JavaScript.valueToCode(block,"TIMES",Blockly.JavaScript.ORDER_ASSIGNMENT)||"0"
+     attributes.repeat.list = "Array.from(Array(" + times + "), function() { return 1 })";
+  } else if (block.type == "controls_for") {
+     attributes.repeat = {}
+     attributes.repeat.iterator = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+     var from =Blockly.JavaScript.valueToCode(block,"FROM",Blockly.JavaScript.ORDER_ASSIGNMENT)||"0"
+     var to = Blockly.JavaScript.valueToCode(block,"TO",Blockly.JavaScript.ORDER_ASSIGNMENT)||"0"
+     var by = Blockly.JavaScript.valueToCode(block,"BY",Blockly.JavaScript.ORDER_ASSIGNMENT)||"1"
+     attributes.repeat.list = "new Function('var list = []; for (var i = " + from + "; i <= " + to + "; i +=" + by + ") { list.push(i) } return list ')()";
   } else if (block.type == "controls_forEach") {
      attributes.repeat = {}
      attributes.repeat.iterator = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
@@ -546,6 +558,18 @@ function workspaceData(block, childrenString) {
       children: mapWorkspaceData(children)
     }
   } else if (block.type == 'controls_forEach') {
+    result = {
+      blockId: block.id,
+      tagType: "div",
+      children: mapWorkspaceData(block.getInputTargetBlock("DO"))  
+    }
+  } else if (block.type == 'controls_for') {
+    result = {
+      blockId: block.id,
+      tagType: "div",
+      children: mapWorkspaceData(block.getInputTargetBlock("DO"))  
+    }
+  } else if (block.type == 'controls_repeat_ext') {
     result = {
       blockId: block.id,
       tagType: "div",

@@ -12,14 +12,9 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * race between programmer typing and another programmer on cycle
 
 ## MVP
-
-  * view full screen
-  
-  * user accounts & saving
   
   * ajax
-  
-  * repeat 10 times for elements and for loop for elements 
+    * consider webscript and blockspring 
   
   * better onboarding
     * needs more structure but still allows for user choice 
@@ -27,7 +22,9 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
     * add other projects chat app and todomvc (with links not to c9) to homepage
 
   * more compile time errors with block id so can highlight
+    * seperate compile-time errors from errors while compiling 
   
+  * user accounts & saving
 
 ### Current technical projects
   
