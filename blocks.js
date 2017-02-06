@@ -213,52 +213,6 @@ Blockly.Blocks['cycle_add_input'] = {
   }
 };
 
-Blockly.Blocks['set_css'] = {
-  init: function() {
-    this.setColour(310);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.appendValueInput("VALUE")
-      .appendField('set the')
-      .appendField(new Blockly.FieldDropdown([
-        ['background color', 'backgroundColor'],
-        ['text color', 'color'],
-
-        ['font size', 'fontSize'],
-        ['font family', 'fontFamily'],
-        ['text decoration', 'textDecoration'],
-        ['text algin', 'textAlign'],
-
-        ['height', 'height'],
-        ['width', 'width'],
-        ['position', 'position'],
-        ['display', 'display'],
-
-        ['visibility', 'visibility'],
-
-        ['padding top', 'paddingTop'],
-        ['padding bottom', 'paddingBottom'],
-        ['padding right', 'paddingRight'],
-        ['padding left', 'paddingLeft'],
-
-        ['margin top', 'marginTop'],
-        ['margin bottom', 'marginBottom'],
-        ['margin right', 'marginRight'],
-        ['margin left', 'marginLeft'],
-
-        ['border width', 'borderWidth'],
-        ['boder color', 'borderColor'],
-        ['boder radius', 'borderRadius'],
-        ['border style', 'borderStyle']
-
-      ]), 'PROPERTY')
-      .appendField('to');
-    // TODO seperate all of these into their own blocks and use units below for the relevant ones
-    // this.appendDummyInput()
-    //     .appendField(new Blockly.FieldDropdown([["pixels", "px"], ["%", "%"], ["relative pixels", "em"]]), "unit");
-  }
-};
-
 Blockly.Blocks['cycle_css_property'] = {
   init: function() {
     this.setColour(310);
@@ -1100,7 +1054,7 @@ Blockly.Blocks['layout_width'] = {
   init: function() {
     this.appendValueInput("VALUE")
         .setCheck(null)
-        .appendField("width");
+        .appendField(new Blockly.FieldDropdown([["width","width"], ["min width","minWidth"], ["max width","maxWidth"]]), "PROP");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(310);
@@ -1113,7 +1067,7 @@ Blockly.Blocks['layout_height'] = {
   init: function() {
     this.appendValueInput("VALUE")
         .setCheck(null)
-        .appendField("height");
+        .appendField(new Blockly.FieldDropdown([["height","height"], ["min height","minHeight"], ["max height","maxHeight"]]), "PROP");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(310);

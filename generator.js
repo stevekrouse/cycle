@@ -15,14 +15,20 @@ keyEvents.forEach(function(event){
   Blockly.JavaScript[event] = function(block) {
     var statements_blocks = Blockly.JavaScript.statementToCode(block, 'blocks');
     if (block.getFieldValue("KEYCODE") != "ANY") {
-      statements_blocks = "debugger;   if (event.keyCode == " + Number(block.getFieldValue("KEYCODE")) + ") {\n  " + statements_blocks + "\n  }"
+      statements_blocks = "if (event.keyCode == " + Number(block.getFieldValue("KEYCODE")) + ") {\n  " + statements_blocks + "\n  }"
     }
     return statements_blocks
   };
 })
 
-
-
+function CompileError(message, blockId) {
+  this.name = 'CompileError';
+  this.blockId = blockId
+  this.message = message;
+  this.stack = (new Error()).stack;
+}
+CompileError.prototype = Object.create(Error.prototype);
+CompileError.prototype.constructor = CompileError;
 
 // Include scripts
 
@@ -257,11 +263,13 @@ function getAttributes(firstChild, parent) {
       attributes.styleStrings[key] = value 
     } else if (children.type.includes("layout_")) {
       if (children.type == "layout_width") {
+        var prop = children.getFieldValue("PROP")
         var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
-        attributes.styleStrings["width"] =  value
+        attributes.styleStrings[prop] =  value
       } else if (children.type == "layout_height") {
+        var prop = children.getFieldValue("PROP")
         var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
-        attributes.styleStrings["height"] =  value
+        attributes.styleStrings[prop] =  value
       } else if (children.type == "layout_padding") {
         var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
         var side = children.getFieldValue('BORDER') == "all" ? '' : children.getFieldValue('BORDER')
@@ -292,7 +300,7 @@ function getAttributes(firstChild, parent) {
         var y = "'" + children.getFieldValue('Y') + "'";
         var wrap = "'" + children.getFieldValue('WRAP') + "'"
         if (attributes.styleStrings.display && attributes.styleStrings.display.includes("inline")) {
-          throw new Error('An inline block cannot arrange its children. Remove the "inline" block or the "arrange children" block.')
+          throw new CompileError('An inline block cannot arrange its children. Remove the "inline" block or the "arrange children" block.', children.id)
         } else {
           attributes.styleStrings["display"] = "'flex'"
         }
@@ -328,7 +336,7 @@ function getAttributes(firstChild, parent) {
       } else if (children.type == "layout_inline") {
         var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
         if (attributes.styleStrings.display && attributes.styleStrings.display.includes("flex")) {
-          throw new Error('An inline block cannot arrange its children. Remove the "inline" block or the "arrange children" block.')
+          throw new CompileError('An inline block cannot arrange its children. Remove the "inline" block or the "arrange children" block.', children.id)
         } else {
           attributes.styleStrings.display = value + "? 'inline-block' : 'block'"
         }
@@ -437,7 +445,15 @@ function getAttributes(firstChild, parent) {
       // prevent blockly from compiling more than one event at a time by removing nextConnecting accessed in javascript_compressed.js:scrub_
       var nextConnection = children.nextConnection
       children.nextConnection = undefined
-      onMap[eventName] = Blockly.JavaScript.blockToCode(children) // TODO allow multiple eventually
+      try {
+        onMap[eventName] = Blockly.JavaScript.blockToCode(children)  
+      } catch(e) {
+        if (e.message.includes("Cannot read property 'call' of undefined")) {
+          throw new CompileError("You cannot have elements or styles (brown or purple blocks) inside of events.", children.id)
+        } else {
+          throw e
+        }
+      }
       children.nextConnection = nextConnection
     } else if (children.type == "cycle_add_input"){
       name = children.getFieldValue('NAME')
@@ -461,9 +477,9 @@ function blockAttributes(block) {
   }
   
   if (block.type == "cycle_page") {
-    if (!attributes.styleStrings.height) {
-      attributes.styleStrings.height = "'100%'"
-    }
+    // if (!attributes.styleStrings.minHeight) {
+    //   attributes.styleStrings.minHeight = "'100%'"
+    // }
   } else if (block.type == "controls_repeat_ext") {
      attributes.repeat = {}
      attributes.repeat.iterator = Blockly.JavaScript.variableDB_.getName("NONE");
@@ -588,6 +604,8 @@ function workspaceData(block, childrenString) {
       tagType: "div",
       children: mapWorkspaceData(block.getInputTargetBlock("DO"))  
     }
+  } else if (block.type == "cycle_debugger") {
+    debugger
   } else if (block.type == "controls_if") {
     result = {
       blockId: block.id,

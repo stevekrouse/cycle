@@ -13,13 +13,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## MVP
 
-  * can't read style strings of undefined
-
-  * min, max width, height --> set mix height to 100%  - 20 min
-  
-  * more compile time errors with block id so can highlight - 1 hour
-    * seperate compile-time errors from errors while compiling
-  
   * think about how to make data more intuative - 3 hours
     * mutator on page (and custom elements) 
     * roll custom variables -> data menu
@@ -40,15 +33,12 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   
   * ajax
     * consider webscript and blockspring 
-
-### Current technical projects
-  
-  
+    
   * better elements
     * Link url URL in a new tab|this page|new window
     * Image url URL
     * break up elements into menus
-      * text-boxes 
+      * Textbox (or text element)
       * media 
         * images
         * links
@@ -56,13 +46,19 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
         * iframe
       * inputs/forms 
       * containers
+        * inline container
+        * full width container
+        * vertical spacer
+        * horiztonal spacer
       * navbar
       * lists 
       * tables
 
-
 ## Eventually
-
+  
+  * date and time menu
+    * maybe: http://www.datejs.com/
+  * parse int
   * export project 
   * faster iteration cycle   
     * don't fully reload īframe just delete loads and vue and app and page for speed
@@ -144,7 +140,9 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   
 
 ## Considerations
-
+  
+  * consider combining all font styles into one massive block like the top of google docs
+  * close flyouts by clicking on the flyout (not on the block)
   * turn loops more into components with base type and closure with their own data
   * see if we can get blocks not to carry children
   * cannot get keydown on divs because no tab index set
