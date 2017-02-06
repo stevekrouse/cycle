@@ -145,6 +145,22 @@
         </block>
       </statement>
     </block>
+    <block type="cycle_iframe">
+      <statement name="CHILDREN">
+        <block type="cycle_html_property">
+          <value name="KEY">
+            <block type="text">
+              <field name="TEXT">src</field>
+            </block>
+          </value>
+          <value name="VALUE">
+            <block type="text">
+              <field name="TEXT">http://stevekrouse.github.io/cycle</field>
+            </block>
+          </value>
+        </block>
+      </statement>
+    </block>
     <!--list-->
     <!--list element (numbered/bullet/nothing)-->
     <!--heading-->

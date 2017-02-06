@@ -12,25 +12,14 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * race between programmer typing and another programmer on cycle
 
 ## MVP
-  
-  * get methods working in setting data initially
-  
-  * ajax
-    * consider webscript and blockspring 
-  
-  * better onboarding
-    * needs more structure but still allows for user choice 
-    * need to come up with untutorials?
-    * add other projects chat app and todomvc (with links not to c9) to homepage
 
-  * more compile time errors with block id so can highlight
-    * seperate compile-time errors from errors while compiling 
+  * min, max width, height --> set mix height to 100%  - 20 min
   
-  * user accounts & saving
-
-### Current technical projects
+  * more compile time errors with block id so can highlight - 1 hour
+    * seperate compile-time errors from errors while compiling
   
-  * think about how to make data more intuative
+  * think about how to make data more intuative - 3 hours
+    * mutator on page (and custom elements) 
     * roll custom variables -> data menu
     * create variable with initial value 
     * set variable to X
@@ -39,6 +28,20 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
     * variable should default to setting to 0
     * functions don't work in setting inital data! this is complex given how things are currenlty built
     * raise errors when variables are used out of scope 
+  
+  * better onboarding
+    * needs more structure but still allows for user choice 
+    * need to come up with untutorials?
+    * add other projects chat app and todomvc (with links not to c9) to homepage
+
+  * user accounts & saving
+  
+  * ajax
+    * consider webscript and blockspring 
+
+### Current technical projects
+  
+  
   * better elements
     * Link url URL in a new tab|this page|new window
     * Image url URL
@@ -48,6 +51,7 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
         * images
         * links
         * video
+        * iframe
       * inputs/forms 
       * containers
       * navbar
@@ -139,7 +143,7 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## Considerations
 
-  * connector to webscript or blockspring or 
+  * turn loops more into components with base type and closure with their own data
   * see if we can get blocks not to carry children
   * cannot get keydown on divs because no tab index set
   * play with ability to edit box model in magnifying glass

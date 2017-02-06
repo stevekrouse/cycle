@@ -545,6 +545,12 @@ function workspaceData(block, childrenString) {
       tagType: "div",
       children: mapWorkspaceData(children)
     }
+  } else if (block.type == 'cycle_iframe'){
+    result = {
+      blockId: block.id,
+      tagType: "iframe",
+      children: mapWorkspaceData(children)
+    }
   } else if (block.type == 'cycle_text') {
     var value = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC)
     return value

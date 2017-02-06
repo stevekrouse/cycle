@@ -68,6 +68,19 @@ Blockly.Blocks['cycle_text'] = {
   },
 };
 
+Blockly.Blocks['cycle_iframe'] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField("Embed (iframe)");
+    this.appendStatementInput("CHILDREN")
+      .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(20);
+    this.setTooltip('');
+  },
+};
+
 Blockly.Blocks['cycle_custom_event'] = {
   init: function() {
     this.appendValueInput("NAME")
