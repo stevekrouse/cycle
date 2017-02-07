@@ -420,7 +420,7 @@ function getAttributes(firstChild, parent) {
       key = Blockly.JavaScript.valueToCode(children, 'KEY', Blockly.JavaScript.ORDER_ATOMIC);
       attributes.domPropsStrings[key] = value 
     } else if (children.type == "variables_set") {
-      value = Blockly.JavaScript.valueToCode(children, 'VALUE',Blockly.JavaScript.ORDER_ASSIGNMENT) || 0;
+      value = Blockly.JavaScript.valueToCode(children, 'VALUE',Blockly.JavaScript.ORDER_ASSIGNMENT) || "0";
       name = Blockly.JavaScript.variableDB_.getName(children.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
       attributes.dataStrings[name] = value
     } else if (events.includes(children.type)) { 

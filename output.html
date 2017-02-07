@@ -179,18 +179,14 @@
       "}"
   }
 
-  function collectData(code) {
-    return collectDataHelper(code, {})
-  }
-
-  function collectDataHelper(code, collection) {
+  function collectData(code, variables, collection) {
     if (!code || typeof code == "string") {
-      return {}
+      return 
     }
     else {
       var dataKeys = Object.keys(code.attributes.dataStrings)
       dataKeys.forEach(function(key) {
-        collection[key] = new Function("return " + code.attributes.dataStrings[key])()
+        collection[key] = scopeVaribles(code.attributes.dataStrings[key], variables, "window.methods")
       })
       var subBlocks = code.children || []
       if (code.attributes.if){
@@ -200,9 +196,8 @@
         subBlocks.push(code.attributes.if.else_)
       }
       subBlocks.forEach(function(child) {
-        collectDataHelper(child, collection)
+        collectData(child, variables, collection)
       })
-      return collection
     }
   }
 
@@ -216,7 +211,7 @@
 
   function printComponents(components) {
     return components.map(function(component) {
-      var data = collectData(component)
+      var data = {} //collectData(component)
       var variables = Object.keys(data).concat(Object.keys(window.code.definitions))
       var render = parseCodeToVueRender(component, variables.concat(component.props))
 
@@ -232,22 +227,27 @@
   }
 
   function pageToVueString(code) {
-    var data = collectData(code.page)
-    var variables = Object.keys(data).concat(Object.keys(code.definitions))
-    return "window.data = " + JSON.stringify(data, null, 2) + "\n" +
-      "window.render = " + parseCodeToVueRender(code.page, variables) + "\n" +
+    var variableNames = Object.keys(code.data)
+    var methodNames = Object.keys(code.definitions)
+    var variablesAndMethods = variableNames.concat(methodNames)
+    collectData(code.page, methodNames, code.data)
+    return "" +
+      "window.methods = {" + "\n" +
+      "  " + printMethods(code.definitions, variablesAndMethods) + "\n" +
+      "};" + "\n" +
+      "window.render = " + parseCodeToVueRender(code.page, variablesAndMethods) + "\n" +
       "window.app = new Vue({" + "\n" +
       "  el: '#page'," + "\n" +
       "  render: window.render," + "\n" +
-      "  data: window.data," + "\n" +
+      "  data: {\n" + Object.keys(code.data).map(function(variable) {
+           return "    " + variable + ": " + code.data[variable] 
+         }).join(",\n") + "\n  },\n" +
       "  mounted: function () {" + "\n" +
       "    this.$nextTick(function () {" + "\n" +
       "      window.loads.forEach(function(funcString) { new Function(funcString)() })" + "\n" +
       "    })" + "\n" +
       "  }," + "\n" +
-      "  methods: {" + "\n" +
-      "  " + printMethods(code.definitions, variables) + "\n" +
-      "  }," + "\n" +
+      "  methods: window.methods,\n" +
       "  components: {" + "\n" +
       "  " + printComponents(code.components) + "\n" +
       "  }," + "\n" +

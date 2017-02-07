@@ -231,6 +231,24 @@
         }
       }
 
+      var nonDataVariables = ["newList"]
+      workspace.getAllBlocks().forEach(function(block){
+        if (events.includes(block.type)) {
+          nonDataVariables.push("event")
+        } else if (block.type.includes("firebase_")) {
+          nonDataVariables.push("value")
+        } else if (block.type == "controls_for" || block.type == "controls_forEach") {
+          nonDataVariables.push(block.getFieldValue('VAR'))
+        }
+      })
+      console.log(nonDataVariables)
+      var data = {}
+      Blockly.JavaScript.definitions_.variables.replace("var ", "").replace(";", "").split(", ").forEach(function(variable) {
+        if (!nonDataVariables.includes(variable)) { 
+          data[variable] = null  
+        }
+      })
+
       var definitions = {}
       Object.keys(Blockly.JavaScript.definitions_).forEach(function(name) {
         if (name != "variables") {
@@ -247,7 +265,8 @@
         blocks: blocks,
         definitions: definitions,
         components: components,
-        compileErrors: compileErrors
+        compileErrors: compileErrors,
+        data: data
       }
     }
 
