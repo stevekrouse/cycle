@@ -477,9 +477,9 @@ function blockAttributes(block) {
   }
   
   if (block.type == "cycle_page") {
-    // if (!attributes.styleStrings.minHeight) {
-    //   attributes.styleStrings.minHeight = "'100%'"
-    // }
+    if (!attributes.styleStrings.minHeight) {
+      attributes.styleStrings.minHeight = "'100%'"
+    }
   } else if (block.type == "controls_repeat_ext") {
      attributes.repeat = {}
      attributes.repeat.iterator = Blockly.JavaScript.variableDB_.getName("NONE");

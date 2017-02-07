@@ -241,13 +241,14 @@
           nonDataVariables.push(block.getFieldValue('VAR'))
         }
       })
-      console.log(nonDataVariables)
       var data = {}
-      Blockly.JavaScript.definitions_.variables.replace("var ", "").replace(";", "").split(", ").forEach(function(variable) {
-        if (!nonDataVariables.includes(variable)) { 
-          data[variable] = null  
-        }
-      })
+      if (Blockly.JavaScript.definitions_.variables) {
+        (Blockly.JavaScript.definitions_.variables).replace("var ", "").replace(";", "").split(", ").forEach(function(variable) {
+          if (!nonDataVariables.includes(variable)) { 
+            data[variable] = null  
+          }
+        })
+      }
 
       var definitions = {}
       Object.keys(Blockly.JavaScript.definitions_).forEach(function(name) {
