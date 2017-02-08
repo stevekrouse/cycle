@@ -42,7 +42,7 @@
     <span id="title">Cycle</span>
     <img onclick="selector=true" style="height:30px" src="https://d0.awsstatic.com/Inspector/Inspector_MCV3_Benefit_IdentifyApplication.png"></img>
     <button id="runtimeError" style="display:none; background-color: salmon; border: none">Error</button>
-    <button onclick="window.open('full.html' + window.location.hash)">Full Screen</button>
+    <button onclick="window.open('index.html?full=true' + window.location.hash)">Full Screen</button>
     <a href="./index.html"><button>New Project</button></a>
   </div>
 
@@ -59,6 +59,12 @@
   </div>
 
   <script>
+    if (JSON.parse(new URLSearchParams(window.location.search.slice(1)).get("full"))) {
+      $("#blocksEditor").hide()
+      $("#navbar").hide()
+      $("#output").css("width", "100%")
+    }
+  
     Blockly.BlockSvg.START_HAT = true;
     
     var scrollToBlockId = function(blockId, op) {
@@ -231,7 +237,7 @@
         }
       }
 
-      var nonDataVariables = ["newList"]
+      var nonDataVariables = ["newList", ""]
       workspace.getAllBlocks().forEach(function(block){
         if (events.includes(block.type)) {
           nonDataVariables.push("event")

@@ -8,14 +8,31 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 ## Customer development ideas
   
   * go to hackathons to teach kids to code with cycle and have them win
+    * HackTrin Sunday Feb 12
+    * Hack it Together Tuedsday Feb 21st workshop
+    * HackNYU Saturday Feb 18th
+      * hackathon on feb 26 at 8:30am
+    * HackNY  April 8
   * need to come up with better words than "block-based" or "drag and drop"
   * race between programmer typing and another programmer on cycle
 
 ## MVP
 
+  * make cycle untutorials, ending in chat app with no login but name and time stamps and sexy
+    *  https://docs.google.com/document/d/1L_6jNXmc-H1mG5jgnEEMOe1sni0g4rtBQC87Ip2iMk0/edit?disco=AAAAA70O310&usp=suggestion_email_discussion
+
+  * fix fullscreen
+
+  * add when flag clicked to firebase setup
+  * change firevase (value) to something else -> try to not break luke or hudson...
+  * add to scope in variables menu
+  * think about making firebase easier to get set up, words easier to understand
+    * REF
+    * sync instead of get?
+
   * temp variables in methods should not be scoped and should make newList not reserved
 
-  * change firevase (value) to something else
+  
 
   * user accounts & saving
     * create users
