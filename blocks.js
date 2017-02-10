@@ -773,7 +773,7 @@ Blockly.Blocks['firebase_set'] = {
   init: function() {
     this.appendValueInput("REF")
         .setCheck(null)
-        .appendField("set REF");
+        .appendField("set value at url");
     this.appendValueInput("VALUE")
         .setCheck(null)
         .appendField("to");
@@ -788,16 +788,35 @@ Blockly.Blocks['firebase_set'] = {
 
 Blockly.Blocks['firebase_add_to_list'] = {
   init: function() {
+    this.appendValueInput("REF")
+        .setCheck(null)
+        .appendField("in list at url");
     this.appendValueInput("VALUE")
         .setCheck(null)
         .appendField("add");
-    this.appendValueInput("REF")
-        .setCheck(null)
-        .appendField("to list at REF");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    // this.setOutput(true);
+    this.setColour(200);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['firebase_add_to_list_id'] = {
+  init: function() {
+    this.appendValueInput("REF")
+        .setCheck(null)
+        .appendField("in list at url");
+    this.appendValueInput("VALUE")
+        .setCheck(null)
+        .appendField("add");
+    this.appendDummyInput()
+        .appendField("and return the id");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setOutput(true);
     this.setColour(200);
     this.setTooltip('');
     this.setHelpUrl('');
@@ -808,7 +827,7 @@ Blockly.Blocks['firebase_delete'] = {
   init: function() {
     this.appendValueInput("REF")
         .setCheck(null)
-        .appendField("delete REF");
+        .appendField("delete contents at url");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -822,10 +841,12 @@ Blockly.Blocks['firebase_get'] = {
   init: function() {
     this.appendValueInput("REF")
         .setCheck(null)
-        .appendField("get REF");
-    this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([["every change","value"], ["once","once"], ["child added","child_added"], ["child removed","child_removed"], ["child changed","child_changed"]]), "frequency")
-        .appendField("(value)");
+        .appendField("at url")
+    this.appendDummyInput()
+        .appendField("get the new")
+        .appendField(new Blockly.FieldVariable("firebaseValue"), "VAR")
+        .appendField("and do");
     this.appendStatementInput("CHILDREN")
         .setCheck(null);
     this.setInputsInline(true);
@@ -842,7 +863,7 @@ Blockly.Blocks['firebase_get'] = {
 Blockly.Blocks['cycle_include_script'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("get JS script at URL")
+        .appendField("get javascript at url")
         .appendField(new Blockly.FieldTextInput("https://www.gstatic.com/firebasejs/3.6.6/firebase.js"), "URL");
     this.appendDummyInput()
         .appendField("and then do");

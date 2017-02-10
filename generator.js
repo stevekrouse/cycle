@@ -77,12 +77,13 @@ Blockly.JavaScript['firebase_delete'] = function(block) {
 
 Blockly.JavaScript['firebase_get'] = function(block) {
   var value_ref = Blockly.JavaScript.valueToCode(block, 'REF', Blockly.JavaScript.ORDER_ATOMIC);
+  var varName = block.getFieldValue('VAR');
   var dropdown_frequency = block.getFieldValue('frequency');
   var statements_children = Blockly.JavaScript.statementToCode(block, 'CHILDREN');
   var freqency = dropdown_frequency == "once" ? "once" : "on"
   var code = 'firebase.database().ref(' + value_ref + ')' 
   code += '.' + freqency + '("value", function(snapshot) {' + '\n';
-  code += 'var value = snapshot.val();\n'
+  code += 'var ' + varName + ' = snapshot.val();\n'
   code += statements_children
   code += "})"
   return code;

@@ -677,36 +677,87 @@
     </block>
   </category>
   <category name="Firebase" colour="200">
-    <block type="cycle_include_script">
-      <statement name="CHILDREN">
-        <block type="firebase_initialize_app"></block>
+    <block type="load">
+      <statement name="blocks">
+        <block type="cycle_include_script">
+          <statement name="CHILDREN">
+            <block type="firebase_initialize_app"></block>
+          </statement>
+        </block>
       </statement>
     </block>
-    
     <block type="firebase_set">
       <value name="REF">
-        <block type="text"></block>
+        <block type="text">
+          <field name="TEXT">/messages</field>
+        </block>
       </value>
       <value name="VALUE">
-        <block type="objects_create_with"></block>
+        <block type="math_number">
+          <field name="NUM">1</field>
+        </block>
       </value>
     </block>
     <block type="firebase_add_to_list">
       <value name="REF">
-        <block type="text"></block>
+        <block type="text">
+          <field name="TEXT">/messages</field>
+        </block>
       </value>
       <value name="VALUE">
-        <block type="objects_create_with"></block>
+        <block type="objects_create_with">
+          <mutation items="2"></mutation>
+          <field name="PROPERTY0">message</field>
+          <value name="ADD0">
+            <block type="text">
+              <field name="TEXT">Hey everyone!</field>
+            </block>
+          </value>
+          <field name="PROPERTY1">sender</field>
+          <value name="ADD1">
+            <block type="text">
+              <field name="TEXT">Steve</field>
+            </block>
+          </value>
+        </block>
+      </value>
+    </block>
+    <block type="firebase_add_to_list_id">
+      <value name="REF">
+        <block type="text">
+          <field name="TEXT">/messages</field>
+        </block>
+      </value>
+      <value name="VALUE">
+        <block type="objects_create_with">
+          <mutation items="2"></mutation>
+          <field name="PROPERTY0">message</field>
+          <value name="ADD0">
+            <block type="text">
+              <field name="TEXT">Hey everyone!</field>
+            </block>
+          </value>
+          <field name="PROPERTY1">sender</field>
+          <value name="ADD1">
+            <block type="text">
+              <field name="TEXT">Steve</field>
+            </block>
+          </value>
+        </block>
       </value>
     </block>
     <block type="firebase_get">
       <value name="REF">
-        <block type="text"></block>
+        <block type="text">
+          <field name="TEXT">/messages</field>
+        </block>
       </value>
     </block>
     <block type="firebase_delete">
       <value name="REF">
-        <block type="text"></block>
+        <block type="text">
+          <field name="TEXT">/messages</field>
+        </block>
       </value>
     </block>
   </category>
