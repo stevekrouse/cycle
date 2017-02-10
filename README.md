@@ -16,31 +16,29 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * need to come up with better words than "block-based" or "drag and drop"
   * race between programmer typing and another programmer on cycle
 
+
 ## Next deadline: HackTrin, Feb 12th
     
-  * add woof database rules 
-    
-  * convert "script errors" to better errors 
- 
   * make cycle untutorials / demo / videos
     * https://docs.google.com/document/d/1L_6jNXmc-H1mG5jgnEEMOe1sni0g4rtBQC87Ip2iMk0/edit?disco=AAAAA70O310&usp=suggestion_email_discussion
     * firebase with one element (no list)
     * ending in chat app with no login but name and time stamps and sexy
 
-  * make adding to end of a list a preset option
-  
   * temp variables in methods should not be scoped and should make newList not reserved
   
   * javascript block where I'll just plop the text in your model / event
+  
+  * copy and paste between cycle windows
+    * copy_ to sytem clickboard or localstorage instead of clipboardXml_
+      * http://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript 
 
   * general ajax
     * consider webscript and blockspring
 
-  * copy and paste between cycle windows
-    * copy_ to sytem clickboard or localstorage instead of clipboardXml_
-      * http://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript 
   
   * examples in dropdown and clean new window 
+  
+  * make navbar prettier
   
 ## Eventually
   

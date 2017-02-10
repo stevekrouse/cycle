@@ -583,6 +583,16 @@
       </value>
     </block>
     <block type="lists_setIndex">
+      <mutation at="false"></mutation>
+      <field name="MODE">INSERT</field>
+      <field name="WHERE">LAST</field>
+      <value name="LIST">
+        <block type="variables_get">
+          <field name="VAR">list</field>
+        </block>
+      </value>
+    </block>
+    <block type="lists_setIndex">
       <value name="LIST">
         <block type="variables_get">
           <field name="VAR">list</field>
