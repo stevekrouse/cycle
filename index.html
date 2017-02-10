@@ -67,7 +67,7 @@
     <button id="error" class="btn btn-medium btn-error" @click="showError()" :style="{display: error ? 'inline-block' : 'none'}"><span class="glyphicon glyphicon-exclamation-sign"></span> Error</button>
     <span style="margin: 10px; ">
       <button style="display: none" :style="{display: 'inline-block'}" style="margin: 10px" class="btn btn-medium" :class="saveStyles" onclick="save()">{{ status == "SAVED" ? 'Saved' : 'Save' }}</button>
-      <img onclick="window.open('index.html?full=true' + window.location.hash)" id="pop" src="./popout.png">
+      <img id="pop" @click="popout()" src="./popout.png">
     </span>
   </div>
 
@@ -147,6 +147,13 @@
         cleanAll: function(){
           var beautiful = js_beautify(editor.getValue(), {space_after_anon_function: true, indent_size: 2, indent_with_tabs: false })
           editor.setValue(beautiful)
+        },
+        popout: function(){
+          if (this.status == 'SAVED') {
+            window.open('index.html?full=true' + window.location.hash)
+          } else {
+            alert("You need to save your project to open it in a new window")
+          }
         }
       }
     })
@@ -497,7 +504,7 @@
     }
     
     window.onbeforeunload = function(e) {		
-       if (app.status == "DIRTY") {		
+       if (app.status == "DIRTY" && !app.fullScreen) {		
          var dialogText = 'Make sure to copy and paste your work somewhere safe.';		
          e.returnValue = dialogText;		
          return dialogText; 		

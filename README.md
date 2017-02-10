@@ -18,27 +18,27 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 
 ## Next deadline: HackTrin, Feb 12th
-    
-  * make cycle untutorials / demo / videos
-    * https://docs.google.com/document/d/1L_6jNXmc-H1mG5jgnEEMOe1sni0g4rtBQC87Ip2iMk0/edit?disco=AAAAA70O310&usp=suggestion_email_discussion
-    * firebase with one element (no list)
-    * ending in chat app with no login but name and time stamps and sexy
-  
-  * copy and paste between cycle windows
-    * copy_ to sytem clickboard or localstorage instead of clipboardXml_
-      * http://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript 
 
   * general ajax
     * probably do a demo with zapier if anything, but maybe ifft
+    * json parse and json encode, and have a setting for this in ajax block
 
-  * examples in dropdown and clean new window 
-  
+  * auto increate inputText varaiable name (input2Text) 
+
   * make navbar prettier
   
   * temp variables in methods should not be scoped and should make newList not reserved 
     * if I don't get to this, remove the option to create methods from toolbox
     * one way to do this is to not give methods scope at all
       * then we'd have to pass the list in as an input in todo-mvc 
+    
+  
+  * copy and paste between cycle windows
+    * copy_ to sytem clickboard or localstorage instead of clipboardXml_
+      * http://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript 
+  
+  * make cycle resources pretty
+    * https://docs.google.com/document/d/1L_6jNXmc-H1mG5jgnEEMOe1sni0g4rtBQC87Ip2iMk0/edit#
     
 ## Eventually
   
