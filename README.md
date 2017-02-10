@@ -29,7 +29,7 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
       * http://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript 
 
   * general ajax
-    * consider webscript and blockspring
+    * probably do a demo with zapier if anything, but maybe ifft
 
   * examples in dropdown and clean new window 
   
@@ -254,6 +254,10 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 ## Click to change color
 
 stevekrouse.github.io/cycle#click-for-color
+
+## Click for count
+
+stevekrouse.github.io/cycle#click-for-count
 
 ## No-login Chat App
 
