@@ -23,10 +23,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
     * https://docs.google.com/document/d/1L_6jNXmc-H1mG5jgnEEMOe1sni0g4rtBQC87Ip2iMk0/edit?disco=AAAAA70O310&usp=suggestion_email_discussion
     * firebase with one element (no list)
     * ending in chat app with no login but name and time stamps and sexy
-
-  * temp variables in methods should not be scoped and should make newList not reserved
-  
-  * javascript block where I'll just plop the text in your model / event
   
   * copy and paste between cycle windows
     * copy_ to sytem clickboard or localstorage instead of clipboardXml_
@@ -35,11 +31,15 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * general ajax
     * consider webscript and blockspring
 
-  
   * examples in dropdown and clean new window 
   
   * make navbar prettier
   
+  * temp variables in methods should not be scoped and should make newList not reserved 
+    * if I don't get to this, remove the option to create methods from toolbox
+    * one way to do this is to not give methods scope at all
+      * then we'd have to pass the list in as an input in todo-mvc 
+    
 ## Eventually
   
   * better elements

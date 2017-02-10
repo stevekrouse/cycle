@@ -30,6 +30,11 @@ function CompileError(message, blockId) {
 CompileError.prototype = Object.create(Error.prototype);
 CompileError.prototype.constructor = CompileError;
 
+Blockly.JavaScript['cycle_eval_js'] = function(block) {
+  var js = Blockly.JavaScript.valueToCode(block, 'JS', Blockly.JavaScript.ORDER_ATOMIC);
+  return ["new Function('return ' + " + js + ")()", Blockly.JavaScript.ORDER_ATOMIC];
+}
+
 // Include scripts
 
 Blockly.JavaScript['cycle_include_script'] = function(block) {

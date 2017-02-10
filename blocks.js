@@ -1291,3 +1291,15 @@ Blockly.Blocks['set_css'] = {
 };
 
 
+
+Blockly.Blocks['cycle_eval_js'] = {
+  init: function() {
+    this.appendValueInput("JS")
+        .appendField("run javascript")
+        .setCheck(null)
+    this.setOutput(true)
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
