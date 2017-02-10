@@ -13,6 +13,16 @@
   <script src="./blocks.js"></script>
   <script src="./generator.js"></script>
   
+  
+  <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/ui/live/0.5/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/live/0.5/firebase-ui-auth.css" />
+  
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  <script src="https://unpkg.com/vue@2.0.1/dist/vue.js"></script>
+  
   <title>Cycle</title>
 
   <style>
@@ -29,29 +39,45 @@
       flex-direction: column;
     }
     
-    #title {
-      font-weight: normal;
-      font-size: 25px;
-      color: blue;
+    #pop {
+      cursor: pointer;
+    }
+    
+    #error {
+      display: none;
+      color: #a94442;
+      margin-right: 5px;
+      background-color: #f2dede;
     }
   </style>
 </head>
 
 <body>
-  <div id="navbar" style="height:30px; width:calc(100%-10px); padding: 5px; display: flex; justify-content: space-between ">
-    <span id="title">Cycle</span>
+  <div id="navbar"  style="height:60px; width:100%; padding: 5px; display: none; justify-content: space-between " :style="{display: fullScreen ? 'none' : 'flex'}">
+    <button class="btn btn-medium btn-info" :style="{display: uid ? 'none' : 'inline-block'}" type="button" id="login" onclick="window.open('./login.html', 'Sign In', 'width=500,height=500')">Login / Sign Up</button>
+    <div id="logggedin" class="dropdown" style="display:none" :style="{display: uid ? 'inline-block' : 'none'}">
+      <button class="btn btn-medium btn-info dropdown-toggle" type="button" id="loggedin-name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">My Account</button>
+      <ul class="dropdown-menu" aria-labelledby="loggedin-name">
+        <li><a href="./index.html">New Project</a></li>
+        <li><a target="_blank" id="login-projects" :href="'user.html#' + uid">My Projects</a></li>
+        <li onclick="firebase.auth().signOut()"><a>Logout</a></li>
+      </ul>
+    </div>
     <img onclick="selector=true" style="height:30px" src="https://d0.awsstatic.com/Inspector/Inspector_MCV3_Benefit_IdentifyApplication.png"></img>
-    <button id="runtimeError" style="display:none; background-color: salmon; border: none">Error</button>
-    <button onclick="window.open('index.html?full=true' + window.location.hash)">Full Screen</button>
-    <a href="./index.html"><button>New Project</button></a>
+    <button id="error" class="btn btn-medium btn-error" @click="showError()" :style="{display: error ? 'inline-block' : 'none'}"><span class="glyphicon glyphicon-exclamation-sign"></span> Error</button>
+    <span style="margin: 10px; ">
+      <button style="display: none" :style="{display: 'inline-block'}" style="margin: 10px" class="btn btn-medium" :class="saveStyles" onclick="save()">{{ status == "SAVED" ? 'Saved' : 'Save' }}</button>
+      <img onclick="window.open('index.html?full=true' + window.location.hash)" id="pop" src="./popout.png">
+    </span>
   </div>
 
+
   <div id="container" style="width:100%; flex-grow: 1; display:flex; flex-direction:row; align-items: stretch;">
-    <div id="output" style=" width:50%; display:flex; align-items: stretch;">
+    <div id="output" style=" width:50%; display:flex; align-items: stretch;" :style="{width: fullScreen ? '100%' : '50%'">
       <iframe frameBorder="0" src="" id="preview" style="width:100%"></iframe>
     </div>
 
-    <div id="blocksEditor" style="width: 50%; "></div>
+    <div id="blocksEditor" style="width: 50%"></div>
     
     <xml id="elementStartingBlocks" style="display:none">
       <block type="cycle_page" id="1" deletable="false" movable="false" x="0" y="10"><statement name="CHILDREN"><block type="layout_height" id="Z_;h`Tu#1D$/uw$_0=yg"><field name="PROP">minHeight</field><value name="VALUE"><block type="text" id="@tA^B-r5k2-gdJW]|*1H"><field name="TEXT">100%</field></block></value><next><block type="layout_background_color" id="St|`#QCG?B;vNm$a7r9z"><value name="COLOR"><block type="colour_picker" id="uw=itF/nez?qJAs,gLa}"><field name="COLOUR">#ffffff</field></block></value><next><block type="layout_flex_parent" id="g!-{wcJ*EIra^nqS-pTz"><field name="DIRECTION">column</field><field name="X">center</field><field name="Y">top</field><field name="WRAP">wrap</field><next><block type="cycle_container" id="{[prevIU~[?u.[kji,[4"><statement name="CHILDREN"><block type="font_color" id="17.lb%4Wdjf89A!Qmapk"><value name="COLOR"><block type="colour_picker" id="aWs+UwCEuHW#P,9P2)G1"><field name="COLOUR">#ff6666</field></block></value><next><block type="layout_margin" id="Pg7~z!JRqGNCgf]7@:E_"><field name="BORDER">Top</field><value name="VALUE"><block type="text" id="{)=/xZXeJZmmu2-}.^Qk"><field name="TEXT">100px</field></block></value><next><block type="font_size" id="E-naHXF5e=JZ(a()n:06"><value name="SIZE"><block type="text" id="u}CL0i}l4C$QpRv^%^ed"><field name="TEXT">50px</field></block></value><next><block type="font_family" id="*8%FD`Mk]]NlCN5v;1$["><value name="FONT"><block type="text" id="$`wU:`yC[^J?8g4zzwL}"><field name="TEXT">sans-serif</field></block></value><next><block type="cycle_text" id="o929PCc,t3Y]cNDv=/+9"><value name="TEXT"><block type="text" id="OBk7E:r/w`T:hGF:^NdD"><field name="TEXT">Welcome to Cycle</field></block></value></block></next></block></next></block></next></block></next></block></statement><next><block type="cycle_button" id="yi11R!ix186a]Y[Tv2FX"><statement name="CHILDREN"><block type="layout_background_color" id="KZI1M[Yv%z{6ml.U!A3l"><value name="COLOR"><block type="colour_picker" id="6PV4Tk3/P0)=@*1#ntua"><field name="COLOUR">#ffffff</field></block></value><next><block type="font_color" id="8~HKUjs?g{(i+#WhLw*k"><value name="COLOR"><block type="colour_picker" id="s9GlVxfx[-N,ZSom`YQ%"><field name="COLOUR">#666666</field></block></value><next><block type="font_size" id="~2B*iPeYKXO*;k`s.H6z"><value name="SIZE"><block type="text" id="m%CDKH)X`Otm2_P8C5|E"><field name="TEXT">30px</field></block></value><next><block type="layout_margin" id="S~DMzr}c/Yt#jmpmw_l("><field name="BORDER">Top</field><value name="VALUE"><block type="text" id="0mr1c^:}{s2,j_Hll4C."><field name="TEXT">40px</field></block></value><next><block type="layout_border" id="q3E4SM)C0,]qmaK-:aOV"><field name="BORDER">all</field><field name="STYLE">solid</field><value name="WIDTH"><block type="text" id="tX~cYD;hlNB`(y;NX0`/"><field name="TEXT">2px</field></block></value><value name="COLOR"><block type="colour_picker" id="n(7N(n7UaF3e*s/_Edrz"><field name="COLOUR">#c0c0c0</field></block></value><value name="RADIUS"><block type="text" id="d_Z5z#8+0MbR_O:Ia6:Y"><field name="TEXT">5px</field></block></value><next><block type="layout_outline" id="d=%UWnKmrKEFx~Tkik78"><field name="STYLE">none</field><value name="WIDTH"><block type="text" id="]7%{Og2-e`9imn3%4w%D"><field name="TEXT">2px</field></block></value><value name="COLOR"><block type="colour_picker" id="3~lD$=5^;yW|Mva[B{SB"><field name="COLOUR">#3333ff</field></block></value><next><block type="cycle_text" id="M0b]_Bxpj4_+,)c^}gnl"><value name="TEXT"><block type="text_join" id="gj_5z^Z*#[H)@uJjz/N6"><mutation items="3"></mutation><value name="ADD0"><block type="text" id="bL$v_#YX(zmInkf%%b5s"><field name="TEXT">I've been clicked </field></block></value><value name="ADD1"><block type="variables_get" id=",OZqq%y(~}k)dNy#wM;h"><field name="VAR">clicks</field></block></value><value name="ADD2"><block type="text" id="NWxl1WD[4Hfzj,q`Z8!Q"><field name="TEXT"> times</field></block></value></block></value><next><block type="variables_set" id="5w;Fv/p.7GMMs8i|qOKF"><field name="VAR">clicks</field><value name="VALUE"><block type="math_number" id="eHe3QR|{iIA{l}eVYSL3"><field name="NUM">0</field></block></value><next><block type="mousedown" id="/wdNa!YO=2DnO@Jt}VA:"><statement name="blocks"><block type="math_change" id="iMl0f#x%1^3k}PQ0Id(@"><field name="VAR">clicks</field><value name="DELTA"><shadow type="math_number" id="eb!DcZ/;:+zq;|qC#:R,"><field name="NUM">1</field></shadow></value></block></statement></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></statement></block></next></block></next></block></next></block></next></block></statement></block>    
@@ -59,10 +85,75 @@
   </div>
 
   <script>
-    if (JSON.parse(new URLSearchParams(window.location.search.slice(1)).get("full"))) {
-      $("#blocksEditor").hide()
-      $("#navbar").hide()
-      $("#output").css("width", "100%")
+    var getID = function() {
+      // returns the name of a project, not inlcuding the current revision
+      return window.location.hash.substring(1, window.location.hash.length).split("/")[0];
+    }
+    var getIDWithRevision = function() {
+      // returns the name of a project, not inlcuding the current revision
+      return window.location.hash.substring(1, window.location.hash.length);
+    }
+    var getCurrentRevisionCode = function(revisions) {
+      // returns the code that corresponds to the current project and revision
+      var revision = parseInt(window.location.hash.substring(1, window.location.hash.length).split("/")[1])
+      
+      var keys = Object.keys(revisions)
+      if (keys.length > 1){
+        keys = keys.slice(1, keys.length)
+      }
+      
+      
+      var key
+      if (!isNaN(revision) && (revision !== 0 && revision !== -1 * keys.length) && Math.abs(revision) < keys.length + 1){
+        if (revision < 0){
+          revision = keys.length + revision // -1 gives the previous revision
+        }
+        key = keys[revision - 1]
+      } else {
+        key = keys[keys.length - 1]
+      }
+      return revisions[key].code
+    }
+    var currentHash = window.location.hash
+    
+    var app = new Vue({
+      el: '#navbar',
+      data: {
+        code: "",
+        status: "NEW",
+        error: null,
+        uid: null,
+        noUpdate: false,
+        fullScreen: JSON.parse(new URLSearchParams(window.location.search.slice(1)).get("full"))
+      },
+      computed: {
+        saveStyles : function() { return {
+           // styles for the "Save" button
+          'btn-warning': this.status == 'DIRTY', 
+          'btn-success': this.status == 'SAVED',
+          'btn-default': this.status == "NEW"
+        } },
+        canClean: function(){
+          // whether or not the code can be "cleaned" or if its already pristine
+          return !this.error && this.code != js_beautify(this.code, {space_after_anon_function: true, indent_size: 2, indent_with_tabs: false })
+        },
+      },
+      methods: {
+        getID: getID,
+        showError: function(){
+          alert(this.error)
+        },
+        
+        cleanAll: function(){
+          var beautiful = js_beautify(editor.getValue(), {space_after_anon_function: true, indent_size: 2, indent_with_tabs: false })
+          editor.setValue(beautiful)
+        }
+      }
+    })
+    
+    if (app.fullScreen) {
+      $('#blocksEditor').css('display', 'none')
+      $('#output').css("width", "100%")
     }
   
     Blockly.BlockSvg.START_HAT = true;
@@ -154,6 +245,7 @@
           scaleSpeed: 1.2
         },
       });
+      noUpdate()
       Blockly.Xml.domToWorkspace(document.getElementById('elementStartingBlocks'), workspace);  
       
       workspace.addChangeListener(function(event) {
@@ -172,28 +264,33 @@
           }
         }
         else {
-          debouncedRun()
-          window.noUpdate = true
-          setTimeout(function() {
-            window.noUpdate = false
-          }, 500)
-          window.location.hash = LZString.compressToEncodedURIComponent(getText())
+          if (!app.noUpdate) {
+            makeDirty()  
+            debouncedRun()
+            noUpdate()
           }
+        }
       })
       debouncedRun()
-
       if (window.location.hash) {
-        setText(LZString.decompressFromEncodedURIComponent(window.location.hash.substring(1)))
+        retrieve()
         debouncedRun()
       }
   
       window.addEventListener("hashchange", function() {
-        if (!window.noUpdate) {
-          setText(LZString.decompressFromEncodedURIComponent(window.location.hash.substring(1)))
+        if (!app.noUpdate) {
+          retrieve()
           debouncedRun()
         }
       });
     })
+    
+    function noUpdate() {
+      app.noUpdate = true
+      setTimeout(function() {
+        app.noUpdate = false
+      }, 500) 
+    }
 
     function getCode() {
       Blockly.JavaScript.init(workspace);
@@ -237,12 +334,12 @@
         }
       }
 
-      var nonDataVariables = ["newList", ""]
+      var nonDataVariables = ["newList"]
       workspace.getAllBlocks().forEach(function(block){
         if (events.includes(block.type)) {
           nonDataVariables.push("event")
-        } else if (block.type.includes("firebase_")) {
-          nonDataVariables.push("value")
+        } else if (block.type.includes("firebase_get")) {
+          nonDataVariables.push(block.getFieldValue("VAR"))
         } else if (block.type == "controls_for" || block.type == "controls_forEach") {
           nonDataVariables.push(block.getFieldValue('VAR'))
         }
@@ -291,14 +388,11 @@
     var blocksEditor = document.getElementById('blocksEditor')
 
     var clearError = function() {
-      runtimeError.style.display = "none"
+      app.error = null
     }
       
     $('body').bind('runtimeError', function(event, message) {
-      runtimeError.style.display = "inline-block"
-      runtimeError.onclick = function() {
-        alert(message)
-      }
+      app.error = message
     })
       
     var code = {}
@@ -348,6 +442,136 @@
     window.addEventListener("keydown", undo)
     preview.contentWindow.addEventListener("keydown", undo)
     addEventListener("keydown", undo)
+    
+    // Firebase
+    
+    var config = {
+      apiKey: "AIzaSyDD0YrvwARk-nz8hapHH9Sg4Jgv1d0aOe8",
+      authDomain: "cycle-64a32.firebaseapp.com",
+      databaseURL: "https://cycle-64a32.firebaseio.com",
+      storageBucket: "cycle-64a32.appspot.com",
+      messagingSenderId: "954402397868"
+    };
+    firebase.initializeApp(config);
+    
+    // Login / logout
+    
+    function handleLogin(uid) {
+      app.uid = uid
+    }
+    
+    function handleLogout () {
+      app.uid = null
+      myCode = false
+    }
+    
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user){
+        handleLogin(user.uid)
+        // if the user is logged in, and we don't have their name/email in our database, save it now
+        firebase.database().ref('/user/' + user.uid).once('value').then(function(snapshot) {
+          if (!snapshot.val()) {
+            firebase.database().ref("/user/" + user.uid).set({
+              displayName: user.displayName,
+              email: user.email,
+              createdDate: firebase.database.ServerValue.TIMESTAMP
+            })
+          }
+        })
+      } else {
+        handleLogout()
+      }
+    });
+    
+    // Saving
+    
+    var myCode = false
+    
+    var makeClean = function() {
+      app.status = "SAVED"
+      currentHash = window.location.hash
+    }
+    
+    var makeDirty = function() {
+      app.status = "DIRTY"
+    }
+    
+    window.onbeforeunload = function(e) {		
+       if (app.status == "DIRTY") {		
+         var dialogText = 'Make sure to copy and paste your work somewhere safe.';		
+         e.returnValue = dialogText;		
+         return dialogText; 		
+       }		
+    };
+    
+    function retrieve() {
+      if (getID()){
+        firebase.database().ref('/code/' + getID()).once('value').then(function(snapshot) {
+          if (snapshot.val()){
+            myCode = firebase.auth().currentUser && snapshot.val()["--uid"] == firebase.auth().currentUser.uid
+            noUpdate()
+            setText(getCurrentRevisionCode(snapshot.val()))
+            makeClean()
+          } else {
+            alert("Could not find a project with the name: " + getID())
+          }
+        });
+      }
+    }
+    
+    
+    var save = function(){
+      if (app.status == "SAVED") { return }
+      
+      if (!firebase.auth().currentUser) { return }
+      
+      var name
+      if (myCode) {
+        name = getID()
+      } else {
+        name = window.prompt('Choose a name for your project. You cannot include ".", "#", "$", "[", "]", or spaces in the name of your project.', "my-project") || '';
+      }
+      if (name.includes('.') || name.includes('/') || name.includes('$') || name.includes("#") || name.includes("[") || name.includes("]") || name.includes(" ")){
+        alert('You cannot include ".", "#", "$", "[", "]", or spaces in the name of your project. Try to save again.')
+      } else if (name) { 
+        firebase.database().ref('/code/' + name).limitToLast(1).once('value').then(function(snapshot) {
+          if (snapshot.val()){
+            if (firebase.auth().currentUser && snapshot.val()[Object.keys(snapshot.val())[0]].uid == firebase.auth().currentUser.uid) {
+                // if the project exists and you own it, push the new code as a revision
+                firebase.database().ref().child("/code/" + name).push({
+                  code: getText(), 
+                  time: firebase.database.ServerValue.TIMESTAMP, 
+                  uid: firebase.auth().currentUser.uid
+                }).then(function(){
+                  noUpdate()
+                  window.location.hash = name
+                  makeClean()
+                  myCode = true
+                }).catch(function(error){
+                  alert("Unable to save project: " + error)
+                });
+            } else {
+              alert("That project name has already been taken. Try another one.")
+            }
+          } else {
+            // else create a new project and push this code as the first revision
+            firebase.database().ref().child("/code/" + name + "/--uid").set(firebase.auth().currentUser.uid)
+            firebase.database().ref().child("/code/" + name).push({
+              code: getText(), 
+              time: firebase.database.ServerValue.TIMESTAMP, 
+              uid: firebase.auth().currentUser.uid
+            }).then(function(){
+              noUpdate()
+              window.location.hash = name
+              myCode = true
+              makeClean()
+            }).catch(function(error){
+              alert("Unable to save project: " + error)
+            });
+          }
+        });
+      }
+    };
     
   </script>
   <script>

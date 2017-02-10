@@ -1,0 +1,120 @@
+<link rel="shortcut icon" type="image/png" href="./favicon.png"/>
+
+<style>
+  a {
+    font-size: 20px;
+
+  }
+  button {
+    min-height: 40px;
+    position: relative;
+    bottom: 6px;
+  }
+  button > input {
+    background-color: transparent;
+    border: 1px solid gray;
+    margin-left: 6px;
+  }
+</style>
+
+<script src="https://unpkg.com/vue@2.0.1/dist/vue.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<title>Projects</title>
+<body>
+  <div id="page" class="container">
+    <h1 id="title">{{ name }}</h1>
+    <ul id="list" class="list-group">
+      <woof-project v-for="project in projects" :project="project"></woof-project>
+    </ul>
+  </div>
+  <script id="project-template" type="text/x-template">
+    <a class="list-group-item list-group-item-action">{{ project.key }}
+      <span class="pull-right">
+        <button class="btn btn-info"     @click="codeClick($event)"       style="margin-right: 5px">View Version<input type="number" min="1" :max="project.revisions.length" :value="project.revisions.length" style="text-align: right; width: 3em"></input></button>
+      </span>
+    </a>
+  </script>
+  <script>
+  Vue.component('woof-project', {
+    template: "#project-template",
+    props: ["project"],
+    methods: {
+      codeClick: function($event) {
+        if ($event.target.nodeName == "BUTTON"){
+          window.open('./index.html#' + this.project.key + '/' + $event.target.firstElementChild.value, '_blank')
+        }
+      },
+    }
+  })
+  
+  var app = new Vue({
+    el: '#page',
+    data: {
+      name: "Loading...",
+      projects: []
+    }
+  })
+  var config = {
+    apiKey: "AIzaSyDD0YrvwARk-nz8hapHH9Sg4Jgv1d0aOe8",
+    authDomain: "cycle-64a32.firebaseapp.com",
+    databaseURL: "https://cycle-64a32.firebaseio.com",
+    storageBucket: "cycle-64a32.appspot.com",
+    messagingSenderId: "954402397868"
+  };
+  
+  firebase.initializeApp(config);
+
+  var getUID = function() {
+      return window.location.hash.substring(1, window.location.hash.length);
+  }
+  
+  firebase.database().ref('/user/' + getUID() + "/displayName").once('value', function(snap) {
+    if (snap.val()){
+      app.name = snap.val() 
+      document.title = snap.val()
+    }
+  });
+  
+  var objectOfObjectsToArray = function(obj, keyName = "key"){
+    return Object.keys(obj).map(function(key) {
+      var child = obj[key]
+      child[keyName] = key
+      return child;
+    })
+  }
+
+  firebase.database().ref('/code/').orderByChild("--uid").equalTo(getUID()).once('value').then(function(snapshot) {
+    var projects = objectOfObjectsToArray(snapshot.val())
+  
+    // nesting revisions under projects
+    app.projects = projects.map(function(project){
+      var keys = Object.keys(project)
+      var revisionKeys = keys.filter(key => key != '--uid' && key != 'key')
+      return {
+        key: project.key,
+        "--uid": project["--uid"],
+        revisions: revisionKeys.map(key => {
+          var revision = project[key]
+          revision.key = key
+          revision.project = project
+          return revision
+        })
+      }
+    })
+  })
+</script>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  
+    ga('create', 'UA-82374072-1', 'auto');
+    ga('send', 'pageview');
+  
+  </script>
+</body>
