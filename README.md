@@ -18,14 +18,8 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 
 ## Next deadline: HackTrin, Feb 12th
-
-  * make navbar prettier
-  
-  * temp variables in methods should not be scoped and should make newList not reserved 
-    * if I don't get to this, remove the option to create methods from toolbox
-    * one way to do this is to not give methods scope at all
-      * then we'd have to pass the list in as an input in todo-mvc 
     
+  * figure out weird scrolling no see bug
   
   * copy and paste between cycle windows
     * copy_ to sytem clickboard or localstorage instead of clipboardXml_

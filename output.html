@@ -203,11 +203,11 @@
     }
   }
 
-  function printMethods(definitions, variables) {
+  function printMethods(definitions, otherMethodNames) {
     var defs = Object.keys(definitions)
     return defs.map(function(key) {
       var functionWithoutName = definitions[key].replace(" " + key, "") // removing functionName() to make anonymous
-      return "  " + key + ": " + i(4, scopeVaribles(functionWithoutName, variables, "this"))
+      return "  " + key + ": " + i(4, scopeVaribles(functionWithoutName, otherMethodNames, "this"))
     }).join(",")
   }
 
@@ -235,7 +235,7 @@
     collectData(code.page, methodNames, code.data)
     return "" +
       "window.methods = {" + "\n" +
-      "  " + printMethods(code.definitions, variablesAndMethods) + "\n" +
+      "  " + printMethods(code.definitions, methodNames) + "\n" +
       "};" + "\n" +
       "window.render = " + parseCodeToVueRender(code.page, variablesAndMethods) + "\n" +
       "window.app = new Vue({" + "\n" +
