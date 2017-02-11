@@ -19,8 +19,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## Next deadline: HackTrin, Feb 12th
 
-  * auto increate inputText varaiable name (input2Text) 
-
   * make navbar prettier
   
   * temp variables in methods should not be scoped and should make newList not reserved 

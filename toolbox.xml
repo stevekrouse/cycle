@@ -90,7 +90,7 @@
     <block type="cycle_input">
       <statement name="CHILDREN">
         <block type="variables_set">
-          <field name="VAR">inputText</field>
+          <field name="VAR">input1Text</field>
           <value name="VALUE">
             <block type="text">
               <field name="TEXT"></field>
@@ -105,14 +105,14 @@
               </value>
               <value name="VALUE">
                 <block type="variables_get">
-                  <field name="VAR">inputText</field>
+                  <field name="VAR">input1Text</field>
                 </block>
               </value>
               <next>
                 <block type="keyup">
                   <statement name="blocks">
                     <block type="variables_set">
-                      <field name="VAR">inputText</field>
+                      <field name="VAR">input1Text</field>
                       <value name="VALUE">
                         <block type="objects_get">
                           <value name="OBJECT">

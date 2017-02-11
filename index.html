@@ -226,9 +226,11 @@
     $('body').bind('mouseoutElement', function(event, element) {
       unhighlightOutputElement$($(element))
     })
-    
+  
     var workspace
+    var toolbox
     $.get('./toolbox.xml').done(function(resp){
+      toolbox = resp.firstChild
       workspace = Blockly.inject('blocksEditor', {
         toolbox: resp.firstChild,
         collapse: true,
@@ -273,6 +275,14 @@
         } else if (event instanceof Blockly.Events.Create) {
           // no run
           // wait for the move event to run
+          
+          // update the toolbox every time you take out an input so the inputXText variable increases
+          Blockly.JavaScript.init(workspace);
+          var i = 1;
+          while (Blockly.JavaScript.definitions_.variables.includes("input" + i + "Text")) {
+            i++
+          }
+          $(toolbox).find("field:contains('input" + (i - 1) + "Text')").text('input' + i + 'Text')
         } else {
           if (!app.noUpdate) {
             makeDirty()  
