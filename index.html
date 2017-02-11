@@ -256,6 +256,7 @@
       Blockly.Xml.domToWorkspace(document.getElementById('elementStartingBlocks'), workspace);  
       
       workspace.addChangeListener(function(event) {
+        console.log(event)
         if (event instanceof Blockly.Events.Ui) {
           if (event.element == "selected") {
             if (event.oldValue) {
@@ -269,8 +270,10 @@
               highlightOutputElement$(element)
             }
           }
-        }
-        else {
+        } else if (event instanceof Blockly.Events.Create) {
+          // no run
+          // wait for the move event to run
+        } else {
           if (!app.noUpdate) {
             makeDirty()  
             debouncedRun()
@@ -434,7 +437,7 @@
         if (callNow) func.apply(context, args);
       };
     };
-    var debouncedRun = debounce(run, 500, false)
+    var debouncedRun = debounce(run, 1000, false)
     
     $.fn.filterByData = function(prop, val) {
         return this.filter(
