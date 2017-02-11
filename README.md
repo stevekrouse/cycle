@@ -19,10 +19,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## Next deadline: HackTrin, Feb 12th
 
-  * general ajax
-    * probably do a demo with zapier if anything, but maybe ifft
-    * json parse and json encode, and have a setting for this in ajax block
-
   * auto increate inputText varaiable name (input2Text) 
 
   * make navbar prettier
@@ -39,7 +35,9 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   
   * make cycle resources pretty
     * https://docs.google.com/document/d/1L_6jNXmc-H1mG5jgnEEMOe1sni0g4rtBQC87Ip2iMk0/edit#
-    
+    * outline presentation
+    * survey
+
 ## Eventually
   
   * better elements
@@ -255,13 +253,21 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 stevekrouse.github.io/cycle#click-for-color
 
+
 ## Click for count
 
 stevekrouse.github.io/cycle#click-for-count
 
+
+## Weather AJAX GET
+
+stevekrouse.github.io/cycl#ajax-get
+
+
 ## No-login Chat App
 
 stevekrouse.github.io/cycle#chat
+
 
 ## To Do MVC 
 

@@ -250,7 +250,7 @@ Blockly.Blocks['cycle_html_property'] = {
 Blockly.Blocks['cycle_debugger'] = {
   init: function() {
     this.appendDummyInput()
-      .appendField("debugger");
+      .appendField("breakpoint");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -456,6 +456,19 @@ Blockly.Blocks['timeout'] = {
   }
 };
 
+// TEXT
+
+Blockly.Blocks['text_stringify'] = {
+  init: function() {
+    this.appendValueInput("VALUE")
+      .appendField("to json");
+    this.setOutput(true, null);
+    this.setColour(165);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+}
+
 // OBJECTS
 
 Blockly.Blocks['objects_create_empty'] = {
@@ -469,7 +482,6 @@ Blockly.Blocks['objects_create_empty'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
-
 
 Blockly.Blocks['objects_get'] = {
   init: function() {
@@ -1303,3 +1315,58 @@ Blockly.Blocks['cycle_eval_js'] = {
     this.setHelpUrl('');
   }
 };
+
+// AJAX
+
+Blockly.Blocks['cycle_ajax_get'] = {
+  init: function() {
+    this.appendValueInput("URL")
+        .setCheck(null)
+        .appendField("get")
+        .appendField(new Blockly.FieldDropdown([["text","text"], ["json data","json"]]), "DATATYPE")
+        .appendField("from url");
+    this.appendStatementInput("SUCCESS")
+        .setCheck(null)
+        .appendField("on success with")
+        .appendField(new Blockly.FieldVariable("getResult"), "RESULT")
+        .appendField("do");
+    this.appendStatementInput("FAIL")
+        .setCheck(null)
+        .appendField("on failure with")
+        .appendField(new Blockly.FieldVariable("getError"), "ERROR")
+        .appendField("do");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(210);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['cycle_ajax_post'] = {
+  init: function() {
+    this.appendValueInput("DATA")
+        .setCheck(null)
+        .appendField("post data");
+    this.appendValueInput("URL")
+        .setCheck(null)
+        .appendField("to url");
+    this.appendStatementInput("SUCCESS")
+        .setCheck(null)
+        .appendField("on success with")
+        .appendField(new Blockly.FieldVariable("postResult"), "RESULT")
+        .appendField("do");
+    this.appendStatementInput("FAIL")
+        .setCheck(null)
+        .appendField("on failure with")
+        .appendField(new Blockly.FieldVariable("postError"), "ERROR")
+        .appendField("do");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(210);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};  

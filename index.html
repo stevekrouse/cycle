@@ -347,6 +347,12 @@
           nonDataVariables.push("event")
         } else if (block.type.includes("firebase_get")) {
           nonDataVariables.push(block.getFieldValue("VAR"))
+        } else if (block.type.includes("cycle_ajax_get")) {
+          nonDataVariables.push(block.getFieldValue("ERROR"))
+          nonDataVariables.push(block.getFieldValue("RESULT"))
+        } else if (block.type.includes("cycle_ajax_post")) {
+          nonDataVariables.push(block.getFieldValue("ERROR"))
+          nonDataVariables.push(block.getFieldValue("RESULT"))
         } else if (block.type == "controls_for" || block.type == "controls_forEach") {
           nonDataVariables.push(block.getFieldValue('VAR'))
         }

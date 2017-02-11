@@ -519,6 +519,8 @@
         </block>
       </value>
     </block>
+    <block type="text_stringify">
+    </block>
     <block type="text_prompt_ext">
       <value name="TEXT">
         <block type="text"></block>
@@ -776,6 +778,14 @@
           <field name="TEXT">/messages</field>
         </block>
       </value>
+    </block>
+  </category>
+  <category name="External Requests" colour="210">
+    <block type="cycle_ajax_get">
+      
+    </block>
+    <block type="cycle_ajax_post">
+      
     </block>
   </category>
 </xml>

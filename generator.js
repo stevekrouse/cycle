@@ -94,6 +94,53 @@ Blockly.JavaScript['firebase_get'] = function(block) {
   return code;
 };
 
+// AJAX
+
+Blockly.JavaScript['cycle_ajax_get'] = function(block) {
+  var dropdown_datatype = block.getFieldValue('DATATYPE');
+  var value_url = Blockly.JavaScript.valueToCode(block, 'URL', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+  var variable_result = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('RESULT'), Blockly.Variables.NAME_TYPE);
+  var statements_success = Blockly.JavaScript.statementToCode(block, 'SUCCESS');
+  var variable_error = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ERROR'), Blockly.Variables.NAME_TYPE);
+  var statements_fail = Blockly.JavaScript.statementToCode(block, 'FAIL');
+  
+  
+  var code = "$.get({"                                              + "\n" +
+             "  dataType: " + dropdown_datatype + ","               + "\n" + 
+             "  crossDomain: true,"                                 + "\n" + 
+             "  url: " + value_url + ", "                           + "\n" +
+             "  success: function(" + variable_result + "){"        + "\n" +
+             "    " + statements_success                            + "\n" +
+             "  },"                                                 + "\n" +
+             "  error: function(" + variable_error + "){"           + "\n" +
+             "    " + statements_fail                               + "\n" +
+             "  }"                                                  + "\n" +
+             "})"
+  return code;
+};
+
+Blockly.JavaScript['cycle_ajax_post'] = function(block) {
+  var value_url = Blockly.JavaScript.valueToCode(block, 'URL', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+  var value_data = Blockly.JavaScript.valueToCode(block, 'DATA', Blockly.JavaScript.ORDER_ATOMIC) || "{}";
+  var variable_result = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('RESULT'), Blockly.Variables.NAME_TYPE);
+  var statements_success = Blockly.JavaScript.statementToCode(block, 'SUCCESS');
+  var variable_error = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ERROR'), Blockly.Variables.NAME_TYPE);
+  var statements_fail = Blockly.JavaScript.statementToCode(block, 'FAIL');
+  
+  var code = "$.post({"                                             + "\n" +
+             "  data: " + value_data + ","                          + "\n" + 
+             "  crossDomain: true,"                                 + "\n" + 
+             "  url: " + value_url + ", "                           + "\n" +
+             "  success: function(" + variable_result + "){"        + "\n" +
+             "    " + statements_success                            + "\n" +
+             "  },"                                                 + "\n" +
+             "  error: function(" + variable_error + "){"           + "\n" +
+             "    " + statements_fail                               + "\n" +
+             "  }"                                                  + "\n" +
+             "})"
+  return code;
+};
+
 // OBJECTS
 
 Blockly.JavaScript['objects_create_empty'] = function(block) {
@@ -130,15 +177,21 @@ Blockly.JavaScript['objects_copy'] = function(block) {
 };
 
 Blockly.JavaScript['objects_create_with'] = function(a) {
-  for (var b = Array(a.itemCount_), c = 0; c < a.itemCount_; c++) b[c] = a.getFieldValue("PROPERTY" + c) + ": " + Blockly.JavaScript.valueToCode(a, "ADD" + c, Blockly.JavaScript.ORDER_COMMA) || "null";
+  for (var b = Array(a.itemCount_), c = 0; c < a.itemCount_; c++) b[c] = a.getFieldValue("PROPERTY" + c) + ": " + (Blockly.JavaScript.valueToCode(a, "ADD" + c, Blockly.JavaScript.ORDER_COMMA) || "null");
   return ["{" + b.join(", ") + "}", Blockly.JavaScript.ORDER_ATOMIC]
 }
 
 Blockly.JavaScript['objects_clone_with'] = function(a) {
-  for (var b = Array(a.itemCount_), c = 0; c < a.itemCount_; c++) b[c] = a.getFieldValue("PROPERTY" + c) + ": " + Blockly.JavaScript.valueToCode(a, "ADD" + c, Blockly.JavaScript.ORDER_COMMA) || "null";
+  for (var b = Array(a.itemCount_), c = 0; c < a.itemCount_; c++) b[c] = a.getFieldValue("PROPERTY" + c) + ": " + (Blockly.JavaScript.valueToCode(a, "ADD" + c, Blockly.JavaScript.ORDER_COMMA) || "null");
   var clone = Blockly.JavaScript.valueToCode(a, "CLONE", Blockly.JavaScript.ORDER_ATOMIC)
   return ["Object.assign(Object.assign({}, " + clone + "), {" + b.join(", ") + "})", Blockly.JavaScript.ORDER_ATOMIC]
 }
+
+// TEXT
+
+Blockly.JavaScript.text_stringify = function(block) {
+  return ["stringify(" + (Blockly.JavaScript.valueToCode(block, "VALUE", Blockly.JavaScript.ORDER_ATOMIC) || "''") + ", null, 2)", Blockly.JavaScript.ORDER_ATOMIC]
+};
 
 // LISTS
 
