@@ -19,8 +19,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## Next deadline: HackTrin, Feb 12th
     
-  * figure out weird scrolling no see bug
-  
   * copy and paste between cycle windows
     * copy_ to sytem clickboard or localstorage instead of clipboardXml_
       * http://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript 
