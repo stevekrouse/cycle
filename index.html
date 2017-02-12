@@ -166,6 +166,14 @@
   
     Blockly.BlockSvg.START_HAT = true;
     
+    Object.defineProperty(Blockly, 'clipboardXml_', {
+      set: function(v) { 
+        localStorage.clipboardXml_ = Blockly.Xml.domToText(v) 
+      }, get: function() { 
+        return Blockly.Xml.textToDom(localStorage.clipboardXml_) 
+      }
+    })
+    
     var scrollToBlockId = function(blockId, op) {
       if (blockId) {
         var block = workspace.getAllBlocks().find(function(b){
