@@ -533,6 +533,21 @@ Blockly.Blocks['objects_keys'] = {
   }
 };
 
+Blockly.Blocks['objects_values'] = {
+  init: function() {
+    this.appendValueInput("OBJECT")
+      .setCheck(null)
+      .appendField("get ");
+    this.appendDummyInput("KEY")
+      .appendField("'s values");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(240);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 Blockly.Blocks['objects_copy'] = {
   init: function() {
     this.appendValueInput("OBJECT")

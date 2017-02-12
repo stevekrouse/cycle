@@ -613,6 +613,7 @@
     <block type="objects_create_empty"></block>
     <block type="objects_create_with"></block>
     <block type="objects_keys"></block>
+    <block type="objects_values"></block>
     <block type="objects_get">
       <value name="KEY">
         <block type="text"></block>

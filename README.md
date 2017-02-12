@@ -17,18 +17,9 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * race between programmer typing and another programmer on cycle
 
 
-## Next deadline: HackTrin, Feb 12th
-  
-  * background color and other styles shoudl work with no input
-  
-  * presentation
-    * outline 
-    * make cycle resources pretty
-      * https://docs.google.com/document/d/1L_6jNXmc-H1mG5jgnEEMOe1sni0g4rtBQC87Ip2iMk0/edit#
-    * survey
-
 ## Eventually
   
+  * hacktrin postmortem  
   * object for each
   * submit blockly pull request for cross tab copy and paste
   * replace event with event field variable

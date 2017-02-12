@@ -164,10 +164,16 @@ Blockly.JavaScript['objects_set'] = function(block) {
 
 Blockly.JavaScript['objects_keys'] = function(block) {
   var value_object = Blockly.JavaScript.valueToCode(block, 'OBJECT', Blockly.JavaScript.ORDER_ATOMIC) || "''";
-  var value_key = Blockly.JavaScript.valueToCode(block, 'KEY', Blockly.JavaScript.ORDER_ATOMIC) || "''";
   var code = "Object.keys(" + value_object + ")";
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
+
+Blockly.JavaScript['objects_values'] = function(block) {
+  var value_object = Blockly.JavaScript.valueToCode(block, 'OBJECT', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+  var code = "Object.values(" + value_object + ")";
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+};
+
 
 Blockly.JavaScript['objects_copy'] = function(block) {
   var value_object = Blockly.JavaScript.valueToCode(block, 'OBJECT', Blockly.JavaScript.ORDER_ATOMIC) || "''";
