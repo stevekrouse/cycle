@@ -104,7 +104,6 @@ Blockly.JavaScript['cycle_ajax_get'] = function(block) {
   var variable_error = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('ERROR'), Blockly.Variables.NAME_TYPE);
   var statements_fail = Blockly.JavaScript.statementToCode(block, 'FAIL');
   
-  
   var code = "$.get({"                                              + "\n" +
              "  dataType: " + dropdown_datatype + ","               + "\n" + 
              "  crossDomain: true,"                                 + "\n" + 

@@ -19,6 +19,8 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## Next deadline: HackTrin, Feb 12th
   
+  * background color and other styles shoudl work with no input
+  
   * presentation
     * outline 
     * make cycle resources pretty
@@ -27,6 +29,8 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## Eventually
   
+  * object for each
+  * submit blockly pull request for cross tab copy and paste
   * replace event with event field variable
   * better elements
   * Link url URL in a new tab|this page|new window

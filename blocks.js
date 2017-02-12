@@ -1323,7 +1323,7 @@ Blockly.Blocks['cycle_ajax_get'] = {
     this.appendValueInput("URL")
         .setCheck(null)
         .appendField("get")
-        .appendField(new Blockly.FieldDropdown([["text","text"], ["json data","json"]]), "DATATYPE")
+        .appendField(new Blockly.FieldDropdown([["text","'text'"], ["json data","'json'"]]), "DATATYPE")
         .appendField("from url");
     this.appendStatementInput("SUCCESS")
         .setCheck(null)
