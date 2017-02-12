@@ -31,7 +31,7 @@ CompileError.prototype = Object.create(Error.prototype);
 CompileError.prototype.constructor = CompileError;
 
 Blockly.JavaScript['cycle_eval_js'] = function(block) {
-  var js = Blockly.JavaScript.valueToCode(block, 'JS', Blockly.JavaScript.ORDER_ATOMIC);
+  var js = Blockly.JavaScript.valueToCode(block, 'JS', Blockly.JavaScript.ORDER_ATOMIC) || "''";
   return ["new Function('return ' + " + js + ")()", Blockly.JavaScript.ORDER_ATOMIC];
 }
 
@@ -61,27 +61,27 @@ Blockly.JavaScript['firebase_initialize_app'] = function(block) {
 };
 
 Blockly.JavaScript['firebase_set'] = function(block) {
-  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_ref = Blockly.JavaScript.valueToCode(block, 'REF', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+  var value_ref = Blockly.JavaScript.valueToCode(block, 'REF', Blockly.JavaScript.ORDER_ATOMIC) || "''";
   var code = "firebase.database().ref(" + value_ref + ").set(" + value_value + ");\n"
   return code;
 };
 
 Blockly.JavaScript['firebase_add_to_list'] = function(block) {
-  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_ref = Blockly.JavaScript.valueToCode(block, 'REF', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+  var value_ref = Blockly.JavaScript.valueToCode(block, 'REF', Blockly.JavaScript.ORDER_ATOMIC) || "''";
   var code = "firebase.database().ref(" + value_ref + ").push(" + value_value + ");\n"
   return code;
 };
 
 Blockly.JavaScript['firebase_delete'] = function(block) {
-  var value_ref = Blockly.JavaScript.valueToCode(block, 'REF', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_ref = Blockly.JavaScript.valueToCode(block, 'REF', Blockly.JavaScript.ORDER_ATOMIC) || "''";
   var code = "firebase.database().ref(" + value_ref + ").remove();\n"
   return code;
 };
 
 Blockly.JavaScript['firebase_get'] = function(block) {
-  var value_ref = Blockly.JavaScript.valueToCode(block, 'REF', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_ref = Blockly.JavaScript.valueToCode(block, 'REF', Blockly.JavaScript.ORDER_ATOMIC) || "''";
   var varName = block.getFieldValue('VAR');
   var dropdown_frequency = block.getFieldValue('frequency');
   var statements_children = Blockly.JavaScript.statementToCode(block, 'CHILDREN');
@@ -147,30 +147,30 @@ Blockly.JavaScript['objects_create_empty'] = function(block) {
 };
 
 Blockly.JavaScript['objects_get'] = function(block) {
-  var value_object = Blockly.JavaScript.valueToCode(block, 'OBJECT', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_key = Blockly.JavaScript.valueToCode(block, 'KEY', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_object = Blockly.JavaScript.valueToCode(block, 'OBJECT', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+  var value_key = Blockly.JavaScript.valueToCode(block, 'KEY', Blockly.JavaScript.ORDER_ATOMIC) || "''";
   var code = value_object + "[" + value_key + "]";
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
 Blockly.JavaScript['objects_set'] = function(block) {
-  var value_object = Blockly.JavaScript.valueToCode(block, 'OBJECT', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_key = Blockly.JavaScript.valueToCode(block, 'KEY', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_object = Blockly.JavaScript.valueToCode(block, 'OBJECT', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+  var value_key = Blockly.JavaScript.valueToCode(block, 'KEY', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+  var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "''";
   var code = value_object + "[" + value_key + "] = " + value_value;
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
 
 Blockly.JavaScript['objects_keys'] = function(block) {
-  var value_object = Blockly.JavaScript.valueToCode(block, 'OBJECT', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_key = Blockly.JavaScript.valueToCode(block, 'KEY', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_object = Blockly.JavaScript.valueToCode(block, 'OBJECT', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+  var value_key = Blockly.JavaScript.valueToCode(block, 'KEY', Blockly.JavaScript.ORDER_ATOMIC) || "''";
   var code = "Object.keys(" + value_object + ")";
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
 Blockly.JavaScript['objects_copy'] = function(block) {
-  var value_object = Blockly.JavaScript.valueToCode(block, 'OBJECT', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_object = Blockly.JavaScript.valueToCode(block, 'OBJECT', Blockly.JavaScript.ORDER_ATOMIC) || "''";
   var code = "JSON.parse(JSON.stringify(" + value_object + ")";
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
@@ -277,8 +277,8 @@ Blockly.JavaScript['lists_setIndex'] = function(block) {
 };
 
 Blockly.JavaScript['cycle_emit'] = function(block) {
-  var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_data = Blockly.JavaScript.valueToCode(block, 'DATA', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+  var value_data = Blockly.JavaScript.valueToCode(block, 'DATA', Blockly.JavaScript.ORDER_ATOMIC) || "''";
   var code = 'self.$emit(' + value_name + ', ' + (value_data  || "undefined") + ');\n';
   return code;
 };
@@ -313,43 +313,43 @@ function getAttributes(firstChild, parent) {
   var value, key, name
   while (children) {
     if (children.type == "set_css"){
-      value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+      value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "''";
       attributes.styleStrings[children.getFieldValue('PROPERTY')] = value 
     } else if (children.type == "cycle_css_property"){
-      value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
-      key = Blockly.JavaScript.valueToCode(children, 'KEY', Blockly.JavaScript.ORDER_ATOMIC);
+      value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+      key = Blockly.JavaScript.valueToCode(children, 'KEY', Blockly.JavaScript.ORDER_ATOMIC) || "''";
       attributes.styleStrings[key] = value 
     } else if (children.type.includes("layout_")) {
       if (children.type == "layout_width") {
         var prop = children.getFieldValue("PROP")
-        var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+        var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         attributes.styleStrings[prop] =  value
       } else if (children.type == "layout_height") {
         var prop = children.getFieldValue("PROP")
-        var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+        var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         attributes.styleStrings[prop] =  value
       } else if (children.type == "layout_padding") {
-        var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+        var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         var side = children.getFieldValue('BORDER') == "all" ? '' : children.getFieldValue('BORDER')
         attributes.styleStrings["padding" + side] =  value
       } else if (children.type == "layout_border") {
-        var color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC);
-        var width = Blockly.JavaScript.valueToCode(children, 'WIDTH', Blockly.JavaScript.ORDER_ATOMIC);
-        var radius = Blockly.JavaScript.valueToCode(children, 'RADIUS', Blockly.JavaScript.ORDER_ATOMIC);
+        var color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+        var width = Blockly.JavaScript.valueToCode(children, 'WIDTH', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+        var radius = Blockly.JavaScript.valueToCode(children, 'RADIUS', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         var side = children.getFieldValue('BORDER') == "all" ? '' : children.getFieldValue('BORDER')
         var style = children.getFieldValue('STYLE') 
         attributes.styleStrings["border" + side] =  width + " + ' " + style + " ' + " + color  
         attributes.styleStrings["borderRadius"] =  radius  
       } else if (children.type == "layout_outline") {
-        var color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC);
-        var width = Blockly.JavaScript.valueToCode(children, 'WIDTH', Blockly.JavaScript.ORDER_ATOMIC);
+        var color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+        var width = Blockly.JavaScript.valueToCode(children, 'WIDTH', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         var style = children.getFieldValue('STYLE') 
         attributes.styleStrings["outline"] =  width + " + ' " + style + " ' + " + color  
       } else if (children.type == "layout_background_color") {
-        var color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC);
+        var color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         attributes.styleStrings["backgroundColor"] =  color  
       } else if (children.type == "layout_margin") {
-        var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+        var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         var side = children.getFieldValue('BORDER') == "all" ? '' : children.getFieldValue('BORDER')
         attributes.styleStrings["margin" + side] =  value
       } else if (children.type == "layout_flex_parent") {
@@ -382,17 +382,17 @@ function getAttributes(firstChild, parent) {
           attributes.styleStrings["alignItems"] = (x == "'left'" ? "'flex-start'" : (x == "'right'" ? "'flex-end'" : x))
         }
       } else if (children.type == "layout_shadow") {
-        var value_x = Blockly.JavaScript.valueToCode(children, 'X', Blockly.JavaScript.ORDER_ATOMIC);
-        var value_y = Blockly.JavaScript.valueToCode(children, 'Y', Blockly.JavaScript.ORDER_ATOMIC);
-        var value_color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC);
-        var blur = Blockly.JavaScript.valueToCode(children, 'BLUR', Blockly.JavaScript.ORDER_ATOMIC);
-        var spread = Blockly.JavaScript.valueToCode(children, 'SPREAD', Blockly.JavaScript.ORDER_ATOMIC);
+        var value_x = Blockly.JavaScript.valueToCode(children, 'X', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+        var value_y = Blockly.JavaScript.valueToCode(children, 'Y', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+        var value_color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+        var blur = Blockly.JavaScript.valueToCode(children, 'BLUR', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+        var spread = Blockly.JavaScript.valueToCode(children, 'SPREAD', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         attributes.styleStrings["boxShadow"] =  value_x + "+ ' ' +" + value_y + "+ ' ' +" + blur + "+ ' ' +" + spread + "+ ' ' +" + value_color
       } else if (children.type == "layout_grow") {
-        var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+        var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         attributes.styleStrings["flexGrow"] = value
       } else if (children.type == "layout_inline") {
-        var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+        var value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         if (attributes.styleStrings.display && attributes.styleStrings.display.includes("flex")) {
           throw new CompileError('An inline block cannot arrange its children. Remove the "inline" block or the "arrange children" block.', children.id)
         } else {
@@ -401,37 +401,37 @@ function getAttributes(firstChild, parent) {
       }
     } else if (children.type.includes("font_")) {
       if (children.type == "font_shadow") {
-        var value_x = Blockly.JavaScript.valueToCode(children, 'X', Blockly.JavaScript.ORDER_ATOMIC);
-        var value_y = Blockly.JavaScript.valueToCode(children, 'Y', Blockly.JavaScript.ORDER_ATOMIC);
-        var value_color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC);
+        var value_x = Blockly.JavaScript.valueToCode(children, 'X', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+        var value_y = Blockly.JavaScript.valueToCode(children, 'Y', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+        var value_color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         attributes.styleStrings["textShadow"] =  value_x + "+ ' ' +" + value_y + "+ ' ' +" + value_color
       }
       else if (children.type == "font_align") {
-        var v_align = Blockly.JavaScript.valueToCode(children, 'ALIGN', Blockly.JavaScript.ORDER_ATOMIC);
+        var v_align = Blockly.JavaScript.valueToCode(children, 'ALIGN', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         attributes.styleStrings["textAlign"] =  v_align
       }
       else if (children.type == "font_size") {
-        var value_size = Blockly.JavaScript.valueToCode(children, 'SIZE', Blockly.JavaScript.ORDER_ATOMIC);
+        var value_size = Blockly.JavaScript.valueToCode(children, 'SIZE', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         attributes.styleStrings["fontSize"] =  value_size
       }
       else if (children.type == "font_bold") {
-        var value_bold = Blockly.JavaScript.valueToCode(children, 'BOLD', Blockly.JavaScript.ORDER_ATOMIC);
+        var value_bold = Blockly.JavaScript.valueToCode(children, 'BOLD', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         attributes.styleStrings["fontWeight"] =  value_bold + ' ? "bold" : "normal"'
       }
       else if (children.type == "font_family") {
-        var value_font = Blockly.JavaScript.valueToCode(children, 'FONT', Blockly.JavaScript.ORDER_ATOMIC);
+        var value_font = Blockly.JavaScript.valueToCode(children, 'FONT', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         attributes.styleStrings["fontFamily"] =  value_font
       }
       else if (children.type == "font_italics") {
-        var value_italics = Blockly.JavaScript.valueToCode(children, 'ITALICS', Blockly.JavaScript.ORDER_ATOMIC);
+        var value_italics = Blockly.JavaScript.valueToCode(children, 'ITALICS', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         attributes.styleStrings["fontStyle"] =  value_italics + ' ? "italic" : "normal"'
       }
       else if (children.type == "font_color") {
-        var value_color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC);
+        var value_color = Blockly.JavaScript.valueToCode(children, 'COLOR', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         attributes.styleStrings["color"] =  value_color
       } 
       else if (children.type == "font_underline") {
-        var value_decoration = Blockly.JavaScript.valueToCode(children, 'DECORATION', Blockly.JavaScript.ORDER_ATOMIC);
+        var value_decoration = Blockly.JavaScript.valueToCode(children, 'DECORATION', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         if (!(attributes.styleStrings["textDecoration"] && attributes.styleStrings["textDecoration"].includes("underline"))) {
           if (attributes.styleStrings["textDecoration"]) {
            attributes.styleStrings["textDecoration"] += " + "
@@ -451,7 +451,7 @@ function getAttributes(firstChild, parent) {
           attributes.styleStrings["textDecoration"] += "(" + value_decoration + " ? 'overline ' : '')"
         }
       } else if (children.type == "font_strikethrough") {
-        var value_decoration = Blockly.JavaScript.valueToCode(children, 'DECORATION', Blockly.JavaScript.ORDER_ATOMIC);
+        var value_decoration = Blockly.JavaScript.valueToCode(children, 'DECORATION', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         if (!(attributes.styleStrings["textDecoration"] && attributes.styleStrings["textDecoration"].includes("line-through"))) {
           if (attributes.styleStrings["textDecoration"]) {
             attributes.styleStrings["textDecoration"] += " + "
@@ -462,20 +462,20 @@ function getAttributes(firstChild, parent) {
         }
       }
       else if (children.type == "font_line_spacing") {
-        var value_spacing = Blockly.JavaScript.valueToCode(children, 'SPACING', Blockly.JavaScript.ORDER_ATOMIC);
+        var value_spacing = Blockly.JavaScript.valueToCode(children, 'SPACING', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         attributes.styleStrings["lineHeight"] =  value_spacing
       }
       else if (children.type == "font_letter_spacing") {
-        var value_spacing = Blockly.JavaScript.valueToCode(children, 'SPACING', Blockly.JavaScript.ORDER_ATOMIC);
+        var value_spacing = Blockly.JavaScript.valueToCode(children, 'SPACING', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         attributes.styleStrings["letterSpacing"] =  value_spacing
       }
       else if (children.type == "font_word_spacing") {
-        var value_spacing = Blockly.JavaScript.valueToCode(children, 'SPACING', Blockly.JavaScript.ORDER_ATOMIC);
+        var value_spacing = Blockly.JavaScript.valueToCode(children, 'SPACING', Blockly.JavaScript.ORDER_ATOMIC) || "''";
         attributes.styleStrings["wordSpacing"] =  value_spacing
       }
     } else if (children.type == "cycle_html_property"){
-      value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
-      key = Blockly.JavaScript.valueToCode(children, 'KEY', Blockly.JavaScript.ORDER_ATOMIC);
+      value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+      key = Blockly.JavaScript.valueToCode(children, 'KEY', Blockly.JavaScript.ORDER_ATOMIC) || "''";
       attributes.domPropsStrings[key] = value 
     } else if (children.type == "variables_set") {
       value = Blockly.JavaScript.valueToCode(children, 'VALUE',Blockly.JavaScript.ORDER_ASSIGNMENT) || "0";
@@ -484,7 +484,7 @@ function getAttributes(firstChild, parent) {
     } else if (events.includes(children.type)) { 
       var eventName
       if (children.type == "cycle_custom_event") {
-        eventName = Blockly.JavaScript.valueToCode(children, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+        eventName = Blockly.JavaScript.valueToCode(children, 'NAME', Blockly.JavaScript.ORDER_ATOMIC) || "''";
       } else {
         eventName = children.type
       }
@@ -515,7 +515,7 @@ function getAttributes(firstChild, parent) {
       children.nextConnection = nextConnection
     } else if (children.type == "cycle_add_input"){
       name = children.getFieldValue('NAME')
-      value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+      value = Blockly.JavaScript.valueToCode(children, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "''";
       attributes.propsStrings[name] = value
     } 
     children = children.getNextBlock()
@@ -671,7 +671,7 @@ function workspaceData(block, childrenString) {
       children: [] // children are in the attributes.if
     }
   } else if (block.type == "cycle_custom_element") { 
-    var dynamicTagType = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+    var dynamicTagType = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC) || "''";
     result = {
       blockId: block.id,
       dynamicTagType: dynamicTagType,
