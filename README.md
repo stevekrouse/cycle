@@ -18,18 +18,16 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 
 ## Next deadline: HackTrin, Feb 12th
-    
-  * copy and paste between cycle windows
-    * copy_ to sytem clickboard or localstorage instead of clipboardXml_
-      * http://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript 
   
-  * make cycle resources pretty
-    * https://docs.google.com/document/d/1L_6jNXmc-H1mG5jgnEEMOe1sni0g4rtBQC87Ip2iMk0/edit#
-    * outline presentation
+  * presentation
+    * outline 
+    * make cycle resources pretty
+      * https://docs.google.com/document/d/1L_6jNXmc-H1mG5jgnEEMOe1sni0g4rtBQC87Ip2iMk0/edit#
     * survey
 
 ## Eventually
   
+  * replace event with event field variable
   * better elements
   * Link url URL in a new tab|this page|new window
   * Image url URL

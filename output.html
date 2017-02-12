@@ -263,6 +263,10 @@
   window.console = {
     log: consoleLog,
     error: function(message) {
+      if (message.includes("Error when rendering root instance")) {
+        message = "\n\nThere is a bug within *somewhere* within your Page block. Sorry I can't be more specific where.\n\n" + 
+                  "My advice is to try to isolate the bug. A classic debugging strategy is to systematically pull out blocks and put them to the side until the code starts working again. Then once you've fixed the offending block(s) you can put it back together again." 
+      }
       var e = new Error(message)
       throw e
     }
