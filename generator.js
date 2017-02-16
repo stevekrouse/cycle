@@ -140,6 +140,20 @@ Blockly.JavaScript['cycle_ajax_post'] = function(block) {
   return code;
 };
 
+// Open page
+
+Blockly.JavaScript['cycle_open_url'] = function(block) {
+  var url = Blockly.JavaScript.valueToCode(block, 'URL', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+  var target = block.getFieldValue("TARGET")
+  if (target == "_blank") {
+    return "window.open(" + url + ", '_blank');"
+  } else if (target == "same") {
+    return "window.location.href = " + url + ";"
+  } else if (target == "new") {
+    return "window.open(" + url + ", 'newwindow', 'height=' + screen.height + ',width=' + screen.width);"
+  }
+};
+
 // OBJECTS
 
 Blockly.JavaScript['objects_create_empty'] = function(block) {
@@ -544,6 +558,40 @@ function blockAttributes(block) {
     if (!attributes.styleStrings.minHeight) {
       attributes.styleStrings.minHeight = "'100%'"
     }
+  } else if (block.type == "cycle_inline_container") {
+    if (!attributes.styleStrings.display) {
+      attributes.styleStrings.display = "'inline-block'"
+    }
+  } else if (block.type == "cycle_inline_text") {
+    if (!attributes.styleStrings.display) {
+      attributes.styleStrings.display = "'inline-block'"
+    }
+  } else if (block.type == "cycle_vertical_spacer") {
+    attributes.styleStrings.height = Blockly.JavaScript.valueToCode(block,"VALUE",Blockly.JavaScript.ORDER_ASSIGNMENT) ||"'0px'"
+  } else if (block.type == "cycle_horizontal_spacer") {
+    if (!attributes.styleStrings.display) {
+      attributes.styleStrings.display = "'inline-block'"
+    }
+    attributes.styleStrings.width = Blockly.JavaScript.valueToCode(block,"VALUE",Blockly.JavaScript.ORDER_ASSIGNMENT) ||"'0px'"
+  } else if (block.type == "cycle_image") {
+    if (!attributes.domPropsStrings.src) {
+      attributes.domPropsStrings.src = Blockly.JavaScript.valueToCode(block,"URL",Blockly.JavaScript.ORDER_ASSIGNMENT) || "''"
+    }
+  } else if (block.type == "cycle_iframe") {
+    if (!attributes.domPropsStrings.src) {
+      attributes.domPropsStrings.src = Blockly.JavaScript.valueToCode(block,"URL",Blockly.JavaScript.ORDER_ASSIGNMENT) || "''"
+    }
+  } else if (block.type == "cycle_display_heading") {
+    attributes.classStrings.push("'" + block.getFieldValue("TAG") + "'")
+  } else if (block.type == "cycle_button") {
+    attributes.classStrings.push("'btn'")
+    attributes.classStrings.push("'" + block.getFieldValue("TYPE") + "'")
+  }  else if (block.type == "cycle_input") {
+    var variable = block.getFieldValue("VAR")
+    var initial = Blockly.JavaScript.valueToCode(block,"VALUE",Blockly.JavaScript.ORDER_ASSIGNMENT) || "''"
+    attributes.onStrings["input"] = variable + " = event.target.value"
+    attributes.domPropsStrings.value = variable 
+    attributes.dataStrings[variable] = initial
   } else if (block.type == "controls_repeat_ext") {
      attributes.repeat = {}
      attributes.repeat.iterator = Blockly.JavaScript.variableDB_.getName("NONE");
@@ -617,7 +665,7 @@ function workspaceData(block, childrenString) {
       tagType: "a",
       children: mapWorkspaceData(children)
     }
-  } else if (block.type == 'cycle_container'){
+  } else if (block.type == 'cycle_container' || block.type == 'cycle_inline_container' || block.type == 'cycle_vertical_spacer' || block.type == 'cycle_horizontal_spacer'){
     result = {
       blockId: block.id,
       tagType: "div",
@@ -632,6 +680,28 @@ function workspaceData(block, childrenString) {
   } else if (block.type == 'cycle_text') {
     var value = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC)
     return value
+  } else if (block.type == 'cycle_heading') {
+    var value = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC)
+    var tag = block.getFieldValue('TAG')
+    result = {
+      blockId: block.id,
+      tagType: tag,
+      children: [value]
+    }
+  } else if (block.type == 'cycle_display_heading') {
+    var value = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC)
+    result = {
+      blockId: block.id,
+      tagType: 'h1',
+      children: [value]
+    }
+  } else if (block.type == 'cycle_inline_text') {
+    var value = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC)
+    result = {
+      blockId: block.id,
+      tagType: "div",
+      children: [value]
+    }
   } else if (block.type == 'cycle_button') {
     result = {
       blockId: block.id,

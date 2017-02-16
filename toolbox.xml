@@ -1,16 +1,79 @@
 <xml id="toolbox" style="display: none;">
-  <category name="Elements" colour="20">
+  <category name="Container Elements" colour="190">
     <block type="cycle_container"></block>
-    <block type="cycle_text">
+    <block type="cycle_inline_container"></block>
+    <block type="cycle_vertical_spacer">
+      <value name="VALUE">
+        <block type="text">
+          <field name="TEXT">20px</field>
+        </block>
+      </value>
+    </block>
+    <block type="cycle_horizontal_spacer">
+      <value name="VALUE">
+        <block type="text">
+          <field name="TEXT">10px</field>
+        </block>
+      </value>
+    </block>
+  </category>
+  <category name="Text Elements" colour="200">
+    <block type="cycle_display_heading">
       <value name="TEXT">
         <block type="text">
           <field name="TEXT">Hello</field>
         </block>
       </value>
     </block>
+    <block type="cycle_heading">
+      <value name="TEXT">
+        <block type="text">
+          <field name="TEXT">Hello</field>
+        </block>
+      </value>
+    </block>
+    <block type="cycle_inline_text">
+      <value name="TEXT">
+        <block type="text">
+          <field name="TEXT">Hello</field>
+        </block>
+      </value>
+    </block>
+    <!--code (pre)-->
+    <!--block quote -->
+    <!--consider putting font styles here-->
+  </category>
+  <category name="Media Elements" colour="220">
+    <block type="mousedown">
+      <statement name="blocks">
+        <block type="cycle_open_url">
+          <value name="URL">
+            <block type="text">
+              <field name="TEXT">http://woofjs.com</field>
+            </block>
+          </value>
+        </block>
+      </statement>
+    </block>
+    <block type="cycle_image">
+      <value name="URL">
+        <block type="text">
+          <field name="TEXT">http://i.imgur.com/GCKBxrv.gif</field>
+        </block>
+      </value>
+    </block>
+    <block type="cycle_iframe">
+      <value name="URL">
+        <block type="text">
+          <field name="TEXT">https://stevekrouse.github.io/cycle</field>
+        </block>
+      </value>
+    </block>
+  </category>
+  <category name="Input Elements" colour="210">
     <block type="cycle_button">
       <statement name="CHILDREN">
-        <block type="cycle_text">
+        <block type="cycle_inline_text">
           <value name="TEXT">
             <block type="text">
               <field name="TEXT">Click me!</field>
@@ -32,159 +95,56 @@
         </block>
       </statement>
     </block>
-    <block type="cycle_link">
-      <statement name="CHILDREN">
-        <block type="cycle_html_property">
-          <value name="KEY">
-            <block type="text">
-              <field name="TEXT">target</field>
-            </block>
-          </value>
-          <value name="VALUE">
-            <block type="text">
-              <field name="TEXT">_blank</field>
-            </block>
-          </value>
-          <next>
-            <block type="cycle_html_property">
-              <value name="KEY">
-                <block type="text">
-                  <field name="TEXT">href</field>
-                </block>
-              </value>
-              <value name="VALUE">
-                <block type="text">
-                  <field name="TEXT">https://google.com</field>
-                </block>
-              </value>
-              <next>
-                <block type="cycle_text">
-                  <value name="TEXT">
-                    <block type="text">
-                      <field name="TEXT">Link to google</field>
-                    </block>
-                  </value>
-                </block>
-              </next>
-            </block>
-          </next>
-        </block>
-      </statement>
-    </block>
-    <block type="cycle_image">
-      <statement name="CHILDREN">
-        <block type="cycle_html_property">
-          <value name="KEY">
-            <block type="text">
-              <field name="TEXT">src</field>
-            </block>
-          </value>
-          <value name="VALUE">
-            <block type="text">
-              <field name="TEXT">http://i.imgur.com/GCKBxrv.gif</field>
-            </block>
-          </value>
-        </block>
-      </statement>
-    </block>
+    <!--add placeholder to input-->
+    <!--add type (number, password, etc) to input https://v4-alpha.getbootstrap.com/components/forms/#textual-inputs-->
     <block type="cycle_input">
-      <statement name="CHILDREN">
-        <block type="variables_set">
-          <field name="VAR">input1Text</field>
-          <value name="VALUE">
-            <block type="text">
-              <field name="TEXT"></field>
-            </block>
-          </value>
-          <next>
-            <block type="cycle_html_property">
-              <value name="KEY">
-                <block type="text">
-                  <field name="TEXT">value</field>
-                </block>
-              </value>
-              <value name="VALUE">
-                <block type="variables_get">
-                  <field name="VAR">input1Text</field>
-                </block>
-              </value>
-              <next>
-                <block type="keyup">
-                  <statement name="blocks">
-                    <block type="variables_set">
-                      <field name="VAR">input1Text</field>
-                      <value name="VALUE">
-                        <block type="objects_get">
-                          <value name="OBJECT">
-                            <block type="objects_get">
-                              <value name="OBJECT">
-                                <block type="variables_get">
-                                  <field name="VAR">event</field>
-                                </block>
-                              </value>
-                              <value name="KEY">
-                                <block type="text">
-                                  <field name="TEXT">target</field>
-                                </block>
-                              </value>
-                            </block>
-                          </value>
-                          <value name="KEY">
-                            <block type="text">
-                              <field name="TEXT">value</field>
-                            </block>
-                          </value>
-                        </block>
-                      </value>
-                    </block>
-                  </statement>
-                </block>
-              </next>
-            </block>
-          </next>
+      <value name="VALUE">
+        <block type="text">
+          <field name="TEXT"></field>
         </block>
-      </statement>
+      </value>
     </block>
-    <block type="cycle_iframe">
-      <statement name="CHILDREN">
-        <block type="cycle_html_property">
-          <value name="KEY">
-            <block type="text">
-              <field name="TEXT">src</field>
-            </block>
-          </value>
-          <value name="VALUE">
-            <block type="text">
-              <field name="TEXT">http://stevekrouse.github.io/cycle</field>
-            </block>
-          </value>
-        </block>
-      </statement>
-    </block>
-    <!--list-->
-    <!--list element (numbered/bullet/nothing)-->
-    <!--heading-->
-    <!--text area-->
-    <!--table-->
-    <!--table row-->
-    <!--table cell-->
-    <!--code (pre)-->
-    <!--embed-->
-    <!--spacer-->
+    <!-- text area -->
     <!--radio buttons-->
     <!--checkboxes-->
-    <!--select dropdown-->
-    <!--toggle-->
-    <!--navbar-->
-    <block type="cycle_html_property">
-      <value name="KEY">
-        <block type="text"></block>
-      </value>
-      <value name="VALUE">
-        <block type="text"></block>
-      </value>
-    </block>
   </category>
+  <!--model category https://v4-alpha.getbootstrap.com/components/modal/-->
+  <!--<category name="Control Elements" colour="230">-->
+     <!--figure out if these are internal or external / add base container class-->
+    <!-- <block type="controls_if"></block>-->
+    <!-- <block type="controls_repeat_ext">-->
+    <!--  <value name="TIMES">-->
+    <!--    <block type="math_number">-->
+    <!--      <field name="NUM">10</field>-->
+    <!--    </block>-->
+    <!--  </value>-->
+    <!--</block>-->
+    <!--<block type="controls_for">-->
+    <!--  <value name="FROM">-->
+    <!--    <block type="math_number">-->
+    <!--      <field name="NUM">1</field>-->
+    <!--    </block>-->
+    <!--  </value>-->
+    <!--  <value name="TO">-->
+    <!--    <block type="math_number">-->
+    <!--      <field name="NUM">10</field>-->
+    <!--    </block>-->
+    <!--  </value>-->
+    <!--  <value name="BY">-->
+    <!--    <block type="math_number">-->
+    <!--      <field name="NUM">1</field>-->
+    <!--    </block>-->
+    <!--  </value>-->
+    <!--</block>-->
+    <!--<block type="controls_forEach"></block>-->
+     <!--list-->
+     <!--list element (numbered/bullet/nothing)-->
+  <!--</category>-->
+  <!--<category name="Menu Elements" colour="240">-->
+    <!--dropdown-->
+    <!--navbar   https://v4-alpha.getbootstrap.com/components/navbar/-->
+    <!--toggle-->
+  <!--</category>-->
   <category name="Font" colour="310">
     <block type="font_family">
       <value name="FONT">
@@ -693,6 +653,14 @@
         <block type="text">
           <field name="TEXT">new Date().getHour()</field>
         </block>
+      </value>
+    </block>
+     <block type="cycle_html_property">
+      <value name="KEY">
+        <block type="text"></block>
+      </value>
+      <value name="VALUE">
+        <block type="text"></block>
       </value>
     </block>
   </category>

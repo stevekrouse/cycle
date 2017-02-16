@@ -8,61 +8,65 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 ## Customer development ideas
   
   * go to hackathons to teach kids to code with cycle and have them win
-    * HackTrin Sunday Feb 12
-    * Hack it Together Tuedsday Feb 21st workshop
     * HackNYU Saturday Feb 18th
+    * Hack it Together Tuedsday Feb 21st workshop  
       * hackathon on feb 26 at 8:30am
     * HackNY  April 8
   * need to come up with better words than "block-based" or "drag and drop"
   * race between programmer typing and another programmer on cycle
 
 
-## Eventually
+## Next deadline: HackNYU Feb 18th at 10m with goal of at least 1 team spending time in Cycle outside of the class
+
+  * make page padding 10px in default page but showing
+
+  * catch script errors better 
+
+  * Polish the untutorials  
+
+  * Improve the survey
+    * What software tools do you expect to use this hackathon?
+    * Why do you choose them?
+    * Why would you use cycle?
+    * Why wouldn’t you use cycle?
   
-  * hacktrin postmortem  
-  * object for each
-  * submit blockly pull request for cross tab copy and paste
-  * replace event with event field variable
-  * better elements
-  * Link url URL in a new tab|this page|new window
-  * Image url URL
-  * break up elements into menus
-    * Textbox (or text element)
-    * media 
-      * images
-      * links
-      * video
-      * iframe
-    * inputs/forms 
-    * containers
-      * inline container
-      * full width container
-      * vertical spacer
-      * horiztonal spacer
-  * navbar
-  * lists 
-  * tables
-  * firebase create account and firebase login
-    * how to handle failure? 
-  * links shouldn't be seperate elements but something you can add to any element
-  * blocks broken on chrome and safari mobile --> and desktop safari
-  * give components data
+  * if and repeats can't have containers 
+    * option 1: like components, give option for base type in ifs and repeats
+    * option 2: make if's and repeats inline blocks that you can throw into any block
+  
+  * Create control iteration for objects so you don’t have to do values for firebase 
+
+  * parse int
+
   * date and time menu
     * maybe: http://www.datejs.com/
-  * parse int
+
+  * At the hackathon: Spend more time interviewing kids about what types of things they are looking to get out of the hackathon, what types of things they want to make.
+
+
+## Eventually
+   * font
+    * consider combining all font styles into one massive block like the top of google docs
+    * https://v4-alpha.getbootstrap.com/content/typography/
+  * Debug the firebase bugs on some computers
+  * change cycle name
+  * submit blockly pull request for cross tab copy and paste
+  * firebase create account and firebase login
+    * how to handle failure? 
+  * blocks broken on chrome and safari mobile --> and desktop safari
+  * give components data
   * export project 
   * faster iteration cycle   
     * don't fully reload īframe just delete loads and vue and app and page for speed
     * try making style and text changes directly without recompile for speed
-  * including CSS link tags
+    * hot reloading - keep track of data between renders and set it as initial values for the next render (refresh clears this) 
   * beautify chat app
   * import JS librarys statically
   * colour scheme generator built in 
     * maybe: https://github.com/Fooidge/PleaseJS
   * turn all px inputs to numbers with dropdown for px, em, %
   * allow code snipets
-    * HTML -> use VueJS compiler
-    * JS -> eval
+    * HTML -> use VueJS compiler?
   * CSS
     * ability to set border radius on each or all corners 
     * more built in fonts
@@ -89,20 +93,12 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * consider blockly-closure-and-flyout-on-hover   
   * focus on blockly after clicking on output so delete button works
     * https://github.com/google/blockly/issues/904
-  * add variables in scope to variable list
-    * https://github.com/google/blockly/blob/c0053531897ad8f7486a5f197ea3cd1803374c6b/core/variables.js 
-    * every time you add inputText, increase the number of numberText of the XML in the toolbox 
-  * hot reloading
-    * keep track of data between renders and set it as initial values for the next render (refresh clears this) 
-  * clicking on html scrolls to code
-  * ability to add classes (or is add HTML prop class good for now?) 
   * more expressive firebase querying
     * limit to VALUE
     * order by key VALUE
     * equal to VALUE
   * list sorting
   * list filtering
-  * ability to add link tags
   * URL menu for routing, includng hash and other convinience methods
   * inline string concatenation
   * figure out better way to do CSS / HTML props
@@ -122,10 +118,8 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
       * (and easy object cloning and key modifying)
     * need to somehow make data variables out of scope in eval
     * message broadcasting between components
-  * copy and paste or "backpack"
   * should text be a div with a text input space and children'? inline?
   * raise errors when variables are used out of scope
-  * consider combining all font styles into one massive block like the top of google docs
   * close flyouts by clicking on the flyout (not on the block)
   * turn loops more into components with base type and closure with their own data
   * see if we can get blocks not to carry children
@@ -142,7 +136,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
      - includes branches and version control and collaboration
      - notifies you when you've been stuck on a feature for too long and should take a break or get help
   * error handling (short term -> try/catch, long-term -> strong typing and no runtime errors)
-  * make getting getting the event.target.value for input text setup more clear
   * the toolbox lives in the mouse/selector so as to help you understand what's in context/scope
   * bubble.is typing 's thing and speeadsheet like database and schema thing
   * ability to select block by drag
@@ -150,26 +143,6 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * arrow codes to move selector + type to insert code
   * element functions without components. basically macros that expand (figure out how to isolate scope)
   * consider using babel ast for jsx react, make generalized blocks that can be editied and then handcraft as I go (or consider switching to pencilcode's droplet)
-  * bootstrap 4 library https://v4-alpha.getbootstrap.com/getting-started/introduction/
-     * options
-       * 1. add class X, Y, Z, etc, etc
-       * 2. or have bootstrap button with lots of class options
-       * 3. navbar / bootstrap buttons can be scaffolded with classes 
-     * elements  
-       * heading 1-6 (get for free?) 
-       * containers
-          * fixed-width vs fluid
-        *  button
-          * primary, secondary, success, info, warning, danger, link
-          * outline-primary, etc, etc 
-          * lg, sm, block
-          * disabled
-        * drop down
-        * list group / list group item
-        * nav bar
-          * collapse 
-          * ul / li.nav-item 
-
 
 ## App ideas
 

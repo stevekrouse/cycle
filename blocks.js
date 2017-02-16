@@ -1,15 +1,145 @@
+// Page element
+
+Blockly.Blocks['cycle_page'] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField("Page");
+    this.appendStatementInput("CHILDREN")
+      .setCheck(null);
+    this.setColour(190);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+// Container Elements
+
 Blockly.Blocks['cycle_container'] = {
   init: function() {
     this.appendDummyInput()
-      .appendField("Container");
+      .appendField("full width container");
     this.appendStatementInput("CHILDREN")
       .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(190);
+    this.setTooltip('');
+  },
+};
+
+Blockly.Blocks['cycle_inline_container'] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField("inline container");
+    this.appendStatementInput("CHILDREN")
+      .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(190);
+    this.setTooltip('');
+  },
+};
+
+Blockly.Blocks['cycle_vertical_spacer'] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField("vertical spacer height");
+    this.appendValueInput("VALUE")
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(190);
+    this.setTooltip('');
+  },
+};
+
+Blockly.Blocks['cycle_horizontal_spacer'] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField("horizontal spacer width");
+    this.appendValueInput("VALUE")
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(190);
+    this.setTooltip('');
+  },
+};
+
+// Text elements
+
+Blockly.Blocks['cycle_text'] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField("Text");
+    this.appendValueInput("TEXT")
+      .setCheck("String");
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(20);
     this.setTooltip('');
   },
 };
+
+Blockly.Blocks['cycle_heading'] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([
+        ["heading 1", "h1"],
+        ["heading 2", "h2"],
+        ["heading 3", "h3"],
+        ["heading 4", "h4"],
+        ["heading 5", "h5"],
+        ["heading 6", "h6"],
+      ]), "TAG");
+    this.appendValueInput("TEXT");
+    this.appendStatementInput("CHILDREN")
+      .setCheck(null);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+  },
+}
+
+Blockly.Blocks['cycle_display_heading'] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldDropdown([
+        ["display heading 1", "display-1"],
+        ["display heading 2", "display-2"],
+        ["display heading 3", "display-3"],
+        ["display heading 4", "display-4"],
+      ]), "TAG");
+    this.appendValueInput("TEXT");
+    this.appendStatementInput("CHILDREN")
+      .setCheck(null);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+  },
+}
+
+Blockly.Blocks['cycle_inline_text'] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField("text");
+    this.appendValueInput("TEXT");
+    this.appendStatementInput("CHILDREN")
+      .setCheck(null);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(200);
+    this.setTooltip('');
+  },
+};
+
+// Media elements
 
 Blockly.Blocks['cycle_link'] = {
   init: function() {
@@ -24,18 +154,107 @@ Blockly.Blocks['cycle_link'] = {
   },
 };
 
+Blockly.Blocks['cycle_open_url'] = {
+  init: function() {
+    this.appendValueInput("URL")
+      .appendField("open url")
+      .appendField(new Blockly.FieldDropdown([
+        ["in a new tab", "_blank"],
+        ["in the same window", "same"],
+        ["in a new window", "new"],
+      ]), "TARGET");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(220);
+    this.setTooltip('');
+  },
+};
+
 Blockly.Blocks['cycle_image'] = {
   init: function() {
-    this.appendDummyInput()
-      .appendField("Image");
+    this.appendValueInput("URL")
+      .appendField("image url");
     this.appendStatementInput("CHILDREN")
       .setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(20);
+    this.setColour(220);
     this.setTooltip('');
   },
 };
+
+Blockly.Blocks['cycle_iframe'] = {
+  init: function() {
+    this.appendValueInput("URL")
+      .appendField("embed url");
+    this.appendStatementInput("CHILDREN")
+      .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(220);
+    this.setTooltip('');
+  },
+};
+
+Blockly.Blocks['cycle_video_url'] = {
+  init: function() {
+    this.appendValueInput("URL")
+      .appendField("video url");
+    this.appendStatementInput("CHILDREN")
+      .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(220);
+    this.setTooltip('');
+  },
+};
+
+// Input elements
+
+Blockly.Blocks['cycle_button'] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField("Button")
+      .appendField(new Blockly.FieldDropdown([
+        ["info", "btn-info"],
+        ["primary", "btn-primary"],
+        ["secondary", "btn-secondary"],
+        ["success", "btn-success"],
+        ["warning", "btn-warning"],
+        ["danger", "btn-danger"],
+        ["info outline", "btn-outline-info"],
+        ["primary outline", "btn-outline-primary"],
+        ["secondary outline", "secbtn-outline-secondary"],
+        ["success outline", "sbtn-outline-success"],
+        ["warning outline", "wbtn-outline-warning"],
+        ["danger outline", "btn-outline-danger"],
+      ]), "TYPE");
+    this.appendStatementInput("CHILDREN")
+      .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(210);
+    this.setTooltip('');
+  },
+};
+
+Blockly.Blocks['cycle_input'] = {
+  init: function() {
+    this.appendValueInput("VALUE")
+      .appendField("single line text input with")
+      .appendField(new Blockly.FieldVariable("input1Text"), "VAR")
+      .appendField("initally set to")
+    this.setInputsInline(true);
+    this.appendStatementInput("CHILDREN")
+      .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(210);
+    this.setTooltip('');
+  },
+};
+
+// Custom Elements
 
 Blockly.Blocks['cycle_emit'] = {
   init: function() {
@@ -54,32 +273,6 @@ Blockly.Blocks['cycle_emit'] = {
   }
 };
 
-Blockly.Blocks['cycle_text'] = {
-  init: function() {
-    this.appendDummyInput()
-      .appendField("Text");
-    this.appendValueInput("TEXT")
-      .setCheck("String");
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(20);
-    this.setTooltip('');
-  },
-};
-
-Blockly.Blocks['cycle_iframe'] = {
-  init: function() {
-    this.appendDummyInput()
-      .appendField("Embed (iframe)");
-    this.appendStatementInput("CHILDREN")
-      .setCheck(null);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(20);
-    this.setTooltip('');
-  },
-};
 
 Blockly.Blocks['cycle_custom_event'] = {
   init: function() {
@@ -87,7 +280,7 @@ Blockly.Blocks['cycle_custom_event'] = {
       .setCheck(null)
       .appendField("When custom event");
     this.appendDummyInput()
-      .appendField("(event)");
+      .appendField(new Blockly.FieldVariable("event"), "VAR")
     this.appendStatementInput("blocks")
       .setCheck(null);
     this.setInputsInline(true);
@@ -99,44 +292,9 @@ Blockly.Blocks['cycle_custom_event'] = {
   }
 };
 
-Blockly.Blocks['cycle_button'] = {
-  init: function() {
-    this.appendDummyInput()
-      .appendField("Button");
-    this.appendStatementInput("CHILDREN")
-      .setCheck(null);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(20);
-    this.setTooltip('');
-  },
-};
 
-Blockly.Blocks['cycle_input'] = {
-  init: function() {
-    this.appendDummyInput()
-      .appendField("Input");
-    this.setInputsInline(true);
-    this.appendStatementInput("CHILDREN")
-      .setCheck(null);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(20);
-    this.setTooltip('');
-  },
-};
 
-Blockly.Blocks['cycle_page'] = {
-  init: function() {
-    this.appendDummyInput()
-      .appendField("Page");
-    this.appendStatementInput("CHILDREN")
-      .setCheck(null);
-    this.setColour(20);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
-  }
-};
+
 
 Blockly.Blocks['cycle_create_element'] = {
   init: function() {
@@ -259,19 +417,19 @@ Blockly.Blocks['cycle_debugger'] = {
   },
 };
 
+// Events
+
 Blockly.Blocks['load'] = {
   init: function() {
     this.setColour(60);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-      .appendField("when the page is loaded (event)");
+      .appendField("when the page is loaded")
+      .appendField(new Blockly.FieldVariable("event"), "VAR")
     this.appendStatementInput("blocks")
       .setCheck(null);
     this.setTooltip('');
-  },
-  getVars: function() {
-    return ["event"]
   }
 };
 
@@ -281,13 +439,11 @@ Blockly.Blocks['mousedown'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-      .appendField("when mouse down (event)");
+      .appendField("when mouse down")
+      .appendField(new Blockly.FieldVariable("event"), "VAR")
     this.appendStatementInput("blocks")
       .setCheck(null);
     this.setTooltip('');
-  },
-  getVars: function() {
-    return ["event"]
   }
 };
 
@@ -297,13 +453,11 @@ Blockly.Blocks['mousemove'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-      .appendField("when mouse move (event)");
+      .appendField("when mouse move")
+      .appendField(new Blockly.FieldVariable("event"), "VAR")
     this.appendStatementInput("blocks")
       .setCheck(null);
     this.setTooltip('');
-  },
-  getVars: function() {
-    return ["event"]
   }
 };
 
@@ -313,13 +467,11 @@ Blockly.Blocks['change'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-      .appendField("when changed (event)");
+      .appendField("when changed")
+      .appendField(new Blockly.FieldVariable("event"), "VAR")
     this.appendStatementInput("blocks")
       .setCheck(null);
     this.setTooltip('');
-  },
-  getVars: function() {
-    return ["event"]
   }
 };
 
@@ -329,13 +481,11 @@ Blockly.Blocks['mouseover'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-      .appendField("when mouse over (event)");
+      .appendField("when mouse over")
+      .appendField(new Blockly.FieldVariable("event"), "VAR")
     this.appendStatementInput("blocks")
       .setCheck(null);
     this.setTooltip('');
-  },
-  getVars: function() {
-    return ["event"]
   }
 };
 Blockly.Blocks['mouseout'] = {
@@ -344,13 +494,11 @@ Blockly.Blocks['mouseout'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-      .appendField("when mouse out (event)");
+      .appendField("when mouse out")
+      .appendField(new Blockly.FieldVariable("event"), "VAR")
     this.appendStatementInput("blocks")
       .setCheck(null);
     this.setTooltip('');
-  },
-  getVars: function() {
-    return ["event"]
   }
 };
 Blockly.Blocks['dblclick'] = {
@@ -359,13 +507,11 @@ Blockly.Blocks['dblclick'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-      .appendField("when double click (event)");
+      .appendField("when double click")
+      .appendField(new Blockly.FieldVariable("event"), "VAR")
     this.appendStatementInput("blocks")
       .setCheck(null);
     this.setTooltip('');
-  },
-  getVars: function() {
-    return ["event"]
   }
 };
 Blockly.Blocks['mouseup'] = {
@@ -374,13 +520,11 @@ Blockly.Blocks['mouseup'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-      .appendField("when mouse up (event)");
+      .appendField("when mouse up")
+      .appendField(new Blockly.FieldVariable("event"), "VAR")
     this.appendStatementInput("blocks")
       .setCheck(null);
     this.setTooltip('');
-  },
-  getVars: function() {
-    return ["event"]
   }
 };
 Blockly.Blocks['keydown'] = {
@@ -393,13 +537,11 @@ Blockly.Blocks['keydown'] = {
       .appendField(new Blockly.FieldDropdown([
         ["any","ANY"], ["backspace","8"],["tab","9"],["enter","13"],["shift","16"],["ctrl","17"],["alt","18"],["pause/break","19"],["caps lock","20"],["escape","27"],["(space)","32"],["page up","33"],["page down","34"],["end","35"],["home","36"],["left arrow","37"],["up arrow","38"],["right arrow","39"],["down arrow","40"],["insert","45"],["delete","46"],["0","48"],["1","49"],["2","50"],["3","51"],["4","52"],["5","53"],["6","54"],["7","55"],["8","56"],["9","57"],["a","65"],["b","66"],["c","67"],["d","68"],["Key","Code"],["e","69"],["f","70"],["g","71"],["h","72"],["i","73"],["j","74"],["k","75"],["l","76"],["m","77"],["n","78"],["o","79"],["p","80"],["q","81"],["r","82"],["s","83"],["t","84"],["u","85"],["v","86"],["w","87"],["x","88"],["y","89"],["z","90"],["left window key","91"],["right window key","92"],["select key","93"],["numpad 0","96"],["numpad 1","97"],["numpad 2","98"],["numpad 3","99"],["numpad 4","100"],["numpad 5","101"],["numpad 6","102"],["numpad 7","103"],["Key","Code"],["numpad 8","104"],["numpad 9","105"],["multiply","106"],["add","107"],["subtract","109"],["decimal point","110"],["divide","111"],["f1","112"],["f2","113"],["f3","114"],["f4","115"],["f5","116"],["f6","117"],["f7","118"],["f8","119"],["f9","120"],["f10","121"],["f11","122"],["f12","123"],["num lock","144"],["scroll lock","145"],["semi-colon","186"],["equal sign","187"],["comma","188"],["dash","189"],["period","190"],["forward slash","191"],["grave accent","192"],["open bracket","219"],["back slash","220"],["close braket","221"],["single quote","222"]
       ]), "KEYCODE")
-      .appendField("key down (event)")
+      .appendField("key down")
+      .appendField(new Blockly.FieldVariable("event"), "VAR")
     this.appendStatementInput("blocks")
       .setCheck(null);
     this.setTooltip('');
-  },
-  getVars: function() {
-    return ["event"]
   }
 };
 
@@ -413,13 +555,11 @@ Blockly.Blocks['keyup'] = {
       .appendField(new Blockly.FieldDropdown([
         ["any","ANY"], ["backspace","8"],["tab","9"],["enter","13"],["shift","16"],["ctrl","17"],["alt","18"],["pause/break","19"],["caps lock","20"],["escape","27"],["(space)","32"],["page up","33"],["page down","34"],["end","35"],["home","36"],["left arrow","37"],["up arrow","38"],["right arrow","39"],["down arrow","40"],["insert","45"],["delete","46"],["0","48"],["1","49"],["2","50"],["3","51"],["4","52"],["5","53"],["6","54"],["7","55"],["8","56"],["9","57"],["a","65"],["b","66"],["c","67"],["d","68"],["Key","Code"],["e","69"],["f","70"],["g","71"],["h","72"],["i","73"],["j","74"],["k","75"],["l","76"],["m","77"],["n","78"],["o","79"],["p","80"],["q","81"],["r","82"],["s","83"],["t","84"],["u","85"],["v","86"],["w","87"],["x","88"],["y","89"],["z","90"],["left window key","91"],["right window key","92"],["select key","93"],["numpad 0","96"],["numpad 1","97"],["numpad 2","98"],["numpad 3","99"],["numpad 4","100"],["numpad 5","101"],["numpad 6","102"],["numpad 7","103"],["Key","Code"],["numpad 8","104"],["numpad 9","105"],["multiply","106"],["add","107"],["subtract","109"],["decimal point","110"],["divide","111"],["f1","112"],["f2","113"],["f3","114"],["f4","115"],["f5","116"],["f6","117"],["f7","118"],["f8","119"],["f9","120"],["f10","121"],["f11","122"],["f12","123"],["num lock","144"],["scroll lock","145"],["semi-colon","186"],["equal sign","187"],["comma","188"],["dash","189"],["period","190"],["forward slash","191"],["grave accent","192"],["open bracket","219"],["back slash","220"],["close braket","221"],["single quote","222"]
       ]), "KEYCODE")
-      .appendField("key up (event)")
+      .appendField("key up")
+      .appendField(new Blockly.FieldVariable("event"), "VAR")
     this.appendStatementInput("blocks")
       .setCheck(null);
     this.setTooltip('');
-  },
-  getVars: function() {
-    return ["event"]
   }
 };
 
@@ -429,13 +569,11 @@ Blockly.Blocks['blur'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-      .appendField("when blur (event)");
+      .appendField("when blur")
+      .appendField(new Blockly.FieldVariable("event"), "VAR")
     this.appendStatementInput("blocks")
       .setCheck(null);
     this.setTooltip('');
-  },
-  getVars: function() {
-    return ["event"]
   }
 };
 
