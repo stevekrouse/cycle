@@ -16,9 +16,11 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * race between programmer typing and another programmer on cycle
 
 
-## Next deadline: HackNYU Feb 18th at 10m with goal of at least 1 team spending time in Cycle outside of the class
+## Next deadline: HackNYU Feb 18th at 10m 
 
-  * make page padding 10px in default page but showing
+  * At the hackathon: Spend more time interviewing kids about what types of things they are looking to get out of the hackathon, what types of things they want to make.
+
+### Goal: at least 1 team spending time in Cycle outside of the class
 
   * catch script errors better 
 
@@ -34,6 +36,10 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
     * option 1: like components, give option for base type in ifs and repeats
     * option 2: make if's and repeats inline blocks that you can throw into any block
   
+  * navbar elements
+  
+  * better text input options
+
   * Create control iteration for objects so you don’t have to do values for firebase 
 
   * parse int
@@ -41,11 +47,10 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * date and time menu
     * maybe: http://www.datejs.com/
 
-  * At the hackathon: Spend more time interviewing kids about what types of things they are looking to get out of the hackathon, what types of things they want to make.
-
 
 ## Eventually
-   * font
+  
+  * font
     * consider combining all font styles into one massive block like the top of google docs
     * https://v4-alpha.getbootstrap.com/content/typography/
   * Debug the firebase bugs on some computers
