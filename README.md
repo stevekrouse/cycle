@@ -22,31 +22,28 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ### Goal: at least 1 team spending time in Cycle outside of the class
 
-  * catch script errors better 
+  * consider giving every css change an animation 
 
-  * Polish the untutorials  
-
-  * Improve the survey
-    * What software tools do you expect to use this hackathon?
-    * Why do you choose them?
-    * Why would you use cycle?
-    * Why wouldn’t you use cycle?
-  
   * if and repeats can't have containers 
     * option 1: like components, give option for base type in ifs and repeats
     * option 2: make if's and repeats inline blocks that you can throw into any block
-  
-  * navbar elements
-  
-  * better text input options
+
+  * only scope variable, not text -- http://stevekrouse.github.io/cycle/#scope-variable-error
 
   * Create control iteration for objects so you don’t have to do values for firebase 
+  
+  * every / wait blocks  
 
-  * parse int
+  * navbar elements
 
   * date and time menu
     * maybe: http://www.datejs.com/
+  
+  * parse int
 
+  * better text input options
+
+  * catch script errors better
 
 ## Eventually
   

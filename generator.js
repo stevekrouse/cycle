@@ -527,7 +527,7 @@ function getAttributes(firstChild, parent) {
         onMap[eventName] = Blockly.JavaScript.blockToCode(children)  
       } catch(e) {
         if (e.message.includes("Cannot read property 'call' of undefined")) {
-          throw new CompileError("You cannot have elements or styles (brown or purple blocks) inside of events.", children.id)
+          throw new CompileError("You cannot have elements (blue-ish blocks) or styles (purple-ish blocks) inside of events.", children.id)
         } else {
           throw e
         }
