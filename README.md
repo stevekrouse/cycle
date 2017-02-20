@@ -16,37 +16,27 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
   * race between programmer typing and another programmer on cycle
 
 
-## Next deadline: HackNYU Feb 18th at 10m 
+## Next deadline: HackItTogether
 
-  * At the hackathon: Spend more time interviewing kids about what types of things they are looking to get out of the hackathon, what types of things they want to make.
+  * figure out strange cycle bug where things sometimes don't load until you refresh the page
+  
+  * try to make the firebase untutorial clearer
 
-### Goal: at least 1 team spending time in Cycle outside of the class
-
-  * consider giving every css change an animation 
+## Eventually
 
   * if and repeats can't have containers 
     * option 1: like components, give option for base type in ifs and repeats
     * option 2: make if's and repeats inline blocks that you can throw into any block
-
   * only scope variable, not text -- http://stevekrouse.github.io/cycle/#scope-variable-error
-
   * Create control iteration for objects so you don’t have to do values for firebase 
-  
-  * every / wait blocks  
-
+  * every / wait blocks 
   * navbar elements
-
   * date and time menu
     * maybe: http://www.datejs.com/
-  
   * parse int
-
   * better text input options
-
   * catch script errors better
-
-## Eventually
-  
+  * css transition animations
   * font
     * consider combining all font styles into one massive block like the top of google docs
     * https://v4-alpha.getbootstrap.com/content/typography/
