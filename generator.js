@@ -708,7 +708,7 @@ function workspaceData(block, childrenString) {
       tagType: "button",
       children: mapWorkspaceData(children)
     }
-  } else if (block.type == 'cycle_input') {
+  } else if (block.type == 'cycle_input' || block.type == 'cycle_input_plain') {
     result = {
       blockId: block.id,
       tagType: "input",

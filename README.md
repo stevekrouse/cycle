@@ -7,23 +7,16 @@ Live demo at [stevekrouse.github.io/cycle](http://stevekrouse.github.io/cycle).
 
 ## Customer development ideas
   
-  * go to hackathons to teach kids to code with cycle and have them win
-    * HackNYU Saturday Feb 18th
-    * Hack it Together Tuedsday Feb 21st workshop  
-      * hackathon on feb 26 at 8:30am
-    * HackNY  April 8
   * need to come up with better words than "block-based" or "drag and drop"
   * race between programmer typing and another programmer on cycle
 
-
-## Next deadline: HackItTogether
-
-  * figure out strange cycle bug where things sometimes don't load until you refresh the page
-  
-  * try to make the firebase untutorial clearer
-
 ## Eventually
 
+  * Ternary expression not intuitive, could fill-in with example values
+  * pasting not blocks gets you a black block
+  * figure out strange cycle bug where things sometimes don't load until you refresh the frame
+  * try to make the firebase untutorial clearer
+  * make coding.space/cycle clearer so it's more obvious where to start
   * if and repeats can't have containers 
     * option 1: like components, give option for base type in ifs and repeats
     * option 2: make if's and repeats inline blocks that you can throw into any block

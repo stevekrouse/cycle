@@ -238,6 +238,20 @@ Blockly.Blocks['cycle_button'] = {
   },
 };
 
+Blockly.Blocks['cycle_input_plain'] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField("single line text input")
+    this.setInputsInline(true);
+    this.appendStatementInput("CHILDREN")
+      .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(210);
+    this.setTooltip('');
+  },
+};
+
 Blockly.Blocks['cycle_input'] = {
   init: function() {
     this.appendValueInput("VALUE")

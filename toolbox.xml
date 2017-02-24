@@ -104,6 +104,8 @@
         </block>
       </value>
     </block>
+    <block type="cycle_input_plain">
+    </block>
     <!-- text area -->
     <!--radio buttons-->
     <!--checkboxes-->
