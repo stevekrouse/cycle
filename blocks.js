@@ -489,6 +489,20 @@ Blockly.Blocks['change'] = {
   }
 };
 
+Blockly.Blocks['input'] = {
+  init: function() {
+    this.setColour(60);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.appendDummyInput()
+      .appendField("when input")
+      .appendField(new Blockly.FieldVariable("event"), "VAR")
+    this.appendStatementInput("blocks")
+      .setCheck(null);
+    this.setTooltip('');
+  }
+};
+
 Blockly.Blocks['mouseover'] = {
   init: function() {
     this.setColour(60);
@@ -663,7 +677,8 @@ Blockly.Blocks['objects_set'] = {
       .setCheck(null)
       .appendField("to");
     this.setInputsInline(true);
-    this.setOutput(true, null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
     this.setColour(240);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');

@@ -395,6 +395,7 @@
     <block type="keyup"></block>
     <block type="blur"></block>
     <block type="change"></block>
+    <block type="input"></block>
   </category>
   <category name="Logic" colour="210">
     <block type="controls_if"></block>

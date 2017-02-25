@@ -226,6 +226,7 @@
       var render = parseCodeToVueRender(component, variables.concat(component.props))
 
       return "  " + JSON.stringify(component.nameString) + ": {" + "\n" +
+        "    name: " + JSON.stringify(component.nameString) + "," + "\n" +
         "    render: " + i(6, render) + "," + "\n" +
         "    data: function() { " + "\n" +
         "      return " + i(8, JSON.stringify(data)) + "\n" +

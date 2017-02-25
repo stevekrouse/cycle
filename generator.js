@@ -1,4 +1,4 @@
-var nativeEvents = ["load", "mousedown", "mouseup", "dblclick", "mouseover", "mouseout", "mousemove", "keydown", "keyup", "change", "blur"]
+var nativeEvents = ["load", "mousedown", "mouseup", "dblclick", "mouseover", "mouseout", "mousemove", "keydown", "keyup", "change", "blur", "input"]
 
 var events = nativeEvents.concat(["cycle_custom_event"])
 
@@ -172,7 +172,7 @@ Blockly.JavaScript['objects_set'] = function(block) {
   var value_key = Blockly.JavaScript.valueToCode(block, 'KEY', Blockly.JavaScript.ORDER_ATOMIC) || "''";
   var value_value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC) || "''";
   var code = value_object + "[" + value_key + "] = " + value_value;
-  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+  return code
 };
 
 
