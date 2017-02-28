@@ -651,6 +651,13 @@
         <block type="text"></block>
       </value>
     </block>
+    <block type="cycle_eval_js_return">
+      <value name="JS">
+        <block type="text">
+          <field name="TEXT">new Date().getHour()</field>
+        </block>
+      </value>
+    </block>
     <block type="cycle_eval_js">
       <value name="JS">
         <block type="text">

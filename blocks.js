@@ -1484,9 +1484,20 @@ Blockly.Blocks['set_css'] = {
   }		
 };
 
-
-
 Blockly.Blocks['cycle_eval_js'] = {
+  init: function() {
+    this.appendValueInput("JS")
+        .appendField("run javascript")
+        .setCheck(null)
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+Blockly.Blocks['cycle_eval_js_return'] = {
   init: function() {
     this.appendValueInput("JS")
         .appendField("run javascript")

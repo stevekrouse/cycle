@@ -198,7 +198,7 @@
       dataKeys.forEach(function(key) {
         collection[key] = scopeVaribles(code.attributes.dataStrings[key], variables, "window.methods")
       })
-      var subBlocks = code.children || []
+      var subBlocks = code.children || code.doCode || []
       if (code.attributes.if){
         subBlocks = subBlocks.concat(code.attributes.if.branches)
       }
@@ -221,17 +221,24 @@
 
   function printComponents(components) {
     return components.map(function(component) {
-      var data = {} //collectData(component)
-      var variables = Object.keys(data).concat(Object.keys(window.code.definitions))
-      var render = parseCodeToVueRender(component, variables.concat(component.props))
+      component.data = component.data || {}
+      var methodNames = Object.keys(window.code.definitions)
+      collectData(component, methodNames, component.data)
+      var variableNames = Object.keys(component.data)
+      var variablesAndMethods = variableNames.concat(methodNames)
+      var variablesAndMethodsAndProps = variablesAndMethods.concat(component.props)
+      var render = parseCodeToVueRender(component, variablesAndMethodsAndProps)
 
       return "  " + JSON.stringify(component.nameString) + ": {" + "\n" +
-        "    name: " + JSON.stringify(component.nameString) + "," + "\n" +
-        "    render: " + i(6, render) + "," + "\n" +
-        "    data: function() { " + "\n" +
-        "      return " + i(8, JSON.stringify(data)) + "\n" +
-        "    }" + "," + "\n" +
-        "    props: " + i(6, JSON.stringify(component.props)) + "," + "\n" +
+        "      name: " + JSON.stringify(component.nameString) + "," + "\n" +
+        "      render: " + i(6, render) + "," + "\n" +
+        "      data:  function() {\n" + 
+        "        return {\n" + Object.keys(component.data).map(function(variable) {
+                               return "          " + variable + ": " + scopeVaribles(component.data[variable], variablesAndMethodsAndProps, "self")
+                             }).join(",\n") + "\n" + 
+        "        }\n" +
+        "      },\n" +
+        "      props: " + i(6, JSON.stringify(component.props)) + "," + "\n" +
         "  }"
 
     })
