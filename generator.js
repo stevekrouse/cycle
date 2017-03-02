@@ -168,7 +168,7 @@ Blockly.JavaScript['objects_create_empty'] = function(block) {
 Blockly.JavaScript['objects_get'] = function(block) {
   var value_object = Blockly.JavaScript.valueToCode(block, 'OBJECT', Blockly.JavaScript.ORDER_ATOMIC) || "''";
   var value_key = Blockly.JavaScript.valueToCode(block, 'KEY', Blockly.JavaScript.ORDER_ATOMIC) || "''";
-  var code = value_object + "[" + value_key + "]";
+  var code = "(" + value_object + " || {})[" + value_key + "]";
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
